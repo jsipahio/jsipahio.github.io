@@ -1,0 +1,30 @@
+.text-center {
+    text-align: center;
+}
+
+body {
+    color: black;
+}
+
+.navbar {
+    margin-left: auto;
+    margin-right: auto;
+}
+.navbar a {
+    border-width: 1px;
+    border-color: whitesmoke;
+}
+
+@media screen and (max-width: 600px) {
+    .navbar {
+        width: 100vw;
+    }
+}
+
+@media screen and (min-width: 601px) {
+    .navbar {
+        margin-left: auto;
+        margin-right: auto;
+        width: 75%;
+    }
+}
