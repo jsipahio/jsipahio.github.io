@@ -1,0 +1,27 @@
+[
+    {
+        "institution": "Stark State College",
+        "classes": [
+            { "name": "CSE122 Programming Logic and Problem Solving", "terms": ["Fall 2025"] },
+            { "name": "CSE233 C++ Programming", "terms": ["Fall 2025"] },
+            { "name": "CSE229 .NET Development", "terms": ["Fall 2024"] },
+            { "name": "NET220 Unix/Linux Operating Environments", "terms": ["Fall 2025"] },
+            { "name": "CFS137 Computer Crime and Investigation", "terms": ["Fall 2024"] },
+            { "name": "CFS210 Cyber Defense Fundamentals", "terms": ["Fall 2025"] },
+            { "name": "CFS257 File System Analysis", "terms": ["Spring 2025", "Fall 2025"] },
+            { "name": "CFS258 Cyber Forensics and Data Recovery", "terms": ["Spring 2025", "Fall 2025"] },
+            { "name": "CFS287 Network Forensics", "terms": ["Spring 2025"] }
+        ],
+        "start": "August 2024",
+        "end": "Present"
+    },
+    {
+        "institution": "Kent State University at Stark",
+        "classes": [
+            { "name": "CS13001 Computer Science I - Procedural Programming (Laboratory Session Only)", "terms": ["Fall 2024", "Spring 2025"] },
+            { "name": "CS13001 Computer Science II - Data Structures (Laboratory Session Only)", "terms": ["Fall 2024", "Spring 2025"] }
+        ],
+        "start": "August 2024",
+        "end": "Present"
+    }
+]
