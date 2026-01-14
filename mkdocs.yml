@@ -1,6 +1,8 @@
 site_name: John Sipahioglu
 nav: 
   - Home: index.md
+  - CSE122:
+    - Setup Help: CSE122/setup.md
   - NET264:
     - Week 1: NET264/week1.md
 theme: 
