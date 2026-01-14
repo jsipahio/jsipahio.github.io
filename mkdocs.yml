@@ -2,7 +2,7 @@ site_name: John Sipahioglu
 nav: 
   - Home: index.md
   - CSE122:
-    - Home: index.md
+    - Home: CSE122/index.md
     - Setup Help: CSE122/setup.md
     - Creating Labs: CSE122/dotnet_commands.md
     - Terminal Basics: CSE122/terminal_basics.md
