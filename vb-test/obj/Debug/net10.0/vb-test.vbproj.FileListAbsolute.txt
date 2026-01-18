@@ -1,0 +1,15 @@
+/workspaces/jsipahio.github.io/vb-test/bin/Debug/net10.0/vb-test
+/workspaces/jsipahio.github.io/vb-test/bin/Debug/net10.0/vb-test.deps.json
+/workspaces/jsipahio.github.io/vb-test/bin/Debug/net10.0/vb-test.runtimeconfig.json
+/workspaces/jsipahio.github.io/vb-test/bin/Debug/net10.0/vb-test.dll
+/workspaces/jsipahio.github.io/vb-test/bin/Debug/net10.0/vb-test.pdb
+/workspaces/jsipahio.github.io/vb-test/obj/Debug/net10.0/vb-test.GeneratedMSBuildEditorConfig.editorconfig
+/workspaces/jsipahio.github.io/vb-test/obj/Debug/net10.0/vb-test.AssemblyInfoInputs.cache
+/workspaces/jsipahio.github.io/vb-test/obj/Debug/net10.0/vb-test.AssemblyInfo.vb
+/workspaces/jsipahio.github.io/vb-test/obj/Debug/net10.0/vb-test.vbproj.CoreCompileInputs.cache
+/workspaces/jsipahio.github.io/vb-test/obj/Debug/net10.0/vb-test.sourcelink.json
+/workspaces/jsipahio.github.io/vb-test/obj/Debug/net10.0/vb-test.dll
+/workspaces/jsipahio.github.io/vb-test/obj/Debug/net10.0/refint/vb-test.dll
+/workspaces/jsipahio.github.io/vb-test/obj/Debug/net10.0/vb-test.pdb
+/workspaces/jsipahio.github.io/vb-test/obj/Debug/net10.0/vb-test.genruntimeconfig.cache
+/workspaces/jsipahio.github.io/vb-test/obj/Debug/net10.0/ref/vb-test.dll
