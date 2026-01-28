@@ -9,6 +9,7 @@ nav:
   - NET264:
     - Week 1: NET264/week1.md
     - Weeks 2 and 3: NET264/week2.md
+    - Week 4: NET264/week4.md
 theme: 
   name: mkdocs
   color_mode: auto

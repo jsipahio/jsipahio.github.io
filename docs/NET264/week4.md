@@ -7,3 +7,47 @@ At this phase, the computer is highly vulnerable as it is dependent on its hardw
 ### GRUB
 Grand Unified Bootloader (GRUB) is the primary bootloader used by UNIX/Linux systems. Most distros use GRUB 2 now (**this contradicts a dated statement in the 4th edition book**), which is the successor to legacy GRUB. The primary differences are in the format and location of the configuration files, and that GRUB 2 allows the boot screen to be customized. From here on, GRUB means GRUB 2, and legacy GRUB will not be discussed in these notes. The file `/boot/grub/grub.cfg` is the primary configuration for GRUB. However, it should not be directly modified. There is a simpler file, `/etc/default/grub` that is available to be edited to make changes to GRUB's configuration. Most distributions provide a program to apply these changes to the `/boot/grub/grub.cfg`. On Debian-based systems it is `update-grub`. On RHEL-based systems, it is `grub2-mkconfig`.  
 GRUB is powerful bootloader that provides options for recovering damaged systems. Upon being given control of the system by BIOS, GRUB will load its configuration and display a splash screen, allowing you to choose which OS kernel to boot. From this screen, a command-line can also be brought up to allow you to modify GRUB's configuration on the fly, or boot an OS kernel that the GRUB splash screen does not know about. Changes made to the configuration in the command line are not saved, however. If you want these changes to persist, you must modify the `grub.cfg` file as described before. The command line also allows you to pass command line arguments to the kernel when booting. This can allow you to boot to single-user mode (like Windows Safe mode) or set `init=/bin/bash` to only load a bash terminal. This provides you with options to recover a damaged system. Another note on the GRUB menu as it pertains to updates. When updating kernels, the new kernel is typically installed alongside the old one, allowing you to boot the old kernel in the event that problems occur with the new kernel. These kernel options will all become available in GRUB, which can pollute the menu. However, if the default kernel is not working, you can try selecting an old one to recover the device. 
+### The Kernel Takes Control
+Once the bootloader loads the kernel, it can begin to take control of the hardware. Older Linux kernels start with the `init` (when talking about `init`, people are often talking about `sysvinit`) process, while newer kernels utilize `systemd`. The main differences are with how services are handled, and how "run-levels" are described. The `init` process uses run-levels from 0 to 6:  
+- 0: shut down
+- 1 or S: single-user mode
+- 2 to 5: networking support
+- 6: reboot
+Entering level 0 or 6 immediately triggers a shutdown or reboot, respectively. Level 1 permits root access to the system, but does not require a password to do so. This led to the creation of level S to require a password to enter single-user mode. Levels 2 and 3 are most commonly used. Level 4 is almost never used. Level 5 is used for window login processes. The `/etc/inittab` file tells `init` what to do at each run level.  
+`systemd` uses "targets" in place of run-levels. The configuration for targets are stored in `.target` files. Below are some `systemd` targets and their roughly equivalent run level.  
+- poweroff.target (0) - halt the system
+- rescure.target (1, S) - single user mode
+- multi-user.target (2, 4) - user-defined, site-specific run levels. By default, 2 and 4 are the same as 3 on `init` systems
+- multi-user.target (3) - multi-user, non-graphical. Allows mutliple users to login to consoles or via network
+- graphical.target (5) - multi-user, graphical. Adds GUI login to multi-user.target
+- reboot.target (6) - reboot the system
+- emergency.target - emergency shell login  
+
+We'll talk more about `systemd` vs. `init` in a later week when we discuss services. Briefly, `systemd` creates a stronger coupling between the kernel and the services (daemons) it manages. This increases the number of responsibilities a single daemon has and makes daemons more dependent on each other, but has also made managing services much easier. Most of the debate about `systemd` is based on adhering to a design philosophy, rather than actual functionality. `systemd` violates the UNIX design principle of simple software that does one thing well, as `systemd` handles system initialization, but then goes on to manage daemons, handle logging, etc. `systemd` handles many tasks. Pertaining to differences in startup, `sysvinit` starts daemons using shell-scripts on start up. `systemd` loads configuration files to start daemons. 
+
+## Shutting Down
+The `shutdown` command can be used to handle all shutdown-adjacent operations. Since UNIX and Linux are designed as multi-user, time-sharing systems, the default is to delay before a shutdown. Even on desktop distributions, when you click the shutdown option from the GUI it pops a window stating that the system will shut down in 60 seconds (at least, that is the default on many distros). This is done to provide other users a warning to save their work and exit before the system powers off. `shutdown -h` calls the `halt` command to power the system off completely. `shutdown -r` calls the `reboot` command to halt the system and immediately bring it back online. There are some variations in the command switches, depending on the system. `shutdown --help` *should* provide the list of options on a particular system you are working on.
+
+## Access Control
+While some system calls have access control managed by the kernel, most access control is managed by the file system. Every file and directory has a user and a group that owns it. Each user belongs to a primary group of which they are the only member, guaranteeing each file will have a group owner. Groups are stored in the `/etc/group` file, but may be overwritten by a network NIS or LDAP server. In addition to owners, files have permissions for what it's user owner, group owner, and all other users can do with it. These permissions are read (r), write (w), and execute (x). The `-l` flag for `ls` can be used to display a file's permissions, user owner, and group owner. When a user starts a process, they own the process and can send the process signals and reduce its priority (but not raise it). File ownership and processes will be discussed more in detail in later weeks.
+
+## The Root Account
+The root user is the equivalent to the Windows local Administrator account; it has total control and permission over the system. The root account has a user ID (UID) of 0. While you could create other accounts named root, rename to root account, and/or create other accounts with the UID 0, you should never do this for what are hopefully obvious reasons.  
+The book provides plenty of background and alternatives, but here are the basics of modern root access:  
+  
+- Logging in as the root user to perform tasks should be avoided whenever possible. There is no record of who logged in as root or what commands they executed.
+- Allowing root logins should be disabled, except for direct access to the machine console. The root password should still be robust (follow modern requirements for password strength, as these change as technology advances).
+- Using `su` to temporarily login as root is insufficient. It will log who logged in as root, but not what they did.
+- Access to root privileges should be handled using `sudo`. The list of users who can run commands with `sudo`, and which commands they can run, are stored in the `/etc/sudoers`
+- Advantages of `sudo`:
+    - Each user has their own "profile" for sudo, which specifies exactly which commands they can run as root
+    - There is a log of any attempt to run a command using `sudo`
+    - There is a log of every command run using `sudo`
+    - The user must provide their own password to run a command using `sudo`, increasing the likelihood the user is who they say they are
+- Edits to the `/etc/sudoers` file should be done using the `visudo` command to ensure that the file is not being edited by someone else at the same time, and that the file has correct syntax before saving it. Saving an incorrect file may mean that you are unable to use `sudo` after the fact to fix it.
+
+## Sudo-users or Pseudo-Users?
+Pseudo-users are users that are created by the system to carry out certain tasks, or to run certain processes. You should take care to ensure that these fake accounts do not become a security liability:  
+  
+- Modify `/etc/shadow` to replace their password with a star (*). This prevents logging in as the user.
+- Set their shell to `/bin/false` or `/bin/nologin` to ensure that a shell session cannot be started as that user.
