@@ -1,0 +1,111 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Wrapper Survey - Demographic Questions</title>
+        <script src="post.js"></script>
+    </head>
+    <body style="text-align: center;">
+        <h3>Demographic Questions</h3>
+        <form id="entry-form">
+            <div id="experience">
+                <label for="experience"><b>Experience:</b></label><br>
+                <label for="1">Less than 1 year:</label>
+                <input type="radio" name="experience" value="1"/><br>
+                <label for="2">1 to 2 years:</label>
+                <input type="radio" name="experience" value="2"/><br>
+                <label for="5">2 to 5 years:</label>
+                <input type="radio" name="experience" value="5"/><br>
+                <label for="10">5 to 10 years:</label>
+                <input type="radio" name="experience" value="10"/><br>
+                <label for="100">More than 10 years:</label>
+                <input type="radio" name="experience" value="100"/><br>
+            </div>
+            <div id="role">
+                <label for="role"><b>Role:</b></label><br>
+                <label for="undergrad">Undergraduate Student: </label>
+                <input type="radio" name="role" value="undergrad"><br>
+                <label for="grad">Graduate Student: </label>
+                <input type="radio" name="role" value="grad"><br>
+                <label for="dev">Developer: </label>
+                <input type="radio" name="role" value="dev"><br>
+                <label for="senior">Senior Developer: </label>
+                <input type="radio" name="role" value="senior"><br>
+            </div>
+            <div id="languages">
+                <label for="languages"><b>Select the 3 languages you are most familiar with: </b></label><br>
+                <input type="checkbox" name="languages" value="C">
+                <label for="C">C</label><br>
+                <input type="checkbox" name="languages" value="CPP">
+                <label for="CPP">C++</label><br>
+                <input type="checkbox" name="languages" value="C#">
+                <label for="C#">C#</label><br>
+                <input type="checkbox" name="languages" value="Java">
+                <label for="Java">Java</label><br>
+                <input type="checkbox" name="languages" value="Python">
+                <label for="Python">Python</label><br>
+                <input type="checkbox" name="languages" value="JS">
+                <label for="JS">JavaScript</label><br>
+                <input type="checkbox" name="languages" value="Rust">
+                <label for="Rust">Rust</label><br>
+                <input type="checkbox" name="languages" value="VB">
+                <label for="VB">Visual Basic</label><br>
+                <input type="checkbox" name="languages" value="custom1">
+                <input name="custom1"><br>
+                <input type="checkbox" name="languages" value="custom2">
+                <input name="custom2"><br>
+                <input type="checkbox" name="languages" value="custom3">
+                <input name="custom3"><br>
+            </div>
+            <div id="c-familiarity">
+                <label for="c-familiarity"><b>Rate your familiarity with the C programming language:</b></label><br>
+                <div><b>Current Selection:</b> <span id="current-selection"></span></div>
+                <label for="1">Unfamiliar/Never Used</label>
+                <input type="radio" name="c-familiarity" value="1">
+                <input type="radio" name="c-familiarity" value="2">
+                <input type="radio" name="c-familiarity" value="3">
+                <input type="radio" name="c-familiarity" value="4">
+                <input type="radio" name="c-familiarity" value="5">
+                <label for="5">Very Familiar</label>
+            </div>
+            <div id="library-contribution">
+                <label for="library-contribution"><b>Have you ever contributed to writing a software library (in any language)?</b></label><br>
+                <label for="y">Yes</label>
+                <input type="radio" name="library-contribution" value="y" id="library-yes" onselect=displayContribution>
+                <label for="n">No</label>
+                <input type="radio" name="library-contribution" value="n" checked>
+                <label for="libraries" id="library-label" hidden>Enter the names (comma-separated) of any libraries you've worked on</label>
+                <textarea name="libraries" id="library-box" hidden></textarea>
+            </div>
+        </form>
+    </body>
+    <script>
+        let currentSelection = document.getElementById("current-selection");
+        const radios = document.querySelectorAll('input[name="c-familiarity"]');
+        const options = ["Completely Unfamiliar", "Very Little Familiarity", "Some Familiarity", "Familiar", "Very Familiar"];
+        radios.forEach(button => {
+            button.addEventListener("change", updateCurrentSelection)
+            if (button.checked) {
+                currentSelection.textContent = options[parseInt(button.value, 10) - 1]
+            }
+        });
+        function updateCurrentSelection() {
+            radios.forEach(button => {
+                if (button.checked) {
+                    currentSelection.textContent = options[parseInt(button.value, 10) - 1];
+                }
+            });
+        }
+
+        function displayContribution() {
+            const yesBox = document.getElementById('library-yes');
+            if (yesBox.checked) {
+                document.getElementById("library-label").hidden = false;
+                document.getElementById("library-box").hidden = false;
+            }
+            else {
+                document.getElementById("library-label").hidden = true;
+                document.getElementById("library-box").hidden = true;
+            }
+        }
+    </script>
+</html>
