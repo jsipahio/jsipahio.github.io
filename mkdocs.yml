@@ -1,6 +1,7 @@
 site_name: John Sipahioglu
 nav: 
   - Home: index.md
+  - Teaching: teaching.md
   - CSE122:
     - Home: CSE122/index.md
     - Setup Help: CSE122/setup.md
