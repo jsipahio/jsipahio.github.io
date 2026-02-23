@@ -7,6 +7,10 @@ nav:
     - Setup Help: CSE122/setup.md
     - Creating Labs: CSE122/dotnet_commands.md
     - Terminal Basics: CSE122/terminal_basics.md
+  - CSE234:
+    - Home: CSE234/index.md 
+    - STL Data Types: CSE234/types.md
+    - STL Algorithm: CSE234/algorithms.md
   - NET264:
     - Week 1: NET264/week1.md
     - Weeks 2 and 3: NET264/week2.md
