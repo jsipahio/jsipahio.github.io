@@ -14,7 +14,7 @@
 | 10   | Command Line Arguments and File I/O | ... |
 | 11   | Structs and Classes | ... | 
 | 12   | Overloading Operators | ... | 
-| 13   | Pointers | ... |
-| 14   | Recursion | ... |
+| 13   | Recursion | ... |
+| 14   | Pointers | ... |
 | 15   | Multi-Dimensional Arrays | ... | 
 | 16   | Finals Week | ... |

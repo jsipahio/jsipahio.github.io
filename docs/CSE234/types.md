@@ -1,6 +1,7 @@
 # CSE234 - STL Data Types
 
-The Standard Template Library (STL) provides implementations of most common data structures. These include arrays, vectors, lists, sets, maps, stacks, and queues. All of these have dynamically changing size, except for array, whose size must be known and specified at compile-time. Below is a brief overview of each:
+The Standard Template Library (STL) provides implementations of most common data structures. These include arrays, vectors, lists, sets, maps, stacks, and queues. All of these have dynamically changing size, except for array, whose size must be known and specified at compile-time. Below is a brief overview of each:  
+  
 - **Array** - A fixed-size collection of elements that preserves order and allows random access (index)
 - **Vector** - An automatically resizing collection that preserves order and allows random access (index)
 - **List** - A collection that does not support random access but does preserve order
@@ -84,7 +85,8 @@ int main() {
 
 
 ## Common Methods
-STL data types share the names and operations for many of their methods. For example, all collections provide `begin()` and `end()` to access the start and end iterators of the collection. Below is a table of common method names, the parameters expected, and a column for STL collections that do not implement that method, if applicable.
+STL data types share the names and operations for many of their methods. For example, all collections provide `begin()` and `end()` to access the start and end iterators of the collection. Below is a table of common method names, the parameters expected, and a column for STL collections that do not implement that method, if applicable.  
+  
 | Method | Parameters | Behavior | Exceptions |
 |--------|------------|----------|------------|
 | begin() | | Returns an iterator to the first element of the container | |
@@ -160,7 +162,7 @@ The STL List class is used to create a linked list. Similar to an array/vector, 
 
 ### Unique Operations
 `std::list` provides `push_front()` to add elements to the front of the list, and `push_back()` to add elements to the end of the list. Similarly, it offers `pop_front()` and `pop_back()` to remove elements from the front and end of the list, respectively. The `std::forward_list` class only supports `push_front()` and `pop_front()`.  
-Lists provide a few unique member functions for common list operations. First is `splice()`, which provides 
+Lists provide a few unique member functions for common list operations. First is `splice()`, which expects an iterator and 
 
 ## Set (and Unordered Set)
 The STL set is used store a collection of unique values. The multiset is used to collection of values that are not unique, but do not need to be kept in order. 
@@ -172,8 +174,101 @@ STL Maps are used to store (key, value) pairs. There are four variations of map:
 A deque is a doubly-ended queue, which allows for quick access to elements at the beginning and end of the collection. The cost of random access is also fast. Like a vector, insertions and removals in the middle of the collection are slower since they require shifting elements. Expanding a deque is faster than a vector, since it does not require copying the collection, but deques use more space on average.
 
 ## Stack
+The STL stack is actually a container adapter, meaning it is used to limit the access to a container. By default, it uses a deque, but it can use any sequential container (vector and list) to store the data. Stacks provide access to data in a last-in, first-out (LIFO) ordering. To enforce this, stack limits access to the container via the `push()`, `pop()`, and `top()` methods. The `push()` method inserts an element to the end of the container. The `pop()` method removes the last element from the container. The `top()` method returns the value of the last item in the container. Stacks are often used for compiler implementation, parsing, and backtracking. Below is a (very simplified) implementation of a back and forward button (such as for a browser) using stacks.
+```C++
+#include <assert.h>
+#include <string>
 
+// class to maintain state of stacks
+class History {
+private:
+    // store the previously visited pages
+    std::stack<std::string> previousPages;
+    // store the pages after the user hits the back button
+    // these get cleared after the user moves forward to a unique page
+    std::stack<std::string> forwardPages;
+public:
+    History() {}
+    // add a page to the previously visited pages
+    void addPage(const std::string& page) {
+        // push the page to the top of the history
+        previousPages.push(page);
+        // wipe any forward pages
+        forwardPages.clear();
+    }
+    // return false and empty string if there is no previous page
+    // return true and the url if there is a previous page
+    // add page to forwardPages so the forward arrow can access it
+    std::pair<bool, std::string> getPreviousPage() {
+        // check if there is not a page to return 
+        if (previousPages.empty()) {
+            return std::make_pair(false, "");
+        }
+        else {
+            // save the top of the previousPages stack
+            std::pair returnValue = std::make_pair(true, previousPages.top());
+            // remove the page from the previousPages stack
+            previousPages.pop();
+            // add to the forward pages
+            forwardPages.push(returnValue.second);
+            return returnValue;
+        }
+    }
+    // return false and empty string if there is no forward page
+    // return true and the url if there is a forward page
+    // add the page back to the previous pages
+    std::pair<bool, std::string> getForwardPage() {
+        // check if there is not a forward page
+        if (forwardPages.empty()) {
+            return std::make_pair(false, "");
+        }
+        else {
+            // save the top of the forwardPages stack
+            std::pair returnValue = std::make_pair(true, forwardPages.top());
+            // remove the page from the forwardPages stack
+            forwardPages.pop();
+            // add page back to the previousPages
+            previousPages.push(returnValue.second);
+            return returnValue;
+        }
+    }
+};
+
+int main() {
+    // create history object
+    History history;
+    // add a couple pages to the history
+    history.addPage("https://www.google.com");
+    history.addPage("https://www.cppreference.com");
+
+    // move back to the previous page
+    auto previousPage = history.getPreviousPage();
+    // check if there was a previous page (we expect this to be true)
+    if (previousPage.first) {
+        assert(previousPage.second == "https://www.google.com");
+    }
+
+    // move to the page we just went back from
+    auto forwardPage = history.getForwardPage();
+    // check if there was a forward page (we expect this will be true)
+    if (forwardPage.first) { 
+        assert(forwardPage.second == "https://www.cppreference.com");
+    }
+
+    // move back a page, then forward to a new page
+    if (history.getPreviousPage().first) {
+        history.addPage("https://www.cplusplus.com");
+    }
+    // we expect that there are no longer any previous 
+    // pages since we added a new page to the history stack
+    assert(history.getForwardPage() == std::make_pair(false, ""));
+
+    return 0;
+}
+
+```
 ## Queue
+Like stack the STL queue is also a container adapter. The queue data structure limits access to data so that it is accessed in first-in, first-out (FIFO) order. To do so, it limits users to the `push()`, `front()`, `back()`, and `pop()` methods. The `push()` method adds an element to the back of the queue. `front()` and `back()` return the values at the front and end of the queue, respectively. The `pop()` method removes the first element of the queue. Queues are used for buffers, such as process wait lists in operating systems, ordering the processing of network requests, and some graph traversal implementations.
 
 ## Comparison of Container Uses
 So, the question that arises at this point is when to use which container. It's easy to decide if a map is needed, since it is the only container that supports key-value pairs. For set and map, unless insertion order needs to be preserved, it is always better to use the "unordered" variants. Vectors offer balanced performance for many applications, but can use excessive space and can be slowed down if many insertions have to occur at the beginning or middle of the vector. If many of these types of insertion must be made, a list may make more sense. If the order of elements needs to be preserved, and the number of elements is known ahead of time, an array may be sufficient. Sets provide quick access to unique elements, while a multiset provides quick access to the counts of a specific element in the collection. 
