@@ -1,7 +1,7 @@
 # John Sipahioglu
-Instructor 
+Instructor - Computer Science - Stark State College
 
-PDF Version (Coming Soon)   
+[PDF Version](jsipahioglu_cv.pdf)
 
 *Academic Contact Information:*  
 jsipahio@kent.edu  
@@ -52,6 +52,7 @@ I am currently contributing to the srcML infrastructure, which supports source c
 
 ## Professional Activities/Services
 #### Conference Reviewer
+- 2026 IEEE International Conference on Software Maintenance and Evolution (ICSME '26) - Additional Reviewer
 - 2026 IEEE/ACM International Conference on Program Comprehension (ICPC) - Additional Reviewer
 
 ## University Activities/Services

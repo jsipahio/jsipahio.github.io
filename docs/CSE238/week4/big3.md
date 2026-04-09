@@ -31,4 +31,69 @@ int main() {
     return 0;
 }
 ```
-This example illustrates that pointers are references to a memory address. When we assign a pointer to another pointer, both pointers have ownership over that memory address. 
+This example illustrates that pointers are references to a memory address. When we assign a pointer to another pointer, both pointers have ownership over that memory address. This creates a problem when copying class fields that are pointers. The compiler's default implementation of a copy constructor is to blindly copy all the fields in the class. This is fine if none of the fields are pointers, since they are all copied by value. However, when copying a pointer by value, the new object will be created with a copy of the *memory address* the pointer is referencing, not a copy of the data the pointer is referencing. Below is an example of a (not so) smart pointer wrapper class that does not implement a copy constructor, and an example of what will happen when copying an object of the class:
+```C++
+#include <assert.h>
+// the SmartPointer class is meant to handle automatic
+// allocation and deletion of a raw pointer so users do not
+// have to remember to call new and delete
+class SmartPointer {
+public:
+    // default constructor allocates memory for the pointer
+    SmartPointer() {
+        ptr = new int;
+    }
+    // allocate memory and assign value
+    SmartPointer(int val) {
+        ptr = new int;
+        *ptr = val;
+    }
+    // delete the pointer when the object goes out of scope
+    ~SmartPointer() {
+        delete ptr;
+    }
+    // allow accessing data with the * operator
+    int operator*() const {
+        return *ptr;
+    }
+    // allow assigning an int value to the pointer with =
+    SmartPointer& operator=(int val) {
+        *ptr = val;
+    }
+    // do not allow the object to be assigned to a raw pointer
+    SmartPointer& operator=(int *other) = delete;
+private:
+    int *ptr;
+};
+
+int main() {
+    // declare a smart pointer object
+    SmartPointer ptr;
+    // assign its value to 34
+    ptr = 34;
+    // create a copy of ptr
+    SmartPointer copy(ptr);
+    // assign copy's value to 56
+    copy = 56;
+    // the value of ptr is now 56 since
+    // copy is a duplicate of the actual pointer
+    // not the value
+    assert(*ptr == *copy);
+    return 0;
+}
+```
+
+The implementation for the copy constructor provided by the compiler looks something like this:
+```C++
+SmartPointer::SmartPointer(const SmartPointer& other) {
+    ptr = other.ptr;
+}
+```
+In reality, when we create a *new* smart pointer object via copying, we are probably expecting just the value to be copied, and for the two pointer objects to be independent entities. Even worse, when both objects go out of scope and the destructor is call, delete will be called on the same pointer twice. This will create a program crash due to a double free. Therefore, we must implement the copy constructor ourselves to avoid multiple objects from referencing the same memory location:
+```C++
+SmartPointer::SmartPointer(const SmartPointer& other) {
+    ptr = new int;
+    *ptr = *other;
+}
+```
+In this implementation, the copy constructor allocates memory for the pointer using `new`, and then assigns the pointer the value being held by the other pointer, rather than copying the pointer itself.  

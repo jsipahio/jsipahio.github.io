@@ -9,7 +9,8 @@ The data a string holds are a collection of characters whose order is important.
 Typically string operations include concatenation, i.e., combining two strings into one, substring extraction, and searching for instances of a character or substring within a string. Of course, our ADT also needs to support construction, destruction (since it will be using dynamic memory), and copying. We also need comparison operators. In C++, we should at the very least define `operator==` and `operator<` to make our ADT compatible with STL algorithms. 
 
 ## Rules
-The following axioms should hold for a string ADT:
+The following axioms should hold for a string ADT:  
+  
 - An empty string has a length of 0, the inner data should be an array with a single character, the null terminator, `\0`
 - A string with a single character has a length of 1, and consists of that character followed by the null terminator
 - A string with more than one character's size must not exceed the maximum capacity of the length member variable

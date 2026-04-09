@@ -1,6 +1,7 @@
 site_name: John Sipahioglu
 nav: 
   - Home: index.md
+  - CV: cv.md
   - Teaching: teaching.md
   - CSE122:
     - Home: CSE122/index.md
@@ -11,6 +12,12 @@ nav:
     - Home: CSE234/index.md 
     - STL Data Types: CSE234/types.md
     - STL Algorithm: CSE234/algorithms.md
+  - CSE238:
+    - Home: CSE238/index.md
+    - Week 1: CSE238/week1/index.md
+    - Week 2: CSE238/week2/index.md
+    - Week 3: CSE238/week3/index.md
+    - Week 4: CSE238/week4/index.md
   - NET264:
     - Week 1: NET264/week1.md
     - Weeks 2 and 3: NET264/week2.md

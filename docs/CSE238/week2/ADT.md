@@ -1,10 +1,11 @@
 # Abstract Data Type
 ### CSE238 - Data Structures and Algorithms
-
-### Introduction
 An Abstract Data Type is a model for how data is stored, how it is operated on, and the expected conditions for the data type. Throughout the class, we will be describing the ADT for the common data structures encountered in computer science.  
 
-### Designing the `DateTime` ADT
+## Components of an ADT
+An ADT consists of three components: operations, data, and rules. The operations define what the ADT can do. The data is the internal representation of data within the ADT. The rules, also called invariants, describe conditions that should be true for a data type no matter. Often, there are rules for certain situations, for example, if a string is empty, its length must be 0. This rule describes a certain feature of the string (its length) under a certain condition (that the string is empty). These concepts will be better explained via the following example, where we design and implement an ADT for `DateTime`.
+
+## Designing the `DateTime` ADT
 Let's learn about abstract data types, by example. For this, we'll model and implement a `DateTime` ADT. The point of the `DateTime` ADT is, as the name would suggest, to model dates and times in a computer program. Since this is an example, our `DateTime` ADT might be a bit limited, but that's fine. The point is to show what an ADT is for right now, not to develop a professional software library.
 
 #### Operations
@@ -29,12 +30,13 @@ So, the "fields" in the middle of the diagram, I'm actually going to refer to th
 
 #### Data Representation
 We have our class diagram that defines the public interface and operations for our class. Now, we need to decide how to represent the data. We have attributes for the seconds, minutes, etc. We could create a private field for each of these. However, this requires storing many fields, which would all need to be checked and updated each time a change is made to the Date or Time. If we observe the `Clock` class from last week, we'll notice that rather than storing the hours, minutes, and seconds separately, we only stored the seconds since midnight, then computed hours and minutes when we needed. We can use that approach here, as well. However, we need a reference point. The current time is always changing, so using the current time as a reference point would not work. Many systems use the "Unix Epoch", which is midnight, January 1st, 1970 UTC, as a reference point for dates and times.  
+  
 Note that the point in time we choose as a reference, and even using seconds since a reference time, is a totally internal design decision, and has no impact on the interface that users of our `DateTime` use. That is the point of an ADT. The user does not need to know any of the implementation details, only what the ADT is (public attributes) and what it does (public methods). The user does not care if the attribute `hours` is stored as a private field called `hours`, or if we computed from the seconds since the Unix Epoch. All they need to know is that they can access the `hours` of a `DateTime` object.  
 
 #### Rules/Axioms
 The rules describe conditions that should be checked for to ensure the correct operation of the ADT. For example, the `now()` method returns the current date and time in a `DateTime` object at the moment the method is called. The attributes all return `unsigned int`, meaning they always refer to time in a positive context (note that if we wanted to have dates and times before the Unix Epoch, we would need to model it using negative seconds internally to the class). The rules/axioms basically define expected behavior of the ADT, and specify misuse conditions where the ADT may raise an error or have undefined behavior.
 
-### Implementing the `DateTime` ADT
+## Implementing the `DateTime` ADT
 Now that we have sketched out the design for `DateTime`, we will realize it in C++. ADTs are implemented as classes in C++. So, we will have a class `DateTime` that implements the required methods and attributes, uses a private member `seconds` to keep track of time, and whose methods will follow the rules and axioms we discussed for the ADT. We will start with the class declaration, which will be contained in `DateTime.hpp`. (Remember, comments in the below code represent my thoughts as writing the code, not the doc comments that should be there. View the included code in the `DateTime-example.zip` file to see the correct doc comments.)   
 *DateTime.hpp*
 ```C++
@@ -344,5 +346,5 @@ We've implemented the `DateTime` class as a wrapper around the C `<time.h>` head
 
 You can view the code for this ADT in the `DateTime-example.zip` file. 
 
-### Looking Ahead
-The next lecture will cover testing for this ADT. For your lab assignment this week, you will need to implement tests for an ADT called `Bigint`. The `Bigint` ADT represents unsigned integers that are larger than the maximum size of integers. As an exercise, try developing the class diagram for the `Bigint` ADT, and try to imagine how `Bigint` might be implemented (i.e., what would the private field(s) look like).
+## Looking Ahead
+The next lecture will cover testing for this ADT. For your lab assignment this week, you will need to implement tests for an ADT called `Bigint`. The `Bigint` ADT represents unsigned integers that are larger than the maximum size of integers. As an exercise, try developing the class diagram for the `Bigint` ADT, and try to imagine how `Bigint` might be implemented (i.e., what would the private field(s) look like).  

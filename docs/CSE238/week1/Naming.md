@@ -1,11 +1,11 @@
 # Source Code Style and Identifier Naming
 ### CSE238 - Data Structures and Algorithms
 
-### Introduction
+## Introduction
 In this lecture we'll discuss source code style and naming. Program comprehension comprises 50-70% of software maintenance time [1]. I often say that "source code is for the humans". The compiler can handle making the binary executable neat and tidy for the computer. Your goal when writing code is to make it as understandable as possible. That's why we're going to discuss consistent styling rules, and especially naming. Studies have show that good identifier names can improve code comprehension drastically [2][3].  
 These are the style rules you should adhere to in this class. When writing code for yourself, you can make your own rules. However, when contributing to a codebase, you are typically expected to adhere to the existing style. Many open source projects have part of their "Contributing" instructions dedicated to acceptable code style.  
 
-### Indentation
+## Indentation
 An indentation of 4 spaces should be used for each level of nesting. All text editors let you configure how many spaces your Tab key will insert. In VS Code, it is in the bottom right corner of the window. Anywhere you put a curly brace (with an exception) starts a new level of nesting. The indentation should be removed when reaching the close curly brace.  
 **Examples:**
 ```C++
@@ -36,12 +36,12 @@ private:
 };
 ```
 
-### Blank Lines
+## Blank Lines
 Blank lines should be inserted between logical subtasks. If a statement is a sentence in C++, a subtask is like a paragraph. How many lines comprise a subtask varies based on the complexity of the task. Below are some examples:
 ```C++
 ```
 
-### Comments
+## Comments
 There are two main purposes of comments. To explain usage (documentary) or to explain intent. All functions and classes should have documentary comments explaining what they do, and in the case of functions what the parameters are for and what it returns. Anywhere you do something unusual, non-standard, or complicated, include a comment explaining your intent. Perhaps the weird way you wrote code is to improve time or memory performance. This provides justification to anyone reading the code later on as to what you did and why you chose to do it that way.
 ```C++
 /**
@@ -67,7 +67,7 @@ Documentary comments are meant for people using the function. To understand how 
 Comments for classes are simpler. Primarily, you are trying to explain what the class is and what its role in the system is.  
 Note: I cannot stand trailing comments and will mark off points if I see them. Comments should go on their own line.
 
-### Braces
+## Braces
 The preferred style for curly braces is to place the opening brace on the same line as the statement that it is associated with. A study has shown that placing the opening brace on the same line reduces cognitive load [4]. The closing brace should be on a line by itself.
 ```C++
 // opening brace on same line as int main()
@@ -78,10 +78,10 @@ int main() {
 // closing brace on its own line
 ```
 
-### Declarations
+## Declarations
 Each variable should be declared on its own line. Avoid statements like `int x, y;`. I don't have much else to say about this other than the language shouldn't even support it as a feature.
 
-### Naming
+## Naming
 Naming is one of, if not the most, important parts of writing high quality source code. Therefore, we will spend a significant amount of time discussing identifier naming. A survey of 1162 professional software developers [5] demonstrated the community interest in the issue of naming (1162 is a very high response rate for a survey) and determined the importance of name styling rules for methods. Many of these rules are generalizable to other source code identifiers, as well. 
 
 #### Naming Style

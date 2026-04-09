@@ -6,4 +6,6 @@ This week will will define the String Abstract Data Type. You will begin impleme
 - 
 
 ### Outline
-- [String ADT](string/)
+- [Big 3](big3.md)
+- [Copy Semantics](copy_semantics.md)
+- [String ADT](string.md)
