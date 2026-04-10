@@ -23,6 +23,19 @@ gh auth login
 ```
 This will prompt you to enter some information. For the first question, select "GitHub.com". For the next 
 
+## git Commands
+This is not an exhaustive list; git has a ton of functions. This should be enough to use git for this class, unless you really mess something up.
+`clone` - The `git clone` command is used to clone a remote repository onto your local machine. By default, it creates a new folder with the same name as the repo in the directory you are currently in  
+`pull` - The `git pull` command pulls changes in the remote version of the branch into the local copy of the branch. `pull` operates on the current branch only  
+`status` - The `git status` command shows the current branch you are on, the staged changes, changes not staged for commit, and untracked files in the repository. Staged changes are the ones that are added to the commit. Changes not staged for commit are files that are detected as being modified, but have not been added to the commit. Untracked files are files that have never existed in the repository before, and need to be added to be tracked.  
+`add` - The `git add` command is used to add files to a commit. Both new files and modified files must be added to the commit. Multiple files can be listed, separated by spaces: `git add class.hpp class.cpp main.cpp`  
+`rm` - The `git rm` command is used to remove files. `git rm filename` will remove the file from tracking AND delete the file locally. If you want to keep the local copy of the file, used `git rm --cached filename` to only remove the file from tracking.  
+`restore` - The `git restore` command is used to "undo" changes since the last time the file was committed.  
+`switch` - The `git switch` command is used to change and create branches. `git switch other-branch` will change to an existing branch called "other-branch". `git switch -c new-branch` will create a new branch called "new-branch", based on the current branch, and switch to that branch.  
+`commit` - The `git commit` command is used to commit a set of changes to your local repository. You should always provide a message describing the commit, using the `-m` switch: `git commit -m "Added README"`.
+`push` - The `git push` command updates the remote version of the repository to reflect local commits.  
+`fetch` - The fetch command is used to access remote branches.
+
 ## Codespaces
 GitHub Codespaces are a web view of the Visual Studio Code editor running a Linux Virtual Machine. These offer a complete development environment, with all the build tools and git commands already installed and ready to be used. The main drawbacks of Codespaces is that they can be laggy and slow to start up, since they are remote virtual machines, and you need to be connected to the internet to access them. Another consideration is that you have a limited amount of time (currently ~75 hours a month) that you can use Codespaces for free. I don't foresee the usage limit being an issue, but it's worth keeping in mind. If you'd prefer to work locally, instructions to set up a local environment are here: [Set Up A Local Environment](local_env.mmd)  
   

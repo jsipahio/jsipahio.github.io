@@ -1,6 +1,6 @@
 # Setting up git, gh, and gcc Locally
 
-Working on your code locally requires more setup than using a codespace, but has the advantage that you do not need to be connected to the internet to work on your code, you do not have the time limits that codespaces do, and will likely have less lag and slow response times than what code spaces offer.  
+Working on your code locally requires more setup than using a Codespace, but has the advantage that you do not need to be connected to the internet to work on your code, you do not have the time limits that Codespaces do, and will likely have less lag and slow response times than what code spaces offer.  
 
 ## VS Code
 The editor that I use and will be able to help you with is Visual Studio Code. It is available for all major operating systems (I've even installed it on a Chromebook). Search VS Code and go to the Download page. It should auto-detect your operating system and provide you with the correct installer. Follow the instructions for the installer on your system. 

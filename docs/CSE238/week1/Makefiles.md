@@ -225,6 +225,9 @@ In the header file, you may notice some lines that are unusual to you. The file 
 In the `.cpp` source code files, you will see that we have `#include "BankAccount.hpp"`. Typically, when we have included files, we've used angle brackets `<>`. The angle brackets tell the compiler to search for standard library system headers that were included with the compiler. However, the double quotes tell the compiler to instead search the current directory first to find the included file. Also, note that we only ever include the `.hpp` file. You should never include a `.cpp` file.  
   
 Otherwise, we've pretty much just copy-pasted the code for the `BankAccount` class declaration and `operator<<` function declaration into `BankAccount.hpp`. We copied the `main` function into `main.cpp`. And all the other function definitions were copied into `BankAccount.cpp`.
+  
+**NOTICE:**  
+Files and directories should only use numbers, letters, dashes, and underscores in their names. Do not use any other characters, including spaces, in file and directory names. 
 
 ## Compiling our program
 Let's turn our attention to compiling this program. We cannot simply compile `main.cpp` into an executable. We now need to individually compile both `.cpp` files into binary code, and then link them into a single executable. We do not need to compile `BankAccount.hpp`, as it is included by the `#include "BankAccount.hpp"` directives. Below are the commands to compile this program:
