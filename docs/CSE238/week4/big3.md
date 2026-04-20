@@ -1,5 +1,7 @@
 # C++ Big 3 Semantic
-Unlike many other modern programming languages (C#, Java, Python), C++ allows for direct access to memory locations via pointers. When pointers are members of classes, it can create problems when allowing the compiler to automatically implement copy constructors, destructors, and assignment operators for a class. Recall this fact about pointers:
+Unlike many other modern programming languages (C#, Java, Python), C++ allows for direct access to memory locations via pointers. When pointers are members of classes, it can create problems when allowing the compiler to automatically implement copy constructors, destructors, and assignment operators for a class.  
+## Destructor
+Recall this fact about pointers:
 ```C++
 int main() {
     // declare an integer pointer
@@ -14,6 +16,7 @@ int main() {
 }
 ```
 As you can see, `ptr` can either be a reference to a single integer in memory, or an array of integers. This directly impacts which version of `delete` must be used to clean up the memory allocated for `ptr` in the heap. The compiler has no way to determine which version of `delete` to call in a destructor, making it impossible to effectively clean up an object that contains dynamic fields. Thus, implementing a destructor is required for any class that contains dynamic fields.  
+## Copy Constructor
 Copying also presents a challenge. Consider the following example:  
 ```C++
 int main() {
@@ -96,4 +99,29 @@ SmartPointer::SmartPointer(const SmartPointer& other) {
     *ptr = *other;
 }
 ```
-In this implementation, the copy constructor allocates memory for the pointer using `new`, and then assigns the pointer the value being held by the other pointer, rather than copying the pointer itself.  
+In this implementation, the copy constructor allocates memory for the pointer using `new`, and then assigns the pointer the value being held by the other pointer, rather than copying the pointer itself.   
+
+## Assignment Operator
+Next, we need to consider the assignment operator, `operator =`. We cannot simply copy the fields of the object on the right-hand side of the equal sign over to the left-hand object. When the class is using dynamically allocated memory, we need to ensure that the left-hand object's memory is freed before copying over data from the right-hand object.
+
+### Copy and Swap Idiom
+Defining an overloaded assignment operator the correct way allows the compiler to make several optimizations. The best way to overload `operator=` is to first create a separate member function that swaps two objects in constant time. Then, pass the right-hand object by value to `operator=`. This will invoke the copy constructor to create a copy of the right-hand object. Then, call the swap function inside `operator=`. This will swap the copy into the left-hand object, and whatever data was in the left-hand object into the parameter. Then, when the function ends, the destructor will be called on the parameter, which cleans up any old data in the left-hand object. Below is the `operator=` for the `SmartPointer` class.  
+```C++
+// first define a constant time swap
+void SmartPointer::swap(SmartPointer &other) {
+    // vacuously a constant time swap of pointers
+    // if these were dynamic arrays swapping the pointers
+    //  would save a lot of time
+    int *temp = ptr;
+    ptr = other.ptr;
+    other.ptr = temp;
+}
+// you also need to return a reference to an object
+// this way you can chain assignments: obj1 = obj2 = obj3;
+SmartPointer& SmartPointer::operator=(SmartPointer rhs) {
+    swap(rhs);
+    return *this;
+}
+```
+## Conclusion 
+The data structures we implement going forward in this class will all be using dynamic memory, so you will need to implement the Big 3 for all of them.

@@ -1,26 +1,27 @@
 # CSE234 - STL Algorithm
 
 The `algorithm` header provides a set of common computer science algorithms that operate primarily on containers. `algorithm` was added in C++11. To use it, `#include <algorithm>`. All functions are provided in `algorithm` are in the `std` namespace. All algorithms have the option to provide an "execution policy", but these will not be discussed in this course.  
+  
+For this class, we'll use `std::transform()` as an introduction to the STL algorithms. All the algorithms follow a similar pattern of usage. But first, we'll discuss the mechanisms to provide callbacks: function pointers, functors (also called function objects), and lambdas. C++ treats functions as "first-class citizens", which basically means functions can be stored in variables, used as parameters to other functions, and can be returned from other functions. This directly applies to STL algorithms, since many of them expects a callback function as one of their parameters. 
 
 ## Function Pointers, Functors, and Lambda Expressions
-Like with iterators for STL containers, we first need to cover function pointers, functors, and lambdas to understand how to use the STL algorithms. Any of these options can be used with the STL algorithms.  
+Before discussing `std::transform()`, we'll describe the mechanisms for passing callback functions.
 
 ### Function Pointers
-There are two ways to use function pointers: pass the address of a function using the ampersand (&) as an argument, or write the function as a pointer. Below is an example of both.
+To declare a function pointer, you need to provide the return type, name of the function pointer variable (which has the pointer asterisk in front of it and is wrapped in parentheses), and the list of types expected for the parentheses. In the following example, the third parameter of `addOrSubtract()` is a function pointer that returns an integer, and expects two integers as its parameters. The name of the function pointer is `operation`. It can be used directly as a function, as seen in the return statement of the `addOrSubtract()`. 
 ```C++
+#include <assert.h>
 // addOrSubtract takes two integers, x and y, that should be
 // added or subtracted, and a function pointer, operation
 // that performs the operation
-int addOrSubtract(int x, int y, int *operation) {
+int addOrSubtract(int x, int y, int (*operation)(int, int)) {
     return operation(x, y);
 }
 
-// add is a normal function
 int add(int x, int y) {
     return x + y;
 }
 
-// subtract is a function pointer
 int subtract(int x, int y) {
     return x - y;
 }
@@ -30,14 +31,28 @@ int main() {
     // on add's name to pass its address
     int additionResult = addOrSubtract(2, 2, &add);
     assert(additionResult == 4);
-    // to use subtract, we just pass it since it is already a pointer
-    int subtractionResult = addOrSubtract(3, 1, subtract);
+    // same for subtract, we need the ampersand to pass its address
+    int subtractionResult = addOrSubtract(3, 2, subtract);
     assert(subtractionResult == 1);
 }
 ```
+C++ 11 added a header `<functional>` that includes an `std::function` type. Below, the `addOrSubtract` function has been modified to use `std::function` as its type:
+```C++
+// need to include the functional header
+#include <functional>
+// std::function is a generic type
+// the template argument is the return type, followed by the parameter
+// list's data types in parentheses
+// so, operation is a function that returns an int 
+//  and expects two ints as parameters
+int addOrSubtract(int x, int y, std::function<int(int,int)> operation) {
+    return operation(x, y);
+}
+// the rest of the program would be the same
+```
 
 ### Functors
-A functor is a class/struct that overloads the function call operator, i.e., it implements `operator ()`. Typically, functors only implement this function, and maybe a constructor, although this is not a requirement. The advantage of functors is that they can maintain state via their member variables. The below example implements a functor to computer the average of values in an array:
+A functor is a class/struct that overloads the function call operator, i.e., it implements `operator ()`. Typically, functors only implement this operator, although they can implement other functions as well. The advantage of functors is that they can maintain state via their member variables. The below example implements a functor to computer the average of values in an array:
 ```C++
 #include <iostream>
 #include <array>

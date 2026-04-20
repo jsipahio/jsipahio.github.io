@@ -6,7 +6,7 @@
 |2	|Testing, Naming, and Time Complexity Measures	|Bigint Part 1, Quiz 2|
 |3	|C++ Standard Library Data Types and Pointers/Dynamic Arrays|	Bigint Part 2, Quiz 3|
 |4	|String ADT	and Big 3 |String Part 1, Quiz 4|
-|5	|Copy Semantics, Polymorphism and Templates|	String Part 2, Quiz 5|
+|5	| Polymorphism and Templates |	String Part 2, Quiz 5|
 |6	|Stack and Queue ADT and Concepts|	String Part 3, Exam 1|
 |7	|Prefix, Postfix, Infix, and Recursion|	Stack Part 1, Quiz 6|
 |8	|Linked List ADT and Concept|	Stack Part 2, Quiz 7|

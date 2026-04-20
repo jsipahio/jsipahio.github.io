@@ -23,6 +23,9 @@ The main way to add new elements to the end of a vector is via the `push_back` f
 ### Accessing Elements
 ### Resizing
 
+### Common Applications
+`std::vector` is the standard container used in C++ for storing collections of data. If you aren't sure which of the other containers to use for an application, that typically means a vector will work fine. Vectors offer balanced performance for most applications.
+
 ## Iterators
 Before discussing the rest of the STL data types, we need to cover iterators. An iterator is a type of pointer that was developed to standardize access to containers. An iterator is basically a pointer to an element of a container, however, there are additionally operations that can be performed on iterators to make traversing a container consistent no matter which type of container is being accessed. Below is a quick example of a vector being created, and an iterator being used to access its members:
 ```C++
@@ -144,7 +147,7 @@ int main() {
 All STL containers provide comparison operators (==, <=, >=, <, >, !=) to compare two containers. 
 
 ## Array
-The STL Array class is a template class that wraps a normal C array. It has the same constraint as a C array, in that the size of the array must be known at compile time. However, it provides protections against out-of-range access via its `at` member function, provides iterators, and has member functions to return the size of the container.
+The STL Array class is a template class that wraps a normal C array. It has the same constraint as a C array, in that the size of the array must be known at compile time. However, it provides protections against out-of-range access via its `at` member function, provides iterators, and has member functions to return the size of the container, unlike standard C arrays where the size of the array is tracked by the programmer.
 
 ### Unique Operations
 Like a C array, STL arrays support random access via the subscript operator (i.e., using an index). They also provide an `at()` member function that raises an exception when an invalid index is provided. 
@@ -165,10 +168,66 @@ The STL List class is used to create a linked list. Similar to an array/vector, 
 Lists provide a few unique member functions for common list operations. First is `splice()`, which expects an iterator and 
 
 ## Set (and Unordered Set)
-The STL set is used store a collection of unique values. The multiset is used to collection of values that are not unique, but do not need to be kept in order. 
+The STL set is used store a collection of unique values. The multiset is used to collection of values that are not unique, but do not need to be kept in order. The multiset tracks the number of times a duplicate element has been "inserted". There are unordered variants of both the set and multiset. Most applications where sets are used do not need to preserve order, so `std::unordered_set` and `std::unordered_multiset` are typically preferred. 
+
+### Example Applications
+Sets can be used anytime you want to create a collection of unique items. Sets offer faster retrieval of items than a list, with the penalty of slower insertion and deletion than list. Since vectors have random access, they offer faster retrieval of items (although searching is slower), but inserting items that are not at the end of the vector is slower than inserting an item to a set.  
+Unordered sets are faster than list and vector in almost all cases, but do not preserve order. If you need to store a collection of items where order is not needed, unordered sets are best.  
+### Example
+This example shows how an unordered set can be used to count the number of unique words in a text file:
+```C++
+#include <fstream>
+#include <iostream>
+#include <string>
+#include <unordered_set>
+
+std::unordered_set<std::string> readUniqueWords(std::ifstream &fin) {
+    std::string word;
+    std::unordered_set<std::string> uniqueWords;
+    while (fin >> word) {
+        uniqueWords.insert(word);
+    }
+    return uniqueWords;
+}
+
+void printReport(const std::unordered_set<std::string> &words) {
+    for (const auto& word: words) {
+        std::cout << word << ": " << words.count(word) << "\n";
+    }
+}
+
+int main(int argc, char **argv) {
+    if (argc < 2) {
+        std::cerr << "Not enough arguments provided. Expected 1, got 0\n";
+        std::cerr << "Usage: \n";
+        std::cerr << "\t./count_words [filename]\n";
+        return 0;
+    }
+
+    std::ifstream fin(argv[1]);
+    if (fin.fail()) {
+        std::cerr << "Could not open file " << argv[1] << "\n";
+        return 1;
+    }
+
+    std::unordered_set<std::string> uniqueWords = readUniqueWords(fin);
+    fin.close();
+    printReport(uniqueWords);
+
+    return 0;
+}
+```
 
 ## Map (and Unordered Map)
 STL Maps are used to store (key, value) pairs. There are four variations of map: `std::map`, `std::multimap`, `std::unordered_map` and `std::unordered_multimap`. If the keys in the map must be unique, `std::map` or `std::unordered_map` can be used. If there can be duplicate keys, then `std::multimap` and `std::unordered_multimap` must be used. The `std::map` and `std::multimap` collections preserve the insertion order of elements. If this is not required, using the `unordered` variants can provide a large performance boost.
+
+### Unique Methods 
+Maps support random access using the subscript `operator[]`, passing a key as the index. 
+
+### Example Applications
+
+### Example
+Here, 
 
 ## Deque
 A deque is a doubly-ended queue, which allows for quick access to elements at the beginning and end of the collection. The cost of random access is also fast. Like a vector, insertions and removals in the middle of the collection are slower since they require shifting elements. Expanding a deque is faster than a vector, since it does not require copying the collection, but deques use more space on average.
@@ -268,7 +327,102 @@ int main() {
 
 ```
 ## Queue
-Like stack the STL queue is also a container adapter. The queue data structure limits access to data so that it is accessed in first-in, first-out (FIFO) order. To do so, it limits users to the `push()`, `front()`, `back()`, and `pop()` methods. The `push()` method adds an element to the back of the queue. `front()` and `back()` return the values at the front and end of the queue, respectively. The `pop()` method removes the first element of the queue. Queues are used for buffers, such as process wait lists in operating systems, ordering the processing of network requests, and some graph traversal implementations.
+Like stack the STL queue is also a container adapter. The queue data structure limits access to data so that it is accessed in first-in, first-out (FIFO) order. To do so, it limits users to the `push()`, `front()`, `back()`, and `pop()` methods. The `push()` method adds an element to the back of the queue. `front()` and `back()` return the values at the front and end of the queue, respectively. The `pop()` method removes the first element of the queue. Queues are used for buffers, such as process wait lists in operating systems, ordering the processing of network requests, and some graph traversal implementations. There is a specialized version of queue, `std::priority_queue`, which orders elements by both insertion order and a "priority" level, so that elements with more priority end up at the front of the queue, even if they are inserted after lower priority elements.
+
+### Example Applications
+Queues are used to implement process queues (i.e., waitlist), any kind of waitlist in general. 
+
+### Example
+Below is an example of a first-come, first-serve process queue:
+```C++ 
+#include <iostream>
+#include <string>
+#include <queue>
+
+int main() {
+    std::queue<std::string> processQueue;
+    // use push to add elements to back of queue
+    processQueue.push("process 1029");
+    processQueue.push("process 1192");
+    processQueue.push("process 399");
+    processQueue.push("process 1922");
+    processQueue.push("process 245");
+
+    // while the queue is not empty
+    while (!processQueue.empty()) {
+        // print the element at the front of queue
+        std::cout << processQueue.front() << "\n";
+        // remove the element from the front of the queue
+        processQueue.pop();
+    }
+    
+    return 0;
+}
+```
+Example Output:
+```
+process 1029
+process 1192
+process 399
+process 1922
+process 245
+```
+
+Here is an example using `priority_queue` for a simple CPU SJF (shortest job first) task scheduler:
+```C++
+#include <iostream>
+#include <string>
+#include <queue>
+
+// create a struct to hold (very simple) process info
+struct Process {
+    std::string name;
+    unsigned int estimatedDuration;
+    Process(std::string n, unsigned int duration) {
+        name = n;
+        estimatedDuration = duration;
+    }
+    // need to implement < for priority_queue
+    bool operator<(const Process& other) const {
+        return estimatedDuration > other.estimatedDuration;
+    }
+};
+
+int main() {
+    // declaring 5 processes with various estimated durations
+    Process p1 = { "process 1", 1000 };
+    Process p2 = { "process 2", 100 };
+    Process p3 = { "process 3", 500 };
+    Process p4 = { "process 4", 400 };
+    Process p5 = { "process 5", 50 };
+
+    // add the processes the queue
+    std::priority_queue<Process> sjfQueue;
+    sjfQueue.push(p1);
+    sjfQueue.push(p2);
+    sjfQueue.push(p3);
+    sjfQueue.push(p4);
+    sjfQueue.push(p5);
+
+    // while the queue is not empty
+    while (!sjfQueue.empty()) {
+        // use top() to access the highest priority item
+        std::cout << sjfQueue.top().name << "\n";
+        // remove the highest priority item
+        sjfQueue.pop();
+    }
+
+    return 0;
+}
+```
+Example Output:
+```
+process 5
+process 2
+process 4
+process 3
+process 1
+```
 
 ## Comparison of Container Uses
 So, the question that arises at this point is when to use which container. It's easy to decide if a map is needed, since it is the only container that supports key-value pairs. For set and map, unless insertion order needs to be preserved, it is always better to use the "unordered" variants. Vectors offer balanced performance for many applications, but can use excessive space and can be slowed down if many insertions have to occur at the beginning or middle of the vector. If many of these types of insertion must be made, a list may make more sense. If the order of elements needs to be preserved, and the number of elements is known ahead of time, an array may be sufficient. Sets provide quick access to unique elements, while a multiset provides quick access to the counts of a specific element in the collection. 

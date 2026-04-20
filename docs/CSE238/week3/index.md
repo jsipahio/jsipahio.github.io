@@ -8,3 +8,7 @@ In this week we will discuss pointers and dynamic arrays, along with the memory 
 ### Outline
 - [Memory Allocation and Pointers](pointers.md)
 - [STL Vectors and IO Streams](stl.md)
+
+### Assignments
+- [Bigint Part 2](bigint.md)
+- [I/O Streams Assignment](io.md) 

@@ -11,6 +11,9 @@ Provided the values are being inserted to the vector in order, or the order is i
 ### Vector Resizing
 A vector automatically resizes itself by doubling its capacity each time it runs out of space. 
 
+### Accessing Values
+Values in the vector can be accessed and modified by the subscript operator (square brackets `[]`). Like a normal array, however, this provides no protection against out-of-range access. The `at()` member function can be used to access members, and throws an exception if the index passed to it is outside the vector's bounds.
+
 ## I/O Streams
 At this point, you are likely used to automatically adding `#include <iostream>` to the top of all your program. Now, we are going to discuss I/O streams in more detail.
 
@@ -57,7 +60,7 @@ If we want to avoid these situations, we should clear the input buffer after eac
 
 void clearInput() {
     // this flushes any error locks,
-    // such as if you try to read incompatable data types
+    // ex: failed to read incompatable data types
     std::cin.clear();
     // this reads data until a new line is reached
     while (std::cin.get() != '\n' && std::cin) ;
@@ -92,4 +95,12 @@ $
 Hello, , you are  years old
 ```
 
-There are other mechanisms for reading input as well, however. In the `clearInput()` function, we used `std::cin.get()`. This function reads a single character at a time, including whitespace. This can be useful if we need to read input into a buffer, or are expecting input to be separated by non-whitespace characters. The `<string>` header provides a function, `getline()`, that can be used to read input into a string until a new line character is reached. 
+There are other mechanisms for reading input as well, however. In the `clearInput()` function, we used `std::cin.get()`. This function reads a single character at a time, including whitespace. This can be useful if we need to read input into a buffer, or are expecting input to be separated by non-whitespace characters. The `<string>` header provides a function, `getline()`, that can be used to read input into a string until a new line character is reached.   
+  
+The extraction operator can be overloaded for user defined types. If the operator needs to access private members of the class, it needs to be defined as a `friend` function, and not a member function. If it does not need to access members of the class, it is better to define it as a free function.
+
+#### Writing Data
+The `std::cout` and `std::cerr` objects can be used to print data to the console. Data is written using the `<<` operator. Normal output is written using `std::cout`. For error messages and debug statements, use `std::cerr`. The `operator<<` can be overloaded to print out any data type. Similar to `operator>>`, if it needs to access private members of the class, it must be defined as a `friend` function. If it does not need access to private members, it is better to define it as a free function.  
+
+### File Streams
+Often, programs need to read data from, and write data to, files. In C++, you create objects that operate similarly to `std::cin` and `std::cout` to handle files. 
