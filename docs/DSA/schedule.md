@@ -1,20 +1,20 @@
-# CSE238 Schedule 
+# CSE238 Table of Contents 
 
-|Week|	Topic	|Deliverable|
-|---|---|---|
-|1	|Introduction, Review, and Abstract Data Type (ADT) Definition	|Lab 1, Quiz 1|
-|2	|Testing, Naming, and Time Complexity Measures	|Bigint Part 1, Quiz 2|
-|3	|C++ Standard Library Data Types and Pointers/Dynamic Arrays|	Bigint Part 2, Quiz 3|
-|4	|String ADT	and Big 3 |String Part 1, Quiz 4|
-|5	| Polymorphism and Templates |	String Part 2, Quiz 5|
-|6	|Stack and Queue ADT and Concepts|	String Part 3, Exam 1|
-|7	|Prefix, Postfix, Infix, and Recursion|	Stack Part 1, Quiz 6|
-|8	|Linked List ADT and Concept|	Stack Part 2, Quiz 7|
-|9	|Binary Tree ADT and Concept|	Stack Part 3, Quiz 8|
-|10|	Heap and Priority Queue ADT and Concept|	Heap Part 1, Quiz 9|
-|11|	Naïve Sorting Algorithms: Insertion, Selection, and Bubble|	Heap Part 2, Quiz 10|
-|12|	Advanced Sorting Algorithms: Quick, Merge, Heap|	Heap Sort, Exam 2|
-|13|	Graphs|	Graph Part 1, Quiz 11|
-|14|	Graphs Continued|	Graph Part 2, Quiz 12|
-|15|	Greedy and Dynamic Programming Algorithms|	Greedy/DP Algorithm, Quiz 13|
-|16|	Finals Week - No New Content|	Final|
+| Chapter | Topic | Deliverable |
+| --- | --- | --- |
+| 1  | Introduction, Review, and Abstract Data Type (ADT) Definition | Lab 1, Quiz 1 |
+| 2  | Testing, Naming, and Time Complexity Measures | ??? Part 1, Quiz 2 |
+| 3  | C++ Standard Library Data Types and Pointers/Dynamic Arrays | ??? Part 2, Quiz 3 |
+| 4  | String ADT and Big 3 | String Part 1, Quiz 4 |
+| 5  | Polymorphism and Templates | String Part 2, Quiz 5 |
+| 6  | Stack and Queue ADT | String Part 3, Exam 1 |
+| 7  | Linked List ADT and Iterators | Stack Part 1, Quiz 7 |
+| 8  | Sets, Hash Tables, and Maps | Stack Part 2, Quiz 6 |
+| 9  | Recursion and Binary Tree ADT | Stack Part 3, Quiz 8 |
+| 10 | Heap and Priority Queue ADT, Heap Sort | Heap Part 1, Quiz 9 |
+| 11 | Naïve Sorting Algorithms: Insertion, Selection, and Bubble | Heap Part 2, Quiz 10 |
+| 12 | Divide and Conquer Algorithms and Advanced Sorting Algorithms: Quick, Merge | Heap Sort, Exam 2 |
+| 13 | Graphs and Graph Traversal | Graph Part 1, Quiz 11 |
+| 14 | Digraphs and Greedy Algorithms | Graph Part 2, Quiz 12 |
+| 15 | Dynamic Programming Algorithms and NP-Complete | Greedy/DP Algorithm, Quiz 13 |
+| 16 | Finals Week - No New Content | Final | 

@@ -50,6 +50,17 @@ I am currently contributing to the srcML infrastructure, which supports source c
 - Ohio Space Consortium Grant (August 2023 - May 2024) - Awarded $10,000 for research into potential benefits of updating protocols for securing Deep Space Network 
 - Choose Ohio First - Computer Science Scholarship (January 2022 - May 2024) - Awarded funds for undergraduate tuition as part of the COF-CS program 
 
+## Publications and Scholarly Works
+#### Works Under Review or Near Submission
+- Sipahioglu, J.A., Behler, J.A.C., Testa, S., Al-Ramadan, F., Decker, M.J., Collard, M.L., Maletic, J.I., "nameCollector: Extracting Source Code Identifiers Along with their Types and Context", submitted May 28th, 2026 to ICSME 2026 Demonstrations Track.
+- Al-Ramadan, F., Sipahioglu, J.A., Behler, J.A.C., Dragan, N., Decker, M.J., Collard, M.L., Maletic, J.I., "Should this Method be Static? Automatic Identification of Static Method Candidates", submitted May 16th, 2026 to TSE.
+
+#### Accepted and to Appear
+N/A
+
+#### Publications (Refereed)
+N/A
+
 ## Professional Activities/Services
 #### Conference Reviewer
 - 2026 IEEE International Conference on Software Maintenance and Evolution (ICSME '26) - Additional Reviewer
@@ -59,7 +70,11 @@ I am currently contributing to the srcML infrastructure, which supports source c
 - 2025 Choose Ohio First (COF) Poster Competition at Kent State University - Judged 6 computer science posters
 
 ## Teaching
-**Stark State College**  
+**Stark State College**
+*Summer 2026*
+    - CSE233 - C++ Programming
+    - CSE234 - Advanced C++ Programming
+    - CSE235 - Python Development
 *Spring 2026*  
     - CSE121 - Mobile Development Architecture  
     - CSE122 - Programming Logic and Problem Solving  
