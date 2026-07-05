@@ -52,26 +52,31 @@ I am currently contributing to the srcML infrastructure, which supports source c
 
 ## Publications and Scholarly Works
 #### Works Under Review or Near Submission
-- Sipahioglu, J.A., Behler, J.A.C., Testa, S., Al-Ramadan, F., Decker, M.J., Collard, M.L., Maletic, J.I., "nameCollector: Extracting Source Code Identifiers Along with their Types and Context", submitted May 28th, 2026 to ICSME 2026 Demonstrations Track.
-- Al-Ramadan, F., Sipahioglu, J.A., Behler, J.A.C., Dragan, N., Decker, M.J., Collard, M.L., Maletic, J.I., "Should this Method be Static? Automatic Identification of Static Method Candidates", submitted May 16th, 2026 to TSE.
+- Al-Ramadan, F., Sipahioglu, J.A., Behler, J.A.C., Dragan, N., Decker, M.J., Collard, M.L., Maletic, J.I., "Should this Method be Static? Automatic Identification of Static Method Candidates", submitted May 16th, 2026 to IEEE Transactions on Software Engineering (TSE).
+- Sipahioglu, J.A., Behler, J.A.C., Al-Ramadan, F., Rossi, K.N., Decker, M.J., Collard, M.L., Maletic, J.I., "Reverse Engineering and Object-Oriented Design Recovery of C Systems", to be submitted Fall 2026 to the 34th IEEE International Conference on Software Analysis, Evolution and Reengineering (SANER).
 
 #### Accepted and to Appear
-N/A
+- Sipahioglu, J.A., Behler, J.A.C., Testa, S., Al-Ramadan, A., Decker, M.J., Collard, M.L., Maletic, J.I., (2026) “nameCollector: Extracting Source Code Identifiers Along with their Types and Context”, in the Proceedings of 42nd IEEE International Conference on Software Maintenance & Evolution (ICSME), Tool Demonstrations Track, Benevento, Italy, Sept 14 - 18, 5 pages. (TO APPEAR)
 
 #### Publications (Refereed)
 N/A
 
+#### Theses
+- Sipahioglu, J.A., "Modernizing Deep Space Network Security", M.S. Thesis, Kent State University, Department of Computer Science, August 2024.
+
 ## Professional Activities/Services
 #### Conference Reviewer
-- 2026 IEEE International Conference on Software Maintenance and Evolution (ICSME '26) - Additional Reviewer
-- 2026 IEEE/ACM International Conference on Program Comprehension (ICPC) - Additional Reviewer
+- 2026 14th IEEE Working Conference on Software Visualization (VISSOFT) - Additional Reviewer
+- 2026 42nd IEEE International Conference on Software Maintenance and Evolution (ICSME '26) - Additional Reviewer
+- 2026 34th IEEE/ACM International Conference on Program Comprehension (ICPC) - Additional Reviewer
 
 ## University Activities/Services
 - 2025 Choose Ohio First (COF) Poster Competition at Kent State University - Judged 6 computer science posters
+- 13th International Conference on Intelligent Human Computer Interaction (IHCI 2021) at Kent State University - Assisted with High School outreach workshop
 
 ## Teaching
-**Stark State College**
-*Summer 2026*
+**Stark State College**  
+*Summer 2026*  
     - CSE233 - C++ Programming
     - CSE234 - Advanced C++ Programming
     - CSE235 - Python Development
