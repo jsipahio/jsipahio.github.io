@@ -4,9 +4,13 @@ Throughout the course we have been using the predefined data types provided by C
 ## Enums
 Enums assign human-readable names to integral constants. C++ has two types of enum, the classical C enum, and the more modern enum class. First, let's look at a C enum:
 ```cpp
-enum Day { SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY };
+enum Day { 
+    SUNDAY, MONDAY, TUESDAY, 
+    WEDNESDAY, THURSDAY, 
+    FRIDAY, SATURDAY 
+};
 ```
-Under the hood, the value 0 is assigned to SUNDAY, 1 is assigned to MONDAY, 2 to TUESDAY, and so on. The same code is roughly equivalent:
+Under the hood, the value 0 is assigned to SUNDAY, 1 is assigned to MONDAY, 2 to TUESDAY, and so on. This code below is roughly equivalent:
 ```cpp
 const int SUNDAY = 0;
 const int MONDAY = 1;
@@ -110,7 +114,11 @@ C++11 added enum classes to deal with this. An enum class is like a normal enum,
   
 Here is the `Day` enum as an enum class:
 ```cpp
-enum class Day { SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY };
+enum class Day { 
+    SUNDAY, MONDAY, TUESDAY, 
+    WEDNESDAY, THURSDAY, 
+    FRIDAY, SATURDAY 
+};
 ```
 Now, the only way to assign an enum class value is to scope it.
 ```cpp
@@ -165,9 +173,11 @@ Student student1 = {"John"};
 Student student2 = {"John", "Doe"};
 // legal, firstName is "John", lastName is "Doe", creditHours is 60
 Student student3 = {"John", "Doe", 60};
-// legal, firstName is "John", lastName is "Doe", creditHours is 60, gpa is 3.1
+// legal, firstName is "John", lastName is "Doe", 
+// creditHours is 60, gpa is 3.1
 Student student4 = {"John", "Doe", 60, 3.1};
-// illegal, will try to store 3.1 in an int (creditHours), which can't be done
+// illegal, will try to store 3.1 in an int (creditHours),
+// which can't be done
 Student student5 = {"John", "Doe", 3.1};
 ```
 For the most part, structs can be used like any other primitive type. They can be used as both return types and parameters to functions. You can also create arrays of structs:
@@ -206,7 +216,7 @@ int main() {
 
     std::cout << "You entered\n";
     for (int i = 0; i < 10; ++i) {
-        std::cout << "\nStudent " << i + 1 << " -----------\n"
+        std::cout << "\nStudent " << i + 1 << " -----------\n";
         printStudent(students[i]);
         std::cout << "---------------------\n";
     }
@@ -217,7 +227,7 @@ int main() {
 The only thing we can't do with structs is use operators like +, -, ==, <, >, etc. on them, or directly print them using `std::cout <<` or similar. Next week, we will discuss operator overloading, which will allow us to use these operators for structs. 
 
 ## Classes
-A class is very similar to a struct (in C++, they are basically the same, but programmers use them differently). The main difference is how they are used. Structs are used to store simple data with few or no operations. All data in a struct is public, by default. In a class, data and member functions are private, by default. The `public:` region specifier must be used to make fields and member functions usable outside the class. Below is a basic class:
+A class is very similar to a struct (in C++, they are basically the same, but programmers use them differently). Structs are used to store simple data with few or no operations. All data in a struct is public, by default. In a class, data and member functions are private, by default. The `public:` region specifier must be used to make fields and member functions usable outside the class. Below is a basic class:
 ```c++
 class Student {
 public:
@@ -227,7 +237,7 @@ public:
     double gpa;
 };
 ```
-In this case, we've made all the fields public, so this class is basically the same as a struct. In object oriented design, we typically make the data fields of a class private. This means that the fields of the class can no longer be accessed directly by objects when we attempt to use them:
+In this case, we've made all the fields public, so this class is basically the same as a struct. In object-oriented design, we typically make the data fields of a class private. This means that the fields of the class can no longer be accessed directly by objects when we attempt to use them:
 ```cpp
 class Student {
 private:
@@ -254,14 +264,17 @@ public:
     // default constructor, does nothing
     Student() {}
     // constructor that allows us to set the fields
-    Student(std::string first, std::string last, double grade, int credits) {
+    // due to width constraints on the PDF, poor names are being used
+    // for the parameters in this example
+    // the full code is provided in a C++ file this week with better names
+    Student(std::string f, std::string l, double g, int c) {
         // the names of the member variables are used directly
         // directly inside of class member functions
         // no dot operator or this/self reference is required
-        firstName = first;
-        lastName = last;
-        creditHours = credits;
-        gpa = grade;
+        firstName = f;
+        lastName = l;
+        creditHours = c;
+        gpa = g;
     }
 // private region specifier, ends the public region
 // anything after this is now private
@@ -272,14 +285,14 @@ private:
     double gpa;
 };
 ```
-Or, more typically in C++, defined outside of the class after they are declared. The function must be scoped to the class by putting the class name before the name of the function, separated by double colons.
+Or, more typically in C++, they are defined outside the class after they are declared. The function must be scoped to the class by putting the class name before the name of the function, separated by double colons.
 ```cpp
 class Student {
 public:
     // default constructor, does nothing
     Student() {}
     // constructor that allows us to set the fields
-    Student(std::string first, std::string last, double grade, int credits);
+    Student(std::string f, std::string l, double g, int c);
 private:
     std::string firstName;
     std::string lastName;
@@ -287,8 +300,8 @@ private:
     double gpa;
 };
 // defined outside the class. the constructor is associated with the class 
-// thanks to Student:: placed before the name
-Student::Student(std::string first, std::string last, double grade, int credits) {
+// thanks to Student:: being placed before the name
+Student::Student(std::string f, std::string l, double g, int c) {
     firstName = first;
     lastName = last;
     creditHours = credits;
@@ -306,7 +319,7 @@ int main() {
     return 0;
 }
 ```
-While this allows us to create objects with data, it doesn't allow us to access this data. The next category of member function is used to read and modify the properties of a class.
+While this allows us to create objects with data, it doesn't allow us to access the data. The next category of member function is used to read and modify the properties of a class.
 
 ### Accessors
 An accessor is a function used to access the values of a class's fields. There are two primary categories of member function: getters and setters. Getters are used to read the values of a field. Setters are used to modify the values of fields. There is no rule for how to name this functions, but getters typically start with `get` and setters typically start with `set`. In some cases, getters and setters can also just be the name of a field.
@@ -314,7 +327,7 @@ An accessor is a function used to access the values of a class's fields. There a
 class Student {
 public:
     Student() {}
-    Student(std::string first, std::string last, double grade, int credits);
+    Student(std::string f, std::string l, double g, int c);
     // getters
     std::string getFirstName() const;
     std::string getLastName() const;
@@ -331,7 +344,7 @@ private:
     int creditHours;
     double gpa;
 };
-Student::Student(std::string first, std::string last, double grade, int credits) {
+Student::Student(std::string f, std::string l, double g, int c) {
     firstName = first;
     lastName = last;
     creditHours = credits;
@@ -381,14 +394,18 @@ int main() {
     std::cout << "Student 1: \n";
     std::cout << "    " << student1.getFirstName() << " " 
         << student1.getLastName() << "\n";
-    std::cout << "    " << student1.getGpa() << " GPA\n";
-    std::cout << "    " << student1.getCreditHours() << " Credit Hours\n";
+    std::cout << "    " 
+        << student1.getGpa() << " GPA\n";
+    std::cout << "    " 
+        << student1.getCreditHours() << " Credit Hours\n";
     
     std::cout << "\nStudent 2: \n";
     std::cout << "    " << student2.getFirstName() << " " 
         << student2.getLastName() << "\n";
-    std::cout << "    " << student2.getGpa() << " GPA\n";
-    std::cout << "    " << student2.getCreditHours() << " Credit Hours\n";
+    std::cout << "    " 
+        << student2.getGpa() << " GPA\n";
+    std::cout << "    " 
+        << student2.getCreditHours() << " Credit Hours\n";
 
     student1.setFirstName("Mike");
     student1.setLastName("Smith");
@@ -402,14 +419,18 @@ int main() {
         std::cout << "Student 1: \n";
     std::cout << "    " << student1.getFirstName() << " " 
         << student1.getLastName() << "\n";
-    std::cout << "    " << student1.getGpa() << " GPA\n";
-    std::cout << "    " << student1.getCreditHours() << " Credit Hours\n";
+    std::cout << "    " 
+        << student1.getGpa() << " GPA\n";
+    std::cout << "    " 
+        << student1.getCreditHours() << " Credit Hours\n";
     
     std::cout << "\nStudent 2: \n";
     std::cout << "    " << student2.getFirstName() << " " 
         << student2.getLastName() << "\n";
-    std::cout << "    " << student2.getGpa() << " GPA\n";
-    std::cout << "    " << student2.getCreditHours() << " Credit Hours\n";
+    std::cout << "    " 
+        << student2.getGpa() << " GPA\n";
+    std::cout << "    " 
+        << student2.getCreditHours() << " Credit Hours\n";
 
     return 0;
 }
@@ -459,7 +480,7 @@ Classes can have other member functions than constructors and accessors. For exa
 class Student {
 public:
     Student() {}
-    Student(std::string first, std::string last, double grade, int credits);
+    Student(std::string f, std::string l, double g, int c);
     // getters
     std::string getFirstName() const;
     std::string getLastName() const;
@@ -533,18 +554,24 @@ void Student::completeClass(double grade, int credits) {
     // now, use weighted average calculation to determine
     // overall GPA based on the old GPA and new class
     int newCredits = credits + creditHours;
-    double weightedGpa = (creditHours / newCredits) * gpa;
-    double weightedGradePoint = (credits / newCredits) * gpa;
+    // (double)newCredits temporarily converts newCredits to a double
+    // that way, it performs floating point division instead of integer
+    // also doing some funky formatting so it fits on the page
+    double weightedGpa 
+        = (creditHours / (double)newCredits) * gpa;
+    double weightedGradePoint 
+        = (credits / (double)newCredits) * gradePoint;
     gpa = weightedGpa + weightedGradePoint;
     creditHours = newCredits;
 }
 ```
-And an exmple of these new member functions being used:
+Example of these new member functions being used:
 ```cpp
 int main() {
     Student student("John", "Doe", 3.5, 24);
     std::cout << student.getFullName() << "\n";
-    std::cout << student.getFullName("Student: {last}, {first}") << "\n";
+    std::cout 
+        << student.getFullName("Student: {last}, {first}") << "\n";
     std::cout << student.getGpa() << " GPA\n";
     std::cout << student.getCreditHours() << " Credit Hours\n";
 
@@ -575,7 +602,7 @@ Updated credit hours and GPA
 ```
 
 ## Comparing Structs and Classes
-Technically speaking, there is almost no difference between a struct and class in C++. The main difference to most programmers is that everything is public by default in a struct, while everything is private by default in a class. There are some low-level differences when dealing with backwards compatibility with C code, but for the sake of this course a struct and class can do the same things. Despite this, C++ programmers generally use structs and classes in different ways. When a programmer-defined data type is only being used to store simple data with few or no operations, structs are typically used. When the inner data is more complex or has more complex relations (where private visibility is needed), classes are preferred. Classes are also typically used when a type has many operations defined for it. If the only operations defined are get/set functions, then you may be better off using a struct and making everything public.
+Technically speaking, there is almost no difference between a struct and class in C++. The main difference to most programmers is that everything is public by default in a struct, while everything is private by default in a class. There are some low-level differences when dealing with backwards compatibility with C code, but for the sake of this course a struct and a class can do the same things. Despite this, C++ programmers generally use structs and classes in different ways. When a programmer-defined data type is only being used to store simple data with few or no operations, structs are typically used. When the inner data is more complex or has more complex relations (where private visibility is needed), classes are preferred. Classes are also typically used when a type has many operations defined for it. If the only operations defined are get/set functions, then you may be better off using a struct and making everything public.
 
 ## Conclusion
-This week we discussed programmer defined data types in C++. Enums are used to declare named constants, typically those that can be grouped together. Structs and classes are mechanically the same in C++, but used in different ways. Structs are used to store plain data with few or no operations. The data in structs is public (accessible by objects outside the struct). Classes have private acccess by default, meaning that the data and member functions cannot be accessed by objects declared outside the class. Classes typically implement constructors to allow the initial values of an object's fields to be set when the class is created. Accessor functions are used to read and modify the values of an object's fields. Classes can also implement other member functions for various other operations.
+This week we discussed programmer defined data types in C++. Enums are used to declare named constants, typically those that can be grouped together. Structs and classes are mechanically the same in C++, but used in different ways. Structs are used to store plain data with few or no operations. The data in structs is public (accessible by objects outside the struct). Classes have private access by default, meaning that the data and member functions cannot be accessed by objects declared outside the class. Classes typically implement constructors to allow the initial values of an object's fields to be set when the class is created. Accessor functions are used to read and modify the values of an object's fields. Classes can also implement other member functions for various other operations.

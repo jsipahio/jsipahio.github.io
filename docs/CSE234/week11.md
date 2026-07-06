@@ -1,5 +1,5 @@
 # CSE234 Week 11: Big 3 and Generic Types
-C++ provides polymorphism in three main ways: function overloading, generic types, and inheritance. Function overloading should have been covered in the prior course. This week, we will focus on generic types. Inheritance will be covered in a couple of weeks.  In C++, you are expected to manage the memory of any dynamically allocated fields you create. 
+C++ provides polymorphism in three main ways: function overloading, generic types, and inheritance. Function overloading should have been covered in the prior course. This week, we will focus on generic types. Inheritance will be covered in a couple of weeks.  In C++, you are expected to manage the memory of any dynamically allocated fields you create. The Big 3 is a term for the destructor, copy constructor, and overloaded assignment operator, which must all be implemented if dynamically allocated memory is used in a class.
 
 ## Generic Types
 Many modern programming languages implement generic types in one way or another. Generic types allow functions and/or classes to be defined once for any type. This, along with function overloading and inheritance, is one of the ways modern languages implement polymorphism. In C++, generic functions and classes are defined using template parameter lists. For the basic syntax, we'll look at a short generic function that adds two values.
@@ -242,14 +242,15 @@ int main() {
 
 The implementation for the copy constructor provided by the compiler looks something like this:
 ```C++
-SmartPointer::SmartPointer(const SmartPointer& other) {
+template <typename T>
+SmartPointer<T>::SmartPointer(const SmartPointer& other) {
     ptr = other.ptr;
 }
 ```
 In reality, when we create a *new* smart pointer object via copying, we are probably expecting just the value to be copied, and for the two pointer objects to be independent entities. Even worse, when both objects go out of scope and the destructor is called, delete will be called on the same pointer twice. This will create a program crash due to a double free. Therefore, we must implement the copy constructor ourselves to avoid multiple objects from referencing the same memory location:
 ```C++
 template <typename T>
-SmartPointer::SmartPointer(const SmartPointer& other) {
+SmartPointer<T>::SmartPointer(const SmartPointer& other) {
     ptr = new T;
     *ptr = *other;
 }
@@ -263,20 +264,22 @@ Next, we need to consider the assignment operator, `operator =`. We cannot simpl
 Defining an overloaded assignment operator the correct way allows the compiler to make several optimizations. The best way to overload `operator=` is to first create a separate member function that swaps two objects in constant time. Then, pass the right-hand object by value to `operator=`. This will invoke the copy constructor to create a copy of the right-hand object. Then, call the swap function inside `operator=`. This will swap the copy into the left-hand object, and whatever data was in the left-hand object into the parameter. Then, when the function ends, the destructor will be called on the parameter, which cleans up any old data in the left-hand object. Below is the `operator=` for the `SmartPointer` class.  
 ```C++
 // first define a constant time swap
-void SmartPointer::swap(SmartPointer &other) {
+template <typename T>
+void SmartPointer<T>::swap(SmartPointer &other) {
     // vacuously a constant time swap of pointers
     // if these were dynamic arrays swapping the pointers
     //  would save a lot of time
-    int *temp = ptr;
+    T *temp = ptr;
     ptr = other.ptr;
     other.ptr = temp;
 }
 // you also need to return a reference to an object
 // this way you can chain assignments: obj1 = obj2 = obj3;
-SmartPointer& SmartPointer::operator=(SmartPointer rhs) {
+template <typename T>
+SmartPointer<T>& SmartPointer<T>::operator=(SmartPointer rhs) {
     swap(rhs);
     return *this;
 }
 ```
 ## Conclusion 
-The data structures we implement going forward in this class will all be using dynamic memory, so you will need to implement the Big 3 for all of them.
+Generic types in C++ allow one definition to be written for functions and data types that use a multitude of input types. The Big 3 (destructor, copy constructor, and overloaded assignment operator) must be defined for any class using dynamically allocated memory.

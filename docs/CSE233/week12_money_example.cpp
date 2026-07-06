@@ -31,6 +31,8 @@ private:
     unsigned short cents;
 };
 
+// techically, these could be members as well, but they
+// can be implemented as free functions using == and <
 bool operator!=(const Money& lhs, const Money& rhs);
 bool operator<=(const Money& lhs, const Money& rhs);
 bool operator>(const Money& lhs, const Money& rhs);
@@ -78,24 +80,32 @@ int main() {
     else {
         std::cout << "m0 is not equal to m5\n";
     }
+    if (m4 > m5) {
+        std::cout << "m4 is greater than m5\n";
+    }
+    else {
+        std::cout << "m4 is not greater than m5\n";
+    }
 
     return 0;
 }
 
-// techically, these could be members as well, but they
-// can be implemented as free functions using == and <
 bool operator!=(const Money& lhs, const Money& rhs) {
     return !(lhs == rhs);
 }
+
 bool operator<=(const Money& lhs, const Money& rhs) {
     return (lhs < rhs) || (lhs == rhs);
 }
+
 bool operator>(const Money& lhs, const Money& rhs) {
     return !(lhs <= rhs);
 }
+
 bool operator>=(const Money& lhs, const Money& rhs) {
     return !(lhs < rhs);
 }
+
 // implement constructor
 Money::Money(unsigned long d, unsigned short c) {
     dollars = d;
@@ -104,12 +114,14 @@ Money::Money(unsigned long d, unsigned short c) {
     dollars += c / 100;
     cents = c % 100;
 }
+
 // implement comparison operators
 bool Money::operator==(const Money& rhs) const {
     // if all the fields are the same, the money objects are equal
     return (dollars == rhs.dollars) &&
            (cents == rhs.cents);
 }
+
 bool Money::operator<(const Money& rhs) const {
     // if the dollars are less than rhs's dollars
     // this is less than the rhs
@@ -135,6 +147,7 @@ Money& Money::operator+=(const Money& rhs) {
 
     return *this;
 }
+
 Money& Money::operator-=(const Money& rhs) {
     // rather than actually handling negatives, just force 
     // the amount to 0
@@ -158,40 +171,48 @@ Money& Money::operator-=(const Money& rhs) {
             cents -= rhs.cents;
         }
         else {
-            cents = rhs.cents - cents;
+            if (cents == 0) {
+                cents = 100 - rhs.cents;
+            }
+            else {
+                cents = rhs.cents - cents;
+            }
             --dollars;
         }
     }
 
     return *this;
 }
+
 // implement the arithmetic operators
 Money Money::operator+(const Money& rhs) const {
     Money returnValue(dollars, cents);
     returnValue += rhs;
     return returnValue;
 }
+
 Money Money::operator-(const Money& rhs) const {
     Money returnValue(dollars, cents);
     returnValue -= rhs;
     return returnValue;
 }
+
 // other members
 void Money::addDollars(unsigned long d) {
     dollars += d;
 }
+
 void Money::addCents(unsigned long c) {
     cents += c;
     dollars += c / 100;
     cents %= 100;
 }
+
 void Money::print() const {
-    char centStr[3];
-    centStr[0] = cents / 10;
-    centStr[1] = cents % 10;
-    centStr[2] = 0;
-    std::cout << '$' << dollars << '.' << centStr;
+    std::cout << '$' << dollars << '.' 
+    << cents / 10 << cents % 10;
 }
+
 std::string Money::toString() const {
     std::string str = "$";
     std::string dollarStr = std::to_string(dollars);

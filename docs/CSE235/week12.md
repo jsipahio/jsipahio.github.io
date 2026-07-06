@@ -3,6 +3,7 @@ Python is commonly used for data processing and data management. Python ships wi
 
 ## SQLite3
 SQLite3 is the third major version of the SQLite database engine. SQLite stores databases as single files, making (small) SQLite databases very portable. The databases used by SQLite are relational databases that are created and queried using SQL. Let's define some terms:   
+  
 - SQL - stands for "Structured Query Language". It is the dominant query language for creating, accessing, and modifying relational databases.
 - Relational Database - a relational database stores data in "tables" which have schemas. The schemas are the "columns" of these tables. They are called relational databases since different tables are often related to each other via these columns.
 - Primary Key - a column (or set of columns) in a database table that is used as the ID for a row. The primary key must be unique and not null (empty). Typically, an integer column that counts up from 0 is used as a primary key.
@@ -59,14 +60,40 @@ We can constrain the rows returned by a query using a `WHERE` clause. A `WHERE` 
 SELECT fruit_name FROM fruits WHERE price <= 1.25;
 ```
 This will return:  
+  
 | fruit_name |
 | ---------- |
 | Apple |
 | Banana |
+
+
 A `WHERE` clause can consist of any number of conditions placed on the values of the columns. 
 
 #### Ordering
-By default, select statements return the data from a table in the order it was inserted. If you want to sort 
+By default, select statements return the data from a table in the order it was inserted. If you want to sort a column, an `ORDER BY` clause can be added:
+```sql
+SELECT * FROM fruits ORDER BY price ASC;
+```
+This orders by ascending prices:  
+
+| id | fruit_name | price |
+| -- | ---------- | ----- |
+| 2 | Banana | 1.05 |
+| 1 | Apple | 1.25 |
+| 3 | Orange | 1.50 |
+
+Alternatively, if we wanted to order by descending prices:
+```sql
+SELECT * FROM fruits ORDER BY price DESC;
+```
+
+| id | fruit_name | price |
+| -- | ---------- | ----- |
+| 3 | Orange | 1.50 |
+| 1 | Apple | 1.25 |
+| 2 | Banana | 1.05 |
+
+We won't cover more complex queries like joins, since this is not a database class.
 
 #### Insert
 The `INSERT` statement is used to add new a row(s) to a table. The syntax for an `INSERT` statement is:

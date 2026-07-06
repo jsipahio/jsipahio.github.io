@@ -169,17 +169,26 @@ file_menu.add_command(label="Exit", command=main_window.quit)
 
 # frames can be used to group other widgets
 # create the frame as a child of the main_window
-content_frame = tk.Frame(main_window, bd=2, relief="groove", padding=10)
+content_frame = tk.Frame(main_window, 
+    bd=2, relief="groove", padding=10)
 content_frame.pack(padx=20, pady=20, fill="both", expand=True)
 
 
 # the Menubutton widget adds a button that expands a dropdown
-mbtn = tk.Menubutton(content_frame, text="Click for Options", relief="raised")
+mbtn = tk.Menubutton(content_frame, 
+    text="Click for Options", 
+    relief="raised")
 mbtn.grid(row=0, column=0, pady=10, sticky="w")
 
+def handle_option_a():
+    print("Option A chosen")
+
+def handle_option_b():
+    print("Option B chosen")
+
 sub_menu = tk.Menu(mbtn, tearoff=0)
-sub_menu.add_command(label="Option A", command=lambda: print("Option A chosen"))
-sub_menu.add_command(label="Option B", command=lambda: print("Option B chosen"))
+sub_menu.add_command(label="Option A", command=handle_option_a)
+sub_menu.add_command(label="Option B", command=handle_option_b)
 mbtn["menu"] = sub_menu
 
 
@@ -188,7 +197,8 @@ scrollbar = tk.Scrollbar(content_frame)
 scrollbar.grid(row=1, column=1, sticky="ns")
 
 # 'yscrollcommand' links the listbox scrolling to the scrollbar
-scroll_box = tk.Listbox(content_frame, yscrollcommand=scrollbar.set, height=5)
+scroll_box = tk.Listbox(content_frame, 
+    yscrollcommand=scrollbar.set, height=5)
 for i in range(1, 31):
     scroll_box.insert(tk.END, f"Scrollable Item {i}")
 scroll_box.grid(row=1, column=0, sticky="ew")
@@ -198,6 +208,8 @@ scrollbar.config(command=scroll_box.yview)
 
 main_window.mainloop()
 ```
+GUI:  
+![Example of Tkinter GUI with some basic menu options](image-1.png)
 
 ### Form Controls 
 The previous controls have been for displaying data or pressing buttons. The following sets of widgets are used for reading data from the user.
@@ -229,19 +241,22 @@ root.title("Text & Selection Inputs")
 root.geometry("400x450")
 
 # create a Label for the Entry
-tk.Label(root, text="Enter your Name (Entry):").pack(anchor="w", padx=10, pady=(10, 0))
+tk.Label(root, text="Enter your Name (Entry):").pack(
+    anchor="w", padx=10, pady=(10, 0))
 # create an Entry widget
 entry_widget = tk.Entry(root, width=40)
 entry_widget.pack(padx=10, pady=5)
 
 # create a Label for the Text
-tk.Label(root, text="Enter Comments (Text):").pack(anchor="w", padx=10, pady=(10, 0))
+tk.Label(root, text="Enter Comments (Text):").pack(
+    anchor="w", padx=10, pady=(10, 0))
 # create a Text widget
 text_widget = tk.Text(root, width=40, height=5)
 text_widget.pack(padx=10, pady=5)
 
 # Label for the Listbox
-tk.Label(root, text="Select your Favorite Colors (Listbox):").pack(anchor="w", padx=10, pady=(10, 0))
+tk.Label(root, text="Select your Favorite Colors (Listbox):").pack(
+    anchor="w", padx=10, pady=(10, 0))
 # selectmode="multiple" allows choosing more than one item
 listbox_widget = tk.Listbox(root, selectmode="multiple", height=4)
 colors = ["Red", "Blue", "Green", "Yellow", "Purple"]
@@ -251,9 +266,22 @@ for color in colors:
 listbox_widget.pack(padx=10, pady=5, fill="x")
 
 # this will dump the input values to the console
-tk.Button(root, text="Print Values to Console", command=submit_inputs).pack(pady=20)
+tk.Button(root, 
+    text="Print Values to Console", command=submit_inputs).pack(pady=20)
 
 root.mainloop()
+```
+GUI:
+![Image of Tkinter GUI with Text Entry controls](image.png)  
+Output (possible sarcasm):
+```
+Single-line Entry: John
+Multiline Text:
+wow, super cool multiline textbox
+this sure doesn't look more dated than
+the late 90s Visual Basic 6 apps I used
+to maintain at work
+Selected Listbox Items: ['Purple']
 ```
 
 #### Checkbutton
@@ -280,7 +308,8 @@ root.geometry("350x300")
 # create a Checkbox widget
 # Tkinter needs a specific variable tracker (IntVar or BooleanVar) for checkboxes
 check_var = tk.IntVar()
-check_btn = tk.Checkbutton(root, text="Subscribe to newsletter?", variable=check_var)
+check_btn = tk.Checkbutton(root, 
+    text="Subscribe to newsletter?", variable=check_var)
 check_btn.pack(pady=15)
 
 
@@ -289,7 +318,8 @@ tk.Label(root, text="Select Age (Spinbox):").pack()
 # create a spinbox with a default value
 spin_var = tk.IntVar(value=25) 
 # limit the spinbox to a discrete range from 0 to 100
-spin_box = tk.Spinbox(root, from_=0, to=100, textvariable=spin_var, width=10)
+spin_box = tk.Spinbox(root, from_=0, to=100, 
+    textvariable=spin_var, width=10)
 spin_box.pack(pady=5)
 
 
@@ -297,16 +327,21 @@ spin_box.pack(pady=5)
 tk.Label(root, text="Select Volume (Scale):").pack(pady=(15, 0))
 # variable to bind to Scale
 scale_var = tk.DoubleVar()
-# 'orient' positions it horizontally, 'from_' and 'to' define the slider boundaries
-slider = tk.Scale(root, from_=0, to=100, orient="horizontal", variable=scale_var, length=200)
+# 'orient' positions it horizontally, 
+# 'from_' and 'to' define the slider boundaries
+slider = tk.Scale(root, from_=0, to=100, 
+    orient="horizontal", variable=scale_var, length=200)
 slider.pack(pady=5)
 
 
 # button to print current values to console
-tk.Button(root, text="Print States", command=print_values).pack(pady=20)
+tk.Button(root, text="Print States", 
+    command=print_values).pack(pady=20)
 
 root.mainloop()
 ```
+GUI:  
+![Example Tkinter GUI with numeric data entry controls](image-2.png)
 
 ### Tkinter Data Types
 We saw some examples of the Tkinter data types (IntVar, StringVar) being used in some examples. These are used in favor the default Python data types because Tkinter can detect changes to these types and update the GUI to reflect those changes automatically.

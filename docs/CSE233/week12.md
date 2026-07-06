@@ -1,5 +1,5 @@
 # CSE233 Week 12: Operator Overloading
-This week, we will continue discussing classes and move to discussing operator overloading. In C++, we can overload operators (like +, -, =) to allow them to be used on objects.
+This week, we will continue discussing classes and move to discussing operator overloading. In C++, we can overload operators (like +, -, =) to allow them to be used on objects. We'll also discuss friend functions, which may be needed for implementing the I/O operators (`<<` and `>>`). Note: I'll be using the term "free function" to refer to functions that are not class member functions.
 
 ## Function Overloading
 Recall the C++ supports function overloading. Function overloading allows the same function name to be used for different sets of parameters. The function overloads are differentiated by the types and number of parameters. The return type has no impact on whether the overload is legal. Here is a basic example of function overloading:
@@ -70,18 +70,24 @@ private:
 };
 // techically, these could be members as well, but they
 // can be implemented as free functions using == and <
+// free functions typically have better performance than
+// member functions
 bool operator!=(const Money& lhs, const Money& rhs) {
     return !(lhs == rhs);
 }
+
 bool operator<=(const Money& lhs, const Money& rhs) {
     return (lhs < rhs) || (lhs == rhs);
 }
+
 bool operator>(const Money& lhs, const Money& rhs) {
     return !(lhs < rhs) && !(lhs == rhs);
 }
+
 bool operator>=(const Money& lhs, const Money& rhs) {
     return !(lhs < rhs);
 }
+
 // implement constructor
 Money::Money(unsigned long d, unsigned short c) {
     dollars = d;
@@ -90,12 +96,14 @@ Money::Money(unsigned long d, unsigned short c) {
     dollars += c / 100;
     cents = c % 100;
 }
+
 // implement comparison operators
 bool Money::operator==(const Money& rhs) const {
     // if all the fields are the same, the money objects are equal
     return (dollars == rhs.dollars) &&
            (cents == rhs.cents);
 }
+
 bool Money::operator<(const Money& rhs) const {
     // if the dollars are less than rhs's dollars
     // this is less than the rhs
@@ -121,6 +129,7 @@ Money& Money::operator+=(const Money& rhs) {
 
     return *this;
 }
+
 Money& Money::operator-=(const Money& rhs) {
     // rather than actually handling negatives, just force 
     // the amount to 0
@@ -144,40 +153,49 @@ Money& Money::operator-=(const Money& rhs) {
             cents -= rhs.cents;
         }
         else {
-            cents = rhs.cents - cents;
+            if (cents == 0) {
+                cents = 100 - rhs.cents;
+            }
+            else {
+                cents = rhs.cents - cents;
+            }
             --dollars;
         }
     }
 
     return *this;
 }
+
 // implement the arithmetic operators
 Money Money::operator+(const Money& rhs) const {
     Money returnValue(dollars, cents);
     returnValue += rhs;
     return returnValue;
 }
+
 Money Money::operator-(const Money& rhs) const {
     Money returnValue(dollars, cents);
     returnValue -= rhs;
     return returnValue;
 }
+
 // other members
 void Money::addDollars(unsigned long d) {
     dollars += d;
 }
+
 void Money::addCents(unsigned long c) {
     cents += c;
     dollars += c / 100;
     cents %= 100;
 }
+
+
 void Money::print() const {
-    char centStr[3];
-    centStr[0] = cents / 10;
-    centStr[1] = cents % 10;
-    centStr[2] = 0;
-    std::cout << '$' << dollars << '.' << centStr;
+    std::cout << '$' << dollars << '.' 
+    << cents / 10 << cents % 10;
 }
+
 std::string Money::toString() const {
     std::string str = "$";
     std::string dollarStr = std::to_string(dollars);
@@ -194,7 +212,7 @@ Let's look at the typical structure of the signatures for the various operator o
 ```cpp
 bool operator==(const DataType& rhs) const;
 ```
-Comparison operators should not modify the data of an object, so they are `const`. The object being compared to should be passed as a const reference since it also will not be modified.  
+Comparison operators should not modify the data of an object, so they are `const`. The object being compared to should be passed as a `const` reference since it also will not be modified.  
 Next, the assignment operators look like this:
 ```cpp
 DataType& operator+=(const DataType& rhs);
@@ -264,8 +282,24 @@ int& IntArray::operator[](int i) {
 }
 ```
 There are two versions of the subscript operator. One is const, and can only be used for reading a value, i.e., `int x = array[0]`. The other one is used for reading or writing, i.e., `array[0] = 10`, so it has to return a reference so the value can be written.  
+```cpp
+int main() {
+    IntArray array;
+    for (int i = 0; i < 10; ++i) {
+        array.append(i);
+    }
+    for (int i = 0; i < array.size(); ++i) {
+        // using operator[] to print the values
+        std::cout << array[i] << "\n";
+    }
+    // using operator[] to modify a value
+    array[10] = 10;
+    
+    return 0;
+}
+```
   
-The only operators left to discuss are the insertion and extraction opertors `<<` and `>>`, but first we need to discuss friend functions.
+The only operators left to discuss are the insertion and extraction operators `<<` and `>>`, but first we need to discuss friend functions.
 
 ## Friend Functions
 Friend functions are functions that are not members of the class (i.e., not called with the `object.function()` syntax), but have access to an object's private members. Friend functions must have their declaration placed in the body of the class declaration, and have the `friend` keyword before them:
@@ -315,6 +349,7 @@ void printArray(const IntArray &array) {
     }
 }
 ```
+In general, friend functions are best avoided whenever possible. Any time a friend has to be used, it is typically indicative of a design flaw. However, sometimes they are needed, or far too convenient to not be used.
 
 ## Overloading the Insertion and Extraction Operators
 The inserstion `<<` and extraction `>>` operators can be implemented as free functions or friend functions. They cannot be implemented as member functions. If the operator does not need to access the private members of the class, it is better to implement it as a free function. Sometimes, it is not possible to do so, so in this case a friend function must be used.  
@@ -326,7 +361,7 @@ The parameter `out` is passed by reference returned by the function. The extract
 ```cpp
 std::istream& operator<<(std::istream& out, DataType& rhs);
 ```
-The primary difference is that the second parameter is no longer const, since the extraction operator (i.e., input operator) needs to modify it. And, of course, the return type and first parameter are `std::istream&` instead of `std::ostream&`. These are the base types for `std::cin` and `std::cout`, as well as file input and output streams. This allows the same operator overload to be used for reading and writing to the console and files. Now, let's look at a concrete example with the `IntArray` class:
+The primary difference is that the second parameter is no longer const, since the extraction operator (i.e., input operator) needs to modify it. And, of course, the return type and first parameter are `std::istream&` instead of `std::ostream&`. These are the base types for `std::cin` and `std::cout`, as well as file input and output streams. This allows the same operator overload to be used for reading and writing to the console and files. Now, let's look at a concrete example with the `IntArray` class. The `IntArray` class has a good enough interface to not need the operators to be friend functions, but I defined them as friends just to demonstrate the concept again.
 ```cpp
 const int MAX_ARRAY_SIZE = 256; 
 
@@ -403,6 +438,22 @@ std::istream& operator>>(std::istream& in, IntArray& array) {
     return in;
 }
 ```
+Now, we can use the overloaded operators for our `IntArray` class.
+```cpp
+int main() {
+    IntArray array;
+
+    // use overloaded operator >>
+    std::cout << "Enter integers (separated by spaces).\n";
+    std::cin >> array;
+
+    // print array using overloaded operator <<
+    std::cout << "You entered: ";
+    std::cout << array << "\n";
+
+    return 0;
+}
+```
 
 ## Conclusion
-Overloading operators allows us to create classes that are more natural to use. Think back to how C strings required functions like `strcat`, `strcpy`, and `strcmp` to do anything. Meanwhile, `std::string` implements `+`, `=` and `==` to make these operations more convenient. We looked at the common patterns for comparison, assignment, arithmetic, and I/O operators.
+Overloading operators allows us to create classes that are more natural to use. Think back to how C strings required functions like `strcat`, `strcpy`, and `strcmp` to do anything. Meanwhile, `std::string` implements `+`, `=` and `==` to make these operations more convenient. We looked at the common patterns for comparison, assignment, arithmetic, and I/O operators. We also discussed friend functions, which are free functions that have access to a class's private members.

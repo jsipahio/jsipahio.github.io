@@ -33,13 +33,28 @@ private:
 };
 
 int main() {
-    IntArray array;
+    IntArray array1;
+    for (int i = 0; i < 10; ++i) {
+        array1.append(i);
+    }
+    for (int i = 0; i < array1.size(); ++i) {
+        // using operator[] to print the values
+        std::cout << array1[i] << "\n";
+    }
+    // using operator[] to modify a value
+    array1[10] = 10;
+    std::cout << array1[10] << "\n";
+    
+    // create another IntArray
+    IntArray array2;
 
+    // use overloaded operator >>
     std::cout << "Enter integers (separated by spaces).\n";
-    std::cin >> array;
+    std::cin >> array2;
 
+    // print array using overloaded operator <<
     std::cout << "You entered: ";
-    std::cout << array << "\n";
+    std::cout << array2 << "\n";
 
     return 0;
 }
