@@ -122,29 +122,54 @@ T& StaticArray<T, SIZE>::operator[](size_t index) {
 As can be seen in the example, each function needs to have the template parameter listed. This is needed to pass the declared template parameters to the template argument list of the class. In the next section, the compilation mechanisms of templates will be discussed.
 
 ### Compiling Generics in C++ 
-Earlier, we discussed that typically functions and classes are declared in a header file and implemented in a separate source file. This makes it possible to make changes to definitions without needed to recompile every file in the project. However, this is not possible with templates. Each time a generic type is created, or function is called, the compiler needs to generate a new version of the type/function's definition that replaces the template type alias with the actual type. Therefore, templates must be defined within a header file. It is possible to manually implement a template for a concrete type. This can be done in a source file. 
-
+Earlier, we discussed that typically functions and classes are declared in a header file and implemented in a separate source file. This makes it possible to make changes to definitions without needed to recompile every file in the project. However, this is not possible with templates. Each time a generic type is created, or function is called, the compiler needs to generate a new version of the type/function's definition that replaces the template type alias with the actual type. Therefore, templates must be defined within a header file. It is possible to manually implement a template for a concrete type. This can be done in a source file.
 
 ## Big 3
-Unlike many other modern programming languages (C#, Java, Python), C++ allows for direct access to memory locations via pointers. When pointers are members of classes, it can create problems when allowing the compiler to automatically implement copy constructors, destructors, and assignment operators for a class.  
-## Destructor
-Recall this fact about pointers:
+Unlike many other modern programming languages (C#, Java, Python), C++ allows for direct access to memory locations via pointers. When pointers are members of classes, it can create problems when allowing the compiler to automatically implement copy constructors, destructors, and assignment operators for a class. First, let's look at the memory model of C++ programs (and really, most compiled programs).
+
+### C++ Program Memory Model
+A computer program consists of five main areas in memory: text, data, heap, stack, and unmanaged. The text area contains the actual program instructions that need to be read and executed, along with constant values (constants are actually replaced by their actual, literal values by the compiler when the program is compiled). The data area contains static and global variables. The heap is used to store values that are dynamically allocated at runtime.
+The stack contains the values of local variables and the call stack. The unmanaged area is used for environment variables and command-line arguments.
+
+#### Text Area
+The text area contains the compiled instructions that describe what the program actual does. At this point, constants have been replaced by literal values and variables are replaced with their memory addresses. This is why declaring any value that could be constant as `const` is a performance optimization. The value becomes part of the program text, rather than needing to be read from memory anytime it is needed.
+
+#### Data Area
+The data area is separated into two regions for initialized and uninitialized values. The data area stores static and global variables. Statics and globals that are provided initial values are stored in the initialized data area. The uninitialized values are stored in what is commonly called the BSS (block start symbol) area. The initialized values area of the data area contains the variable offsets and values in the compiled executable file, whereas the BSS contains the amount of space required to hold the uninitialized variables. The variable are then allocated in the BSS when the program is executed.
+
+#### Stack
+The typical program diagram has the stack above the heap, but it makes more sense to explain the stack first to better differentiate the heap. This is not the same as the stack ADT we will discuss later in the course, but it does follow the same principle of last-in, first-out access. Each time a function is called, its local variables are added to the top of the stack. When the function is done executing, all the variables allocated for that function are popped from the stack. The stack is managed by a combination of the compiler (when compiling the code) and the operating system (when the program is executing).  
+  
+While the stack offers fast access and manages memory usage for the programmer, it is limited in size, and less flexible when allocating large amounts of memory due to access to the stack being in a specific order. Additionally, there may be instances where data needs to last longer than the lifetime of the function that creates it, but does not need to last the lifetime of the program (i.e., the variable is a poor candidate to be global or static).
+
+#### Heap
+To overcome the shortcomings of the stack, the heap is used. The heap is the largest area of memory allocated for a computer program (theoretically it could be the size of RAM minus what is needed for the stack, data, and text areas). While conceptually heap is often shown as growing from the bottom to the top of its "container", heap can actually allocate space anywhere, at any time. This makes it a much more flexible storage area than the stack. However, it also makes it slower to access, as the heap must be searched for an area large enough to hold the amount of data being requested. However, the heap makes runtime allocation of data possible, such as for raw pointers and dynamic arrays.  
+
+### Destructor
+Pointers can be assigned to the memory addressses of existing (stack allocated) variables, or used to create new memory on the heap to be used by the program. Memory on the heap is allocated using the `new` operator. Data created on the heap is freed after the pointer is done with it by using the `delete` operator. Failure to free memory results in memory leaks, where the operating system is unable to reclaim memory that is no longer in use by a program. The memory is 
 ```C++
 int main() {
     // declare an integer pointer
     int *ptr;
-    // ptr is a reference to a single integer
+    // ptr is a reference to a single integer on the heap
     ptr = new int;
+    // use delete to free a single value
     delete ptr;
-    // ptr is now a reference to a dynamic array
+    // ptr is now a reference to a dynamic array on the heap
     ptr = new int[10];
+    // use delete[] to free a 
     delete[] ptr;
+    
+    int x;
+    // ptr is now pointing to a normally (stack) allocated variable
+    ptr = &x;
+    // pointers to existing variables are not deleted
     return 0;
 }
 ```
-As you can see, `ptr` can either be a reference to a single integer in memory, or an array of integers. This directly impacts which version of `delete` must be used to clean up the memory allocated for `ptr` in the heap. The compiler has no way to determine which version of `delete` to call in a destructor, making it impossible to effectively clean up an object that contains dynamic fields. Thus, implementing a destructor is required for any class that contains dynamic fields.  
+As you can see, `ptr` can either be a reference to a single integer in heap memory, an array of integers, or a stack allocated variable. This directly impacts which version of `delete` must be used to clean up the memory allocated for `ptr` in the heap. Additionally, `delete` cannot be called if the pointer is allocated on the stack. The compiler has no way to determine which version of `delete` to call in a destructor, making it impossible to effectively clean up an object that contains dynamic fields. Thus, implementing a destructor is required for any class that contains dynamic fields. A destructor has the same signature as a constructor, except it begins with a tilda `~`. Classes that do not use pointers to heap memory do not need to implement a destructor.
 
-## Copy Constructor
+### Copy Constructor
 Copying also presents a challenge. Consider the following example:  
 ```C++
 int main() {
@@ -231,10 +256,10 @@ SmartPointer::SmartPointer(const SmartPointer& other) {
 ```
 In this implementation, the copy constructor allocates memory for the pointer using `new`, and then assigns the pointer the value being held by the other pointer, rather than copying the pointer itself.   
 
-## Assignment Operator
+### Assignment Operator
 Next, we need to consider the assignment operator, `operator =`. We cannot simply copy the fields of the object on the right-hand side of the equal sign over to the left-hand object. When the class is using dynamically allocated memory, we need to ensure that the left-hand object's memory is freed before copying over data from the right-hand object.
 
-### Copy and Swap Idiom
+#### Copy and Swap Idiom
 Defining an overloaded assignment operator the correct way allows the compiler to make several optimizations. The best way to overload `operator=` is to first create a separate member function that swaps two objects in constant time. Then, pass the right-hand object by value to `operator=`. This will invoke the copy constructor to create a copy of the right-hand object. Then, call the swap function inside `operator=`. This will swap the copy into the left-hand object, and whatever data was in the left-hand object into the parameter. Then, when the function ends, the destructor will be called on the parameter, which cleans up any old data in the left-hand object. Below is the `operator=` for the `SmartPointer` class.  
 ```C++
 // first define a constant time swap

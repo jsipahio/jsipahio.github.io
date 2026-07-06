@@ -133,38 +133,192 @@ Now, the text wraps, so the entire text content is readable:
 
 ### Frame
 A Frame is a generic container that can be used to hold other widgets. If you want to create a subsection for a window that has its own set of widgets, a Frame is used to store the widgets:  
-```py
-```
-
-### LabelFrame
-A LabelFrame is a widget which has 
 
 ### Menu
+The Menu component is used to add a top-bar menu at the top of the GUI windows. It typically contains drop downs for "File", "Edit", "View", etc. 
 
 #### MenuButton
+The MenuButton component is used to create a menu dropdown when clicked.
 
 ### Scrollbar
+The Scrollbar widget is used to add a scroll bar to a window. This allows the content to overflow the size of the window, but still be accessible to the user. 
+```py
+import tkinter as tk
+from tkinter import messagebox
+
+main_window = tk.Tk()
+main_window.title("Frame & Menubar")
+main_window.geometry("400x350")
+
+# function to run a basic popup when clicking a menu option
+def hello():
+    messagebox.showinfo("Menu Action", "You clicked a menu item!")
+
+main_menu = tk.Menu(main_window)
+main_window.config(menu=main_menu)
+
+# create a "File" dropdown menu
+file_menu = tk.Menu(main_menu, tearoff=0)
+# the add_cascade function adds a submenu dropdown to the menu
+main_menu.add_cascade(label="File", menu=file_menu)
+# the add_command adds a command button to the dropdown
+file_menu.add_command(label="New", command=hello)
+file_menu.add_separator()
+file_menu.add_command(label="Exit", command=main_window.quit)
+
+
+# frames can be used to group other widgets
+# create the frame as a child of the main_window
+content_frame = tk.Frame(main_window, bd=2, relief="groove", padding=10)
+content_frame.pack(padx=20, pady=20, fill="both", expand=True)
+
+
+# the Menubutton widget adds a button that expands a dropdown
+mbtn = tk.Menubutton(content_frame, text="Click for Options", relief="raised")
+mbtn.grid(row=0, column=0, pady=10, sticky="w")
+
+sub_menu = tk.Menu(mbtn, tearoff=0)
+sub_menu.add_command(label="Option A", command=lambda: print("Option A chosen"))
+sub_menu.add_command(label="Option B", command=lambda: print("Option B chosen"))
+mbtn["menu"] = sub_menu
+
+
+# attaching a scrollbar to a generic Listbox to showcase scrolling
+scrollbar = tk.Scrollbar(content_frame)
+scrollbar.grid(row=1, column=1, sticky="ns")
+
+# 'yscrollcommand' links the listbox scrolling to the scrollbar
+scroll_box = tk.Listbox(content_frame, yscrollcommand=scrollbar.set, height=5)
+for i in range(1, 31):
+    scroll_box.insert(tk.END, f"Scrollable Item {i}")
+scroll_box.grid(row=1, column=0, sticky="ew")
+
+# link the scrollbar back to the listbox view
+scrollbar.config(command=scroll_box.yview)
+
+main_window.mainloop()
+```
 
 ### Form Controls 
+The previous controls have been for displaying data or pressing buttons. The following sets of widgets are used for reading data from the user.
 
 #### Entry
+The Entry widget is a single line text box. 
 
 #### Text
+The Text widget is a multiline text box. Users can enter arbitrary text with new lines, tabs, etc., and all the text and formatting is returned in the string being used to store the input.
 
 ### Listbox
+A Listbox displays multiple options in a list. Users can select one or more option from the list. 
+```py
+import tkinter as tk
+
+def submit_inputs():
+    # the get() function returns the text of the widget
+    print(f"Single-line Entry: {entry_widget.get()}")
+    # Text widgets require starting and ending positions ('1.0' to 'end')
+    print(f"Multiline Text:\n{text_widget.get('1.0', 'end-1c')}")
+    
+    # get selected items from Listbox
+    selected_indices = listbox_widget.curselection()
+    selected_items = [listbox_widget.get(i) for i in selected_indices]
+    print(f"Selected Listbox Items: {selected_items}")
+
+root = tk.Tk()
+root.title("Text & Selection Inputs")
+root.geometry("400x450")
+
+# create a Label for the Entry
+tk.Label(root, text="Enter your Name (Entry):").pack(anchor="w", padx=10, pady=(10, 0))
+# create an Entry widget
+entry_widget = tk.Entry(root, width=40)
+entry_widget.pack(padx=10, pady=5)
+
+# create a Label for the Text
+tk.Label(root, text="Enter Comments (Text):").pack(anchor="w", padx=10, pady=(10, 0))
+# create a Text widget
+text_widget = tk.Text(root, width=40, height=5)
+text_widget.pack(padx=10, pady=5)
+
+# Label for the Listbox
+tk.Label(root, text="Select your Favorite Colors (Listbox):").pack(anchor="w", padx=10, pady=(10, 0))
+# selectmode="multiple" allows choosing more than one item
+listbox_widget = tk.Listbox(root, selectmode="multiple", height=4)
+colors = ["Red", "Blue", "Green", "Yellow", "Purple"]
+for color in colors:
+    # insert function adds new options to the listbox
+    listbox_widget.insert(tk.END, color)
+listbox_widget.pack(padx=10, pady=5, fill="x")
+
+# this will dump the input values to the console
+tk.Button(root, text="Print Values to Console", command=submit_inputs).pack(pady=20)
+
+root.mainloop()
+```
 
 #### Checkbutton
+A Checkbox is a square box that the user can click to toggle a yes/no response to an input prompt. 
 
 #### Spinbox
+A spinbox is a control that accepts numeric inputs. It has an up and down arrow to toggle the value up and down. Users can also directly type a value in.
 
 #### Scale 
+A scale is another widget for numeric inputs. It displays a range of input, and there is a slider that can be drug between the values to select the value.
+```py
+import tkinter as tk
+
+# print values of controls to the console
+def print_values():
+    print(f"Checkbox state: {check_var.get()}")
+    print(f"Spinbox value: {spin_var.get()}")
+    print(f"Scale value: {scale_var.get()}")
+
+root = tk.Tk()
+root.title("Numeric & Toggle Controls")
+root.geometry("350x300")
+
+# create a Checkbox widget
+# Tkinter needs a specific variable tracker (IntVar or BooleanVar) for checkboxes
+check_var = tk.IntVar()
+check_btn = tk.Checkbutton(root, text="Subscribe to newsletter?", variable=check_var)
+check_btn.pack(pady=15)
+
+
+# create a Label for the spinbox
+tk.Label(root, text="Select Age (Spinbox):").pack()
+# create a spinbox with a default value
+spin_var = tk.IntVar(value=25) 
+# limit the spinbox to a discrete range from 0 to 100
+spin_box = tk.Spinbox(root, from_=0, to=100, textvariable=spin_var, width=10)
+spin_box.pack(pady=5)
+
+
+# Label for the Scale widget
+tk.Label(root, text="Select Volume (Scale):").pack(pady=(15, 0))
+# variable to bind to Scale
+scale_var = tk.DoubleVar()
+# 'orient' positions it horizontally, 'from_' and 'to' define the slider boundaries
+slider = tk.Scale(root, from_=0, to=100, orient="horizontal", variable=scale_var, length=200)
+slider.pack(pady=5)
+
+
+# button to print current values to console
+tk.Button(root, text="Print States", command=print_values).pack(pady=20)
+
+root.mainloop()
+```
 
 ### Tkinter Data Types
-We saw some examples of the Tkinter data types (IntVar, StringVar) being used in some examples. Let's look more in-depth at the various data types Tkinter provides. 
+We saw some examples of the Tkinter data types (IntVar, StringVar) being used in some examples. These are used in favor the default Python data types because Tkinter can detect changes to these types and update the GUI to reflect those changes automatically.
 
 ## Tkinter Limitations
+The biggest criticism of is how dated it looks. The default widgets use hardcoded styles rather than native system styles for GUIs. There is also a limited number of default, basic components. More advanced controls, like web embeddings and audio/video players are not provided, leading to a lot of custom programming to implement those features. While threading is not a topic of this course, it is worth noting that Tkinter has poor threading support. In simple terms, GUI apps typically run CPU intensive processes in the background using separate threads from the GUI loop. However, this does not work well with Tkinter. This can result in the UI freezing while waiting for intensive processes to finish.
 
 ### ttk
-Tkinter is extended by ttk (themed Tkinter), which allows for more modern designs to be created using Tkinter. One of the main critiques of Tk is that it's components are not easily styled and look very dated. Like Tkinter, ttk is included with 
+Tkinter is extended by ttk (themed Tkinter), which allows for more modern designs to be created using Tkinter. One of the main critiques of Tk is that it's components are not easily styled and look very dated. Like Tkinter, ttk is included with Python in the `ttk` module. 
+
+### Other GUI Frameworks
+For more higher end GUIs, other GUI frameworks should be considered. PyQT and wxPython are wrappers around the C++ GUI frameworks QT and wxWidgets. Both of these are high perfromance options for GUIs, but have a much higher learning curve than Tkinter. CustomTkinter is an additional module that adds new styles to existing Tkinter modules. While it has no learning curve, it has all the performance drawbacks of Tkinter.
 
 ## Conclusion
+Tkinter is the built-in GUI framework provided with Python. Tkinter has a very low learning curve compared to other GUI frameworks, but also has a very limited set of features compared to others. Tkinter GUIs are created by nesting widgets within each other. The `Tk()` constructor is used to create the main window. A variety of other widgets for displaying and reading data can be added to the main window.

@@ -126,7 +126,7 @@ A concept declaration consists of a generic parameter list, followed by the `con
 template <typename T>
 concept HasInnerType = requires {
     T::inner
-}
+};
 ```
 In this case, class `A` will pass the concept check, and class `B` will not. Neither will class `C`.
 ```cpp
@@ -150,13 +150,13 @@ template <typename T>
 concept HasSize = requires(T t) {
     // verifies that T instances have a member function size
     t.size();
-}
+};
 
 template <typename T>
 concept Addable = requires(T x, T y) {
     // verifies that T has "operator+(T, T)" defined
     x + y;
-}
+};
 
 template <typename T, typename U>
 concept MixedTypeArithmetic = requires(T t, U u) {
@@ -168,11 +168,76 @@ concept MixedTypeArithmetic = requires(T t, U u) {
     t * u;
     // divided
     t / u;
-}
+};
 ```
 Here are some examples of these concepts in use:
 ```cpp
+template <HasSize T>
+size_t getSize(T object) {
+    return object.size();
+}
 
+template <Addable T> 
+T add(T x, T y) {
+    return x + y;
+}
+
+// concepts that use multiple types need a requires clause
+// the concept cannot be used in place of "typename"
+template <typename T, typename U>
+requires MixedTypeArithmetic<T, U>
+T add(T x, U y) {
+    return x + y; 
+}
 ```
 
-This type of check do not verify the return type of the 
+This type of check do not verify the return type of the expressions. To check the return type of the expression, the `{} -> conceptName;` syntax is used:
+```cpp
+template <typename T>
+concept HasSize = requires(T t) {
+    {t.size()} -> std::same_as<size_t>;
+}
+
+template <HasSize T>
+size_t getSize(T object) {
+    return object.size();
+}
+
+template <typename T, typename U, typename R>
+concept DivisionReturnsR = requires (T t, U u) {
+    {t / u} -> std::same_as<R>;
+}
+
+template <typename T, typename U, typename R>
+requires DivisionReturnsR<T, U, R>
+R divide(T x, U y) {
+    return x / y; 
+}
+```
+
+## Conjunctions and Disjunctions
+If a generic type/function must satisfy multiple concepts, a conjunction (`&&`) can be used:
+```cpp
+template <typename T>
+concept Integral = requires std::is_integral<T>;
+
+// both Integral<T> and std::is_signed<T> concepts must be met
+template <typename T>
+concept SignedIntegral = requires Integral<T> && std::is_signed<T>;
+```
+If a generic type/function must satisfy one or another concept, a disjunction (`||`) can be used in the same way.
+
+## Requires Requires
+If you want use an inline concept (i.e., use a requires expression without definining a concept), you have to use the somewhat silly looking `requires requires` syntax. The second `requires` can have any expressions that a normal `requires` in a concept can have:
+```cpp
+template <typename T>
+requires requires(T x, T y) {
+    x + y;
+}
+T add(T x, T y) {
+    return x + y;
+}
+```
+
+## Conclusion
+Concepts provide a way to make constraints on generic types clearer. The error messages for a generic type violation is more clear when a concept is used. Additionally, using concepts allows editor error detection (red squiggles) to detect when the template arguments are invalid, making it faster to identify when a generic function/type is being misued.

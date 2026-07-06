@@ -12,9 +12,20 @@ SQLite3 is the third major version of the SQLite database engine. SQLite stores 
 - Column - A 
 - Row - A single data entry in a table 
 
-### Database SQL Commands
-
-### Table SQL Commands
+### Creating Tables
+A table is created with a `CREATE TABLE` statment. The syntax is:
+```sql
+CREATE TABLE table_name(column_list);
+```
+The column list consists of the column name, data type, and any additional attributes such as `NOT NULL` or `PRIMARY KEY`. Here is an example:
+```sql
+CREATE TABLE if not exists fruits(
+    id INT PRIMARY KEY AUTOINCREMENT,
+    fruit_name TEXT NOT NULL,
+    price FLOAT NOT NULL
+);
+```
+The first column is `id`, which has `INT` as a data type. It is a primary key, so it is automatically unique and not null. The `AUTOINCREMENT` specifies that is should automatically increase by one each time a row is added to the table. `fruit_name` is a `TEXT` column, and is specified to not be null. Attempting to set it to null or insert a row without providing a value for it will result in an error. `price` is a `FLOAT` variable that is also not allows to be null.
 
 ### Querying SQL Commands
 These are the commands for querying data from existing tables. 
@@ -52,14 +63,43 @@ This will return:
 | ---------- |
 | Apple |
 | Banana |
-A `WHERE` clause can consist of any number of 
+A `WHERE` clause can consist of any number of conditions placed on the values of the columns. 
+
+#### Ordering
+By default, select statements return the data from a table in the order it was inserted. If you want to sort 
 
 #### Insert
 The `INSERT` statement is used to add new a row(s) to a table. The syntax for an `INSERT` statement is:
 ```sql
 INSERT INTO table_name(column_list) VALUES (value_list);
 ```
-After `INSERT INTO` is the name of the table that the new values will be inserted into. After the table name is the list of columns that the data will be inserted into. 
+After `INSERT INTO` is the name of the table that the new values will be inserted into. After the table name is the list of columns that the data will be inserted into. Then, there is the `VALUES` followed by the list of values to insert. 
+```sql
+INSERT INTO fruits(fruit_name, price) 
+VALUES ('Apple', 1.25),('Banana', 1.05),('Orange', 1.50);
+```
+
+#### Update
+The `UPDATE` statement is used to update existing rows in the table. Typically, `UPDATE` statements have a where clause to indicate which row to update. Otherwise, all rows will be updated. The basic syntax is:
+```sql
+UPDATE table_name SET column=val WHERE condition;
+```
+And a concrete example:
+```sql
+UPDATE fruit
+SET price=1.15
+WHERE fruit_name = 'Banana';
+```
+
+#### Delete
+The `DELETE` statement is used to delete rows from a table. Again, a `WHERE` clause should be used, otherwise it will delete all rows from the table. The basic syntax is:
+```sql
+DELETE FROM table_name WHERE condition;
+```
+Example:
+```sql
+DELETE FROM fruit WHERE fruit_name = 'Orange';
+```
 
 ## Python SQLite3 API
 Python provides an API (abstract programming interface) for SQLite3. Like Tkinter, the SQLite3 API ships with Python. To use it, it can be imported like any of the other built-in modules:
@@ -70,20 +110,21 @@ The first thing to do is to create a database connection. With SQLite, this is s
 ```py
 import sqlite3
 
-connection = sqlite3.connect()
+# if the database file does not exist, it will be created
+connection = sqlite3.connect("fruit.db")
 ```
 The next thing to do is to create a cursor object to execute queries against the database. The `sqlite3.cursor()` function is passed a connection as an argument, and returns a new cursor:
 ```py
 import sqlite3
 
-connection = sqlite3.connect()
+connection = sqlite3.connect("fruit.db")
 cursor = sqlite3.cursor(connection)
 ```
 The cursor object has the method `execute()` associated with it. This can be used to execute SQL commands. For example, we can use the cursor to create a table:
 ```py
 import sqlite3
 
-connection = sqlite3.connect()
+connection = sqlite3.connect("fruit.db")
 cursor = sqlite3.cursor(connection)
 
 # executing a CREATE TABLE command
@@ -92,12 +133,38 @@ CREATE TABLE if not exists fruits(
     id INT PRIMARY KEY AUTOINCREMENT,
     fruit_name TEXT NOT NULL,
     price FLOAT NOT NULL
-);""")
+);
+""")
 
 # inserting values into the table
 cursor.execute("""
-INSERT INTO fruits(id, fruit_name, price) 
-VALUES ()
+INSERT INTO fruits(fruit_name, price) 
+VALUES ('Apple', 1.25),('Banana', 1.05),('Orange', 1.50);
 """)
 ```
-This will create the fruit table from the examples.
+This will create the fruit table and add the data from the examples. The cursor can also be used to execute select queries. A list of lists is returned:
+```py
+# execute the select query
+cursor.execute("SELECT * FROM fruits;")
+# fetch all the rows selected
+rows = cursor.fetchall()
+# iterate through the rows
+for row in rows:
+    print(f"ID: {row[0]}")
+    print(f"Name: {row[1]}")
+    print(f"Price: ${row[2]}")
+```
+The delete and update queries can be used similarly. But, what if we want to make the queries interactive? The Python SQLite3 API allows us to use question marks as placeholders in queries. We then pass a tuple of values to replace the question marks with. For example, the following code snippet will read values from the user to insert a new row into the fruit table:
+```py
+name = input("Enter Fruit Name: ")
+price = float(input("Enter Fruit Price: $"))
+cursor.execute(
+"""INSERT INTO fruits(fruit_name, price) 
+VALUES(?,?)
+""", (name, price)
+)
+```
+The value of `name` will replace the first question mark, and the value of `price` will replace the second question mark. This can be used for any type of query.
+
+## Conclusion
+This week we discussed the SQLite3 API for Python. The API is simple, using it primarily consists of using the `connect()` function to open a database file, and the `cursor()` function to create a cursor to execute queries against the database. An larger SQLite3 example is included with this week's example. It features a Tkinter GUI to interact with a database of pets.
