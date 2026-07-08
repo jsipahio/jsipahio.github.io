@@ -1,0 +1,58 @@
+# CSE235 Week 14: Web APIs and FastAPI
+The past few weeks we have looked at desktop GUIs using Tkinter. This week, we will introduce web programming in Python. Python has many web programming frameworks available. Django is one of the most popular, as it is a full stack framework (front and back end). However, modern web development has moved away from full stack programming on the server-side, and is instead focused on creating lightweight APIs for server-side programming. Python offers many frameworks for web API development, but we'll be focusing on FastAPI since it is easy to use and offers a convenient dashboard for testing out of the box.
+
+## Brief Overview of Web Programming
+Web programming consists of two major components: front-end and back-end development. Front-end development focuses on creating the interfaces that users interact with using HTML, CSS, and JavaScript. Back-end programming focuses on storing and retrieving data from databases on a remote server. HTTP (hypertext transfer protocol) uses client-server model. The client, a web browser makes a request for a webpage when you click a link or enter a URL. The server responds to this request by returning the requested resource.   
+  
+Web browsers can handle HTML (hypertext markup language), CSS (cascading style sheets), and JavaScript. HTML is used to describe the structure and content of the web page. CSS adds custom styling to the page. JavaScript is a programming language that is executed in the browser. These languages comprise the core of front-end web development. 
+  
+Back-end web programming is the server-side programming that occurs. Web servers are responsible for storing and updating persistent data and managing logins. Historically, back-end programming has also carried the burden of rendering pages as well. Languages like PHP allowed the back-end PHP code to be mixed with HTML and JavaScript, which would generate the complete webpage that is returned the the client's browser. In this case, the browser only has to render the completed HTML document and apply CSS styles. Minimal JavaScript may have been used for front-end form verification and other small tasks. This style of web programming is referred to as thin client, thick server. The web server carries a large processing burden to handle both data processing and rendering, while the client has the minimal task of displaying the resulting page. More recently, this has flipped. As the number of users of the web has increased, web programming has transitioned to a thick client, thin server model. Modern front-end JavaScript frameworks like React, Angular, and Vue have moved web development to a point where the client now performs most of the rendering in the browser. The load on the server has been lightened, where servers are now primarily responsible for storing and returning data.  
+  
+An API is an abstract programming interface. In the context of web development, it refers to applications that perform basic database operations at the behest of a client, such as inserting data or returning the results of a data request. CRUD refers to create, retrieve, update, and delete: the four main tasks most web APIs are responsible for. These correspond to the SQL `INSERT INTO`, `SELECT`, `UPDATE`, and `DELETE FROM` queries, respectively. REST stands for Representational State Transfer. REST APIs define ways for applications to interact with each other over HTTP by mapping the HTTP request methods to CRUD operations:  
+- GET: an HTTP GET request corresponds to the R in CRUD. It is a request to retrieve data
+- POST: an HTTP POST request corresponds to the C in CRUD. It is a request to create data
+- PATCH and PUT: technially the HTTP PATCH request is a partial update to an existing data item, and PUT is a full replacement of an existing item. They correspond to the U in CRUD
+- DELETE: an HTTP DELETE request corresponds to the D in CRUD. It is a request to delete data
+
+In many real world applications, the GET and POST methods see the most use and are overloaded to handle the other CRUD operations. Now, let's look at requests and responses.
+### Requests
+A request is made by a client to the API. The request consists of the following components:  
+- Endpoint: The endpoint is the URL (eg. https://www.google.com) that is being sent a request
+- Method: The HTTP request method being used
+- Headers: Additional metadata like login tokens or cookies included with the request
+- Body: Payload data (typically JSON) included with the request
+
+### Responses
+The server responds to the request with the requested resource (if possible) and a response code. Response codes from 200-299 indicate success. Codes from 300-399 specify that a redirection took place. 400-499 indicate a request error. Codes 500-599 indicate a server error. Some common response codes include:  
+- 200 OK: indicates the the response is okay
+- 201 CREATED: indicates the resource was created (POST and some PUT)
+- 202 ACCEPTED: the request was accepted but not acted on
+- 301 MOVED PERMANTLY: the resource being requested has moved, and the new location was returned
+- 400 BAD REQUEST: the server cannot or will not handle the request due to a error detected in the request
+- 401 UNAUTHORIZED: the client is not authenticated to access the requested resource
+- 403 FORBIDDEN: the client is not authorized to access the requested resource
+- 404 NOT FOUND: the requested resource cannot be located by the server
+- 405 METHOD NOT ALLOWED: the request method is recognized but not permitted for the requested resource
+- 500 INTERNAL SERVER ERROR: generic error messsage when a problem occurs on the server
+- 501 NOT IMPLEMENTED: the requested method is not implemented/handled by the server
+The resource returned can be anything from an HTTP file, an image, or a JSON data document. JSON is most commonly used in REST APIs.
+
+## FastAPI
+FastAPI is a Python package used for creating web APIs. As the name suggests, it is designed to allow you to do so quickly. Overall, it does achieve that goal. Of the many Python web frameworks I've used, FastAPI is the easiest and fastest. To install FastAPI, run:
+```bash
+pip install fastapi[standard]
+```
+To start using FastAPI, create a Python file called `main.py` and add the following code:
+```py
+from fastapi import FastAPI
+
+# create a FastAPI app object
+app = FastAPI()
+
+# the @app.get('/') means that this function
+# handles get requests for the url '/'
+@app.get('/')
+def get_root():
+    return "Hello World"
+```
+To run this, type `fastapi dev` into the terminal in the directory this file is located. This will start a local web server that you can use to access your code. By default, it starts the server on port 8000. Type the URL `localhost:8000` in your browser to visit the page. You should see a blank screen with "Hello World" displayed. Since FastAPI is designed for API development, it returns JSON by default. 

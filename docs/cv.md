@@ -46,14 +46,14 @@ I am currently contributing to the srcML infrastructure, which supports source c
 - *IT Coop* - PCC Airfoils (July 2022 - January 2023, June 2023 - August 2024)
 
 ## Funding Awards
-- *Summer Research Worker* (May 2025 - August 2025) - Funded under NSF grant CNS 20-16465. Created markup specification to add the Rust programming language to srcML and contributed to srcDispatch to parse srcML
+- Summer Research Worker (May 2025 - August 2025) - Funded under NSF grant CNS 20-16465. Created markup specification to add the Rust programming language to srcML and contributed to srcDispatch to parse srcML
 - Ohio Space Consortium Grant (August 2023 - May 2024) - Awarded $10,000 for research into potential benefits of updating protocols for securing Deep Space Network 
 - Choose Ohio First - Computer Science Scholarship (January 2022 - May 2024) - Awarded funds for undergraduate tuition as part of the COF-CS program 
 
 ## Publications and Scholarly Works
 #### Works Under Review or Near Submission
 - Al-Ramadan, F., Sipahioglu, J.A., Behler, J.A.C., Dragan, N., Decker, M.J., Collard, M.L., Maletic, J.I., "Should this Method be Static? Automatic Identification of Static Method Candidates", submitted May 16th, 2026 to IEEE Transactions on Software Engineering (TSE).
-- Sipahioglu, J.A., Behler, J.A.C., Al-Ramadan, F., Rossi, K.N., Decker, M.J., Collard, M.L., Maletic, J.I., "Reverse Engineering and Object-Oriented Design Recovery of C Systems", to be submitted Fall 2026 to the 34th IEEE International Conference on Software Analysis, Evolution and Reengineering (SANER).
+- Sipahioglu, J.A., Al-Ramadan, F., Rossi, K.N., Behler, J.A.C., Decker, M.J., Collard, M.L., Maletic, J.I., "Reverse Engineering and Object-Oriented Design Recovery of C Systems", to be submitted Fall 2026 to the 34th IEEE International Conference on Software Analysis, Evolution and Reengineering (SANER).
 
 #### Accepted and to Appear
 - Sipahioglu, J.A., Behler, J.A.C., Testa, S., Al-Ramadan, A., Decker, M.J., Collard, M.L., Maletic, J.I., (2026) “nameCollector: Extracting Source Code Identifiers Along with their Types and Context”, in the Proceedings of 42nd IEEE International Conference on Software Maintenance & Evolution (ICSME), Tool Demonstrations Track, Benevento, Italy, Sept 14 - 18, 5 pages. (TO APPEAR)
