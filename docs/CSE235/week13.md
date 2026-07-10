@@ -82,5 +82,6 @@ NumPy is a mathematics library for Python. One of the biggest problems with Pyth
 One of the main reasons to use NumPy is it's `Array` data type. Python lists are like arrays, but they can store elements of any data type. NumPy arrays, on the other hand, function more like arrays in other languages, where only a single data type must be stored. This reduces the burden of determining the data type for every element in the array. 
 
 ## Matplotlib
+Matplotlib is used to create graphs and charts. Primarily, the submodule PyPlot of Matplotlib is used to create the charts. To install Matplotlib, run: `pip install matplotlib` (Windows) or `pip3 install matplotlib` (Mac/Linux). 
 
 ## Conclusion

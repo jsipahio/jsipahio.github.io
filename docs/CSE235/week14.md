@@ -20,7 +20,7 @@ A request is made by a client to the API. The request consists of the following 
 - Endpoint: The endpoint is the URL (eg. https://www.google.com) that is being sent a request
 - Method: The HTTP request method being used
 - Headers: Additional metadata like login tokens or cookies included with the request
-- Body: Payload data (typically JSON) included with the request
+- Body: Payload data (typically JSON) included with the request. This is primarily used with POST and PUT requests.
 
 ### Responses
 The server responds to the request with the requested resource (if possible) and a response code. Response codes from 200-299 indicate success. Codes from 300-399 specify that a redirection took place. 400-499 indicate a request error. Codes 500-599 indicate a server error. Some common response codes include:  
@@ -36,6 +36,24 @@ The server responds to the request with the requested resource (if possible) and
 - 500 INTERNAL SERVER ERROR: generic error messsage when a problem occurs on the server
 - 501 NOT IMPLEMENTED: the requested method is not implemented/handled by the server
 The resource returned can be anything from an HTTP file, an image, or a JSON data document. JSON is most commonly used in REST APIs.
+
+### URLs
+URL stands for unified resource location. It is used to specify the endpoint of a resource being requested. A URL consists of the protocal, hostname, path, and query. URLs can also contain selectors after the query, but those are not relevant to API development. The protocol is typically HTTPS for APIs. HTTP may be used locally for testing, but is not used in production environments. The hostname is the name of the server hosting the resources being requested, such as `www.google.com` or `www.amazon.com`. The path is the specific resource on a server being requested.  
+```
+https://www.api.com/cool_resource/
+^       ^           ^
+|       |           |
+protocal|           |
+        hostname    |
+                    path
+```
+After the path, a query string can be requested. The query string is typically used to add additional details to a get request. The query starts with a question mark and contains a list of key=value pairs separated by ampersands:
+```
+https://www.api.com/cool_resource?key1=value1&key2=value2
+```
+
+### Request Bodies
+The request body is (typically) JSON formatted data that is included with the request. 
 
 ## FastAPI
 FastAPI is a Python package used for creating web APIs. As the name suggests, it is designed to allow you to do so quickly. Overall, it does achieve that goal. Of the many Python web frameworks I've used, FastAPI is the easiest and fastest. To install FastAPI, run:
@@ -55,4 +73,43 @@ app = FastAPI()
 def get_root():
     return "Hello World"
 ```
-To run this, type `fastapi dev` into the terminal in the directory this file is located. This will start a local web server that you can use to access your code. By default, it starts the server on port 8000. Type the URL `localhost:8000` in your browser to visit the page. You should see a blank screen with "Hello World" displayed. Since FastAPI is designed for API development, it returns JSON by default. 
+To run this, type `fastapi dev` into the terminal in the directory this file is located. This will start a local web server that you can use to access your code. By default, it starts the server on port 8000. Type the URL `localhost:8000` in your browser to visit the page. You should see a blank screen with "Hello World" displayed. Since FastAPI is designed for API development, it returns JSON by default. If we return a list or dictionary, it is automatically converted to JSON.
+```py
+from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get('/')
+def get_root():
+    return "Hello World"
+
+
+@app.get('/dict')
+def get_dict():
+    return { "key1": "value1", "key2": "value2" }
+
+
+@app.get('/list')
+def get_list():
+    return [
+        { "object1" : { "key1": "value1", "key2": "value2" } },
+        { "object2" : { "key1": "value1", "key2": "value2" } },
+        { "object3" : { "key1": "value1", "key2": "value2" } }
+    ]
+```
+Adding parameters to the endpoint handler function allows you to read query parameters:
+```py
+# this expects query parameters called key1 and key2
+# and returns them as JSON
+@app.get('/params')
+def get_params(key1 = None, key2 = None):
+    return { "key1" : key1, "key2" : key2 }
+```
+We can test this by going to `localhost:8000/params?key1=value1&key2=value2`. We can expect to see:
+```
+{"key1":"value1","key2":"value2"}
+```
+The exact formatting will depend on how your browser is configured to show raw JSON. 
+
+### FastAPI Testing Dashboard
+FastAPI provides a dashboard for testing your API. To reach it, go to `localhost:8000/docs` in your browser. The dashboard provides a submenu for each API endpoint. From the submenu, you can see the details of that endpoint and test it. The "Try it out" button allows you to enter parameters and/or body of the request.
