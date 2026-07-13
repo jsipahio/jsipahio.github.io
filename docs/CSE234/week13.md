@@ -69,7 +69,7 @@ target_sources(example_program PRIVATE example.cpp)
 Up until this point everything you've created in C++ have been executable programs. Software can also be compiled into a library. A library is a collection of functions and data types that other libraries and executables can use. `iostream`, `string`, `algorithm`, `vector`, etc. are all libraries. Libraries do not have a `main()` function. 
 
 To create a library using CMake, we can use the `add_library()` command, similar to how we used `add_executable` for a program. 
-```c++
+```cmake
 add_library(example_library)
 ```
 Unlike executables, where all the code it depends on is private, clients of a library do need to know the contents of the header files of the library. If you did not have access to the `iostream` header, you would never be able to include or use it. Therefore, when adding target soruces to a library, we make the implementation files private and the library headers public:
@@ -84,7 +84,52 @@ target_sources(example_library
             example.hpp
 )
 ```
-The `PRIVATE` section just contains the source code for the library. The `PUBLIC` section is a bit more complicated. First, `FILE_SET` indicates the name CMake will use to refer to this set of files. It is a bit redundant here since there is only one file, but it will become more useful when we have files. `TYPE HEADERS` indicates that these are header files. `FILES` indicates the names of the header file(s). In this case, we only have one header file, `example.hpp`. We run CMake to generate the build files and compile just as before. However, rather than compiling to an executable, it will generate a compiled library file. On Mac/Linux, it will generate a static library file with the `.a` extension. On Windows, it will generate a static library with the `.lib` extension. There are options that can be set to generate a shared library on Linux/Mac as well. 
+The `PRIVATE` section just contains the source code for the library. The `PUBLIC` section is a bit more complicated. First, `FILE_SET` indicates the name CMake will use to refer to this set of files. It is a bit redundant here since there is only one file, but it will become more useful when we have files. `TYPE HEADERS` indicates that these are header files. `FILES` indicates the names of the header file(s). In this case, we only have one header file, `example.hpp`. We run CMake to generate the build files and compile just as before. However, rather than compiling to an executable, it will generate a compiled library file. Typically, the default is to build a static library file. On Mac/Linux, a static library file with the `.a` extension. On Windows, the `.lib` extension extension. There are options that can be set to generate a shared library.
 
 #### Static vs Dynamic/Shared Libaries
-A static library is a fully compiled version of a library that must be integrated as part of an executable. That is, when the executable is compiled, the static library will be included as part of that executable's code. On Mac and Linux, static libraries typically have the `.a` extension. On Windows, they have the `.lib` extension. Shared (also called dynamically linked) libraries do not need to be compiled as part of an executable's machine code. Instead, when the code from the shared library is needed, the executable (while running) can request for the operating system to find that shared libary and load the code it needs. This means that the overall size of the final executable is smaller. However, it also requires the client using the executable to have the shared library installed. Shared libraries have the `.so` extension on Mac and Linux, and the `.dll` extension on Windows. 
+A static library is a fully compiled version of a library that must be integrated as part of an executable. That is, when the executable is compiled, the static library will be included as part of that executable's code. On Mac and Linux, static libraries typically have the `.a` extension. On Windows, they have the `.lib` extension. Shared (also called dynamically linked) libraries do not need to be compiled as part of an executable's machine code. Instead, when the code from the shared library is needed, the executable (while running) can request for the operating system to find that shared libary and load the code it needs. This means that the overall size of the final executable is smaller. However, it also requires the client using the executable to have the shared library installed. Shared libraries have the `.so` extension on Mac and Linux, and the `.dll` extension on Windows. To build a shared library, the `SHARED` option can be set on the `add_library()` command.
+```cmake
+add_library(example_static_library STATIC)
+add_library(example_shared_library SHARED)
+```
+
+### Building Libraries and Executables
+We can also provide build instructions for libraries and executables in the same `CMakeLists.txt` file. In this example, we build a shared and static library from the header file and its implementation, and then build our executable using the static libary.
+```cmake
+cmake_minimum_required(VERSION 3.28)
+project(EXAMPLE_PROJECT)
+
+add_library(example_static_library STATIC)
+add_library(example_shared_library SHARED)
+add_executable(example_executable)
+
+target_sources(example_static_library
+    PRIVATE
+        example.cpp
+    PUBLIC
+        FILE_SET exampleHeaders
+        TYPE HEADERS
+        FILES
+            example.hpp
+)
+
+target_sources(example_shared_library
+    PRIVATE
+        example.cpp
+    PUBLIC
+        FILE_SET exampleHeaders
+        TYPE HEADERS
+        FILES
+            example.hpp
+)
+
+target_link_libraries(example_executable PRIVATE example_static_library)
+target_sources(example_executable PRIVATE main.cpp)
+```
+
+### Subdirectories
+Larger scale projects split files into multiple subdirectories. Typically, a `CMakeLists.txt` is written for each directory. The `add_subdirectory()` command is used to tell CMake which subdirectory to search for more `CMakeLists.txt`. 
+
+## Dependencies
+Oftentimes, real software systems require libraries beyond what the C++ standard library provides, as well as what you can write yourself. This is when installing third-party libraries and making them project dependencies is needed. 
+

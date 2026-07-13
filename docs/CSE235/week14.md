@@ -113,3 +113,53 @@ The exact formatting will depend on how your browser is configured to show raw J
 
 ### FastAPI Testing Dashboard
 FastAPI provides a dashboard for testing your API. To reach it, go to `localhost:8000/docs` in your browser. The dashboard provides a submenu for each API endpoint. From the submenu, you can see the details of that endpoint and test it. The "Try it out" button allows you to enter parameters and/or body of the request.
+
+### Handling Post Requests
+We've been using `@app.get()` to process GET requests. Similarly, `@app.post()` is used to specify endpoints that handle POST requests. 
+```py
+@app.post("/post-example")
+def post_example():
+    return { "key": "value" }
+```
+Unlike GET requests, which send their data through the URL query string, POST requests accept input via the request body, which is typically JSON. To read the request body, you need to specify the expected format of the JSON input. To do so, you can declare a class that represents the expected structure of the JSON data. The class must inherit from the `BaseModel` class defined in the `pydantic` package. Pydantic is a dependency of FastAPI, so it will already be installed with FastAPI. Classes that inherit from `BaseModel` specify their properties and their data types. Python allows data type annotations by placing a colon after a variable's name, followed by the expected data type. Pydantic will use this data type information to convert dictionaries/JSON data to/from the class. Below is an example class that inherits from `BaseModel`:
+```py
+from pydantic import BaseModel
+
+# example class that represents JSON data
+# with an object at the top level
+class ObjectExample(BaseModel):
+    # specify the expected data types of each field
+    # data1 is a string
+    data1: str
+    # data2 is an int
+    data2: int
+    # data 3 is an int with unknown contents
+    # pydantic will interpret it as a list of strings
+    data3: list
+
+# example class that represents JSON data
+# with an array at the top level
+class ArrayExample(BaseModel):
+    # here, we expect that the list contains ObjectExamples
+    array: list[ObjectExample]
+```
+We can then specify the class as the type of the parameter for our post request. 
+```py
+# POST example that accepts JSON object
+@app.post("/post-object")
+def post_object(data: ObjectExample):
+    print(f"data1: {data.data1}")
+    print(f"data2: {data.data2}")
+    print(f"data3: {data.data3}")
+    return { "status" : "accpeted" }
+
+# POST example that accepts JSON array
+@app.post("/post-array")
+def post_array(data: ArrayExample):
+    for d in data.array:
+        print(f"data1: {d.data1}")
+        print(f"data2: {d.data2}")
+        print(f"data3: {d.data3}")
+    return { "status" : "accpeted" }
+```
+
