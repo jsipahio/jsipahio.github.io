@@ -1,5 +1,5 @@
-# CSE234 Week 13: CMake, Dependencies, and Cross-Platform Build Solutions
-CMake is the predominant build tool for C++ projects. There other build tools as well (Meson, Premake, xmake, Bazel, etc.), but CMake is the most popular for C/C++. Most large scale projects also require third-party software libraries, which introduces dependency management into the project. Your build system needs to ensure the correct version of the dependency is installed before generating build files. If your goal is to make your program cross-platform, you need to ensure that the dependencies are available and can be installed across platforms.
+# CSE234 Week 13: CMake
+CMake is the predominant build tool for C++ projects. There other build tools as well (Meson, Premake, xmake, Bazel, etc.), but CMake is the most popular for C/C++. 
 
 ## Quick History Lesson: Make
 Before CMake was `make`. Make is a build system for UNIX-like systems. It is very simple compared to CMake, but shares some similarities. Make (and CMake) use the last modified times of files to determine if a file needs to be recompiled. This allows Make to rebuild the minimum number of files required to update the program. Make uses a file called `Makefile` to configure the build for a project. Makefiles consist of *targets*, *dependencies*, *variables*, *comments*, *directives*, and *commands*. For our overview here, we are only concerned with targets, dependencies, and commands. Let's revisit the compilation of a basic three file program. To compile this, we need to compile the source code files separately, then link them. If we have a project that consists of `Class.hpp`, `Class.cpp`, and `main.cpp`, we would have to compile it as follows (assuming Linux is the platform):
@@ -84,9 +84,9 @@ target_sources(example_library
             example.hpp
 )
 ```
-The `PRIVATE` section just contains the source code for the library. The `PUBLIC` section is a bit more complicated. First, `FILE_SET` indicates the name CMake will use to refer to this set of files. It is a bit redundant here since there is only one file, but it will become more useful when we have files. `TYPE HEADERS` indicates that these are header files. `FILES` indicates the names of the header file(s). In this case, we only have one header file, `example.hpp`. We run CMake to generate the build files and compile just as before. However, rather than compiling to an executable, it will generate a compiled library file. Typically, the default is to build a static library file. On Mac/Linux, a static library file with the `.a` extension. On Windows, the `.lib` extension extension. There are options that can be set to generate a shared library.
+The `PRIVATE` section just contains the source code for the library. The `PUBLIC` section is a bit more complicated. First, `FILE_SET` indicates the name CMake will use to refer to this set of files. It is a bit redundant here since there is only one file, but it will become more useful when we have files. `TYPE HEADERS` indicates that these are header files. `FILES` indicates the names of the header file(s). In this case, we only have one header file, `example.hpp`. We run CMake to generate the build files and compile just as before. However, rather than compiling to an executable, it will generate a compiled library file. Typically, the default is to build a static library file. On Mac/Linux, a static library file with the `.a` extension. On Windows, the `.lib` extension. There are options that can be set to generate a shared library.
 
-#### Static vs Dynamic/Shared Libaries
+#### Static vs Dynamic/Shared Libraries
 A static library is a fully compiled version of a library that must be integrated as part of an executable. That is, when the executable is compiled, the static library will be included as part of that executable's code. On Mac and Linux, static libraries typically have the `.a` extension. On Windows, they have the `.lib` extension. Shared (also called dynamically linked) libraries do not need to be compiled as part of an executable's machine code. Instead, when the code from the shared library is needed, the executable (while running) can request for the operating system to find that shared libary and load the code it needs. This means that the overall size of the final executable is smaller. However, it also requires the client using the executable to have the shared library installed. Shared libraries have the `.so` extension on Mac and Linux, and the `.dll` extension on Windows. To build a shared library, the `SHARED` option can be set on the `add_library()` command.
 ```cmake
 add_library(example_static_library STATIC)
@@ -128,8 +128,36 @@ target_sources(example_executable PRIVATE main.cpp)
 ```
 
 ### Subdirectories
-Larger scale projects split files into multiple subdirectories. Typically, a `CMakeLists.txt` is written for each directory. The `add_subdirectory()` command is used to tell CMake which subdirectory to search for more `CMakeLists.txt`. 
+Larger scale projects split files into multiple subdirectories. Typically, a `CMakeLists.txt` is written for each directory. The `add_subdirectory()` command is used to tell CMake which subdirectory to search for more `CMakeLists.txt`. Below is a typical directory structure for a basic C++ project:
+```
+project-root
+    include
+        header-files
+    src
+        source-files
+```
+The `CMakeLists.txt` in the project root is used to specify the minimum CMake version, package name, and add subdirectories. Directories that only contain header files do not need a `CMakeLists.txt`, since headers are not compiled on their own. The `CMakeLists.txt` in the `src` directory specifies the libraries and/or executables to be built. There may be more nested directories within `src` or `include` for larger scale projects, but we'll assume here that this is the highest tier of nesting. The `CMakeLists.txt` for the root would be:
+```cmake
+cmake_minimum_required(VERSION 3.28)
+project(EXAMPLE_PROJECT)
 
-## Dependencies
-Oftentimes, real software systems require libraries beyond what the C++ standard library provides, as well as what you can write yourself. This is when installing third-party libraries and making them project dependencies is needed. 
+add_subdirectory(src)
+```
+And for src:
+```cmake
+add_library(example_static_library STATIC)
+
+target_include_directories(example_static_library PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../include)
+
+target_sources(example_static_library
+    PRIVATE
+        example.cpp
+)
+
+add_executable(example)
+target_sources(example PRIVATE example.cpp)
+target_link_library(example PRIVATE example_static_library)
+```
+The `target_include_directories` is used to specify which path(s) to search for header files. Since the headers `PUBLIC` on the library, we do not need to specify them again for the executable. 
+
 

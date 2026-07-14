@@ -41,7 +41,7 @@ int main() {
     return 0;
 }
 ```
-Names cannot be reused like this, so the code will fail to compile because the name `Vector` has been redeclared, as far as the compiler is concerned. However, we can use namespaces to isolate the names from each other. A namespace is created by putting the `namespace` keyword followed by the name of the namespace and a block. Any code in the block is part of the namespace.
+Names cannot be reused like this, so the code will fail to compile because the name `Vector` has been redeclared, as far as the compiler is concerned. However, we can use namespaces to isolate the names from each other. A namespace is created by putting the `namespace` keyword followed by the name of the namespace and a block. Any code in the block is part of the namespace.  
 ***math***
 ```cpp
 namespace math {
@@ -81,4 +81,4 @@ int main() {
 ```
 
 ## Conclusion
-When C++ programs are compiled, all the code that is included is combined into a single file. Namepaces allow us to keep the global namespace clean by keeping code isoloated. While `using namespace` statements can be used to bring code from namespaces into the global namespace, this is considered bad practice in C++, and anecdotally I've found it to not work sometimes.
+When C++ programs are compiled, all the code that is included is combined into a single file. Namespaces allow us to keep the global namespace clean by keeping code isolated. While `using namespace` statements can be used to bring code from namespaces into the global namespace, this is considered bad practice in C++, and anecdotally I've found it to not work sometimes.

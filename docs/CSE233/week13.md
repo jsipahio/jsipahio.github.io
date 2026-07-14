@@ -26,7 +26,7 @@ int addDown(int n) {
 ```
 ## More Complex Example: Greatest Common Divisor
 The greatest common divisor (GCD) problem is the following: given two integers A and B, find the largest possible integer C that divides both A and B. The Euclidean algorithm is the accepted solution to find a GCD. The Euclidean algorithm successively solves the equation:  
-r<sub>k-2</sub> = q<sub>k</sub>r<sub>k-1<sub> + r<sub>k</sub>  
+r<sub>k-2</sub> = q<sub>k</sub>r<sub>k-1</sub> + r<sub>k</sub>  
 Where r is the remainder, q is the quotient, and k is the number of steps the algorithm has been performed. Two perform the algorithm, we start at step k=0 and replace r<sub>0-2</sub> with A and r<sub>0-1</sub> with B. As an example, let's compute the GCD of 42 and 12. We start by plugging in 42 and 12:  
 Step 0: 42 = q<sub>0</sub>12 + r<sub>0</sub>  
 Now, we solve the equation for q<sub>0</sub> and r<sub>0</sub>:  

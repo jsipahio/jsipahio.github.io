@@ -79,9 +79,113 @@ Most IDEs and even rich text editors like VS Code have the capability to create 
 NumPy is a mathematics library for Python. One of the biggest problems with Python is that, being an interpreted language, it is very slow. Additionally, lists, while convenient to use, slow down program execution because they can hold different data types. Even if you create a list of all integers, Python does not know that is your intention, and will always have to treat every index in the list as though it could be anything. NumPy is a C library with bindings that make it usable in Python. Compiled C code is much faster than Python, and there are many performance optimizations that can be done in C that are simply impossible in Python. 
 
 ### NumPy Arrays
-One of the main reasons to use NumPy is it's `Array` data type. Python lists are like arrays, but they can store elements of any data type. NumPy arrays, on the other hand, function more like arrays in other languages, where only a single data type must be stored. This reduces the burden of determining the data type for every element in the array. 
+One of the main reasons to use NumPy is it's `Array` data type. Python lists are like arrays, but they can store elements of any data type. NumPy arrays, on the other hand, function more like arrays in other languages, where only a single data type must be stored. This reduces the burden of determining the data type for every element in the array.  
+
+Because NumPy arrays enforce a single data type, the computer can store the data contiguously in memory, making mathematical operations incredibly fast. 
+To use NumPy in your code, you must first import it. The standard convention is to import it under the alias `np`:
+
+```python
+import numpy as np
+
+```
+
+#### Creating Arrays
+
+You can create a NumPy array by passing a standard Python list into the `np.array()` function:
+
+```python
+# creating a 1D array
+my_list = [1, 2, 3, 4, 5]
+my_array = np.array(my_list)
+print(my_array)
+
+# creating a 2D array (a matrix)
+matrix_list = [[1, 2, 3], [4, 5, 6]]
+my_matrix = np.array(matrix_list)
+print(my_matrix)
+# output:
+# [[1 2 3]
+#  [4 5 6]]
+
+```
+
+#### Element-wise Operations (Vectorization)
+
+In standard Python, if you want to multiply every number in a list by 2, you have to use a `for` loop or a list comprehension. NumPy allows you to perform operations on the entire array at once, which is called vectorization.
+
+```python
+# standard Python list (requires a loop)
+python_list = [1, 2, 3]
+doubled_list = [x * 2 for x in python_list]
+
+# NumPy array (direct math)
+data = np.array([1, 2, 3])
+doubled_data = data * 2
+# prints: [2 4 6]
+print(doubled_data)  
+
+# you can also add arrays together
+array1 = np.array([1, 2, 3])
+array2 = np.array([4, 5, 6])
+# output: [5 7 9]
+print(array1 + array2)  
+
+```
+
+---
 
 ## Matplotlib
-Matplotlib is used to create graphs and charts. Primarily, the submodule PyPlot of Matplotlib is used to create the charts. To install Matplotlib, run: `pip install matplotlib` (Windows) or `pip3 install matplotlib` (Mac/Linux). 
+
+Matplotlib is the go-to library for data visualization in Python. It allows you to transform your data and NumPy arrays into highly customizable charts, graphs, and plots.
+
+To use it, we typically import the `pyplot` submodule using the alias `plt`. If you want to use it alongside your data, your import statements will usually look like this:
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+```
+
+### Creating a Basic Line Plot
+
+The most common way to use Matplotlib is to plot $x$ and $y$ coordinates. The `plt.plot()` function connects these coordinates with a line, and `plt.show()` displays the window containing the graph.
+
+```python
+# sample data
+x = np.array([1, 2, 3, 4, 5])
+y = np.array([2, 4, 6, 8, 10])
+
+# create a line plot
+plt.plot(x, y)
+
+# it is best practice to always label your graphs
+plt.title("My First Line Plot")
+plt.xlabel("X Axis Label")
+plt.ylabel("Y Axis Label")
+
+# Display the plot
+plt.show()
+
+```
+
+### Creating a Scatter Plot
+
+If you want to display individual data points without connecting them with a line, you can use `plt.scatter()` instead:
+
+```python
+x = np.array([1, 2, 3, 4, 5])
+y = np.array([5, 2, 9, 1, 7])
+
+# Create a scatter plot
+plt.scatter(x, y, color='red', marker='o')
+plt.title("Simple Scatter Plot")
+plt.xlabel("Independent Variable")
+plt.ylabel("Dependent Variable")
+
+plt.show()
+
+```
 
 ## Conclusion
+
+By using `pip`, we can easily install third-party code packages from the Python Package Index (PyPI). To keep our computer systems organized and prevent different projects from conflicting with one another, we learned how to isolate our work using Virtual Environments (`.venv`). The abundance of third-party software is one of the major reasons why Python is so widely used. Afterward, we looked at two of the most commonly used Python packages, NumPy and Matplotlib. NumPy provides high-performance, fixed-type numerical arrays that allow us to perform fast, vector-based math. Matplotlib is used to create charts and graphs.

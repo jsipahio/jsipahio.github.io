@@ -6,12 +6,12 @@ Web programming consists of two major components: front-end and back-end develop
   
 Web browsers can handle HTML (hypertext markup language), CSS (cascading style sheets), and JavaScript. HTML is used to describe the structure and content of the web page. CSS adds custom styling to the page. JavaScript is a programming language that is executed in the browser. These languages comprise the core of front-end web development. 
   
-Back-end web programming is the server-side programming that occurs. Web servers are responsible for storing and updating persistent data and managing logins. Historically, back-end programming has also carried the burden of rendering pages as well. Languages like PHP allowed the back-end PHP code to be mixed with HTML and JavaScript, which would generate the complete webpage that is returned the the client's browser. In this case, the browser only has to render the completed HTML document and apply CSS styles. Minimal JavaScript may have been used for front-end form verification and other small tasks. This style of web programming is referred to as thin client, thick server. The web server carries a large processing burden to handle both data processing and rendering, while the client has the minimal task of displaying the resulting page. More recently, this has flipped. As the number of users of the web has increased, web programming has transitioned to a thick client, thin server model. Modern front-end JavaScript frameworks like React, Angular, and Vue have moved web development to a point where the client now performs most of the rendering in the browser. The load on the server has been lightened, where servers are now primarily responsible for storing and returning data.  
+Back-end web programming is the server-side programming that occurs. Web servers are responsible for storing and updating persistent data and managing logins. Historically, back-end programming has also carried the burden of rendering pages as well. Languages like PHP allowed the back-end PHP code to be mixed with HTML and JavaScript, which would generate the complete webpage that is returned the client's browser. In this case, the browser only has to render the completed HTML document and apply CSS styles. Minimal JavaScript may have been used for front-end form verification and other small tasks. This style of web programming is referred to as thin client, thick server. The web server carries a large processing burden to handle both data processing and rendering, while the client has the minimal task of displaying the resulting page. More recently, this has flipped. As the number of users of the web has increased, web programming has transitioned to a thick client, thin server model. Modern front-end JavaScript frameworks like React, Angular, and Vue have moved web development to a point where the client now performs most of the rendering in the browser. The load on the server has been lightened, where servers are now primarily responsible for storing and returning data.  
   
 An API is an abstract programming interface. In the context of web development, it refers to applications that perform basic database operations at the behest of a client, such as inserting data or returning the results of a data request. CRUD refers to create, retrieve, update, and delete: the four main tasks most web APIs are responsible for. These correspond to the SQL `INSERT INTO`, `SELECT`, `UPDATE`, and `DELETE FROM` queries, respectively. REST stands for Representational State Transfer. REST APIs define ways for applications to interact with each other over HTTP by mapping the HTTP request methods to CRUD operations:  
 - GET: an HTTP GET request corresponds to the R in CRUD. It is a request to retrieve data
 - POST: an HTTP POST request corresponds to the C in CRUD. It is a request to create data
-- PATCH and PUT: technially the HTTP PATCH request is a partial update to an existing data item, and PUT is a full replacement of an existing item. They correspond to the U in CRUD
+- PATCH and PUT: technically the HTTP PATCH request is a partial update to an existing data item, and PUT is a full replacement of an existing item. They correspond to the U in CRUD
 - DELETE: an HTTP DELETE request corresponds to the D in CRUD. It is a request to delete data
 
 In many real world applications, the GET and POST methods see the most use and are overloaded to handle the other CRUD operations. Now, let's look at requests and responses.
@@ -24,21 +24,21 @@ A request is made by a client to the API. The request consists of the following 
 
 ### Responses
 The server responds to the request with the requested resource (if possible) and a response code. Response codes from 200-299 indicate success. Codes from 300-399 specify that a redirection took place. 400-499 indicate a request error. Codes 500-599 indicate a server error. Some common response codes include:  
-- 200 OK: indicates the the response is okay
+- 200 OK: indicates the response is okay
 - 201 CREATED: indicates the resource was created (POST and some PUT)
 - 202 ACCEPTED: the request was accepted but not acted on
-- 301 MOVED PERMANTLY: the resource being requested has moved, and the new location was returned
+- 301 MOVED PERMANENTLY: the resource being requested has moved, and the new location was returned
 - 400 BAD REQUEST: the server cannot or will not handle the request due to a error detected in the request
 - 401 UNAUTHORIZED: the client is not authenticated to access the requested resource
 - 403 FORBIDDEN: the client is not authorized to access the requested resource
 - 404 NOT FOUND: the requested resource cannot be located by the server
 - 405 METHOD NOT ALLOWED: the request method is recognized but not permitted for the requested resource
-- 500 INTERNAL SERVER ERROR: generic error messsage when a problem occurs on the server
+- 500 INTERNAL SERVER ERROR: generic error message when a problem occurs on the server
 - 501 NOT IMPLEMENTED: the requested method is not implemented/handled by the server
 The resource returned can be anything from an HTTP file, an image, or a JSON data document. JSON is most commonly used in REST APIs.
 
 ### URLs
-URL stands for unified resource location. It is used to specify the endpoint of a resource being requested. A URL consists of the protocal, hostname, path, and query. URLs can also contain selectors after the query, but those are not relevant to API development. The protocol is typically HTTPS for APIs. HTTP may be used locally for testing, but is not used in production environments. The hostname is the name of the server hosting the resources being requested, such as `www.google.com` or `www.amazon.com`. The path is the specific resource on a server being requested.  
+URL stands for unified resource location. It is used to specify the endpoint of a resource being requested. A URL consists of the protocol, hostname, path, and query. URLs can also contain selectors after the query, but those are not relevant to API development. The protocol is typically HTTPS for APIs. HTTP may be used locally for testing, but is not used in production environments. The hostname is the name of the server hosting the resources being requested, such as `www.google.com` or `www.amazon.com`. The path is the specific resource on a server being requested.  
 ```
 https://www.api.com/cool_resource/
 ^       ^           ^
@@ -109,7 +109,16 @@ We can test this by going to `localhost:8000/params?key1=value1&key2=value2`. We
 ```
 {"key1":"value1","key2":"value2"}
 ```
-The exact formatting will depend on how your browser is configured to show raw JSON. 
+The exact formatting will depend on how your browser is configured to show raw JSON.   
+  
+We can also read URL parameters:
+```py
+# put the url param in curly braces
+# and add it as a funciton parameter
+@app.get("url/{param}")
+def get_url_param(param: str):
+    return {"url_param": param}
+```
 
 ### FastAPI Testing Dashboard
 FastAPI provides a dashboard for testing your API. To reach it, go to `localhost:8000/docs` in your browser. The dashboard provides a submenu for each API endpoint. From the submenu, you can see the details of that endpoint and test it. The "Try it out" button allows you to enter parameters and/or body of the request.

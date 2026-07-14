@@ -57,6 +57,13 @@ def get_params(key1 = None, key2 = None):
     return { "key1" : key1, "key2" : key2 }
 
 
+# put the url param in curly braces
+# and add it as a funciton parameter
+@app.get("url/{param}")
+def get_url_param(param: str):
+    return {"url_param": param}
+
+
 # basic POST example
 @app.post("/post-example")
 def post_example():

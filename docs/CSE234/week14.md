@@ -1,5 +1,5 @@
 # CSE234 Week 14: Inheritance 
-Inheritance allows classes to, for lack of a better term, inherit data and operations from other classes. Inheritance also allows for C++ to implement run-time polymorphism. Inheritance is weird in C++ compared to pure object oriented languages like Java or C#. 
+Inheritance allows classes to, for lack of a better term, inherit data and operations from other classes. Inheritance also allows for C++ to implement run-time polymorphism. Inheritance is weird in C++ compared to pure object-oriented languages like Java or C#. 
 
 ## Basic Inheritance
 The basic syntax for C++ inheritance is to put a colon after the name of class doing the inheriting followed by the name of the class it inherits from. 
@@ -43,7 +43,7 @@ Unlike most other languages, C++ has inheritance visibility specifiers. Classes 
     </tbody>
 </table>
 
-From the table, we can tell that derived classes can never access the private members of the their base class, no matter which inheritance specifier is used. A private inheritance specifier indicates that derived classes can never access any members of the base class. Protected inheritance prevents objects of the derived class from accessing base class members, but the public and protected members of the base class are still available in the class. Public inheritance allows public members of the base class to be accessed by objects. Let's look at a concrete example:
+From the table, we can tell that derived classes can never access the private members of their base class, no matter which inheritance specifier is used. A private inheritance specifier indicates that derived classes can never access any members of the base class. Protected inheritance prevents objects of the derived class from accessing base class members, but the public and protected members of the base class are still available in the class. Public inheritance allows public members of the base class to be accessed by objects. Let's look at a concrete example:
 ```cpp
 class Base {
 public:
@@ -141,7 +141,7 @@ int main() {
 ```
 
 ### Calling Base Class Constructors
-Since private members of the base class are not visible in derived classes, the derived class must be be able to call the base class's constructor if it wants to set those fields. Initializer lists are used call base class constructors. They can also be used to set the fields of the class. An initializer list starts with a colon after a paramter list of the constructor. It consists of a comma separated list of the class's fields and base class(es) which are passed values.
+Since private members of the base class are not visible in derived classes, the derived class must be able to call the base class's constructor if it wants to set those fields. Initializer lists are used call base class constructors. They can also be used to set the fields of the class. An initializer list starts with a colon after a parameter list of the constructor. It consists of a comma separated list of the class's fields and base class(es) which are passed values.
 ```cpp
 class Base {
 public:
@@ -233,7 +233,7 @@ int main() {
     return 0;
 }
 ```
-Despite being set to a derived class object, the pointer `base` will still call the base class method. Runtime polymorphism (in C++, C#, Java, at least) is handled by a virtual method table (VMT), a hidden member added to classes by the compiler. The VMT tracks which methods of a class are inherited, and which are potentially overriden. When an object reference calls a function, the VMT is consulted to determine which version of the function to call. However, in C++, to be added to the VMT a function must be explicitly labeled as `virtual`. If the function is not virtual, it is not added to the VMT, causing the version from `Base` to be called, since the original type of the pointer is `Base*`, even though we used new to instantiate it to a `Derived` object. Since `derived` has the type `Derived*`, it still calls the version of `printMessage()` defined in `Derived`. If we make the `printMessage()` function virtual, `base->printMessage()` will call the derived class's implementation.
+Despite being set to a derived class object, the pointer `base` will still call the base class method. Runtime polymorphism (in C++, C#, Java, at least) is handled by a virtual method table (VMT), a hidden member added to classes by the compiler. The VMT tracks which methods of a class are inherited, and which are potentially overridden. When an object reference calls a function, the VMT is consulted to determine which version of the function to call. However, in C++, to be added to the VMT a function must be explicitly labeled as `virtual`. If the function is not virtual, it is not added to the VMT, causing the version from `Base` to be called, since the original type of the pointer is `Base*`, even though we used new to instantiate it to a `Derived` object. Since `derived` has the type `Derived*`, it still calls the version of `printMessage()` defined in `Derived`. If we make the `printMessage()` function virtual, `base->printMessage()` will call the derived class's implementation.
 ```cpp
 class Base {
 public:
@@ -291,7 +291,7 @@ public:
     }
 };
 ```
-The `final` specifier is used to tell the compiler that no derived classes can override this function. `final` can also be used on classes to indicate that they cannot be inherited from. `final` can offer performance benefits when you know a class won't be inherited from, or a function will not be overriden, since it can disable VMT checks when it is known that there will never be a derived method to call. 
+The `final` specifier is used to tell the compiler that no derived classes can override this function. `final` can also be used on classes to indicate that they cannot be inherited from. `final` can offer performance benefits when you know a class won't be inherited from, or a function will not be overridden, since it can disable VMT checks when it is known that there will never be a derived method to call. 
 ```cpp
 class Base {
 public:
@@ -328,7 +328,7 @@ public:
 ```
 
 ### Pure Virtual Methods and "Interfaces"
-A pure virtual function is a function that has no implementation in it's base class. This is done by declaring the function virtual and setting it equal to 0.
+A pure virtual function is a function that has no implementation in its base class. This is done by declaring the function virtual and setting it equal to 0.
 ```cpp
 class Base {
 public:
@@ -350,7 +350,7 @@ public:
 ```
 
 ### Multiple Inheritance
-C++ supports multiple inheritance, which is when one derived class can have multiple parents. Most langauges do not support this, or only support multiple inheritance from interfaces. C++ has no such restrictions. 
+C++ supports multiple inheritance, which is when one derived class can have multiple parents. Most languages do not support this, or only support multiple inheritance from interfaces. C++ has no such restrictions. 
 ```cpp
 class Camera {
 public:
@@ -389,7 +389,7 @@ public:
 };
 ```
 
-### Example 1: Animals
+### Example: Animals
 ```cpp
 // animal is an interface
 class Animal {
@@ -441,7 +441,7 @@ public:
 };
 ```
 
-### Example 2: Game Objects
+### Example: Game Objects
 ```cpp
 class Entity {
 public:
@@ -596,4 +596,4 @@ void printAnimal(Animal *animal) {
 ```
 
 ## Conclusion
-This week, we discussed inheritance in C++. Inheritance allows for classes to inherit the methods and data of other classes. We typically call the classes being inherited from base classes, super classes, or parent classes. The classes doing the inheriting are called derived classes, subclasses, or child classes. C++ inheritence is more complex than other languages. For one, C++ does not treat objects as references by default, meaning that much of the runtime polymorphism that occurs automatically in Java or C# does not happen in C++ unless using references or pointers. Additionally, C++ adds another layer of complexity thanks to the inheritence visibility specifiers and multiple inheritance. Object slicing occurs when a base class parameter is not passed by reference or pointer, leading to the calls with derived class objects as the argument "slicing" the derived classes fields and methods off the object. 
+This week, we discussed inheritance in C++. Inheritance allows for classes to inherit the methods and data of other classes. We typically call the classes being inherited from base classes, super classes, or parent classes. The classes doing the inheriting are called derived classes, subclasses, or child classes. C++ inheritance is more complex than other languages. For one, C++ does not treat objects as references by default, meaning that much of the runtime polymorphism that occurs automatically in Java or C# does not happen in C++ unless using references or pointers. Additionally, C++ adds another layer of complexity thanks to the inheritance visibility specifiers and multiple inheritance. Object slicing occurs when a base class parameter is not passed by reference or pointer, leading to the calls with derived class objects as the argument "slicing" the derived classes fields and methods off the object. 

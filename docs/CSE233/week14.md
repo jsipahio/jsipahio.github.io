@@ -2,11 +2,11 @@
 A pointer, in the simplest terms, is a variable that stores a memory address instead of a value. Pointers can be used to reference other variables, or create new memory in an area called the heap. 
 
 ## Basic Pointer Examples
-A pointer is declared by putting a asterick/star `*` after the type name and before the variable name.
+A pointer is declared by putting an asterisk/star `*` after the type name and before the variable name.
 ```cpp
 int *ptr;
 ```
-The `nullptr` value is used to represent a pointer that references nothing. A pointer with the value of `nullptr` is considered `false` in Boolean expressions, just like `0` (most of the times, the literal value of `nullptr` is `0`).
+The `nullptr` value is used to represent a pointer that references nothing. A pointer with the value of `nullptr` is considered `false` in Boolean expressions, just like `0` (most of the time, the literal value of `nullptr` is `0`).
 ```cpp
 int *ptr = nullptr;
 if (ptr) {
@@ -28,7 +28,7 @@ int *ptr = &x;
 // prints: 5
 std::cout << *ptr << std::endl;
 ```
-Dereferencing also let's you change the value of the variable the pointer is referencing:
+Dereferencing also lets you change the value of the variable the pointer is referencing:
 ```cpp
 int x = 5;
 int *ptr = &x;
@@ -206,4 +206,4 @@ int main() {
 ```
 
 ## Conclusion
-Pointers are variables that are used to store memory addresses instead of values. Accessing the value referenced by a pointer requires the pointer to be dereferenced. Pointers can be assigned the memory address of existing variables, or used to create raw pointers using the `new` operator. Pointers created with `new` should always have a corresponding `delete` to free the memory created by the pointer. Unlike static arrays (declared like `int array[100]`), where the size must be known when the program is compiled, pointers can also be used to create dynamic arrays which can be created with a size that isn't known until the program is run. Dynamic arrayhs are freed using the `delete[]` operator. Pointers can be used as parameters to functions as well as return values from functions. 
+Pointers are variables that are used to store memory addresses instead of values. Accessing the value referenced by a pointer requires the pointer to be dereferenced. Pointers can be assigned the memory address of existing variables, or used to create raw pointers using the `new` operator. Pointers created with `new` should always have a corresponding `delete` to free the memory created by the pointer. Unlike static arrays (declared like `int array[100]`), where the size must be known when the program is compiled, pointers can also be used to create dynamic arrays which can be created with a size that isn't known until the program is run. Dynamic arrays are freed using the `delete[]` operator. Pointers can be used as parameters to functions as well as return values from functions. 
