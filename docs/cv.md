@@ -27,7 +27,7 @@ Prof. Jonathan I. Maletic (Ph.D., 2024 - Present)
 Dr. Younghun Chae (M.S., 2023 - 2024)
 
 ## Research Statement
-Interests: Code reuse, design recovery, code quality, software engineering, evolution, and maintenance  
+Interests: Code reuse, design recovery, code quality, software engineering, evolution, technical debt, and maintenance  
   
 I am currently contributing to the srcML infrastructure, which supports source code fact extraction, querying, transformation, and syntactic differencing.
 
@@ -35,6 +35,7 @@ I am currently contributing to the srcML infrastructure, which supports source c
 - `srcML` - Contribute to writing grammars to add new languages to srcML and presently implementing parsing for Rust. The srcML tool wraps source code elements in XML tags to embed the abstract syntax tree into the source code. srcML serves as the base for other tools to query, difference, parse, and transform source code.
 - `srcBind` - A tool for creating idiomatic bindings and wrappers of C (and eventually Rust) libraries in object-oriented languages, such as Python, C++ and Java. 
 - `srcDispatch` - Contribute to continued development and support of more language features in srcDispatch. srcDispatch is a SAX (simple API for XML parsing) event dispatcher for srcML.
+- Technical Debt - Exploring methods to identify technical debt in systems.
 
 ## Academic Experience
 - *Instructor, Full Time: Computer Science* - Stark State College (August 2025 - Present)
@@ -53,7 +54,7 @@ I am currently contributing to the srcML infrastructure, which supports source c
 ## Publications and Scholarly Works
 #### Works Under Review or Near Submission
 - Al-Ramadan, F., Sipahioglu, J.A., Behler, J.A.C., Dragan, N., Decker, M.J., Collard, M.L., Maletic, J.I., "Should this Method be Static? Automatic Identification of Static Method Candidates", submitted May 16th, 2026 to IEEE Transactions on Software Engineering (TSE).
-- Sipahioglu, J.A., Al-Ramadan, F., Rossi, K.N., Behler, J.A.C., Decker, M.J., Collard, M.L., Maletic, J.I., "Reverse Engineering and Object-Oriented Design Recovery of C Systems", to be submitted Fall 2026 to the 34th IEEE International Conference on Software Analysis, Evolution and Reengineering (SANER).
+- Sipahioglu, J.A., Al-Ramadan, F., Rossi, K.N., Behler, J.A.C., Decker, M.J., Collard, M.L., Maletic, J.I., "Reverse Engineering Object-Oriented Designs from C Systems", to be submitted Fall 2026 to the 34th IEEE International Conference on Software Analysis, Evolution and Reengineering (SANER).
 
 #### Accepted and to Appear
 - Sipahioglu, J.A., Behler, J.A.C., Testa, S., Al-Ramadan, A., Decker, M.J., Collard, M.L., Maletic, J.I., (2026) “nameCollector: Extracting Source Code Identifiers Along with their Types and Context”, in the Proceedings of 42nd IEEE International Conference on Software Maintenance & Evolution (ICSME), Tool Demonstrations Track, Benevento, Italy, Sept 14 - 18, 5 pages. (TO APPEAR)
