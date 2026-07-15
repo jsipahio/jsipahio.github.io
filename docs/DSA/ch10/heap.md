@@ -111,4 +111,6 @@ operation delete_last_inserted():
 ```
 
 ## Priority Queues
-A priority queue is a modified queue that orders elements based on their priority. Rather than the oldest element being removed first, the highest priority element is removed first. 
+A priority queue is a modified queue that orders elements based on their priority. Rather than the oldest element being removed first, the highest priority element is removed first. If we use a heap as the underlying data representation of a queue, we have, in effect, created a priority queue, since popping from the heap will always remove the highest priority element.  
+  
+Priority queues have the same external ADT (rules and operations) as a normal queue. A priority queue may take a custom comparison function to pass to its internal heap data structure to determine which elements have higher priority.

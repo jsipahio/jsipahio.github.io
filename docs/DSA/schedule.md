@@ -11,10 +11,10 @@
 | 7  | Linked List ADT and Iterators | Stack Part 1, Quiz 7 |
 | 8  | Sets, Hash Tables, and Maps | Stack Part 2, Quiz 6 |
 | 9  | Recursion and Binary Tree ADT | Stack Part 3, Quiz 8 |
-| 10 | Heap and Priority Queue ADT, Heap Sort | Heap Part 1, Quiz 9 |
+| 10 | Heap and Priority Queue ADT | Heap Part 1, Quiz 9 |
 | 11 | Naïve Sorting Algorithms: Insertion, Selection, and Bubble | Heap Part 2, Quiz 10 |
-| 12 | Divide and Conquer Algorithms and Advanced Sorting Algorithms: Quick, Merge | Heap Sort, Exam 2 |
+| 12 | Advanced Sorting Algorithms: Quick, Merge, Heap, Radix, Bucket | Heap Sort, Exam 2 |
 | 13 | Graphs and Graph Traversal | Graph Part 1, Quiz 11 |
 | 14 | Digraphs and Greedy Algorithms | Graph Part 2, Quiz 12 |
-| 15 | Dynamic Programming Algorithms and NP-Complete | Greedy/DP Algorithm, Quiz 13 |
+| 15 | Dynamic Programming Algorithms and NP-Complete | Graph Part 3, Quiz 13 |
 | 16 | Finals Week - No New Content | Final | 
