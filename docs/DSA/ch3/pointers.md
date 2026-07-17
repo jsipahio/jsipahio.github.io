@@ -253,5 +253,3 @@ There are several runtime errors that you may encounter when working with dynami
 - **free(): double free detected in tcache n**: This error occurs when a pointer that has already been freed has `delete` invoked on it a second time.
 
 - **munmap_chunk(): invalid pointer**: This occurs when you try to `delete` a pointer to a variable on the stack. Since this memory is not supposed to be managed by the programmer, trying to free memory allocated on the stack is illegal and will create a program crash.
-
-- 

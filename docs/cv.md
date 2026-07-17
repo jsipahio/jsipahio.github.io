@@ -77,11 +77,11 @@ N/A
 
 ## Teaching
 **Stark State College**  
-*Summer 2026*  
+*Summer 2026*   
     - CSE233 - C++ Programming
     - CSE234 - Advanced C++ Programming
     - CSE235 - Python Development
-*Spring 2026*  
+*Spring 2026*   
     - CSE121 - Mobile Development Architecture  
     - CSE122 - Programming Logic and Problem Solving  
     - CSE233 - C++ Programming  
