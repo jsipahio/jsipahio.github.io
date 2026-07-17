@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>CSE233 Week 12: Operator Overloading - </title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../css/brands.min.css" rel="stylesheet">
+        <link href="../../css/solid.min.css" rel="stylesheet">
+        <link href="../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" disabled>
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../.."></a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../cv/" class="nav-link">CV</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../teaching/" class="nav-link">Teaching</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item dropdown">
+                              <button id="theme-menu" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static" aria-label="Toggle theme" class="nav-link dropdown-toggle">
+                                <i class="fa-solid fa-circle-half-stroke fa-fw"></i>
+                                <span class="d-lg-none ms-2">Toggle theme</span>
+                              </button>
+                              <ul class="dropdown-menu dropdown-menu-end">
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
+                                    <i class="fa-solid fa-sun fa-fw"></i>
+                                    <span class="ms-2">Light</span>
+                                    <i class="fa-solid fa-check ms-auto d-none"></i>
+                                  </button>
+                                </li>
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
+                                    <i class="fa-solid fa-moon fa-fw"></i>
+                                    <span class="ms-2">Dark</span>
+                                    <i class="fa-solid fa-check ms-auto d-none"></i>
+                                  </button>
+                                </li>
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="auto" aria-pressed="true">
+                                    <i class="fa-solid fa-circle-half-stroke fa-fw"></i>
+                                    <span class="ms-2">Auto</span>
+                                    <i class="fa-solid fa-check ms-auto"></i>
+                                  </button>
+                                </li>
+                              </ul>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <script src="../../js/darkmode.js"></script>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#cse233-week-12-operator-overloading" class="nav-link">CSE233 Week 12: Operator Overloading</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#function-overloading" class="nav-link">Function Overloading</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#operator-overloading" class="nav-link">Operator Overloading</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#friend-functions" class="nav-link">Friend Functions</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#overloading-the-insertion-and-extraction-operators" class="nav-link">Overloading the Insertion and Extraction Operators</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#conclusion" class="nav-link">Conclusion</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="cse233-week-12-operator-overloading">CSE233 Week 12: Operator Overloading</h1>
+<p>This week, we will continue discussing classes and move to discussing operator overloading. In C++, we can overload operators (like +, -, =) to allow them to be used on objects. We'll also discuss friend functions, which may be needed for implementing the I/O operators (<code>&lt;&lt;</code> and <code>&gt;&gt;</code>). Note: I'll be using the term "free function" to refer to functions that are not class member functions.</p>
+<h2 id="function-overloading">Function Overloading</h2>
+<p>Recall the C++ supports function overloading. Function overloading allows the same function name to be used for different sets of parameters. The function overloads are differentiated by the types and number of parameters. The return type has no impact on whether the overload is legal. Here is a basic example of function overloading:</p>
+<pre><code class="language-cpp">// 1.
+int add(int x, int y) { return x + y; }
+// 2.
+double add(int x, double y) { return x + y; }
+// 3.
+double add(double x, int y) { return x + y; }
+// 4.
+double add(double x, double y) { return x + y; }
+
+int main() {
+    // calls 1
+    int a = add(1, 1);
+    // calls 2
+    double b = add(1, 1.0);
+    // calls 3
+    double c = add(1.0, 1);
+    // calls 4
+    double d = add(1.0, 1.0);
+
+    return 0;
+}
+</code></pre>
+<h2 id="operator-overloading">Operator Overloading</h2>
+<p>Operator overloading allows operators, like +, -, &lt;, &gt;, ==, etc. to be used for objects of a class (or struct). Let's look at some examples. You may have noticed that the <code>double</code> data type does not always have perfect decimals. This has to do with how decimal values are stored at the hardware level. This is not sufficient for storing monetary values. It is unacceptable in finance applications to have imprecise values. So, we will make a <code>Money</code> class to store US dollars and cents using integers to ensure the values are correct. However, we want to still be able to use the <code>Money</code> type like an integer or double where we can add, subtract, compare, etc. the variables. To achieve this, we must overload the operators. We aren't going to consider negative values in the example, since it would add a bunch of extra calculations and checks. This would distract from implementing the operators, which is the focus of this week.<br />
+One thing to remember with overloaded operators is that the left-hand side of an expression takes the place of the object being used to call the operator. For example, consider:</p>
+<pre><code class="language-cpp">c = a + b;
+</code></pre>
+<p>If we defined a member function <code>add()</code> as well, this would be equivalent to:</p>
+<pre><code class="language-cpp">c = a.add(b)
+</code></pre>
+<p>Now, let's consider the <code>Money</code> class:</p>
+<pre><code class="language-cpp">class Money {
+public:
+    // constructor, default values of $0.00
+    Money(unsigned long d = 0, unsigned short c = 0);
+
+    // comparison operators, should always be const
+    bool operator==(const Money&amp; rhs) const;
+    bool operator&lt;(const Money&amp; rhs) const;
+
+    // assignment operators
+    Money&amp; operator+=(const Money&amp; rhs);
+    Money&amp; operator-=(const Money&amp; rhs);
+
+    // arithmetic operators
+    Money operator+(const Money&amp; rhs) const;
+    Money operator-(const Money&amp; rhs) const;
+
+    // other members
+    void addDollars(unsigned long d);
+    void addCents(unsigned long c);
+    void print() const;
+    std::string toString() const;
+private:
+    // the dollar amount, we use a very large data type
+    unsigned long dollars;
+    // cents only range from 0 to 100, so we can use the 
+    // smallest integer type, short
+    unsigned short cents;
+};
+// techically, these could be members as well, but they
+// can be implemented as free functions using == and &lt;
+// free functions typically have better performance than
+// member functions
+bool operator!=(const Money&amp; lhs, const Money&amp; rhs) {
+    return !(lhs == rhs);
+}
+
+bool operator&lt;=(const Money&amp; lhs, const Money&amp; rhs) {
+    return (lhs &lt; rhs) || (lhs == rhs);
+}
+
+bool operator&gt;(const Money&amp; lhs, const Money&amp; rhs) {
+    return !(lhs &lt; rhs) &amp;&amp; !(lhs == rhs);
+}
+
+bool operator&gt;=(const Money&amp; lhs, const Money&amp; rhs) {
+    return !(lhs &lt; rhs);
+}
+
+// implement constructor
+Money::Money(unsigned long d, unsigned short c) {
+    dollars = d;
+    // handle case where cents is greater than 100
+    // if the cents is less than 100, these won't make make a difference
+    dollars += c / 100;
+    cents = c % 100;
+}
+
+// implement comparison operators
+bool Money::operator==(const Money&amp; rhs) const {
+    // if all the fields are the same, the money objects are equal
+    return (dollars == rhs.dollars) &amp;&amp;
+           (cents == rhs.cents);
+}
+
+bool Money::operator&lt;(const Money&amp; rhs) const {
+    // if the dollars are less than rhs's dollars
+    // this is less than the rhs
+    if (dollars &lt; rhs.dollars) return true;
+    // if both dollar amounts are equal, we need to compare cents
+    else if (dollars == rhs.dollars) {
+        if (cents &lt; rhs.cents) return true;
+        else return false;
+    }
+    // otherwise, rhs.dollars are less and rhs is less overall
+    else return false;
+}
+
+// implement the assignment operators
+Money&amp; Money::operator+=(const Money&amp; rhs) {
+    // add the rhs cents
+    cents += rhs.cents;
+    // add the rhs dollars
+    dollars += rhs.dollars;
+    // if the cents are now over 100, this will handle the rollover
+    dollars += cents / 100;
+    cents %= 100;
+
+    return *this;
+}
+
+Money&amp; Money::operator-=(const Money&amp; rhs) {
+    // rather than actually handling negatives, just force 
+    // the amount to 0
+    if (dollars &lt; rhs.dollars) {
+        dollars = 0;
+        cents = 0;
+    }
+    else if (dollars == rhs.dollars) {
+        if (cents &lt; rhs.cents) {
+            dollars = 0;
+            cents = 0;
+        }
+        else {
+            dollars = 0;
+            cents -= rhs.cents;
+        }
+    }
+    else {
+        dollars -= rhs.dollars;
+        if (rhs.cents &lt; cents) {
+            cents -= rhs.cents;
+        }
+        else {
+            if (cents == 0) {
+                cents = 100 - rhs.cents;
+            }
+            else {
+                cents = rhs.cents - cents;
+            }
+            --dollars;
+        }
+    }
+
+    return *this;
+}
+
+// implement the arithmetic operators
+Money Money::operator+(const Money&amp; rhs) const {
+    Money returnValue(dollars, cents);
+    returnValue += rhs;
+    return returnValue;
+}
+
+Money Money::operator-(const Money&amp; rhs) const {
+    Money returnValue(dollars, cents);
+    returnValue -= rhs;
+    return returnValue;
+}
+
+// other members
+void Money::addDollars(unsigned long d) {
+    dollars += d;
+}
+
+void Money::addCents(unsigned long c) {
+    cents += c;
+    dollars += c / 100;
+    cents %= 100;
+}
+
+
+void Money::print() const {
+    std::cout &lt;&lt; '$' &lt;&lt; dollars &lt;&lt; '.' 
+    &lt;&lt; cents / 10 &lt;&lt; cents % 10;
+}
+
+std::string Money::toString() const {
+    std::string str = &quot;$&quot;;
+    std::string dollarStr = std::to_string(dollars);
+    char centStr[3];
+    centStr[0] = cents / 10;
+    centStr[1] = cents % 10;
+    str += dollarStr;
+    str += &quot;.&quot;;
+    str += centStr;
+    return str;
+}
+</code></pre>
+<p>Let's look at the typical structure of the signatures for the various operator overloads. Boolean operators (==, &lt;) have the form of: </p>
+<pre><code class="language-cpp">bool operator==(const DataType&amp; rhs) const;
+</code></pre>
+<p>Comparison operators should not modify the data of an object, so they are <code>const</code>. The object being compared to should be passed as a <code>const</code> reference since it also will not be modified.<br />
+Next, the assignment operators look like this:</p>
+<pre><code class="language-cpp">DataType&amp; operator+=(const DataType&amp; rhs);
+</code></pre>
+<p>These modify the calling object, so they are not <code>const</code>. The object being added, subtracted, etc. from the calling object is not modified, so it should be a constant reference. These operators return a reference to the calling object. The <code>return *this;</code> at the end of the function is what does so. <br />
+The arithmetic operators look like this:</p>
+<pre><code class="language-cpp">DataType operator+(const DataType&amp; rhs) const;
+</code></pre>
+<p>These do not modify the calling object. Instead, they return a new object that is the result of the calling object and object passed as the parameter being combined.<br />
+There is another type of operator that cannot be demonstrated using the money example: the subscript operators. These are the operators that are used to access an array's elements. If the data type being defined by the class is array-like, these can be used. Let's consider this example of an <code>IntArray</code> class:</p>
+<pre><code class="language-cpp">const int MAX_ARRAY_SIZE = 256; 
+
+class IntArray {
+public:
+    IntArray();
+    int maxSize() const;
+    int size() const;
+    bool empty() const;
+    bool full() const;
+    // append returns true if there was room to add a new value
+    // or false otherwise
+    bool append(int value);
+    // overloaded subscript operators
+    // this one is const (read only)
+    int operator[](int i) const;
+    // this one returns a reference,
+    // so it can be used to update the value in the array
+    int&amp; operator[](int i);
+    void printArray() const;
+private:
+    int data[MAX_ARRAY_SIZE];
+    int currentSize;
+};
+// other members ommitted for brevity
+
+// readonly subscript operator
+int IntArray::operator[](int i) const {
+    // if the index is greater than current size, 
+    // the value at the index is meaningless
+    if (i &lt; currentSize) {
+        return data[i];
+    }
+    else {
+        std::cout &lt;&lt; &quot;Invalid index\n&quot;;
+        exit(1);
+    }
+}
+
+// read/write subscript operator
+int&amp; IntArray::operator[](int i) {
+    // since this is used to write and read data
+    // we can't guard it as strictly as the read only one
+    if (i &lt; MAX_ARRAY_SIZE) {
+        // if the index is greater than the current size
+        // update the current size to be the index
+        if (currentSize &lt; i) {
+            currentSize = i;
+        }
+        return data[i];
+    }
+    else {
+        std::cout &lt;&lt; &quot;Invalid index\n&quot;;
+        exit(1);
+    }
+}
+</code></pre>
+<p>There are two versions of the subscript operator. One is const, and can only be used for reading a value, i.e., <code>int x = array[0]</code>. The other one is used for reading or writing, i.e., <code>array[0] = 10</code>, so it has to return a reference so the value can be written.  </p>
+<pre><code class="language-cpp">int main() {
+    IntArray array;
+    for (int i = 0; i &lt; 10; ++i) {
+        array.append(i);
+    }
+    for (int i = 0; i &lt; array.size(); ++i) {
+        // using operator[] to print the values
+        std::cout &lt;&lt; array[i] &lt;&lt; &quot;\n&quot;;
+    }
+    // using operator[] to modify a value
+    array[10] = 10;
+
+    return 0;
+}
+</code></pre>
+<p>The only operators left to discuss are the insertion and extraction operators <code>&lt;&lt;</code> and <code>&gt;&gt;</code>, but first we need to discuss friend functions.</p>
+<h2 id="friend-functions">Friend Functions</h2>
+<p>Friend functions are functions that are not members of the class (i.e., not called with the <code>object.function()</code> syntax), but have access to an object's private members. Friend functions must have their declaration placed in the body of the class declaration, and have the <code>friend</code> keyword before them:</p>
+<pre><code class="language-cpp">const int MAX_ARRAY_SIZE = 256; 
+class IntArray {
+public:
+    IntArray();
+    int maxSize() const;
+    int size() const;
+    int operator[](int i) const;
+    int&amp; operator[](int i);
+    // member function, no parameter
+    void printArray() const;
+    // friend function, has a parameter
+    friend void printArray(const IntArray &amp;array);
+private:
+    int data[MAX_ARRAY_SIZE];
+    int currentSize;
+};
+
+void IntArray::printArray() const {
+    bool printComma;
+    // normal member function, access member variables directly
+    for (int i = 0; i &lt; currentSize; ++i) {
+        if (printComma) {
+            std::cout &lt;&lt; &quot;, &quot;;
+        }
+        std::cout &lt;&lt; data[i];
+        printComma = true;
+    }
+}
+
+// friend function does not have IntArray:: or friend specifier when 
+// being defined
+void printArray(const IntArray &amp;array) {
+    bool printComma;
+    // friends do not have direct access to class member variables
+    // they can access the member variables of its parameters,
+    // even if they are private, though
+    for (int i = 0; i &lt; array.currentSize; ++i) {
+        if (printComma) {
+            std::cout &lt;&lt; &quot;, &quot;;
+        }
+        std::cout &lt;&lt; array.data[i];
+        printComma = true;
+    }
+}
+</code></pre>
+<p>In general, friend functions are best avoided whenever possible. Any time a friend has to be used, it is typically indicative of a design flaw. However, sometimes they are needed, or far too convenient to not be used.</p>
+<h2 id="overloading-the-insertion-and-extraction-operators">Overloading the Insertion and Extraction Operators</h2>
+<p>The inserstion <code>&lt;&lt;</code> and extraction <code>&gt;&gt;</code> operators can be implemented as free functions or friend functions. They cannot be implemented as member functions. If the operator does not need to access the private members of the class, it is better to implement it as a free function. Sometimes, it is not possible to do so, so in this case a friend function must be used.<br />
+The overloaded insertion operator has a signature like this:</p>
+<pre><code class="language-cpp">std::ostream&amp; operator&lt;&lt;(std::ostream&amp; out, const DataType&amp; rhs);
+</code></pre>
+<p>The parameter <code>out</code> is passed by reference returned by the function. The extraction operator is defined similarly:</p>
+<pre><code class="language-cpp">std::istream&amp; operator&lt;&lt;(std::istream&amp; out, DataType&amp; rhs);
+</code></pre>
+<p>The primary difference is that the second parameter is no longer const, since the extraction operator (i.e., input operator) needs to modify it. And, of course, the return type and first parameter are <code>std::istream&amp;</code> instead of <code>std::ostream&amp;</code>. These are the base types for <code>std::cin</code> and <code>std::cout</code>, as well as file input and output streams. This allows the same operator overload to be used for reading and writing to the console and files. Now, let's look at a concrete example with the <code>IntArray</code> class. The <code>IntArray</code> class has a good enough interface to not need the operators to be friend functions, but I defined them as friends just to demonstrate the concept again.</p>
+<pre><code class="language-cpp">const int MAX_ARRAY_SIZE = 256; 
+
+class IntArray {
+public:
+    IntArray();
+    int maxSize() const;
+    int size() const;
+    bool empty() const;
+    bool full() const;
+    // append returns true if there was room to add a new value
+    // or false otherwise
+    bool append(int value);
+    // overloaded subscript operators
+    // this one is const (read only)
+    int operator[](int i) const;
+    // this one returns a reference,
+    // so it can be used to update the value in the array
+    int&amp; operator[](int i);
+    // member function, no parameter
+    void printArray() const;
+    // friend function, has a parameter
+    friend void printArray(const IntArray &amp;array);
+    // overloaded insertion operator
+    friend std::ostream&amp; operator&lt;&lt;(std::ostream&amp; out, const IntArray&amp; array);
+    // overloaded extraction operator
+    friend std::istream&amp; operator&gt;&gt;(std::istream&amp; in, IntArray&amp; array);
+private:
+    int data[MAX_ARRAY_SIZE];
+    int currentSize;
+};
+
+std::ostream&amp; operator&lt;&lt;(std::ostream&amp; out, const IntArray&amp; array) {
+    bool printComma;
+
+    for (int i = 0; i &lt; array.currentSize; ++i) {
+        if (printComma) {
+            std::cout &lt;&lt; &quot;, &quot;;
+        }
+        out &lt;&lt; array.data[i];
+        printComma = true;
+    }
+
+    // overloaded &lt;&lt; and &gt;&gt; always return the stream 
+    // that is passed as a parameter
+    return out;
+}
+
+std::istream&amp; operator&gt;&gt;(std::istream&amp; in, IntArray&amp; array) {
+    std::string line;
+    std::getline(in, line);
+    // remove any leading spaces
+    while (line[0] == ' ') {
+        line.erase(0, 1);
+    }
+    int start = 0;
+    int end = line.find(' ');
+    while (end != std::string::npos) {
+        // extract a number
+        std::string number = line.substr(start, end - start);
+        // convert it to an int and add it to the array
+        array.data[array.currentSize] = std::stoi(number);
+        ++(array.currentSize);
+        // erase the number
+        line.erase(start, end);
+        // erase any extra spaces between numbers
+        while (line[0] == ' ') {
+            line.erase(0, 1);
+        } 
+        // find the end of the next number
+        end = line.find(' ');
+    }
+
+    return in;
+}
+</code></pre>
+<p>Now, we can use the overloaded operators for our <code>IntArray</code> class.</p>
+<pre><code class="language-cpp">int main() {
+    IntArray array;
+
+    // use overloaded operator &gt;&gt;
+    std::cout &lt;&lt; &quot;Enter integers (separated by spaces).\n&quot;;
+    std::cin &gt;&gt; array;
+
+    // print array using overloaded operator &lt;&lt;
+    std::cout &lt;&lt; &quot;You entered: &quot;;
+    std::cout &lt;&lt; array &lt;&lt; &quot;\n&quot;;
+
+    return 0;
+}
+</code></pre>
+<h2 id="conclusion">Conclusion</h2>
+<p>Overloading operators allows us to create classes that are more natural to use. Think back to how C strings required functions like <code>strcat</code>, <code>strcpy</code>, and <code>strcmp</code> to do anything. Meanwhile, <code>std::string</code> implements <code>+</code>, <code>=</code> and <code>==</code> to make these operations more convenient. We looked at the common patterns for comparison, assignment, arithmetic, and I/O operators. We also discussed friend functions, which are free functions that have access to a class's private members.</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script src="../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

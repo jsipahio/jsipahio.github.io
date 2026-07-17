@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>CSE235 Week 7: Strings - </title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../css/brands.min.css" rel="stylesheet">
+        <link href="../../css/solid.min.css" rel="stylesheet">
+        <link href="../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" disabled>
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../.."></a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../cv/" class="nav-link">CV</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../teaching/" class="nav-link">Teaching</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item dropdown">
+                              <button id="theme-menu" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static" aria-label="Toggle theme" class="nav-link dropdown-toggle">
+                                <i class="fa-solid fa-circle-half-stroke fa-fw"></i>
+                                <span class="d-lg-none ms-2">Toggle theme</span>
+                              </button>
+                              <ul class="dropdown-menu dropdown-menu-end">
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
+                                    <i class="fa-solid fa-sun fa-fw"></i>
+                                    <span class="ms-2">Light</span>
+                                    <i class="fa-solid fa-check ms-auto d-none"></i>
+                                  </button>
+                                </li>
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
+                                    <i class="fa-solid fa-moon fa-fw"></i>
+                                    <span class="ms-2">Dark</span>
+                                    <i class="fa-solid fa-check ms-auto d-none"></i>
+                                  </button>
+                                </li>
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="auto" aria-pressed="true">
+                                    <i class="fa-solid fa-circle-half-stroke fa-fw"></i>
+                                    <span class="ms-2">Auto</span>
+                                    <i class="fa-solid fa-check ms-auto"></i>
+                                  </button>
+                                </li>
+                              </ul>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <script src="../../js/darkmode.js"></script>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#cse235-week-7-strings" class="nav-link">CSE235 Week 7: Strings</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#escape-sequences" class="nav-link">Escape Sequences</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#f-strings" class="nav-link">F-Strings</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#string-member-functions" class="nav-link">String Member Functions</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#conclusion" class="nav-link">Conclusion</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="cse235-week-7-strings">CSE235 Week 7: Strings</h1>
+<p>We've introduced the <code>str</code> data type as a way to store text data. This week, we'll look at Python's string data type more in depth.</p>
+<h2 id="escape-sequences">Escape Sequences</h2>
+<p>There are some special characters that cannot be represented by directly typing them in a string. These are instead represented by escape sequences, which start with a backslash. An example is a new line, which is represented by <code>\n</code>. While this is technically two characters that you have to type, in a string it represents the one character that inserts a new line. For example:</p>
+<pre><code class="language-py">print(&quot;Hello\nWorld&quot;)
+</code></pre>
+<p>will print:</p>
+<pre><code>Hello
+World
+</code></pre>
+<p>Here is a list of some common escape sequences:  </p>
+<table>
+<thead>
+<tr>
+<th>Sequence</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>\t</code></td>
+<td>Tab character</td>
+</tr>
+<tr>
+<td><code>\n</code></td>
+<td>New line</td>
+</tr>
+<tr>
+<td><code>\r</code></td>
+<td>Carriage return</td>
+</tr>
+<tr>
+<td><code>\\</code></td>
+<td>Backslash character</td>
+</tr>
+<tr>
+<td><code>\"</code></td>
+<td>Double-quote character</td>
+</tr>
+<tr>
+<td><code>\'</code></td>
+<td>Singe-quote character</td>
+</tr>
+</tbody>
+</table>
+<h2 id="f-strings">F-Strings</h2>
+<p>One of the most useful string features that Python offers are f-strings. The f is short for format, and it allows you to embed formatting and values within a string literal without needing to concatenate the strings. Consider the following Python snippet:</p>
+<pre><code class="language-py">x = int(input(&quot;Enter the first number: &quot;))
+y = int(input(&quot;Enter the second number: &quot;))
+z = x + y
+result_str = str(x) + &quot; + &quot; + str(y) + &quot; = &quot; + str(z)
+print(result_str)
+# or, directly with print:
+print(x, &quot;+&quot;, y, &quot;=&quot;, z)
+</code></pre>
+<p>Both of these are somewhat difficult to read. The first example using string concatenation has the casts from integers to strings, and the plus signs between the string segments. The second uses the print function to output the data, but it is also hard to read since print automatically inserts spaces. This can potentially make it hard to tell what exactly is being printed. F-strings allow for values, variables, and expressions to be embedded directly into the string literal. F-strings are denoted by putting an "f" right before the first double quote.</p>
+<pre><code class="language-py">x = int(input(&quot;Enter the first number: &quot;))
+y = int(input(&quot;Enter the second number: &quot;))
+z = x + y
+result_str = f&quot;{x} + {y} = {z}&quot;
+print(result_str)
+# or, directly within print:
+print(f&quot;{x} + {y} = {z}&quot;)
+</code></pre>
+<p>f-strings use curly braces within the string to denote when values, variables, and expressions are being inserted into the string. Beyond allowing data to be inserted into the string, f-strings also allow the data to be formatted. For example, this code will format the <code>float</code> with two decimal places:</p>
+<pre><code class="language-py">amount = 26.7523
+print(f&quot;Amount = ${amount:.2f}&quot;)
+# prints: Amount = $26.75
+</code></pre>
+<p>The colon after the variable name indicates that formatting is being started. The .2f indicates that a decimal point with rounded to two places. .4f would round to 4 decimal places.</p>
+<h3 id="other-string-variations">Other String Variations</h3>
+<p>Beyond f-strings, there are a few other string variants. An r-string is a raw string. Raw strings treat backslashes as normal characters instead of as the start of an escape sequence. b-strings are byte strings. Normal Python strings can hold any Unicode character. Byte strings can only store ASCII characters. While byte strings can be represented as strings, the individual characters are treated as integers between 0 and 255. When printing a byte string, Python will output the string prefixed with a b instead of the plain text. </p>
+<pre><code class="language-py">raw_string = r&quot;Hello\nWorld&quot;
+byte_string = b&quot;Hello World&quot;
+print(raw_string)
+print(byte_string)
+</code></pre>
+<p>Output:</p>
+<pre><code>Hello\nWorld
+b'Hello World'
+</code></pre>
+<h2 id="string-member-functions">String Member Functions</h2>
+<p>String has several member functions that allow for common operations. Parameters in square brackets are optional. Note: this is not an exhaustive list. </p>
+<table>
+<thead>
+<tr>
+<th>Function Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>center(width, fillchar=' ')</code></td>
+<td>Returns a string with the calling string centered in the width characters</td>
+</tr>
+<tr>
+<td><code>count(substr[, start[, end]])</code></td>
+<td>Counts the number of occurrences of <code>substr</code> in the string</td>
+</tr>
+<tr>
+<td><code>encode(encoding='utf-8', errors='strict')</code></td>
+<td>Converts the string to the specified byte encoding</td>
+</tr>
+<tr>
+<td><code>endswith(suffix[, start[, end]])</code></td>
+<td>Returns <code>True</code> if the string ends with <code>suffix</code></td>
+</tr>
+<tr>
+<td><code>expandtabs(tabsize=8)</code></td>
+<td>Replaces the tab character with <code>tabsize</code> spaces</td>
+</tr>
+<tr>
+<td><code>find(substr[, start[, end]])</code></td>
+<td>Returns starting index of <code>substr</code> in the string</td>
+</tr>
+<tr>
+<td><code>isalnum()</code></td>
+<td>Returns <code>True</code> if the string is all letters and numbers</td>
+</tr>
+<tr>
+<td><code>isalpha()</code></td>
+<td>Returns <code>True</code> if the string is all letters</td>
+</tr>
+<tr>
+<td><code>isdigit()</code></td>
+<td>Returns <code>True</code> if the string is all numbers</td>
+</tr>
+<tr>
+<td><code>islower()</code></td>
+<td>Returns <code>True</code> if the string is all lowercase</td>
+</tr>
+<tr>
+<td><code>isspace()</code></td>
+<td>Returns <code>True</code> if the string is all whitespace</td>
+</tr>
+<tr>
+<td><code>isupper()</code></td>
+<td>Returns <code>True</code> if the string is all uppercase</td>
+</tr>
+<tr>
+<td><code>lower()</code></td>
+<td>Converts string to lowercase</td>
+</tr>
+<tr>
+<td><code>replace(old, new[, count])</code></td>
+<td>Replaces all or <code>count</code> (if specified) instances of <code>old</code> with <code>new</code></td>
+</tr>
+<tr>
+<td><code>split(sep=None, maxsplit=-1)</code></td>
+<td>Returns a list of strings. The calling string is split on the <code>sep</code> string.</td>
+</tr>
+<tr>
+<td><code>strip(chars=None)</code></td>
+<td>Removes any of <code>chars</code> from the beginning and end of the string</td>
+</tr>
+<tr>
+<td><code>upper()</code></td>
+<td>Converts string to uppercase</td>
+</tr>
+</tbody>
+</table>
+<p>The official Python documentation has the full list of string member functions.  </p>
+<p>Here are some basic examples of each of the member functions:</p>
+<pre><code class="language-py">text = &quot;Python&quot;
+print(text.center(12, &quot;-&quot;))
+# prints: '---Python---'
+
+text = &quot;banana&quot;
+print(text.count(&quot;an&quot;))
+# prints: 2
+
+text = &quot;café&quot;
+# encode returns a b-string
+print(text.encode(encoding=&quot;utf-8&quot;))
+# prints: b'caf\xc3\xa9'
+
+filename = &quot;report.pdf&quot;
+print(filename.endswith(&quot;.pdf&quot;))
+# prints: True
+
+text = &quot;A\tB\tC&quot;
+print(text.expandtabs(tabsize=4))
+# prints: 'A   B   C'
+
+text = &quot;Find the needle in the haystack.&quot;
+# returns the index of the start of the substring
+print(text.find(&quot;needle&quot;))
+# prints: 9
+
+username = &quot;Player123&quot;
+print(username.isalnum())
+# prints: True
+
+print(&quot;Player 123&quot;.isalnum()) 
+# prints: False (because of the space)
+
+word = &quot;HelloWorld&quot;
+print(word.isalpha())
+# prints: True
+
+code = &quot;12345&quot;
+print(code.isdigit())
+# prints: True
+
+text = &quot;hello world!&quot;
+# spaces and puncuation are ignored
+print(text.islower())
+# prints: True
+
+spaces = &quot;  \n\t  &quot;
+# new lines and tabs count as whitespace
+print(spaces.isspace())
+# prints: True
+
+shouting = &quot;LOOK OUT!&quot;
+# spaces and puncuation are ignored
+print(shouting.isupper())
+# prints: True
+
+text = &quot;Data Science&quot;
+print(text.lower())
+# prints: 'data science'
+
+text = &quot;one potato, two potato, three potato&quot;
+print(text.replace(&quot;potato&quot;, &quot;apple&quot;, 2))
+# prints: 'one apple, two apple, three potato'
+
+csv_line = &quot;apple,banana,cherry&quot;
+# the comma is not included in the output strings
+print(csv_line.split(&quot;,&quot;))
+# prints: ['apple', 'banana', 'cherry']
+
+text = &quot;xxx   clean this up   xxx&quot;
+# this removes any x's or spaces at the start
+# and end of the string
+print(text.strip(&quot;x &quot;))
+# prints: 'clean this up'
+
+text = &quot;turn it up&quot;
+print(text.upper())
+# prints: 'TURN IT UP'
+</code></pre>
+<h3 id="string-indexes-and-slicing">String Indexes and Slicing</h3>
+<p>Strings are like lists, except every element is a single character. Therefore, the same indexing and slicing that works for lists works for strings as well. </p>
+<pre><code class="language-py">greeting = &quot;Hello World&quot;
+assert greeting[0] == 'H'
+assert greeting[:5] == &quot;Hello&quot;
+assert greeting[6:] == &quot;World&quot;
+assert greeting[-1] == &quot;d&quot;
+</code></pre>
+<h2 id="conclusion">Conclusion</h2>
+<p>This week we discussed strings. Strings are used to hold text data. First, we looked at escape sequences, which are used to represent new lines and tabs, which cannot be directly typed. Then, we discussed f-strings, which allow for variables and expressions to be embedded directly into a string. Finally, we looked at the member functions for manipulating strings.</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script src="../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

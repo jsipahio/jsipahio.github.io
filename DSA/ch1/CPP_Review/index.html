@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../../img/favicon.ico">
+        <title>C++ Review - </title>
+        <link href="../../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../../css/brands.min.css" rel="stylesheet">
+        <link href="../../../css/solid.min.css" rel="stylesheet">
+        <link href="../../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" disabled>
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../../.."></a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../../cv/" class="nav-link">CV</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../../teaching/" class="nav-link">Teaching</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item dropdown">
+                              <button id="theme-menu" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static" aria-label="Toggle theme" class="nav-link dropdown-toggle">
+                                <i class="fa-solid fa-circle-half-stroke fa-fw"></i>
+                                <span class="d-lg-none ms-2">Toggle theme</span>
+                              </button>
+                              <ul class="dropdown-menu dropdown-menu-end">
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
+                                    <i class="fa-solid fa-sun fa-fw"></i>
+                                    <span class="ms-2">Light</span>
+                                    <i class="fa-solid fa-check ms-auto d-none"></i>
+                                  </button>
+                                </li>
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
+                                    <i class="fa-solid fa-moon fa-fw"></i>
+                                    <span class="ms-2">Dark</span>
+                                    <i class="fa-solid fa-check ms-auto d-none"></i>
+                                  </button>
+                                </li>
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="auto" aria-pressed="true">
+                                    <i class="fa-solid fa-circle-half-stroke fa-fw"></i>
+                                    <span class="ms-2">Auto</span>
+                                    <i class="fa-solid fa-check ms-auto"></i>
+                                  </button>
+                                </li>
+                              </ul>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <script src="../../../js/darkmode.js"></script>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#c-review" class="nav-link">C++ Review</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#basic-program" class="nav-link">Basic Program</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#variable-declaration-statements" class="nav-link">Variable Declaration Statements</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#flow-control" class="nav-link">Flow Control</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#functions" class="nav-link">Functions</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#structs-and-classes" class="nav-link">Structs and Classes</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#pointers-and-dynamic-arrays" class="nav-link">Pointers and Dynamic Arrays</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#summary" class="nav-link">Summary</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="c-review">C++ Review</h1>
+<h3 id="cse238-data-structures-and-algorithms">CSE238 - Data Structures and Algorithms</h3>
+<p>The goal of this lecture is to go over what you should have learned in the prerequisite C++ Programming course, CSE233, that you should have taken before this. This is not an exhaustive explanation of every topic. I'm just providing an overview to remind you of what you should have learned and are expected to know coming into this class. All the following lectures will assume you know this stuff. If you see something here you don't remember, you should go back to your material and book from the previous course and remind yourself of it before moving on with this course.</p>
+<h2 id="basic-program">Basic Program</h2>
+<p>Let's look at the very basic C++ "Hello World" program below:</p>
+<pre><code class="language-C++">#include &lt;iostream&gt;
+
+int main() {
+    std::cout &lt;&lt; &quot;Hello World!&quot; &lt;&lt; std::endl;
+    return 0;
+}
+</code></pre>
+<p>At the top, we have this "include" directive: <code>#include &lt;iostream&gt;</code>. This tells the compiler to find a file called "iostream" and include it with the source code in the file we are compiling. Since it is wrapped in angle brackets, the less-than and greater-than symbols, the compiler expects this to be a C++ standard library header and automatically searches for it there. In a couple lectures we'll see how to include a local file.  </p>
+<p>Moving on, we have the function <code>int main()</code>. This is the entry point for every C++ program. The compiler searches for a function called main when it creates the final executable to know where to start the program. So, you can't have an executable program without an <code>int main()</code>, and you also can't have multiple <code>main</code> functions in files you are linking together into an executable. And, of course, you should remember that the curly braces "{}" delineate the start and end of the function.  </p>
+<p>The first statement in the function is <code>std::cout &lt;&lt; "Hello World!" &lt;&lt; std::endl;</code>. In your past class, you may have had a <code>using namespace std;</code> somewhere in your program, but <code>using</code> namespaces is generally discouraged, so those are banned in this class. You will lose point if you use them. Instead, we are prefixing the <code>cout</code> object with its namespace, <code>std</code>. The two colons that go between them are called the scope-resolution operator.   </p>
+<p>After <code>std::cout</code>, we have the insertion operator, which is two less than symbols. There can't be any spaces between the two symbols. After that, we have a string literal, "Hello World!". We are chaining our print statement here by placing another insertion operator after the string literal, and adding <code>std::endl</code> to the output.</p>
+<p>Finally, we have <code>return 0;</code>. This is the code that is returned to the operating system that tells it the program exited normally. And note that in C++ all statements have to end with a semicolon.</p>
+<h2 id="variable-declaration-statements">Variable Declaration Statements</h2>
+<p>Variables allow us to associate names with memory locations, that way we can use a value by name throughout our program. To use a variable, we first need to declare it. To declare a variable, we need to provide a data type, a name, and, optionally, an initialization. Below are declarations, one without an initialization, and the other with.</p>
+<pre><code class="language-C++">int x;
+int y = 0;
+</code></pre>
+<p>Both these variables have the data type <code>int</code>. The first one is called "x", and the second one is called "y". Only y is being initialized here, which was done by the "= 0".  </p>
+<p>In C++, if we don't initialize a variable, it could have a garbage value. There's no guarantee in the C++ standard that the compiler will assign a default value, so it is best to assume that it will read whatever data is currently in memory at the location that is allocated for that variable. If a variable is not initialized, we need to make sure it is given a value, either through a later assignment or reading input, before we try using its value.  </p>
+<h4 id="constants">Constants</h4>
+<p>We may want to declare variables whose values are never changed during the lifetime of our program. We can do so using the <code>const</code> keyword in front of the data type of the variable:</p>
+<pre><code class="language-C++">const double pi = 3.1415926;
+const double e = 2.78128182;
+</code></pre>
+<p>Declaring any value that can be constant as <code>const</code> is a performance optimization. This will be explained in week 3.</p>
+<h4 id="arrays">Arrays</h4>
+<p>We can also declare arrays, which are collections of elements of the same type. You use square brackets at the end of a variable name to denote that it is an array (note that these are static arrays, we'll discuss dynamic arrays at the end of the lecture). Arrays declared like this must be given a size that is known at compile-time.</p>
+<pre><code class="language-C++">int arr[5];
+</code></pre>
+<p>Since 5 is an integer literal, it is known at compile-time and can be used.</p>
+<h2 id="flow-control">Flow Control</h2>
+<p>C++ offers a few different methods for flow control, which I'll briefly touch on here.</p>
+<h4 id="if-statements">If Statements</h4>
+<p>The simplest flow control is an <code>if</code> statement. You can have a bare <code>if</code>, or an <code>if</code> followed by an <code>else</code>. You can avoid nesting by creating <code>else if</code> statements.</p>
+<pre><code class="language-C++">int main() {
+    int num;
+
+    std::cout &lt;&lt; &quot;Enter a number: &quot;;
+    std::cin &gt;&gt; num;
+
+    if (num &gt; 0) {
+        std::cout &lt;&lt; &quot;Your number is positive&quot; &lt;&lt; std::endl;
+    }
+    else if (num &lt; 0) {
+        std::cout &lt;&lt; &quot;Your number is negative&quot; &lt;&lt; std::endl;
+    }
+    else {
+        std::cout &lt;&lt; &quot;Your number is zero&quot; &lt;&lt; std::endl;
+    }
+
+    return 0;
+}
+</code></pre>
+<h4 id="while">While</h4>
+<p>A while loop executes as long as a given condition is true. They are most useful when the number of times the loop must execute is not known at compile-time. Below shows an example of using a while loop:</p>
+<pre><code class="language-C++">int main() {
+    int input;
+    int total = 0;
+    char response = 'y';
+    while (tolower(response) != 'n') {
+        std::cout &lt;&lt; &quot;Enter a value: &quot;;
+        std::cin &gt;&gt; input;
+        total += input:
+        std::cout &lt;&lt; &quot;Continue? (y/n): &quot;;
+        std::cin &gt;&gt; response;
+    }
+    std::cout &lt;&lt; &quot;Total = &quot; &lt;&lt; total &lt;&lt; std::endl;
+    return 0;
+}
+</code></pre>
+<h4 id="for">For</h4>
+<p>A for loop can and should be used in almost all cases when the number of iterations is known at compile time. </p>
+<pre><code class="language-C++">int main() {
+    std::vector&lt;int&gt; values = { 1, 2, 3, 4, 5 };
+    for (int i = 0; i &lt; values.size(); ++i) {
+        std::cout &lt;&lt; values[i] &lt;&lt; std::endl;
+    }
+    return 0;
+}
+</code></pre>
+<h4 id="switch">Switch</h4>
+<p>A switch statement can be used in place of a chain of <code>else if</code> statements when the values being compared are an integer-based type (any variety of <code>int</code>, <code>char</code>, or <code>enum</code>). You write a <code>case</code> statement for each expected value. You should always write a <code>default</code> case in the event that an invalid control value is entered. Note that you do not need curly braces around the individual cases. A <code>break;</code> statement needs to be added at the end of each case to avoid falling through to the <code>default</code> case.</p>
+<pre><code class="language-C++">int main() {
+    int floor = 0;
+    std::cout &lt;&lt; &quot;You are currently on the ground floor&quot; &lt;&lt; std::endl;
+    std::cout &lt;&lt; &quot;Enter the floor you'd like to change to (1-5): &quot;;
+    std::cin &gt;&gt; floor;
+    switch (floor) {
+        case 0:
+            std::cout &lt;&lt; &quot;You are still on the ground floor&quot; &lt;&lt; std::endl;
+            break;
+        case 1:
+            std::cout &lt;&lt; &quot;You are on the first floor&quot; &lt;&lt; std::endl;
+            break;
+        case 2:
+            std::cout &lt;&lt; &quot;You are on the second floor&quot; &lt;&lt; std::endl;
+            break;
+        case 3:
+            std::cout &lt;&lt; &quot;You are on the third floor&quot; &lt;&lt; std::endl;
+            break;
+        case 4:
+            std::cout &lt;&lt; &quot;You are on the fourth floor&quot; &lt;&lt; std::endl;
+            break;
+        case 5:
+            std::cout &lt;&lt; &quot;You are on the fifth floor&quot; &lt;&lt; std::endl;
+            break;
+        default:
+            std::cout &lt;&lt; floor &lt;&lt; &quot; is an invalid selection&quot; &lt;&lt; std::endl;
+    }
+    return 0;
+}
+</code></pre>
+<h2 id="functions">Functions</h2>
+<p>Functions help us modularize and reuse code. We can declare and define functions. To declare a function, we need to provide a return type, name, parameter list, and we end with a semicolon. The return type, name, and parameter list are called the function's signature. To define a function, we provide the signature, but use curly braces in place of the semicolon. We can then write whatever statements the function needs to execute between the curly braces. Below is an example of a function declaration, and a definition for the function we declared.</p>
+<pre><code class="language-C++">// declaration
+int add(int x, int y);
+
+// definition
+int add(int x, int y) {
+    return x + y;
+}
+</code></pre>
+<p>The function is called add and returns an integer. It has two parameters, which are both integers. The declaration ends with a semicolon, and has to come before the definition. The definition has curly braces, and contains a single return statement. The value returned is the value of the two parameters added.</p>
+<h4 id="void-functions">void Functions</h4>
+<p>A function that returns <code>void</code> is one that doesn't return a value. They can still contain <code>return</code> statements, but there can't be an expression after the keyword <code>return</code>.</p>
+<pre><code class="language-C++">void print(int x) {
+    std::cout &lt;&lt; x &lt;&lt; std::endl;
+    // return is optional
+    return;
+}
+</code></pre>
+<p>The function above prints the value of x, but does not return any values.</p>
+<h4 id="pass-by-reference-parameters">Pass-by-Reference Parameters</h4>
+<p>The previous functions have all used pass-by-value parameters. Pass-by-value creates a copy of the value passed as an argument when the function is called, and stores it in a new variable associated with the function. Any changes to the parameter in the function do not impact the argument outside of it.</p>
+<pre><code class="language-C++">void triple(int x) {
+    x *= 3;
+}
+int main() {
+    int value = 4;
+    triple(value);
+    // the following statement will print 4
+    std::cout &lt;&lt; value &lt;&lt; std::endl;
+    return 0;
+}
+</code></pre>
+<p>In the example above, we have this function <code>triple</code> that takes an integer as a pass-by-value parameter. Even though we multiply the parameter by 3 in the function, after the function is called in <code>main</code>, the variable <code>value</code> will still be 4. If we use a pass-by-reference parameter, we can make it so the change inside the function is reflected outside of it:</p>
+<pre><code class="language-C++">void triple(int&amp; x) {
+    x *= 3;
+}
+int main() {
+    int value = 4;
+    triple(value);
+    // now this statement will print 12
+    std::cout &lt;&lt; value &lt;&lt; std::endl;
+    return 0;
+}
+</code></pre>
+<p>To make a parameter pass-by-reference, we add an ampersand (and symbol) to the end of the parameter's type.<br />
+Pass-by-reference passes the memory address to the function instead of the variable's value. Rather than creating a new variable that is associated with the function, the parameter and argument are now accessing the same place in memory.<br />
+If we want to provide a guarantee that the value will not be changed by the function, but still want to pass it by reference, we can use the <code>const</code> keyword to specify that the parameter should be immutable. This is useful for when we are passing object that potentially use a large amount of memory (making them expensive to copy), but we want to guarantee the function will not modify the parameter. </p>
+<pre><code class="language-C++">void print(const std::string str) {
+    std::cout &lt;&lt; str &lt;&lt; std::endl;
+    // can't do this, str is const:
+    // str += &quot;!!!&quot;;
+}
+</code></pre>
+<h4 id="arrays-as-parameters">Arrays as Parameters</h4>
+<p>We can pass an array as a parameter to a function by including empty array brackets at the end of the parameter's name. See below:</p>
+<pre><code class="language-C++">void readArray(int arr[], int size) {
+    for (int i = 0; i &lt; size; ++i) {
+        std::cin &gt;&gt; arr[i];
+    }
+}
+</code></pre>
+<p>Behind the scenes, passing an array is the same as passing a pointer (which we'll discuss at the end of this lecture) to the first element of the array. Since a pointer is a reference to a memory address, array parameters are implicitly pass-by-reference.<br />
+Like with other pass-by-reference parameters, we can use the <code>const</code> keyword to specify that the array should not be modified by the function:</p>
+<pre><code class="language-C++">void printArray(const int arr[], int size) {
+    bool printComma = false;
+
+    for (int i = 0; i &lt; size; ++i) {
+        if (printComma) std::cout &lt;&lt; &quot;, &quot;;
+        std::cout &lt;&lt; arr[i];
+        printComma = true;
+    }
+    std::cout &lt;&lt; std::endl;
+}
+</code></pre>
+<h2 id="structs-and-classes">Structs and Classes</h2>
+<p>Structs and classes allow you to implement more complex, user-defined data types. Typically, structs are used to implement data types that are purely data or have very limited functionality, while classes are used to implement data types that have more complex functionality associated with them. This is stylistic and idiom based, as far as the compiler is concerned the only difference between structs and classes are that structs have public access and inheritance by default, and classes have private access and inheritance by default.<br />
+Due to them being functionally the same, we will use classes for all the examples.<br />
+To declare a class (or struct), write the keyword <code>class</code> (or <code>struct</code>, respectively), followed by the name of the class. The name can be followed by a semicolon if you are forward declaring a class (we will discuss in a future lecture why you'd want to do this), or curly braces to declare/define the class. Inside the curly braces, we put our fields (member variables) and methods (member functions). C++ uses access regions, specified by <code>public:</code>, <code>protected:</code>, and <code>private:</code>. This is different to some other object-oriented languages, like Java or C#, that place a <code>public</code>, <code>protected</code>, or <code>private</code> specifier on each member. Below are a few basic examples:</p>
+<pre><code class="language-C++">// forward declaration
+class Engine;
+
+// defined class
+class Wheel {
+public:
+    Wheel(double wheelDiameter) {
+        diamater = wheelDiameter;
+    }
+    double getDiameter() const {
+        return diameter;
+    }
+    double getSpeed(int rpm) const {
+        double circumference = 3.14 * diameter;
+        int rph = rpm * 60;
+        return (rph * circumference) / 63360;
+    }
+private:
+    double diamater;
+}; // note that you need a semicolon after the closing curly brace for classes and structs
+
+// declared class
+class Car {
+public:
+    Car(std::string carMake, std::string carModel, Engine carEngine, Wheel carWheel); 
+    double getCurrentSpeed() const;
+    // ...
+private:
+    std::string make;
+    std::string model;
+    Engine engine;
+    Wheel wheel;
+};
+</code></pre>
+<p>The class <code>Engine</code> has been forward declared. We have used the type <code>Engine</code> for a field in the class <code>Car</code>, but we haven't used any of its members. The class <code>Wheel</code> is fully defined, since we provided definitions for all the methods inside the class. The class <code>Car</code> has been declared, since we've provided all the field and function declarations, but haven't defined any of them.<br />
+Note that some of the methods have a trailing <code>const</code> specifier. This means that the method will not modify any of an object's fields when the method is called.<br />
+If we wanted to define the methods for the class <code>Car</code> outside of the class, we would need to put <code>Car::</code> in front of the method's name.</p>
+<pre><code class="language-C++">Car::Car(std::string carMake, std::string carModel, Engine carEngine, Wheel carWheel) {
+    make = carMake;
+    model = carModel;
+    engine = carEngine;
+    wheel = carWheel;
+} 
+
+double Car::getCurrentSpeed() {
+    // ...
+}
+</code></pre>
+<h2 id="pointers-and-dynamic-arrays">Pointers and Dynamic Arrays</h2>
+<p>A pointer is a variable that stores a memory address instead of a value. A dynamic array is an array that uses a pointer to reference a sequence of memory addresses. This allows for memory for an array to be allocated at runtime, bypassing the limitation of static arrays where their size must be known at compile time.<br />
+To declare a pointer, an asterisk should be placed before the variable's name. To create a raw pointer that creates new storage, use the <code>new</code> keyword. Alternatively, a pointer can be assigned to an existing variable's memory address. If the <code>new</code> keyword was used to allocated memory, it must be freed using <code>delete</code>.</p>
+<pre><code class="language-C++">int main() {
+    int x = 5;
+    // use &amp; to access the memory address of x
+    int *ptr = &amp;x;
+
+    // create a raw pointer
+    int *rawPtr = new int;
+    // access data that pointer is referencing
+    // by dereferencing pointer with *
+    *rawPtr = 16;
+
+    int size;
+    std::cout &lt;&lt; &quot;Enter size of array: &quot;;
+    std::cin &gt;&gt; size;
+    // declare a dynamic array with size determined at runtime
+    int *arr = new int[]
+    // the dynamic array is used the same way a static array would be
+    for (int i = 0; i &lt; size; ++i) {
+        std::cout &lt;&lt; &quot;Enter a number: &quot;;
+        std::cin &gt;&gt; arr[i];
+    }
+
+    // we need to delete rawPtr
+    delete rawPtr;
+    // we also need to delete arr
+    delete[] arr;
+    // we do not delete ptr, however, since it is referencing a normal variable
+    return 0;
+}
+</code></pre>
+<h4 id="pointers-as-parameters">Pointers as Parameters</h4>
+<p>Pointers can be used as function parameters. They operate similar to pass-by-reference, in that changes to the value the pointer is referencing will be reflected outside the function. However, unlike pass-by-reference, pointer parameters must be explicitly dereferenced to access the value they reference, whereas pass-by-reference parameters can be used like normal variables. It is also possible to create memory leaks or undefined behavior by changing a pointer reference. Below are two examples of a swap function, one using pass-by-reference and the other using pointers:</p>
+<pre><code class="language-C++">void swapByRef(int&amp; a, int&amp; b) {
+    int temp = a;
+    a = b;
+    b = temp;
+}
+void swapByPtr(int *a, int *b) {
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+// you could also swap the pointers
+void swapPointers(int *a, int *b) {
+    int *temp = a;
+    a = b;
+    b = temp;
+}
+</code></pre>
+<h2 id="summary">Summary</h2>
+<p>As stated at the beginning, the point of this lecture isn't to teach you every nuance from an intro class in C++. You should have already taken that. But, if anything presented here seems unfamiliar, this gives you a chance to go back and review it now before we get too deep into the class.</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../../js/base.js"></script>
+        <script src="../../../javascripts/mathjax.js"></script>
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script src="../../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

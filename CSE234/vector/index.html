@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>Vector - </title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../css/brands.min.css" rel="stylesheet">
+        <link href="../../css/solid.min.css" rel="stylesheet">
+        <link href="../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" disabled>
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../.."></a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../cv/" class="nav-link">CV</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../teaching/" class="nav-link">Teaching</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item dropdown">
+                              <button id="theme-menu" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static" aria-label="Toggle theme" class="nav-link dropdown-toggle">
+                                <i class="fa-solid fa-circle-half-stroke fa-fw"></i>
+                                <span class="d-lg-none ms-2">Toggle theme</span>
+                              </button>
+                              <ul class="dropdown-menu dropdown-menu-end">
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
+                                    <i class="fa-solid fa-sun fa-fw"></i>
+                                    <span class="ms-2">Light</span>
+                                    <i class="fa-solid fa-check ms-auto d-none"></i>
+                                  </button>
+                                </li>
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
+                                    <i class="fa-solid fa-moon fa-fw"></i>
+                                    <span class="ms-2">Dark</span>
+                                    <i class="fa-solid fa-check ms-auto d-none"></i>
+                                  </button>
+                                </li>
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="auto" aria-pressed="true">
+                                    <i class="fa-solid fa-circle-half-stroke fa-fw"></i>
+                                    <span class="ms-2">Auto</span>
+                                    <i class="fa-solid fa-check ms-auto"></i>
+                                  </button>
+                                </li>
+                              </ul>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <script src="../../js/darkmode.js"></script>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="2"><a href="#vector" class="nav-link">Vector</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="2"><a href="#iterators" class="nav-link">Iterators</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="2"><a href="#vectors-continued" class="nav-link">Vectors (continued)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="2"><a href="#list" class="nav-link">List</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h2 id="vector">Vector</h2>
+<p>The STL Vector is an automatically resizing dynamic array wrapper. When the vector runs out of space to hold new elements, it automatically resizes itself to be twice the size of its previous capacity. Items can be inserted into the beginning or middle of a vector while preserving order. To do so, all elements that come after the inserted element must be shifted. This happens automatically, as well. </p>
+<h3 id="constructioninitialization">Construction/Initialization</h3>
+<p>Vectors must have the type of data it is storing specified. An initial size can be provided to the constructor. Vectors support copying and assignment, like all STL containers. Like a C-array, a vector can be instantiated with a sequence of values in curly braces.</p>
+<pre><code class="language-C++">// need  to include vector
+#include &lt;vector&gt;
+
+int main() {
+    // declaring an empty vector of integers
+    std::vector&lt;int&gt; integers;
+    // declaring vector with memory for 10 doubles allocated
+    std::vector&lt;double&gt; doubles(10);
+    // declaring vector of c-strings
+    std::vector&lt;const char*&gt; months = {
+        &quot;Sunday&quot;. &quot;Monday&quot;, &quot;Tuesday&quot;, &quot;Wednesday&quot;,
+        &quot;Thursday&quot;, &quot;Friday&quot;, &quot;Saturday&quot;
+    };
+    // creating copy of months vector
+    // C++17 added type deduction, so you don't need to use
+    //  the template argument when it is obvious what the type should be
+    std::vector monthsCopy(months);
+    // you can also use the equals sign to assign vectors
+    //  but they must have the same type
+    std::vector&lt;int&gt; otherIntegers;
+    otherIntegers = integers;
+    // can't do this, types mismatch
+    // otherIntegers = doubles;
+}
+</code></pre>
+<h3 id="adding-elements">Adding Elements</h3>
+<p>The main way to add new elements to the end of a vector is via the <code>push_back</code> function. Using the subscript <code>[]</code> operator to add new elements is undefined behavior. It may work, it may not, depending on the compiler, and should therefore be avoided.</p>
+<pre><code class="language-C++">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+
+int main() {
+    std::vector&lt;double&gt; scores;
+    double score = 0;
+
+    while (score &gt;= 0) {
+        std::cout &lt;&lt; &quot;Enter score: &quot;;
+        std::cin &gt;&gt; score;
+        scores.push_back(score);
+    }
+
+    return 0;
+}
+</code></pre>
+<h3 id="accessing-elements">Accessing Elements</h3>
+<p>Vectors offer random access of its elements via the subscript operator <code>[]</code>. It is still possible to pass out of range elements to the subscript operator, just like a normal array. A member function <code>std::vector&lt;T&gt;::at(size_t index)</code> is used to check if the index is in range. If it is out of range, an exception is thrown. The size of the vector is accessed via the <code>size()</code> member function. The first element of the vector can be accessed via the <code>front()</code> member function, and the last element is accessed via the <code>back()</code> member function. If you need access to the underlying c-array, the <code>data()</code> member function can be used. The <code>pop_back()</code> function can be used to remove the last element of the vector.</p>
+<pre><code class="language-C++">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+
+int main() {
+    std::vector&lt;double&gt; scores;
+    double score = 0;
+
+    while (score &gt;= 0) {
+        std::cout &lt;&lt; &quot;Enter score: &quot;;
+        std::cin &gt;&gt; score;
+        scores.push_back(score);
+    }
+
+    std::cout &lt;&lt; &quot;There are &quot; &lt;&lt; scores.size() &lt;&lt; &quot; scores in the vector\n&quot;;
+    std::cout &lt;&lt; &quot;First score: &quot; &lt;&lt; scores.front() &lt;&lt; &quot;\n&quot;;
+    std::cout &lt;&lt; &quot;Last score: &quot; &lt;&lt; scores.back() &lt;&lt; &quot;\n&quot;;
+
+    for (int i = 0; i &lt; scores.size(); ++i) {
+        // accessing scores with the subsctipt operator
+        std::cout &lt;&lt; &quot;Score &quot; &lt;&lt; i + 1 &lt;&lt; &quot;: &quot; &lt;&lt; scores[i] &lt;&lt; &quot;\n&quot;;
+    }
+
+    int lastIndex = scores.size() - 1;
+    scores.pop_back();
+    // won't cause an error, but data could be invalidated
+    double lastScore = scores[lastIndex];
+    // this will throw an exception
+    lastScore = scores.at(lastIndex);
+
+    return 0;
+}
+</code></pre>
+<p>Before talking about the rest of the vector member functions, we need to discuss iterators. </p>
+<h2 id="iterators">Iterators</h2>
+<p>Before discussing the rest of the STL data types, we need to cover iterators. An iterator is a type of pointer that was developed to standardize access to containers. An iterator is basically a pointer to an element of a container, however, there are additionally operations that can be performed on iterators to make traversing a container consistent no matter which type of container is being accessed. Below is a quick example of a vector being created, and an iterator being used to access its members:</p>
+<pre><code class="language-C++">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+
+int main() {
+    std::vector&lt;int&gt; values = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+    // the begin() member function returns an iterator to the first
+    // element of a collection 
+    std::vector&lt;int&gt;::iterator it = values.begin();
+
+    // we often use the &quot;auto&quot; type for iterators rather than writing it out
+    // the end() member function returns the &quot;past-the-end&quot; iterator
+    // of a collection. this iterator points to the location immediately
+    // after the end of a collection
+    auto end = values.end();
+
+    // the end iterator is not referenceable, it is just a sentinel
+    // value that marks the end of the container
+    while (it != end) {
+        // accessing the data an iterator is pointing to requires it 
+        // to be dereferenced using *, just like a pointer
+        std::cout &lt;&lt; *it &lt;&lt; std::endl;
+        // ++ is used to move the iterator to point at the next element
+        ++it;
+    }
+    return 0;
+}
+</code></pre>
+<h3 id="range-based-for-loops">Range-based for-Loops</h3>
+<p>One consequence of iterators is the ability to implement range-based for-loops. If you are familiar with for loops in Python or the <code>foreach</code> loop in C#, this concept should be familiar to you. The syntax for a range-based for-loop is below:</p>
+<pre><code class="language-C++">for (TypeName x : container) {
+
+}
+</code></pre>
+<p>Below shows a traditional for-loop and a range-based for loop that performs the same operation:</p>
+<pre><code class="language-C++">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+
+int main() {
+    std::vector&lt;int&gt; values = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+
+    // tradition for loop
+    for (int i = 0; i &lt; values.size(); ++i) {
+        std::cout &lt;&lt; values[i] &lt;&lt; std::endl;
+    }
+
+    // range-based for loop
+    for (int x: values) {
+        std::cout &lt;&lt; x &lt;&lt; std::endl;
+    }
+
+    return 0;
+}
+</code></pre>
+<h2 id="vectors-continued">Vectors (continued)</h2>
+<p>Iterators can be used to insert at, or delete elements from, the middle of the vector. These operations are expensive, however, since they require shifting the entire vector to adjust for the missing or new element. The <code>insert()</code> function takes an iterator that points to the location the element will be inserted, and the element to be inserted. The element is inserted before the iterator the <code>insert()</code> function is passed. The function returns an iterator to the element that was just inserted. The <code>erase()</code> function is used to remove item(s) from a vector. It expects an iterator that points to the element to be removed. A start and end iterator can be used to erase a range of elements from the vector. It returns an iterator to the next element after the last element that was removed.<br />
+<strong>Note:</strong> <code>insert()</code> and <code>erase()</code> invalidate any existing iterators to a vector. Since the items must be shifted, there is no guarantee that an iterator is pointing to the correct location in memory.</p>
+<pre><code class="language-C++">#include &lt;vector&gt;
+
+int main() {
+    std::vector&lt;int&gt; values = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    auto it = values.begin() + 2; // points to &quot;3&quot;
+    values.insert(it, 2);
+    // vector is now {1, 2, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+    // &quot;it&quot; is now invalid, so we need to reassign it
+    it = values.begin() + 2; 
+    values.erase(it); // deletes the 2 that was just inserted
+    // vector is now {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, x}
+    // the last element is invalid, but still has memory allocated
+    values.erase(values.begin(), values.begin() + 5); // erase first 5 elements
+    // vector is now {6, 7, 8, 9, 10}
+}
+</code></pre>
+<h3 id="common-applications">Common Applications</h3>
+<p><code>std::vector</code> is the standard container used in C++ for storing collections of data. If you aren't sure which of the other containers to use for an application, that typically means a vector will work fine. Vectors offer balanced performance for most applications.</p>
+<h3 id="example">Example</h3>
+<p>This example uses vectors to split a string and store the contents of a CSV file that contains information on orders:</p>
+<pre><code class="language-C++">
+#include &lt;fstream&gt;
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;vector&gt;
+
+// we expect the structure of the file to be
+// John Doe,3,1000a,Filter
+
+// struct to hold order information
+struct Order {
+    std::string customerName;
+    int quantity;
+    std::string itemId;
+    std::string itemName;
+};
+
+// overloading &lt;&lt; to print an order
+std::ostream&amp; operator&lt;&lt;(std::ostream&amp; out, const Order&amp; order) {
+    out &lt;&lt; &quot;Customer:  &quot; &lt;&lt; order.customerName &lt;&lt; &quot;\n&quot;;
+    out &lt;&lt; &quot;Quantity:  &quot; &lt;&lt; order.quantity &lt;&lt; &quot;\n&quot;;
+    out &lt;&lt; &quot;Item ID:   &quot; &lt;&lt; order.itemId &lt;&lt; &quot;\n&quot;;
+    out &lt;&lt; &quot;Item Name: &quot; &lt;&lt; order.itemName &lt;&lt; &quot;\n&quot;;
+    return out;
+}
+
+// function to split a string on any character
+std::vector&lt;std::string&gt; split(const std::string&amp; line, char delim) {
+    std::vector&lt;std::string&gt; parts;
+    size_t start = 0;
+    // find index delimitor in string
+    size_t end = line.find(delim, start);
+    // while end position of substring is not the past the end
+    // of the string
+    while (end != std::string::npos) {
+        // push substring into vector
+        parts.push_back(line.substr(start, end - start));
+        // set the start of the next substring to the 
+        // next index of the string
+        start = end + 1;
+        // search for the next occurance of &quot;delim&quot;
+        end = line.find(delim, start);
+    }
+    // push the last substring into the vector
+    // if &quot;delim&quot; is never found, it will just
+    // push the whole string into the vector
+    parts.push_back(line.substr(start, end - start));
+    return parts;
+}
+
+// main function
+int main(int argc, char **argv) {
+    // input filename needs to be provided via command line arg
+    if (argc &lt; 2) {
+        std::cerr &lt;&lt; &quot;Must provide input filename\n&quot;;
+        std::cerr &lt;&lt; &quot;Usage:\n&quot;;
+        std::cerr &lt;&lt; &quot;\torder_report orders.csv\n&quot;;
+        return 1;
+    }
+
+    // open and check the input file
+    std::ifstream fin(argv[1]);
+    if (fin.fail()) {
+        std::cerr &lt;&lt; &quot;Could not open file: &quot; &lt;&lt; argv[1] &lt;&lt; &quot;\n&quot;;
+        return 2;
+    }
+
+    // read the lines of the file into the split function
+    // convert them to orders and add to the orders vector
+    std::vector&lt;Order&gt; orders;
+    for (std::string line; std::getline(fin, line);) {
+        std::vector&lt;std::string&gt; orderParts = split(line, ',');
+        // verify that the input is not malformed and we have the correct 
+        // number of parts
+        if (orderParts.size() != 4) {
+            continue;
+        }
+        orders.push_back({
+            orderParts[0], 
+            std::stoi(orderParts[1]), 
+            orderParts[2], 
+            orderParts[3]
+            });
+    }
+
+    // done with file stream -&gt; close it
+    fin.close();
+
+    // print out the orders
+    std::cout &lt;&lt; &quot;Orders:\n&quot;;
+    // using range-based for loop to access elements
+    for (const auto&amp; order: orders) {
+        std::cout &lt;&lt; &quot;------------------------\n&quot;;
+        std::cout &lt;&lt; order;
+        std::cout &lt;&lt; &quot;------------------------\n&quot;;
+    }
+    return 0;
+}
+
+
+</code></pre>
+<h2 id="list">List</h2>
+<p>The STL List class is used to create a doubly linked list. Similar to a vector, lists store a collection of elements while preserving their order. Linked lists are different from vectors in that the elements can no longer be accessed by an index and are not stored contiguously in memory. This can be an advantage or disadvantage depending on the usage. Below is a table that compares lists and vectors.  </p>
+<table>
+<thead>
+<tr>
+<th>Scenario</th>
+<th>Vector</th>
+<th>List</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Insertion at End</td>
+<td>May be instant, unless vector must be resized</td>
+<td>Fast</td>
+</tr>
+<tr>
+<td>Insertion at Middle</td>
+<td>Requires shifting all elements that follow the insertion point, Slow</td>
+<td>Fast</td>
+</tr>
+<tr>
+<td>Insertion at Front</td>
+<td>Requires shifting all elements, Slow</td>
+<td>Fast</td>
+</tr>
+<tr>
+<td>Deletion</td>
+<td>Requires shifting of elements, Slow</td>
+<td>Fast, and preserves iterators</td>
+</tr>
+<tr>
+<td>Random Access (index)</td>
+<td>Fast</td>
+<td>Impossible</td>
+</tr>
+<tr>
+<td>Space</td>
+<td>Does not need to be known at compile time, but resizing is expensive and can result in massive amounts of wasted space</td>
+<td>Does not need to be known at compile time, and there is never wasted space</td>
+</tr>
+</tbody>
+</table>
+<h3 id="similarities-to-vector">Similarities to Vector</h3>
+<p>Lists support many of the same operations as vectors, minus the subscript operator <code>[]</code>. Lists add the <code>push_front()</code> and <code>pop_front()</code>, in addition to the <code>push_back()</code> and <code>pop_back()</code> member functions. This allows direct access to the front of the list, whereas vectors only allow access to the back.  </p>
+<h3 id="unique-operations">Unique Operations</h3>
+<p>Lists provide a few unique member functions for common list operations. First is <code>splice()</code>, which is used to combine two lists (or sub-lists) into one. Splicing allows elements of lists to be transferred between each other, or reordered within the same list, without the overhead of copying.<br />
+The <code>merge()</code> member functions assumes that you have two sorted lists, and merges them into a single sorted list.<br />
+The <code>remove()</code> function searches for the value that is passed to it, and removes it from the list. This is different from <code>erase()</code>, which expects an iterator to the element to be removed. The <code>remove_if()</code> function takes a function pointer/functor/lambda and removes items that satisfy the condition of that function. Don't worry too much about this for right now; function pointers/functors/lambdas are a point of discussion for next week.<br />
+Lists also offer a <code>reverse()</code> member function, that reverses the contents of the list, and <code>sort()</code> which sorts the list.<br />
+The <code>unique()</code> function removes consecutive duplicated elements. For example, <code>std::list&lt;int&gt;({1, 2, 3, 3, 4, 5, 5, 2, 3}).unique()</code> would result in the list <code>{1, 2, 3, 4, 5, 2, 3}</code>. The consecutive 3s and 5s are removed, but the extra 2 and 3 at the end of the list stays.  </p>
+<h3 id="common-applications_1">Common Applications</h3>
+<p>Lists are used when there are frequent needs for insertions or removals, or to move elements via <code>splice()</code>. </p>
+<h3 id="example_1">Example</h3>
+<p>A cache is used to store recently accessed items. Many caches store use LRU (least recently used) to decide which item to evict from the cache when it gets full. One example of a cache is the CPU cache. Your computer's CPU has a small amount of memory that is faster than RAM that is part of the CPU. The most recently accessed data is stored in this cache, as it is assumed that recently used data will be accessed again soon. Another example of a cache is a browser cache. Recently accessed webpages, images, etc. are stored locally on your computer. This way, they will be available faster when you access them again.<br />
+This example shows a class that implements an LRU cache using a list as the internal cache representation. For the example we'll just use integers for data.</p>
+<pre><code class="language-C++">#include &lt;iostream&gt;
+#include &lt;list&gt;
+
+// class that implements LRU Cache using an std::list
+class LRUCache {
+public:
+    LRUCache() {
+        maxCacheSize = 64;
+    }
+    LRUCache(size_t size) {
+        maxCacheSize = size;
+    }
+    // checks for a cache hit, i.e.,
+    // if the data is in the cache
+    bool hit(int data);
+    // returns an iterator the data in the cache
+    // if the data is not in the cache, it is added
+    // if the data is in the cache, it is moved to
+    // the front of the cache
+    // if the cache is full, evicts LRU element
+    // to make room for new item
+    std::list&lt;int&gt;::iterator get(int data);
+    // get the size of the cache
+    size_t size() const { return maxCacheSize; }
+private:
+    // helper function to find an item in the list
+    std::list&lt;int&gt;::iterator find(int data);
+    // list for the cache
+    std::list&lt;int&gt; cache;
+    // limit to size of cache
+    // if a cache is too big, it will become slower to
+    // search and won't be as useful
+    size_t maxCacheSize;
+};
+
+std::list&lt;int&gt;::iterator LRUCache::find(int data) {
+    auto it = cache.begin();
+    while (it != cache.end()) {
+        if (*it == data) {
+            return it;
+        }
+        ++it;
+    }
+    return it;
+}
+
+bool LRUCache::hit(int data) {
+    return find(data) != cache.end();
+}
+
+std::list&lt;int&gt;::iterator LRUCache::get(int data) {
+    // get iterator to data item
+    auto it = find(data);
+    // if it is found
+    if (it != cache.end()) {
+        // move to the front of the cache using splice
+        cache.splice(cache.begin(), cache, it);
+        // and return the iterator
+        return it;
+    }
+
+    // if not, check if the cache is not full
+    if (cache.size() &lt; maxCacheSize) {
+        // if it is not full, just push the new data to the front
+        cache.push_front(data);
+    }
+    else {
+        // remove the last item of the cache
+        cache.pop_back();
+        // add the data to the front
+        cache.push_front(data);
+    }
+
+    // in both cases, we return the first iterator of the list
+    return cache.begin();
+}
+
+int main() {
+    LRUCache cache(4);
+
+    cache.get(1);
+    cache.get(2);
+    cache.get(3);
+    cache.get(4);
+    cache.get(1);
+    cache.get(5);
+
+    if (cache.hit(1)) {
+        std::cout &lt;&lt; 1 &lt;&lt; &quot; - Cache hit\n&quot;;
+    }
+    else {
+        std::cout &lt;&lt; 1 &lt;&lt; &quot; - Cache miss\n&quot;;
+    }
+    if (cache.hit(2)) {
+        std::cout &lt;&lt; 2 &lt;&lt; &quot; - Cache hit\n&quot;;
+    }
+    else {
+        std::cout &lt;&lt; 2 &lt;&lt; &quot; - Cache miss\n&quot;;
+    }
+    if (cache.hit(3)) {
+        std::cout &lt;&lt; 3 &lt;&lt; &quot; - Cache hit\n&quot;;
+    }
+    else {
+        std::cout &lt;&lt; 3 &lt;&lt; &quot; - Cache miss\n&quot;;
+    }
+    if (cache.hit(4)) {
+        std::cout &lt;&lt; 4 &lt;&lt; &quot; - Cache hit\n&quot;;
+    }
+    else {
+        std::cout &lt;&lt; 4 &lt;&lt; &quot; - Cache miss\n&quot;;
+    }
+    if (cache.hit(5)) {
+        std::cout &lt;&lt; 5 &lt;&lt; &quot; - Cache hit\n&quot;;
+    }
+    else {
+        std::cout &lt;&lt; 5 &lt;&lt; &quot; - Cache miss\n&quot;;
+    }
+    return 0;
+}
+</code></pre>
+<p>This will print:</p>
+<pre><code>1 - Cache hit
+2 - Cache miss
+3 - Cache hit
+4 - Cache hit
+5 - Cache hit
+</code></pre></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script src="../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

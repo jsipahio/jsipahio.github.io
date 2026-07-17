@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../../img/favicon.ico">
+        <title>Graphs and Graph Representations - </title>
+        <link href="../../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../../css/brands.min.css" rel="stylesheet">
+        <link href="../../../css/solid.min.css" rel="stylesheet">
+        <link href="../../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" disabled>
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../../.."></a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../../cv/" class="nav-link">CV</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../../teaching/" class="nav-link">Teaching</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item dropdown">
+                              <button id="theme-menu" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static" aria-label="Toggle theme" class="nav-link dropdown-toggle">
+                                <i class="fa-solid fa-circle-half-stroke fa-fw"></i>
+                                <span class="d-lg-none ms-2">Toggle theme</span>
+                              </button>
+                              <ul class="dropdown-menu dropdown-menu-end">
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
+                                    <i class="fa-solid fa-sun fa-fw"></i>
+                                    <span class="ms-2">Light</span>
+                                    <i class="fa-solid fa-check ms-auto d-none"></i>
+                                  </button>
+                                </li>
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
+                                    <i class="fa-solid fa-moon fa-fw"></i>
+                                    <span class="ms-2">Dark</span>
+                                    <i class="fa-solid fa-check ms-auto d-none"></i>
+                                  </button>
+                                </li>
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="auto" aria-pressed="true">
+                                    <i class="fa-solid fa-circle-half-stroke fa-fw"></i>
+                                    <span class="ms-2">Auto</span>
+                                    <i class="fa-solid fa-check ms-auto"></i>
+                                  </button>
+                                </li>
+                              </ul>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <script src="../../../js/darkmode.js"></script>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#graphs-and-graph-representations" class="nav-link">Graphs and Graph Representations</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#lecture-notes-introduction-to-graphs-implementation-strategies" class="nav-link">Lecture Notes: Introduction to Graphs &amp; Implementation Strategies</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#1-core-graph-concepts-and-vocabulary" class="nav-link">1. Core Graph Concepts and Vocabulary</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#2-the-graph-abstract-data-type-adt" class="nav-link">2. The Graph Abstract Data Type (ADT)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#3-graph-implementation-strategies" class="nav-link">3. Graph Implementation Strategies</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#4-operation-complexity-comparison" class="nav-link">4. Operation Complexity Comparison</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="graphs-and-graph-representations">Graphs and Graph Representations</h1>
+<h1 id="lecture-notes-introduction-to-graphs-implementation-strategies">Lecture Notes: Introduction to Graphs &amp; Implementation Strategies</h1>
+<p>So far in this course, we have looked at linear data structures (like arrays and linked lists) and hierarchical data structures (like trees). While trees are excellent for representing parent-child relationships, they have a strict rule: a node can only have one parent, and there can be no cycles.</p>
+<p>But what if we need to represent data that is interconnected in a more complex, web-like way?</p>
+<ul>
+<li>A social network where friends are connected to multiple other friends.</li>
+<li>A map of cities connected by highways.</li>
+<li>The internet, where webpages link back and forth to each other.</li>
+</ul>
+<p>To model these systems, we use a highly flexible and powerful data structure called a <strong>Graph</strong>.</p>
+<hr />
+<h2 id="1-core-graph-concepts-and-vocabulary">1. Core Graph Concepts and Vocabulary</h2>
+<p>Before we write any code, we need to speak the language of graphs. A graph is mathematically defined as a collection of two sets: <span class="arithmatex">\(G = (V, E)\)</span>.</p>
+<ul>
+<li><strong>Vertices (<span class="arithmatex">\(V\)</span>):</strong> The individual data nodes or points in the graph (singular: <strong>Vertex</strong>). These are often also called <strong>nodes</strong>.</li>
+<li><strong>Edges (<span class="arithmatex">\(E\)</span>):</strong> The connections or links between the vertices.</li>
+</ul>
+<h3 id="key-properties-of-graphs">Key Properties of Graphs</h3>
+<p>Depending on the problem you are solving, edges can have different behaviors:</p>
+<h4 id="directed-vs-undirected">Directed vs. Undirected</h4>
+<ul>
+<li><strong>Undirected Graph:</strong> Edges have no direction. If there is a connection between Vertex A and Vertex B, you can travel freely in both directions. (Example: A Facebook friendship is mutual).</li>
+<li><strong>Directed Graph (Digraph):</strong> Edges have arrows indicating a one-way direction. An edge from A to B does <em>not</em> mean you can travel from B to A. (Example: A Twitter/X follow, or a hyperlink from one webpage to another).</li>
+</ul>
+<h4 id="weighted-vs-unweighted">Weighted vs. Unweighted</h4>
+<ul>
+<li><strong>Unweighted Graph:</strong> Edges simply represent the existence of a connection. All connections are equal.</li>
+<li><strong>Weighted Graph:</strong> Edges have a numerical "weight" or "cost" associated with them. (Example: On a map graph, the weight of an edge might represent the physical distance in miles or travel time between two cities).</li>
+</ul>
+<h4 id="cyclic-vs-acyclic">Cyclic vs. Acyclic</h4>
+<ul>
+<li><strong>Cycle:</strong> A path that starts at a vertex, travels along edges, and ends up back at the same vertex.</li>
+<li><strong>Acyclic Graph:</strong> A graph that contains absolutely no cycles.</li>
+</ul>
+<hr />
+<h2 id="2-the-graph-abstract-data-type-adt">2. The Graph Abstract Data Type (ADT)</h2>
+<p>If we were to design a generic interface (or abstract class) for a Graph in C++, what essential operations must it support? At a minimum, a Graph ADT must allow us to manipulate vertices and edges:</p>
+<h3 id="core-operations">Core Operations:</h3>
+<ul>
+<li><code>addVertex(value)</code>: Inserts a new vertex into the graph.</li>
+<li><code>addEdge(u, v)</code>: Creates an edge connecting vertex <code>u</code> to vertex <code>v</code>.</li>
+<li><code>removeVertex(v)</code>: Removes a vertex and all edges connected to it.</li>
+<li><code>removeEdge(u, v)</code>: Removes the edge between <code>u</code> and <code>v</code>.</li>
+<li><code>isAdjacent(u, v)</code>: Returns <code>true</code> if there is an edge pointing from <code>u</code> to <code>v</code>.</li>
+<li><code>getNeighbors(v)</code>: Returns a list of all vertices directly connected to <code>v</code>.</li>
+</ul>
+<hr />
+<h2 id="3-graph-implementation-strategies">3. Graph Implementation Strategies</h2>
+<p>How do we actually store this web of nodes and connections in computer memory using C++? There are three classic implementation strategies: <strong>Adjacency Matrix</strong>, <strong>Adjacency List</strong>, and <strong>Edge List</strong>.</p>
+<p>To compare them, let's assume we have a graph with <strong><span class="arithmatex">\(V\)</span></strong> vertices and <strong><span class="arithmatex">\(E\)</span></strong> edges.</p>
+<hr />
+<h3 id="strategy-a-adjacency-matrix">Strategy A: Adjacency Matrix</h3>
+<p>An <strong>Adjacency Matrix</strong> is a 2D grid (a matrix) of size <span class="arithmatex">\(V \times V\)</span>.</p>
+<ul>
+<li>The rows represent the starting vertices, and the columns represent the destination vertices.</li>
+<li>If there is an edge from row <code>i</code> to column <code>j</code>, we store a <code>1</code> (or the edge's weight) at <code>matrix[i][j]</code>. Otherwise, we store a <code>0</code> (or infinity/null for weighted graphs).</li>
+</ul>
+<h4 id="c-concept-code">C++ Concept Code</h4>
+<pre><code class="language-cpp">class GraphMatrix {
+private:
+    int numVertices;
+    std::vector&lt;std::vector&lt;int&gt;&gt; matrix;
+
+public:
+    GraphMatrix(int vertices) : numVertices(vertices) {
+        matrix.resize(vertices, std::vector&lt;int&gt;(vertices, 0));
+    }
+
+    void addEdge(int u, int v) {
+        matrix[u][v] = 1;
+        matrix[v][u] = 1; // If undirected, set both directions!
+    }
+
+    bool isAdjacent(int u, int v) {
+        return matrix[u][v] == 1;
+    }
+};
+
+</code></pre>
+<ul>
+<li><strong>Pros:</strong> * Incredibly fast to check if an edge exists between two specific vertices: <code>isAdjacent(u, v)</code> is a simple lookup at <code>matrix[u][v]</code>, taking <strong><span class="arithmatex">\(O(1)\)</span></strong> constant time.</li>
+<li>
+<p>Easy to implement.</p>
+</li>
+<li>
+<p><strong>Cons:</strong></p>
+</li>
+<li><strong>Memory Waste:</strong> It always uses <strong><span class="arithmatex">\(O(V^2)\)</span></strong> memory. If you have 10,000 vertices but only 5,000 edges, you are allocating a <span class="arithmatex">\(10,000 \times 10,000\)</span> matrix (100 million entries!) just to store 5,000 connections. This is called a <strong>sparse graph</strong>.</li>
+<li>Finding the neighbors of a vertex takes <strong><span class="arithmatex">\(O(V)\)</span></strong> time because you have to scan an entire row of the matrix.</li>
+</ul>
+<hr />
+<h3 id="strategy-b-adjacency-list">Strategy B: Adjacency List</h3>
+<p>Instead of allocating a massive grid, an <strong>Adjacency List</strong> associates each vertex with a list (like a dynamic array or linked list) containing only its actual neighbors.</p>
+<ul>
+<li>We use an array/vector of size <span class="arithmatex">\(V\)</span>.</li>
+<li>Index <code>i</code> of this array points to a list of all vertices that vertex <code>i</code> has an edge to.</li>
+</ul>
+<h4 id="c-concept-code_1">C++ Concept Code</h4>
+<pre><code class="language-cpp">#include &lt;vector&gt;
+#include &lt;list&gt;
+
+class GraphList {
+private:
+    int numVertices;
+    std::vector&lt;std::list&lt;int&gt;&gt; adjList; // An array of linked lists
+
+public:
+    GraphList(int vertices) : numVertices(vertices) {
+        adjList.resize(vertices);
+    }
+
+    void addEdge(int u, int v) {
+        adjList[u].push_back(v);
+        adjList[v].push_back(u); // If undirected
+    }
+
+    std::list&lt;int&gt; getNeighbors(int u) {
+        return adjList[u]; // Instant access to u's actual neighbors
+    }
+
+    bool isAdjacent(int u, int v) {
+        // Must search u's neighbor list
+        for (int neighbor : adjList[u]) {
+            if (neighbor == v) return true;
+        }
+        return false;
+    }
+};
+
+</code></pre>
+<ul>
+<li><strong>Pros:</strong></li>
+<li><strong>Highly Space-Efficient:</strong> It only takes <strong><span class="arithmatex">\(O(V + E)\)</span></strong> memory. We only allocate memory for actual connections.</li>
+<li>
+<p>Finding the neighbors of a vertex is incredibly fast—we just read the existing list.</p>
+</li>
+<li>
+<p><strong>Cons:</strong></p>
+</li>
+<li>Checking <code>isAdjacent(u, v)</code> is slower. We must traverse the list of <code>u</code>'s neighbors to see if <code>v</code> is in there, which takes <strong><span class="arithmatex">\(O(degree(u))\)</span></strong> time (where degree is the number of neighbors <code>u</code> has). In the worst case, this is <span class="arithmatex">\(O(V)\)</span>.</li>
+</ul>
+<hr />
+<h3 id="strategy-c-edge-list">Strategy C: Edge List</h3>
+<p>The simplest implementation of all is the <strong>Edge List</strong>. This is simply a collection (like a vector) of pairs containing the start and end of every edge in the graph.</p>
+<pre><code class="language-cpp">struct Edge {
+    int source;
+    int destination;
+    int weight; // Optional
+};
+
+std::vector&lt;Edge&gt; edgeList;
+
+</code></pre>
+<ul>
+<li><strong>Pros:</strong> Extremely simple; uses only <span class="arithmatex">\(O(E)\)</span> memory.</li>
+<li><strong>Cons:</strong> Doing almost <em>any</em> operation (finding neighbors, checking adjacency) requires a brute-force scan of the entire list, taking <strong><span class="arithmatex">\(O(E)\)</span></strong> time. It is rarely used for general graph operations but is useful for specific algorithms we will see later in the semester (like Kruskal's algorithm).</li>
+</ul>
+<hr />
+<h2 id="4-operation-complexity-comparison">4. Operation Complexity Comparison</h2>
+<p>When choosing how to implement a graph, you must weigh the tradeoffs based on the density of your graph.</p>
+<ul>
+<li><strong>Dense Graph:</strong> The number of edges is close to the maximum possible (<span class="arithmatex">\(E \approx V^2\)</span>).</li>
+<li><strong>Sparse Graph:</strong> The number of edges is much smaller (<span class="arithmatex">\(E \approx V\)</span>). Real-world graphs (like mapping roads or social networks) are almost always sparse.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>Adjacency Matrix</th>
+<th>Adjacency List</th>
+<th>Edge List</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Space Complexity</strong></td>
+<td><span class="arithmatex">\(O(V^2)\)</span></td>
+<td><strong><span class="arithmatex">\(O(V + E)\)</span></strong></td>
+<td><strong><span class="arithmatex">\(O(E)\)</span></strong></td>
+</tr>
+<tr>
+<td><strong>Add Vertex</strong></td>
+<td><span class="arithmatex">\(O(V^2)\)</span> (must resize matrix)</td>
+<td><strong><span class="arithmatex">\(O(1)\)</span></strong> (push back to list)</td>
+<td><span class="arithmatex">\(O(1)\)</span></td>
+</tr>
+<tr>
+<td><strong>Add Edge</strong></td>
+<td><strong><span class="arithmatex">\(O(1)\)</span></strong></td>
+<td><strong><span class="arithmatex">\(O(1)\)</span></strong></td>
+<td><span class="arithmatex">\(O(1)\)</span></td>
+</tr>
+<tr>
+<td><strong>Remove Vertex</strong></td>
+<td><span class="arithmatex">\(O(V^2)\)</span></td>
+<td><span class="arithmatex">\(O(V + E)\)</span></td>
+<td><span class="arithmatex">\(O(E)\)</span></td>
+</tr>
+<tr>
+<td><strong>Remove Edge</strong></td>
+<td><strong><span class="arithmatex">\(O(1)\)</span></strong></td>
+<td><span class="arithmatex">\(O(V)\)</span></td>
+<td><span class="arithmatex">\(O(E)\)</span></td>
+</tr>
+<tr>
+<td>**Query: <code>isAdjacent(u,v)**</code></td>
+<td><strong><span class="arithmatex">\(O(1)\)</span></strong></td>
+<td><span class="arithmatex">\(O(V)\)</span> (average case is much faster)</td>
+<td><span class="arithmatex">\(O(E)\)</span></td>
+</tr>
+<tr>
+<td>**Query: <code>getNeighbors(u)**</code></td>
+<td><span class="arithmatex">\(O(V)\)</span></td>
+<td><strong><span class="arithmatex">\(O(degree(u))\)</span></strong></td>
+<td><span class="arithmatex">\(O(E)\)</span></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Rule of Thumb for Students:</strong> Unless your graph is incredibly small or so dense that almost every node connects to every other node, <strong>prefer the Adjacency List</strong>. It is the standard, go-to representation for most practical applications.</p>
+</blockquote>
+<hr />
+<p>Next, we will discuss how to traverse these graph structures to find paths using Breadth-First Search (BFS) and Depth-First Search (DFS).</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../../js/base.js"></script>
+        <script src="../../../javascripts/mathjax.js"></script>
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script src="../../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

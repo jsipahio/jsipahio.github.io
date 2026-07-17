@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>CSE233 Week 14: Pointers and Dynamic Arrays - </title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../css/brands.min.css" rel="stylesheet">
+        <link href="../../css/solid.min.css" rel="stylesheet">
+        <link href="../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" disabled>
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../.."></a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../cv/" class="nav-link">CV</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../teaching/" class="nav-link">Teaching</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item dropdown">
+                              <button id="theme-menu" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static" aria-label="Toggle theme" class="nav-link dropdown-toggle">
+                                <i class="fa-solid fa-circle-half-stroke fa-fw"></i>
+                                <span class="d-lg-none ms-2">Toggle theme</span>
+                              </button>
+                              <ul class="dropdown-menu dropdown-menu-end">
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
+                                    <i class="fa-solid fa-sun fa-fw"></i>
+                                    <span class="ms-2">Light</span>
+                                    <i class="fa-solid fa-check ms-auto d-none"></i>
+                                  </button>
+                                </li>
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
+                                    <i class="fa-solid fa-moon fa-fw"></i>
+                                    <span class="ms-2">Dark</span>
+                                    <i class="fa-solid fa-check ms-auto d-none"></i>
+                                  </button>
+                                </li>
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="auto" aria-pressed="true">
+                                    <i class="fa-solid fa-circle-half-stroke fa-fw"></i>
+                                    <span class="ms-2">Auto</span>
+                                    <i class="fa-solid fa-check ms-auto"></i>
+                                  </button>
+                                </li>
+                              </ul>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <script src="../../js/darkmode.js"></script>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#cse233-week-14-pointers-and-dynamic-arrays" class="nav-link">CSE233 Week 14: Pointers and Dynamic Arrays</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#basic-pointer-examples" class="nav-link">Basic Pointer Examples</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#dynamic-arrays" class="nav-link">Dynamic Arrays</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#pointers-to-objects" class="nav-link">Pointers to Objects</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#pointers-as-parameters" class="nav-link">Pointers as Parameters</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#pointers-as-return-values" class="nav-link">Pointers as Return Values</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#conclusion" class="nav-link">Conclusion</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="cse233-week-14-pointers-and-dynamic-arrays">CSE233 Week 14: Pointers and Dynamic Arrays</h1>
+<p>A pointer, in the simplest terms, is a variable that stores a memory address instead of a value. Pointers can be used to reference other variables, or create new memory in an area called the heap. </p>
+<h2 id="basic-pointer-examples">Basic Pointer Examples</h2>
+<p>A pointer is declared by putting an asterisk/star <code>*</code> after the type name and before the variable name.</p>
+<pre><code class="language-cpp">int *ptr;
+</code></pre>
+<p>The <code>nullptr</code> value is used to represent a pointer that references nothing. A pointer with the value of <code>nullptr</code> is considered <code>false</code> in Boolean expressions, just like <code>0</code> (most of the time, the literal value of <code>nullptr</code> is <code>0</code>).</p>
+<pre><code class="language-cpp">int *ptr = nullptr;
+if (ptr) {
+    std::cout &lt;&lt; &quot;ptr is not null\n&quot;;
+}
+else {
+    std::cout &lt;&lt; &quot;ptr is null\n&quot;;
+}
+</code></pre>
+<p>Pointers store memory addresses. One way to use a pointer is to assign it the address of an existing variable. The ampersand <code>&amp;</code> is used access the memory address of a variable:</p>
+<pre><code class="language-cpp">int x = 5;
+int *ptr = &amp;x;
+</code></pre>
+<p>To access the value of the variable being referenced by the pointer, you put the star <code>*</code> in front of the pointer name to dereference it. </p>
+<pre><code class="language-cpp">int x = 5;
+int *ptr = &amp;x;
+// prints: 5
+std::cout &lt;&lt; *ptr &lt;&lt; std::endl;
+</code></pre>
+<p>Dereferencing also lets you change the value of the variable the pointer is referencing:</p>
+<pre><code class="language-cpp">int x = 5;
+int *ptr = &amp;x;
+// prints: 5
+std::cout &lt;&lt; *ptr &lt;&lt; std::endl;
+*ptr = 10;
+// prints: 10
+std::cout &lt;&lt; *ptr &lt;&lt; std::endl;
+// prints: 10
+std::cout &lt;&lt; x &lt;&lt; std::endl;
+</code></pre>
+<p>Like with pass-by-reference parameters, changes to the pointer affect the variable it is referencing.  </p>
+<p>Pointers can also be used to create new memory. This memory is allocated in a part of the program memory called the heap. Memory allocated in the heap must be manually freed by the programmer. Pointers that create new memory are typically called raw pointers.</p>
+<pre><code class="language-cpp">// raw pointers are allocated memory
+// using the new operator
+int *ptr = new int;
+// can be used like other pointers
+*ptr = 10;
+std::cout &lt;&lt; *ptr &lt;&lt; std::endl;
+// use delete to free memory used by raw pointer
+delete ptr;
+</code></pre>
+<h2 id="dynamic-arrays">Dynamic Arrays</h2>
+<p>Previously, we could only declare arrays with sizes that are known at compile time. Using pointers and heap allocated memory, we can create dynamic arrays that have a size determined while the program is running.</p>
+<pre><code class="language-cpp">int size;
+std::cout &lt;&lt; &quot;Enter size: &quot;;
+std::cin &gt;&gt; size;
+
+int *dynamicArray = new int[size];
+std::cout &lt;&lt; &quot;Enter &quot; &lt;&lt; size &lt;&lt; &quot; numbers\n&quot;;
+for (int i = 0; i &lt; size; ++i) {
+    std::cout &lt;&lt; &quot;Number &quot; &lt;&lt; i + 1 &lt;&lt; &quot;: &quot;;
+    // dynamic arrays are not dereferenced, just use the index
+    std::cin &gt;&gt; dynamicArray[i];
+}
+
+std::cout &lt;&lt; &quot;You entered\n&quot;;
+for (int i = 0; i &lt; size; ++i) {
+    if (i != 0) std::cout &lt;&lt; &quot;, &quot;;
+    std::cout &lt;&lt; dynamicArray[i];
+}
+std::cout &lt;&lt; &quot;\n&quot;;
+
+// use delete with empty brackets
+// to free a dynamic array
+delete[] dynamicArray;
+</code></pre>
+<h2 id="pointers-to-objects">Pointers to Objects</h2>
+<p>We've seen that objects use the dot operator to access their fields. However, when we have a pointer to an object, that changes slightly. Instead of the dot operator, we use the array operator <code>-&gt;</code> to access object members:</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;string&gt;
+
+struct Student {
+    std::string name;
+    char grade;
+};
+
+void printStudent(Student* student) {
+    std::cout &lt;&lt; &quot;Name:  &quot; &lt;&lt; student-&gt;name &lt;&lt; std::endl;
+    std::cout &lt;&lt; &quot;Grade: &quot; &lt;&lt; student-&gt;grade &lt;&lt; std::endl;
+}
+
+int main() {
+    Student *student = new Student;
+    student-&gt;name = &quot;John Doe&quot;;
+    student-&gt;grade = 'A';
+    printStudent(student);
+    delete student;
+    return 0;
+}
+</code></pre>
+<p>The same goes for member functions:</p>
+<pre><code class="language-cpp">#include &lt;string&gt;
+
+int main() {
+    std::string* str = new std::string(&quot;Hello, World&quot;);
+    str-&gt;append(&quot;!&quot;);
+    std::string* substr = new std::string(str-&gt;substr(0, 7));
+    // still need to dereference to use operators
+    *substr += &quot;John Doe!&quot;;
+
+    std::cout &lt;&lt; *str &lt;&lt; std::endl;
+    std::cout &lt;&lt; *substr &lt;&lt; std::endl;
+
+    delete str;
+    delete substr;
+
+    return 0;
+}
+</code></pre>
+<h2 id="pointers-as-parameters">Pointers as Parameters</h2>
+<p>As seen in the struct example, pointers can be used as parameters to functions. Pointers behave very similar to pass-by-reference when used as function parameters. The primary difference is that in the function, the pointer parameter must be dereferenced, whereas pass-by-reference parameters are used like they are normal variables. Additionally, when the function is called, we either need to pass a pointer as the argument or pass the address of the variable being used as an argument (using &amp;). Below is an example:</p>
+<pre><code class="language-cpp">#include &lt;cassert&gt;
+
+namespace ref {
+    void swap(int&amp; x, int&amp; y) {
+        int temp = x;
+        x = y;
+        y = temp;
+    }
+}
+
+namespace ptr {
+    void swap(int* x, int* y) {
+        int temp = *x;
+        *x = *y;
+        *y = *temp;
+    }
+}
+
+int main() {
+    int x = 10;
+    int y = 4;
+    // with pass-by-ref, we use x and y as parameters
+    ref::swap(x, y);
+    assert(x == 4);
+    assert(y == 10);
+
+    // with pointer params, we need to use &amp; to get the addresses
+    ptr::swap(&amp;x, &amp;y);
+    assert(x == 10);
+    assert(y == 4);
+
+    int *xPtr = &amp;x;
+    int *yPtr = &amp;y;
+    // or, we can directly use pointers as the arguments
+    ptr::swap(xPtr, yPtr);
+
+    return 0;
+}
+</code></pre>
+<h2 id="pointers-as-return-values">Pointers as Return Values</h2>
+<p>Pointers can also be the return value of a function. Don't return pointers to variables from a function. When the function ends, local variables are deleted and the pointer may become invalid. Returning raw pointers and dynamic arrays is possible, but it becomes the responsibility of the calling code to call delete on the pointer that is returned when it is no longer needed.</p>
+<pre><code class="language-cpp">// don't do this
+int* pointerToLocal() {
+    int x = 10;
+    int *ptr = &amp;x;
+    // this pointer may become invalid after the function ends
+    // don't return pointers that point to local variables
+    return ptr;
+}
+
+// this is fine, but client has to delete the pointer
+int* getRawPointer(int val) {
+    int *ptr = new int;
+    *ptr = val;
+    return ptr;
+}
+
+// this is also fine. again, calling code must clean up
+int* getDynamicArray(int size) {
+    int *darray = new int[size];
+    return darray;
+}
+
+int main() {
+    int *rawPtr = getRawPointer(10);
+    delete rawPtr;
+    int *darray = getDynamicArray(32);
+    delete[] darray;
+
+    return 0;
+}
+</code></pre>
+<h2 id="conclusion">Conclusion</h2>
+<p>Pointers are variables that are used to store memory addresses instead of values. Accessing the value referenced by a pointer requires the pointer to be dereferenced. Pointers can be assigned the memory address of existing variables, or used to create raw pointers using the <code>new</code> operator. Pointers created with <code>new</code> should always have a corresponding <code>delete</code> to free the memory created by the pointer. Unlike static arrays (declared like <code>int array[100]</code>), where the size must be known when the program is compiled, pointers can also be used to create dynamic arrays which can be created with a size that isn't known until the program is run. Dynamic arrays are freed using the <code>delete[]</code> operator. Pointers can be used as parameters to functions as well as return values from functions. </p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script src="../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

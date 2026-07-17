@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>CSE233 Week 13: Namespaces - </title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../css/brands.min.css" rel="stylesheet">
+        <link href="../../css/solid.min.css" rel="stylesheet">
+        <link href="../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" disabled>
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../.."></a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../cv/" class="nav-link">CV</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../teaching/" class="nav-link">Teaching</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item dropdown">
+                              <button id="theme-menu" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static" aria-label="Toggle theme" class="nav-link dropdown-toggle">
+                                <i class="fa-solid fa-circle-half-stroke fa-fw"></i>
+                                <span class="d-lg-none ms-2">Toggle theme</span>
+                              </button>
+                              <ul class="dropdown-menu dropdown-menu-end">
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
+                                    <i class="fa-solid fa-sun fa-fw"></i>
+                                    <span class="ms-2">Light</span>
+                                    <i class="fa-solid fa-check ms-auto d-none"></i>
+                                  </button>
+                                </li>
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
+                                    <i class="fa-solid fa-moon fa-fw"></i>
+                                    <span class="ms-2">Dark</span>
+                                    <i class="fa-solid fa-check ms-auto d-none"></i>
+                                  </button>
+                                </li>
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="auto" aria-pressed="true">
+                                    <i class="fa-solid fa-circle-half-stroke fa-fw"></i>
+                                    <span class="ms-2">Auto</span>
+                                    <i class="fa-solid fa-check ms-auto"></i>
+                                  </button>
+                                </li>
+                              </ul>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <script src="../../js/darkmode.js"></script>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#cse233-week-13-namespaces" class="nav-link">CSE233 Week 13: Namespaces</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#namespaces" class="nav-link">Namespaces</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#using-statements" class="nav-link">Using Statements</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#conclusion" class="nav-link">Conclusion</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="cse233-week-13-namespaces">CSE233 Week 13: Namespaces</h1>
+<p>Throughout the course, we've been putting <code>std::</code> in front of the standard library functions, types, and objects we've been using (e.g., <code>std::cout</code>, <code>std::string</code>, <code>std::getline()</code>). Let's discuss what exactly namespaces are and why they are important in C++. </p>
+<h2 id="namespaces">Namespaces</h2>
+<p>To understand why namespaces are important, let's discuss how C/C++ programs are compiled. We've been using <code>#include</code> directives to include libraries into our source code. The C/C++ compilers are not extremely sophisticated. When encountering an <code>#include</code> directive, the compiler copies the code from that file into the source code file being compiled. Therefore, any time you use <code>#include &lt;iostream&gt;</code>, all of the code in the file <code>iostream</code> (and any code that is included by <code>iostream</code>) is copied into the source code being compiled. This means that a lot of unknown code may be dumped into a single file to be compiled any time we compile a program. Any variable, class, function, etc. names that are duplicated across these files can lead to a clash. We cannot assume that we know every name that is potentially used in an external file. That is why the C++ standard libraries all use the <code>std</code> namespace. This prevents code in the standard library files from clashing with users' code.   </p>
+<p>To demonstrate this on a smaller scale, let's consider the following code from three C++ files:<br />
+<strong><em>math</em></strong></p>
+<pre><code class="language-cpp">// a math/physics vector has x,y,z components
+class Vector {/*...*/};
+</code></pre>
+<p><strong><em>datatypes</em></strong></p>
+<pre><code class="language-cpp">// a vector datatype is an automatically resizing dynamic array
+class Vector {/*...*/};
+</code></pre>
+<p><strong><em>main.cpp</em></strong></p>
+<pre><code class="language-cpp">#include &lt;datatypes&gt;
+#include &lt;math&gt;
+
+int main() {
+    // ??? which vector do we want ???
+    Vector vec;
+    // ...
+    return 0;
+}
+</code></pre>
+<p>For one, as the comment says, there is no way to know which vector we want. Also, when the preprocessor runs, the file that is being compiled will look something like this:</p>
+<pre><code class="language-cpp">// a math/physics vector has x,y,z components
+class Vector {/*...*/};
+// a vector datatype is an automatically resizing dynamic array
+class Vector {/*...*/};
+
+int main() {
+    // ??? which vector do we want ???
+    Vector vec;
+    // ...
+    return 0;
+}
+</code></pre>
+<p>Names cannot be reused like this, so the code will fail to compile because the name <code>Vector</code> has been redeclared, as far as the compiler is concerned. However, we can use namespaces to isolate the names from each other. A namespace is created by putting the <code>namespace</code> keyword followed by the name of the namespace and a block. Any code in the block is part of the namespace.<br />
+<strong><em>math</em></strong></p>
+<pre><code class="language-cpp">namespace math {
+    // a math/physics vector has x,y,z components
+    class Vector {/*...*/};
+}
+</code></pre>
+<p><strong><em>datatypes</em></strong></p>
+<pre><code class="language-cpp">namespace datatypes {
+    // a vector datatype is an automatically resizing dynamic array
+    class Vector {/*...*/};
+}
+</code></pre>
+<p><strong><em>main.cpp</em></strong></p>
+<pre><code class="language-cpp">#include &lt;datatypes&gt;
+#include &lt;math&gt;
+
+int main() {
+    math::Vector vec;
+    // ...
+    return 0;
+}
+</code></pre>
+<p>Now, the names are in separate namespaces, meaning we have a way to specify which version of <code>Vector</code> we want to use. It also ensures we are not risking a redeclaration when the files are combined during compilation. While this is a trivial example, when the code we are including is potentially thousands of lines long, using namespaces becomes critical to keep the global namespace clean. </p>
+<h2 id="using-statements">Using Statements</h2>
+<p>A <code>using namepace</code> statement is used to bring all the elements of a namespace into the global namespace. This is not recommended practice in C++. <code>using namespace</code> statements can also be used within a function. This is better, since the using statement is contained to the function. However, I've found in practice that compilers (especially MSVC) decide to ignore using statements. Generally, <code>using namespace</code> statements are not used in C++. Single identifiers can be used as well:</p>
+<pre><code class="language-cpp">int main() {
+    using std::cout;
+    cout &lt;&lt; &quot;hello\n&quot;;
+
+    return 0;
+}
+</code></pre>
+<h2 id="conclusion">Conclusion</h2>
+<p>When C++ programs are compiled, all the code that is included is combined into a single file. Namespaces allow us to keep the global namespace clean by keeping code isolated. While <code>using namespace</code> statements can be used to bring code from namespaces into the global namespace, this is considered bad practice in C++, and anecdotally I've found it to not work sometimes.</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script src="../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

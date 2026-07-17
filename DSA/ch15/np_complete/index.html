@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../../img/favicon.ico">
+        <title>Lecture Notes: The Outer Limits of Computing (NP-Completeness, AI, and Quantum) - </title>
+        <link href="../../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../../css/brands.min.css" rel="stylesheet">
+        <link href="../../../css/solid.min.css" rel="stylesheet">
+        <link href="../../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" disabled>
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../../.."></a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../../cv/" class="nav-link">CV</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../../teaching/" class="nav-link">Teaching</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item dropdown">
+                              <button id="theme-menu" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static" aria-label="Toggle theme" class="nav-link dropdown-toggle">
+                                <i class="fa-solid fa-circle-half-stroke fa-fw"></i>
+                                <span class="d-lg-none ms-2">Toggle theme</span>
+                              </button>
+                              <ul class="dropdown-menu dropdown-menu-end">
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
+                                    <i class="fa-solid fa-sun fa-fw"></i>
+                                    <span class="ms-2">Light</span>
+                                    <i class="fa-solid fa-check ms-auto d-none"></i>
+                                  </button>
+                                </li>
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
+                                    <i class="fa-solid fa-moon fa-fw"></i>
+                                    <span class="ms-2">Dark</span>
+                                    <i class="fa-solid fa-check ms-auto d-none"></i>
+                                  </button>
+                                </li>
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="auto" aria-pressed="true">
+                                    <i class="fa-solid fa-circle-half-stroke fa-fw"></i>
+                                    <span class="ms-2">Auto</span>
+                                    <i class="fa-solid fa-check ms-auto"></i>
+                                  </button>
+                                </li>
+                              </ul>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <script src="../../../js/darkmode.js"></script>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#lecture-notes-the-outer-limits-of-computing-np-completeness-ai-and-quantum" class="nav-link">Lecture Notes: The Outer Limits of Computing (NP-Completeness, AI, and Quantum)</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#1-the-p-vs-np-question-without-the-proofs" class="nav-link">1. The P vs. NP Question (Without the Proofs)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#2-the-myth-of-the-ai-silver-bullet" class="nav-link">2. The Myth of the AI "Silver Bullet"</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#3-the-quantum-myth-trying-every-path-at-once" class="nav-link">3. The Quantum Myth: "Trying Every Path at Once"</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#4-case-study-shors-algorithm-vs-the-np-complete-wall" class="nav-link">4. Case Study: Shor's Algorithm vs. The NP-Complete Wall</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#summary-cheat-sheet-the-limits-of-technology" class="nav-link">Summary Cheat Sheet: The Limits of Technology</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="lecture-notes-the-outer-limits-of-computing-np-completeness-ai-and-quantum">Lecture Notes: The Outer Limits of Computing (NP-Completeness, AI, and Quantum)</h1>
+<p>To wrap up our semester, we are going to look beyond the code we can write today and explore the fundamental limits of what computers can solve <em>at all</em>.</p>
+<p>So far, we have focused on algorithms that run in "reasonable" time—like <span class="arithmatex">\(O(n)\)</span>, <span class="arithmatex">\(O(n \log n)\)</span>, or even <span class="arithmatex">\(O(n^2)\)</span>. In computer science, we formally call these <strong>Polynomial Time</strong> algorithms. If a problem can be solved in polynomial time, we consider it <strong>efficiently solvable</strong>.</p>
+<p>But there is a massive class of real-world problems for which no efficient algorithm has ever been found. This brings us to the famous boundary of <strong>NP-Completeness</strong>, and the modern myths surrounding how emerging technologies like AI and Quantum Computing interact with it.</p>
+<hr />
+<h2 id="1-the-p-vs-np-question-without-the-proofs">1. The P vs. NP Question (Without the Proofs)</h2>
+<p>To understand this landscape, we must split computational problems into two basic categories:</p>
+<h3 id="class-p-easy-to-solve">Class P (Easy to Solve)</h3>
+<p><strong>P</strong> stands for <strong>Polynomial</strong> time. These are the problems we can solve quickly.</p>
+<ul>
+<li><em>Examples:</em> Sorting an array, finding the shortest path on a map, searching for a name in a database.</li>
+<li><em>Characteristics:</em> The computer can find the exact, correct solution in a reasonable amount of time, even for huge datasets.</li>
+</ul>
+<h3 id="class-np-easy-to-verify">Class NP (Easy to Verify)</h3>
+<p><strong>NP</strong> stands for <strong>Nondeterministic Polynomial</strong> time. Don't let the name confuse you; the easiest way to think about NP is: <strong>"Hard to solve, but incredibly easy to check."</strong></p>
+<ul>
+<li><em>Example:</em> A massive Sudoku puzzle. Finding the solution from scratch might take you hours of frustrating trial-and-error. But if someone hands you a completed board, you can verify if it is correct in just a few seconds by checking the rows, columns, and boxes.</li>
+<li><em>Characteristics:</em> We don't know an efficient way to <em>find</em> the solution, but we can <em>verify</em> a proposed solution instantly.</li>
+</ul>
+<h3 id="what-is-np-complete">What is "NP-Complete"?</h3>
+<p>Within the class of NP problems, there is a special club called <strong>NP-Complete</strong>. These are the "hardest" problems in NP.</p>
+<p>They have a fascinating mathematical property: <strong>They are all structurally linked.</strong> If you can find an efficient, polynomial-time algorithm to solve just <em>one</em> NP-complete problem, you can use that solution to solve <em>every single</em> NP problem in existence.</p>
+<p>If someone proves <span class="arithmatex">\(\text{P} = \text{NP}\)</span>, it means anything we can easily verify can also be easily solved. If <span class="arithmatex">\(\text{P} \neq \text{NP}\)</span> (which most computer scientists believe), then these NP-complete problems are destined to always require exponential time (<span class="arithmatex">\(O(2^n)\)</span>) to solve exactly.</p>
+<hr />
+<h2 id="2-the-myth-of-the-ai-silver-bullet">2. The Myth of the AI "Silver Bullet"</h2>
+<p>With the rapid rise of Artificial Intelligence and Large Language Models, students often ask: <em>"Can't we just train an AI to solve these NP-complete problems instantly?"</em></p>
+<p>The short answer is <strong>no</strong>. Here is why:</p>
+<ul>
+<li><strong>Approximation vs. Exactness:</strong> AI is exceptionally good at pattern matching and finding "good enough" answers (heuristics). For example, an AI can look at a complex shipping route and suggest a highly efficient path. However, it cannot <em>guarantee</em> that this path is the absolute mathematically optimal one. To guarantee the absolute best solution to an NP-complete problem, you still have to search the exponential space.</li>
+<li><strong>The Hallucination/Verification Gap:</strong> While an AI can generate a potential solution to a problem quickly, it is bound by the same physical computation limits when trying to mathematically prove that its solution is the absolute best.</li>
+</ul>
+<p>AI is a powerful tool for finding <em>approximate</em> solutions to NP-complete problems, but it does not change the fundamental mathematical complexity of the problems themselves.</p>
+<hr />
+<h2 id="3-the-quantum-myth-trying-every-path-at-once">3. The Quantum Myth: "Trying Every Path at Once"</h2>
+<p>Perhaps the most common misconception in modern technology is how Quantum Computers work. Popular science articles often describe quantum computers like this: <em>"A classical computer tries paths one by one, but a quantum computer uses qubits in superposition to try every single possible path simultaneously."</em></p>
+<p>If this were true, quantum computers would solve NP-complete problems instantly. But this is a fundamental misunderstanding of quantum mechanics.</p>
+<h3 id="how-quantum-computers-actually-work">How Quantum Computers Actually Work</h3>
+<p>Yes, a quantum computer can put qubits into a state of superposition representing all possible answers. However, when you <em>measure</em> those qubits to read the output, the superposition collapses, and you only get <strong>one random answer</strong> out of the billions of possibilities.</p>
+<p>To make a quantum computer useful, scientists must design algorithms that use <strong>quantum interference</strong>.</p>
+<ul>
+<li>Think of this like noise-canceling headphones.</li>
+<li>The algorithm must manipulate the quantum waves so that the incorrect answers destructively interfere (cancel each other out) and the correct answer constructively interferes (amplifies).</li>
+</ul>
+<p>Only a very specific subset of problems have the mathematical structure required to make this wave-canceling trick work. This quantum-friendly class of problems is called <strong>BQP</strong> (Bounded-Error Quantum Polynomial-Time). Most computer scientists believe that <strong>NP-Complete problems lie outside of BQP</strong>.</p>
+<hr />
+<h2 id="4-case-study-shors-algorithm-vs-the-np-complete-wall">4. Case Study: Shor's Algorithm vs. The NP-Complete Wall</h2>
+<p>To prove this, let’s look at the most famous quantum algorithm in history: <strong>Shor's Algorithm</strong>.</p>
+<h3 id="the-problem-prime-factorization">The Problem: Prime Factorization</h3>
+<p>Given a massive number (like a 2048-bit integer used in modern encryption), find the prime numbers that multiply together to make it.</p>
+<ul>
+<li>On a classical computer, this is incredibly hard. It takes exponential time, which is why modern cybersecurity relies on it.</li>
+<li>In 1994, Peter Shor invented a quantum algorithm that can solve this in polynomial time, theoretically threatening all modern encryption.</li>
+</ul>
+<h3 id="why-shors-algorithm-works-and-why-it-doesnt-solve-np-complete">Why Shor's Algorithm Works (And Why It Doesn't Solve NP-Complete)</h3>
+<p>Shor's algorithm works because prime factorization is <strong>not</strong> a generic, unstructured search problem. It has a highly specific mathematical property called <strong>periodicity</strong> (it repeats in a circular, periodic pattern when treated with modular arithmetic).</p>
+<p>Shor’s algorithm uses a <strong>Quantum Fourier Transform (QFT)</strong> to find this period. Because the problem has this beautiful, repeating mathematical structure, the quantum computer can perfectly align the waves to cancel out all the incorrect non-periodic factors and amplify the correct ones.</p>
+<h3 id="the-np-complete-wall">The NP-Complete Wall</h3>
+<p>Now, contrast this with an NP-complete problem like the <strong>Traveling Salesperson Problem</strong> (finding the shortest route connecting <span class="arithmatex">\(n\)</span> cities).</p>
+<ul>
+<li>This problem is completely <strong>unstructured</strong>. There is no repeating wave pattern or elegant mathematical symmetry to exploit.</li>
+<li>Because there is no structure, you cannot use a Quantum Fourier Transform to cancel out the bad routes.</li>
+<li>The best quantum algorithm we have for unstructured search is <strong>Grover's Algorithm</strong>.</li>
+<li>Grover's algorithm only provides a <strong>quadratic speedup</strong> (it reduces the search time from <span class="arithmatex">\(O(2^n)\)</span> to <span class="arithmatex">\(O(\sqrt{2^n})\)</span>). While this is a massive achievement, it is still an <strong>exponential</strong> growth curve. For a sufficiently large number of cities, even a quantum computer running Grover's algorithm will run until the sun burns out.</li>
+</ul>
+<hr />
+<h2 id="summary-cheat-sheet-the-limits-of-technology">Summary Cheat Sheet: The Limits of Technology</h2>
+<table>
+<thead>
+<tr>
+<th>Problem Class</th>
+<th>Solvable by Classical?</th>
+<th>Solvable by AI?</th>
+<th>Solvable by Quantum?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Class P</strong> (e.g., Sorting)</td>
+<td><strong>Yes</strong> (Exact, fast)</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><strong>Factoring</strong> (The basis of cryptography)</td>
+<td>No (Too slow)</td>
+<td>No (Exact is too slow)</td>
+<td><strong>Yes</strong> (Via Shor's Algorithm)</td>
+</tr>
+<tr>
+<td><strong>NP-Complete</strong> (e.g., Route Optimization)</td>
+<td>No (Too slow)</td>
+<td><strong>Only Approximations</strong></td>
+<td><strong>Only Approximations / Minor Speedup</strong> (Grover's)</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Final Takeaway for the Semester:</strong> As software engineers and computer scientists, understanding these boundaries prevents us from wasting time trying to write "perfect" algorithms for impossible problems. When faced with an NP-complete problem in your career, your goal is not to find the perfect algorithm, but to use the data structures and heuristic strategies you've learned this semester to find a <em>great</em> approximation efficiently.</p>
+</blockquote>
+<hr /></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../../js/base.js"></script>
+        <script src="../../../javascripts/mathjax.js"></script>
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script src="../../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

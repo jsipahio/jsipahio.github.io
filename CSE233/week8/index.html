@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>CSE233 Week 8: Arrays - </title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../css/brands.min.css" rel="stylesheet">
+        <link href="../../css/solid.min.css" rel="stylesheet">
+        <link href="../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" disabled>
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../.."></a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../cv/" class="nav-link">CV</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../teaching/" class="nav-link">Teaching</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item dropdown">
+                              <button id="theme-menu" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static" aria-label="Toggle theme" class="nav-link dropdown-toggle">
+                                <i class="fa-solid fa-circle-half-stroke fa-fw"></i>
+                                <span class="d-lg-none ms-2">Toggle theme</span>
+                              </button>
+                              <ul class="dropdown-menu dropdown-menu-end">
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
+                                    <i class="fa-solid fa-sun fa-fw"></i>
+                                    <span class="ms-2">Light</span>
+                                    <i class="fa-solid fa-check ms-auto d-none"></i>
+                                  </button>
+                                </li>
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
+                                    <i class="fa-solid fa-moon fa-fw"></i>
+                                    <span class="ms-2">Dark</span>
+                                    <i class="fa-solid fa-check ms-auto d-none"></i>
+                                  </button>
+                                </li>
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="auto" aria-pressed="true">
+                                    <i class="fa-solid fa-circle-half-stroke fa-fw"></i>
+                                    <span class="ms-2">Auto</span>
+                                    <i class="fa-solid fa-check ms-auto"></i>
+                                  </button>
+                                </li>
+                              </ul>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <script src="../../js/darkmode.js"></script>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#cse233-week-8-arrays" class="nav-link">CSE233 Week 8: Arrays</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#declaring-and-using-arrays" class="nav-link">Declaring and Using Arrays</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#partially-filled-arrays" class="nav-link">Partially Filled Arrays</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#arrays-as-function-parameters" class="nav-link">Arrays as Function Parameters</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#array-bounds" class="nav-link">Array Bounds</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#conclusion" class="nav-link">Conclusion</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="cse233-week-8-arrays">CSE233 Week 8: Arrays</h1>
+<p>This week, we will discuss arrays. Arrays are a fundamental data structure in computer science and programming, and are implemented in nearly all programming languages. Arrays are fixed-size containers that store elements of the same data types. They allow a single name to be used to access multiple data values. Individual values are accessed via a subscript (also called index).</p>
+<h2 id="declaring-and-using-arrays">Declaring and Using Arrays</h2>
+<p>Below is the declaration of an array of 10 integers in C++:</p>
+<pre><code class="language-cpp">int array[10];
+</code></pre>
+<p>First, the data type is specified. Then, the name of the array. After the name is a set of square brackets with the number of elements in the array. An initializer list can be used to provide initial values to the array. An initializer list is a set of curly-braces with a comma-separated list of values inside. When using an initializer list, the size of the array can be deduced by the compiler:</p>
+<pre><code class="language-cpp">// still has 10 elements
+int array[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+</code></pre>
+<p>The individual elements of the array are accessed via the subscript operator. The subscript operator is a set of square brackets placed after the array name. The square brackets contain an index, which is an integer which specifies which array element is being accessed. Arrays in C++ are 0-indexed, meaning the first element has index 0, the second element has index 1, etc. The subscript operator can be used to both read and write values. </p>
+<pre><code class="language-cpp">int array[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+
+// array[0] is the first element
+assert(array[0] == 1);
+// array[9] is the last element
+assert(array[9] == 10);
+
+// we can use a loop to print every element in the array
+for (int i = 0; i &lt; 10; ++i) {
+    std::cout &lt;&lt; &quot;array[&quot; &lt;&lt; i &lt;&lt; &quot;] = &quot; &lt;&lt; array[i] &lt;&lt; &quot;\n&quot;;
+}
+
+// we can also use the index to change the values of 
+// the array's elements
+array[0] = 10;
+array[9] = 1;
+
+// change them back
+array[0] = 1;
+array[9] = 10;
+
+// we can also do so in a loop
+for (int i = 0; i &lt; 10; ++i) {
+    array[i] = array[i] * 2;
+}
+// array is now:
+// { 2, 4, 6, 8, 10, 12, 14, 16, 18, 20 }
+</code></pre>
+<p>As noted in the example, the last element of an array with 10 elements is indexed with 9. This is due to the array being 0-indexed; the last element is always one less than the number of elements it contains.   </p>
+<p>To understand why arrays are indexed the way they are, let's look at how arrays are stored in memory. We'll consider the starting address of the array as being memory address 1000. Recall from last week that the <code>int</code> data type uses 4 bytes of memory. In this case, the array <code>array</code> that we declared will use 10 * 4 = 40 bytes:</p>
+<pre><code>1036 |       | 10
+1032 |       | 9
+1028 |       | 8
+1024 |       | 7
+1020 |       | 6
+1016 |       | 5
+1012 |       | 4
+1008 |       | 3 
+1004 |       | 2
+1000 | array | 1
+</code></pre>
+<p>Note that I did not list <code>array[0]</code>, <code>array[1]</code>, etc. Since arrays are stored contiguously in memory, each individual element of the array does not need to be tracked. The program only tracks the start of the array, and then adds an offset to determine the next element of the array. So, <code>array[0]</code> is saying to find the integer that is = elements array from the start of the array. <code>array[3]</code> says to find the element that is 3 elements from the start. 3 * 4 = 12, so it searches for a value that is 12 bytes from the start address. In this example, the start address is 1000, so it searches address 1012. This address stores the value 4, as expected.  </p>
+<h2 id="partially-filled-arrays">Partially Filled Arrays</h2>
+<p>Sometimes, we do not know exactly how many elements an array will need to hold. This is a problem, since the size of the array must be known before the program is compiled. Therefore, a partially filled array may be needed. A partially filled array declares an array that may be too large for the number of elements it needs to hold, and then keeps track of how many elements actually get used. Let's consider this example of reading quiz scores for students. We can assume that the largest possible class has 25 students. However, the class could not full, or students could be absent when the quiz is taken. Therefore, it is possible that fewer than 25 grades need to be stored. We can use a partially filled array for this task. We'll declare an array with 25 elements, and then keep track of how many students actually have a grade. Then, we can use that value as the size of the array for the rest of the program:</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;string&gt;
+
+int main() {
+    // declare arrays of 25 strings and doubles
+    // to store the students and their grades
+    std::string names[25];
+    double grades[25];
+
+    // variable to track the number of students 
+    // that are actually entered
+    int numStudents = 0;
+
+    std::string name = &quot;&quot;;
+
+    std::cout &lt;&lt; &quot;Enter the first student's name: &quot;;
+    std::cin &gt;&gt; name;
+
+    // check that &quot;quit&quot; was not enter for a student's name
+    // also check that we have not exceeded the size of the array
+    while (name != &quot;quit&quot; &amp;&amp; numStudents &lt; 24) {
+        // only store the student if the name is not quit
+        names[numStudents] = name;
+        std::cout &lt;&lt; &quot;Enter grade for &quot; &lt;&lt; student &lt;&lt; &quot;: &quot;;
+        std::cin &gt;&gt; grades[numStudents];
+
+        // increase the number of students
+        ++numStudents;
+
+        // prompt for the next student
+        std::cout &lt;&lt; &quot;Enter the next student's name (or 'quit'): &quot;;
+        std::cin &gt;&gt; name;
+    }
+
+    std::cout &lt;&lt; numStudents; 
+    std::cout &lt;&lt; &quot; out of 25 possible students took the quiz\n&quot;;
+
+    // print out the students and their grades
+    // instead of using the actual size of the array, 25
+    // we are looping up until numStudents, which is the number
+    // of indices that are actually used
+    for (int i = 0; i &lt; numStudents; ++i) {
+        std::cout &lt;&lt; names[i] &lt;&lt; &quot; scored &quot; 
+            &lt;&lt; grades[i] &lt;&lt; &quot; on the quiz\n&quot;;
+    }
+
+    return 0;
+}
+</code></pre>
+<h2 id="arrays-as-function-parameters">Arrays as Function Parameters</h2>
+<p>Arrays can be used as parameters to functions. Arrays are passed via "pass-by-array", which automatically passes them by reference. Therefore, if the function is not supposed to modify the array, the parameter is marked as <code>const</code>. Array parameters are specified by putting the square brackets on the parameter's name. Additionally, the size of the array should always be passed as a parameter. While there are ways to determine the size of the array within the function, there is no way to determine whether all the indices are valid, since the array could be partially filled. </p>
+<pre><code class="language-cpp">// this function will print out an array in curly braces
+// with each element separated by a comma
+void printArray(const int arr[], int size) {
+    bool printComma = false;
+    std::cout &lt;&lt; &quot;{ &quot;;
+    for (int i = 0; i &lt; size; ++i) {
+        if (printComma) std::cout &lt;&lt; &quot;, &quot;;
+        printComma = true;
+        std::cout &lt;&lt; arr[i];
+    }
+    std::cout &lt;&lt; &quot; }&quot;;
+}
+</code></pre>
+<p>Arrays cannot be returned from a function. Instead, if you want a function to read or modify an array, it must be passed to the function as a parameter. The following program rewrites the previous program that reads student quiz grades to use a function to read the arrays and print the arrays:</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;string&gt;
+
+// passing the max size of the array by value
+// passing numStudents by reference so the 
+// partially filled size is known
+void readGrades(std::string names[], double grades[], 
+                int maxSize, int &amp;numStudents);
+
+// this function prints the grades with the format used in the 
+// original version of this program
+void printGrades(std::string names[], double grades[], int numStudents);
+
+int main() {
+    std::string names[];
+    double grades[];
+    int numStudents = 0;
+
+    readGrades(names, grades, 25, numStudents);
+
+    std::cout &lt;&lt; numStudents; 
+    std::cout &lt;&lt; &quot; out of 25 possible students took the quiz\n&quot;;
+
+    printGrades(names, grades, numStudents);
+
+    return 0;
+}
+
+void readGrades(std::string names[], double grades[], 
+                int maxSize, int &amp;numStudents) {
+
+    std::string name = &quot;&quot;;
+
+    std::cout &lt;&lt; &quot;Enter the first student's name: &quot;;
+    std::cin &gt;&gt; name;
+
+    // check that &quot;quit&quot; was not enter for a student's name
+    // also check that we have not exceeded the size of the array
+    while (name != &quot;quit&quot; &amp;&amp; numStudents &lt; maxSize - 1) {
+        // only store the student if the name is not quit
+        names[numStudents] = name;
+        std::cout &lt;&lt; &quot;Enter grade for &quot; &lt;&lt; student &lt;&lt; &quot;: &quot;;
+        std::cin &gt;&gt; grades[numStudents];
+
+        // increase the number of students
+        ++numStudents;
+
+        // prompt for the next student
+        std::cout &lt;&lt; &quot;Enter the next student's name (or 'quit'): &quot;;
+        std::cin &gt;&gt; name;
+    }
+}
+
+void printGrades(std::string names[], double grades[], int numStudents) {
+    for (int i = 0; i &lt; numStudents; ++i) {
+        std::cout &lt;&lt; names[i] &lt;&lt; &quot; scored &quot; 
+            &lt;&lt; grades[i] &lt;&lt; &quot; on the quiz\n&quot;;
+    }
+}
+</code></pre>
+<h2 id="array-bounds">Array Bounds</h2>
+<p>The bounds of an array are the indices that are valid. Valid indices always start at 0. All C arrays are 0-indexed. This is the lower-bound of an array. The upper-bound is one less than the size of the array. A 10-element array has an upper-bound of 9. Accessing an index that is not valid for the array is called an "out-of-bounds" or "out-of-range" access. C++ provides no check if the index being accessed is out-of-bounds. Recall that an array is contiguous in memory. When accessing an element, the offset (index * data size) is added to the memory address of the first array element. This memory address is accessed. If we have a 10 element array of integers called <code>values</code> that starts at address 1000, and we try to access <code>values[20]</code>, the program will try to access 4 bytes of memory starting at 1000 + (20 * 4) = 1080. This value is not part of the array, but the program will access it like it is. This can lead to a wide range of problems. If we are reading data from <code>values[20]</code>, whatever 4 bytes of data that start at that location will be interpreted as an integer and read as such. Obviously, this is invalid data for the array and can cause bugs later on by using an invalid value. Writing data to an invalid location can result in even worse consequences, as it can overwrite another variable or corrupt the program.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>Arrays are fundamental data structures in computer science. Arrays allow multiple values to be stored consecutively in memory under the same name. Values are accessed via the subscript operator, which are square brackets placed after the name of the array. The bounds of the array range from 0 to one less than the size of the array. Arrays can be passed as parameters to functions with a special "pass-by-array" syntax. Pass-by-array automatically passes them by reference. Functions cannot return arrays, so functions that need to "return" an array require it to be passed as a parameter. C++ provides no checks for out-of-bounds access to array elements, so it is up to the programmer to ensure that no invalid indices are read or written to.</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script src="../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width"><title>http://localhost:8000/CSE234/vector/</title><link rel="stylesheet" type="text/css" href="resource://content-accessible/viewsource.css"></head><body id="viewsource" style="tab-size: 4"><span id="line1"><span></span><span class="doctype">&lt;!DOCTYPE html&gt;</span><span>
+</span></span><span id="line2"><span></span><span>&lt;<span class="start-tag">html</span> <span class="attribute-name">lang</span>="<a class="attribute-value">en</a>" <span class="attribute-name">data-bs-theme</span>="<a class="attribute-value">auto</a>"&gt;</span><span>
+</span></span><span id="line3"><span>    </span><span>&lt;<span class="start-tag">head</span>&gt;</span><span>
+</span></span><span id="line4"><span>        </span><span>&lt;<span class="start-tag">meta</span> <span class="attribute-name">charset</span>="<a class="attribute-value">utf-8</a>"&gt;</span><span>
+</span></span><span id="line5"><span>        </span><span>&lt;<span class="start-tag">meta</span> <span class="attribute-name">http-equiv</span>="<a class="attribute-value">X-UA-Compatible</a>" <span class="attribute-name">content</span>="<a class="attribute-value">IE=edge</a>"&gt;</span><span>
+</span></span><span id="line6"><span>        </span><span>&lt;<span class="start-tag">meta</span> <span class="attribute-name">name</span>="<a class="attribute-value">viewport</a>" <span class="attribute-name">content</span>="<a class="attribute-value">width=device-width, initial-scale=1.0</a>"&gt;</span><span>
+</span></span><span id="line7"><span>        
+</span></span><span id="line8"><span>        
+</span></span><span id="line9"><span>        </span><span>&lt;<span class="start-tag">link</span> <span class="attribute-name">rel</span>="<a class="attribute-value">canonical</a>" <span class="attribute-name">href</span>="<a class="attribute-value" href="view-source:http://127.0.0.1:8000/CSE234/vector/">http://127.0.0.1:8000/CSE234/vector/</a>"&gt;</span><span>
+</span></span><span id="line10"><span>        </span><span>&lt;<span class="start-tag">link</span> <span class="attribute-name">rel</span>="<a class="attribute-value">shortcut icon</a>" <span class="attribute-name">href</span>="<a class="attribute-value" href="view-source:http://localhost:8000/img/favicon.ico">../../img/favicon.ico</a>"&gt;</span><span>
+</span></span><span id="line11"><span>        </span><span>&lt;<span class="start-tag">title</span>&gt;</span><span>Vector - John Sipahioglu</span><span>&lt;/<span class="end-tag">title</span>&gt;</span><span>
+</span></span><span id="line12"><span>        </span><span>&lt;<span class="start-tag">link</span> <span class="attribute-name">href</span>="<a class="attribute-value" href="view-source:http://localhost:8000/css/bootstrap.min.css">../../css/bootstrap.min.css</a>" <span class="attribute-name">rel</span>="<a class="attribute-value">stylesheet</a>"&gt;</span><span>
+</span></span><span id="line13"><span>        </span><span>&lt;<span class="start-tag">link</span> <span class="attribute-name">href</span>="<a class="attribute-value" href="view-source:http://localhost:8000/css/fontawesome.min.css">../../css/fontawesome.min.css</a>" <span class="attribute-name">rel</span>="<a class="attribute-value">stylesheet</a>"&gt;</span><span>
+</span></span><span id="line14"><span>        </span><span>&lt;<span class="start-tag">link</span> <span class="attribute-name">href</span>="<a class="attribute-value" href="view-source:http://localhost:8000/css/brands.min.css">../../css/brands.min.css</a>" <span class="attribute-name">rel</span>="<a class="attribute-value">stylesheet</a>"&gt;</span><span>
+</span></span><span id="line15"><span>        </span><span>&lt;<span class="start-tag">link</span> <span class="attribute-name">href</span>="<a class="attribute-value" href="view-source:http://localhost:8000/css/solid.min.css">../../css/solid.min.css</a>" <span class="attribute-name">rel</span>="<a class="attribute-value">stylesheet</a>"&gt;</span><span>
+</span></span><span id="line16"><span>        </span><span>&lt;<span class="start-tag">link</span> <span class="attribute-name">href</span>="<a class="attribute-value" href="view-source:http://localhost:8000/css/v4-font-face.min.css">../../css/v4-font-face.min.css</a>" <span class="attribute-name">rel</span>="<a class="attribute-value">stylesheet</a>"&gt;</span><span>
+</span></span><span id="line17"><span>        </span><span>&lt;<span class="start-tag">link</span> <span class="attribute-name">href</span>="<a class="attribute-value" href="view-source:http://localhost:8000/css/base.css">../../css/base.css</a>" <span class="attribute-name">rel</span>="<a class="attribute-value">stylesheet</a>"&gt;</span><span>
+</span></span><span id="line18"><span>        </span><span>&lt;<span class="start-tag">link</span> <span class="attribute-name">id</span>="<a class="attribute-value">hljs-light</a>" <span class="attribute-name">rel</span>="<a class="attribute-value">stylesheet</a>" <span class="attribute-name">href</span>="<a class="attribute-value" href="view-source:https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css</a>" <span class="attribute-name">disabled</span>&gt;</span><span>
+</span></span><span id="line19"><span>        </span><span>&lt;<span class="start-tag">link</span> <span class="attribute-name">id</span>="<a class="attribute-value">hljs-dark</a>" <span class="attribute-name">rel</span>="<a class="attribute-value">stylesheet</a>" <span class="attribute-name">href</span>="<a class="attribute-value" href="view-source:https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css">https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css</a>" <span class="attribute-name">disabled</span>&gt;</span><span>
+</span></span><span id="line20"><span>        </span><span>&lt;<span class="start-tag">script</span> <span class="attribute-name">src</span>="<a class="attribute-value" href="view-source:https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js">https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js</a>"&gt;</span><span></span><span>&lt;/<span class="end-tag">script</span>&gt;</span><span>
+</span></span><span id="line21"><span>        </span><span>&lt;<span class="start-tag">script</span>&gt;</span><span>hljs.highlightAll();</span><span>&lt;/<span class="end-tag">script</span>&gt;</span><span> 
+</span></span><span id="line22"><span>    </span><span>&lt;/<span class="end-tag">head</span>&gt;</span><span>
+</span></span><span id="line23"><span>
+</span></span><span id="line24"><span>    </span><span>&lt;<span class="start-tag">body</span>&gt;</span><span>
+</span></span><span id="line25"><span>        </span><span>&lt;<span class="start-tag">div</span> <span class="attribute-name">class</span>="<a class="attribute-value">navbar fixed-top navbar-expand-lg navbar-dark bg-primary</a>"&gt;</span><span>
+</span></span><span id="line26"><span>            </span><span>&lt;<span class="start-tag">div</span> <span class="attribute-name">class</span>="<a class="attribute-value">container</a>"&gt;</span><span>
+</span></span><span id="line27"><span>                </span><span>&lt;<span class="start-tag">a</span> <span class="attribute-name">class</span>="<a class="attribute-value">navbar-brand</a>" <span class="attribute-name">href</span>="<a class="attribute-value" href="view-source:http://localhost:8000/">../..</a>"&gt;</span><span>John Sipahioglu</span><span>&lt;/<span class="end-tag">a</span>&gt;</span><span>
+</span></span><span id="line28"><span>                </span><span class="comment">&lt;!-- Expander button --&gt;</span><span>
+</span></span><span id="line29"><span>                </span><span>&lt;<span class="start-tag">button</span> <span class="attribute-name">type</span>="<a class="attribute-value">button</a>" <span class="attribute-name">class</span>="<a class="attribute-value">navbar-toggler</a>" <span class="attribute-name">data-bs-toggle</span>="<a class="attribute-value">collapse</a>" <span class="attribute-name">data-bs-target</span>="<a class="attribute-value">#navbar-collapse</a>" <span class="attribute-name">aria-controls</span>="<a class="attribute-value">navbar-collapse</a>" <span class="attribute-name">aria-expanded</span>="<a class="attribute-value">false</a>" <span class="attribute-name">aria-label</span>="<a class="attribute-value">Toggle navigation</a>"&gt;</span><span>
+</span></span><span id="line30"><span>                    </span><span>&lt;<span class="start-tag">span</span> <span class="attribute-name">class</span>="<a class="attribute-value">navbar-toggler-icon</a>"&gt;</span><span></span><span>&lt;/<span class="end-tag">span</span>&gt;</span><span>
+</span></span><span id="line31"><span>                </span><span>&lt;/<span class="end-tag">button</span>&gt;</span><span>
+</span></span><span id="line32"><span>
+</span></span><span id="line33"><span>                </span><span class="comment">&lt;!-- Expanded navigation --&gt;</span><span>
+</span></span><span id="line34"><span>                </span><span>&lt;<span class="start-tag">div</span> <span class="attribute-name">id</span>="<a class="attribute-value">navbar-collapse</a>" <span class="attribute-name">class</span>="<a class="attribute-value">navbar-collapse collapse</a>"&gt;</span><span>
+</span></span><span id="line35"><span>                        </span><span class="comment">&lt;!-- Main navigation --&gt;</span><span>
+</span></span><span id="line36"><span>                        </span><span>&lt;<span class="start-tag">ul</span> <span class="attribute-name">class</span>="<a class="attribute-value">nav navbar-nav</a>"&gt;</span><span>
+</span></span><span id="line37"><span>                            </span><span>&lt;<span class="start-tag">li</span> <span class="attribute-name">class</span>="<a class="attribute-value">nav-item</a>"&gt;</span><span>
+</span></span><span id="line38"><span>                                </span><span>&lt;<span class="start-tag">a</span> <span class="attribute-name">href</span>="<a class="attribute-value" href="view-source:http://localhost:8000/">../..</a>" <span class="attribute-name">class</span>="<a class="attribute-value">nav-link</a>"&gt;</span><span>Home</span><span>&lt;/<span class="end-tag">a</span>&gt;</span><span>
+</span></span><span id="line39"><span>                            </span><span>&lt;/<span class="end-tag">li</span>&gt;</span><span>
+</span></span><span id="line40"><span>                            </span><span>&lt;<span class="start-tag">li</span> <span class="attribute-name">class</span>="<a class="attribute-value">nav-item</a>"&gt;</span><span>
+</span></span><span id="line41"><span>                                </span><span>&lt;<span class="start-tag">a</span> <span class="attribute-name">href</span>="<a class="attribute-value" href="view-source:http://localhost:8000/cv/">../../cv/</a>" <span class="attribute-name">class</span>="<a class="attribute-value">nav-link</a>"&gt;</span><span>CV</span><span>&lt;/<span class="end-tag">a</span>&gt;</span><span>
+</span></span><span id="line42"><span>                            </span><span>&lt;/<span class="end-tag">li</span>&gt;</span><span>
+</span></span><span id="line43"><span>                            </span><span>&lt;<span class="start-tag">li</span> <span class="attribute-name">class</span>="<a class="attribute-value">nav-item</a>"&gt;</span><span>
+</span></span><span id="line44"><span>                                </span><span>&lt;<span class="start-tag">a</span> <span class="attribute-name">href</span>="<a class="attribute-value" href="view-source:http://localhost:8000/teaching/">../../teaching/</a>" <span class="attribute-name">class</span>="<a class="attribute-value">nav-link</a>"&gt;</span><span>Teaching</span><span>&lt;/<span class="end-tag">a</span>&gt;</span><span>
+</span></span><span id="line45"><span>                            </span><span>&lt;/<span class="end-tag">li</span>&gt;</span><span>
+</span></span><span id="line46"><span>                            </span><span>&lt;<span class="start-tag">li</span> <span class="attribute-name">class</span>="<a class="attribute-value">nav-item dropdown</a>"&gt;</span><span>
+</span></span><span id="line47"><span>                                </span><span>&lt;<span class="start-tag">a</span> <span class="attribute-name">href</span>="<a class="attribute-value" href="view-source:http://localhost:8000/CSE234/vector/#">#</a>" <span class="attribute-name">class</span>="<a class="attribute-value">nav-link dropdown-toggle</a>" <span class="attribute-name">role</span>="<a class="attribute-value">button</a>" <span class="attribute-name">data-bs-toggle</span>="<a class="attribute-value">dropdown</a>"  <span class="attribute-name">aria-expanded</span>="<a class="attribute-value">false</a>"&gt;</span><span>CSE122</span><span>&lt;/<span class="end-tag">a</span>&gt;</span><span>
+</span></span><span id="line48"><span>                                </span><span>&lt;<span class="start-tag">ul</span> <span class="attribute-name">class</span>="<a class="attribute-value">dropdown-menu</a>"&gt;</span><span>
+</span></span><span id="line49"><span>                                    
+</span></span><span id="line50"><span></span><span>&lt;<span class="start-tag">li</span>&gt;</span><span>
+</span></span><span id="line51"><span>    </span><span>&lt;<span class="start-tag">a</span> <span class="attribute-name">href</span>="<a class="attribute-value" href="view-source:http://localhost:8000/CSE122/">../../CSE122/</a>" <span class="attribute-name">class</span>="<a class="attribute-value">dropdown-item</a>"&gt;</span><span>Home</span><span>&lt;/<span class="end-tag">a</span>&gt;</span><span>
+</span></span><span id="line52"><span></span><span>&lt;/<span class="end-tag">li</span>&gt;</span><span>
+</span></span><span id="line53"><span>                                    
+</span></span><span id="line54"><span></span><span>&lt;<span class="start-tag">li</span>&gt;</span><span>
+</span></span><span id="line55"><span>    </span><span>&lt;<span class="start-tag">a</span> <span class="attribute-name">href</span>="<a class="attribute-value" href="view-source:http://localhost:8000/CSE122/setup/">../../CSE122/setup/</a>" <span class="attribute-name">class</span>="<a class="attribute-value">dropdown-item</a>"&gt;</span><span>Setup Help</span><span>&lt;/<span class="end-tag">a</span>&gt;</span><span>
+</span></span><span id="line56"><span></span><span>&lt;/<span class="end-tag">li</span>&gt;</span><span>
+</span></span><span id="line57"><span>                                    
+</span></span><span id="line58"><span></span><span>&lt;<span class="start-tag">li</span>&gt;</span><span>
+</span></span><span id="line59"><span>    </span><span>&lt;<span class="start-tag">a</span> <span class="attribute-name">href</span>="<a class="attribute-value" href="view-source:http://localhost:8000/CSE122/dotnet_commands/">../../CSE122/dotnet_commands/</a>" <span class="attribute-name">class</span>="<a class="attribute-value">dropdown-item</a>"&gt;</span><span>Creating Labs</span><span>&lt;/<span class="end-tag">a</span>&gt;</span><span>
+</span></span><span id="line60"><span></span><span>&lt;/<span class="end-tag">li</span>&gt;</span><span>
+</span></span><span id="line61"><span>                                    
+</span></span><span id="line62"><span></span><span>&lt;<span class="start-tag">li</span>&gt;</span><span>
+</span></span><span id="line63"><span>    </span><span>&lt;<span class="start-tag">a</span> <span class="attribute-name">href</span>="<a class="attribute-value" href="view-source:http://localhost:8000/CSE122/terminal_basics/">../../CSE122/terminal_basics/</a>" <span class="attribute-name">class</span>="<a class="attribute-value">dropdown-item</a>"&gt;</span><span>Terminal Basics</span><span>&lt;/<span class="end-tag">a</span>&gt;</span><span>
+</span></span><span id="line64"><span></span><span>&lt;/<span class="end-tag">li</span>&gt;</span><span>
+</span></span><span id="line65"><span>                                </span><span>&lt;/<span class="end-tag">ul</span>&gt;</span><span>
+</span></span><span id="line66"><span>                            </span><span>&lt;/<span class="end-tag">li</span>&gt;</span><span>
+</span></span><span id="line67"><span>                            </span><span>&lt;<span class="start-tag">li</span> <span class="attribute-name">class</span>="<a class="attribute-value">nav-item dropdown</a>"&gt;</span><span>
+</span></span><span id="line68"><span>                                </span><span>&lt;<span class="start-tag">a</span> <span class="attribute-name">href</span>="<a class="attribute-value" href="view-source:http://localhost:8000/CSE234/vector/#">#</a>" <span class="attribute-name">class</span>="<a class="attribute-value">nav-link dropdown-toggle</a>" <span class="attribute-name">role</span>="<a class="attribute-value">button</a>" <span class="attribute-name">data-bs-toggle</span>="<a class="attribute-value">dropdown</a>"  <span class="attribute-name">aria-expanded</span>="<a class="attribute-value">false</a>"&gt;</span><span>CSE234</span><span>&lt;/<span class="end-tag">a</span>&gt;</span><span>
+</span></span><span id="line69"><span>                                </span><span>&lt;<span class="start-tag">ul</span> <span class="attribute-name">class</span>="<a class="attribute-value">dropdown-menu</a>"&gt;</span><span>
+</span></span><span id="line70"><span>                                    
+</span></span><span id="line71"><span></span><span>&lt;<span class="start-tag">li</span>&gt;</span><span>
+</span></span><span id="line72"><span>    </span><span>&lt;<span class="start-tag">a</span> <span class="attribute-name">href</span>="<a class="attribute-value" href="view-source:http://localhost:8000/CSE234/">../</a>" <span class="attribute-name">class</span>="<a class="attribute-value">dropdown-item</a>"&gt;</span><span>Home</span><span>&lt;/<span class="end-tag">a</span>&gt;</span><span>
+</span></span><span id="line73"><span></span><span>&lt;/<span class="end-tag">li</span>&gt;</span><span>
+</span></span><span id="line74"><span>                                    
+</span></span><span id="line75"><span></span><span>&lt;<span class="start-tag">li</span>&gt;</span><span>
+</span></span><span id="line76"><span>    </span><span>&lt;<span class="start-tag">a</span> <span class="attribute-name">href</span>="<a class="attribute-value" href="view-source:http://localhost:8000/CSE234/types/">../types/</a>" <span class="attribute-name">class</span>="<a class="attribute-value">dropdown-item</a>"&gt;</span><span>STL Data Types</span><span>&lt;/<span class="end-tag">a</span>&gt;</span><span>
+</span></span><span id="line77"><span></span><span>&lt;/<span class="end-tag">li</span>&gt;</span><span>
+</span></span><span id="line78"><span>                                    
+</span></span><span id="line79"><span></span><span>&lt;<span class="start-tag">li</span>&gt;</span><span>
+</span></span><span id="line80"><span>    </span><span>&lt;<span class="start-tag">a</span> <span class="attribute-name">href</span>="<a class="attribute-value" href="view-source:http://localhost:8000/CSE234/algorithms/">../algorithms/</a>" <span class="attribute-name">class</span>="<a class="attribute-value">dropdown-item</a>"&gt;</span><span>STL Algorithm</span><span>&lt;/<span class="end-tag">a</span>&gt;</span><span>
+</span></span><span id="line81"><span></span><span>&lt;/<span class="end-tag">li</span>&gt;</span><span>
+</span></span><span id="line82"><span>                                </span><span>&lt;/<span class="end-tag">ul</span>&gt;</span><span>
+</span></span><span id="line83"><span>                            </span><span>&lt;/<span class="end-tag">li</span>&gt;</span><span>
+</span></span><span id="line84"><span>                            </span><span>&lt;<span class="start-tag">li</span> <span class="attribute-name">class</span>="<a class="attribute-value">nav-item dropdown</a>"&gt;</span><span>
+</span></span><span id="line85"><span>                                </span><span>&lt;<span class="start-tag">a</span> <span class="attribute-name">href</span>="<a class="attribute-value" href="view-source:http://localhost:8000/CSE234/vector/#">#</a>" <span class="attribute-name">class</span>="<a class="attribute-value">nav-link dropdown-toggle</a>" <span class="attribute-name">role</span>="<a class="attribute-value">button</a>" <span class="attribute-name">data-bs-toggle</span>="<a class="attribute-value">dropdown</a>"  <span class="attribute-name">aria-expanded</span>="<a class="attribute-value">false</a>"&gt;</span><span>CSE238</span><span>&lt;/<span class="end-tag">a</span>&gt;</span><span>
+</span></span><span id="line86"><span>                                </span><span>&lt;<span class="start-tag">ul</span> <span class="attribute-name">class</span>="<a class="attribute-value">dropdown-menu</a>"&gt;</span><span>
+</span></span><span id="line87"><span>                                    
+</span></span><span id="line88"><span></span><span>&lt;<span class="start-tag">li</span>&gt;</span><span>
+</span></span><span id="line89"><span>    </span><span>&lt;<span class="start-tag">a</span> <span class="attribute-name">href</span>="<a class="attribute-value" href="view-source:http://localhost:8000/CSE238/">../../CSE238/</a>" <span class="attribute-name">class</span>="<a class="attribute-value">dropdown-item</a>"&gt;</span><span>Home</span><span>&lt;/<span class="end-tag">a</span>&gt;</span><span>
+</span></span><span id="line90"><span></span><span>&lt;/<span class="end-tag">li</span>&gt;</span><span>
+</span></span><span id="line91"><span>                                    
+</span></span><span id="line92"><span></span><span>&lt;<span class="start-tag">li</span>&gt;</span><span>
+</span></span><span id="line93"><span>    </span><span>&lt;<span class="start-tag">a</span> <span class="attribute-name">href</span>="<a class="attribute-value" href="view-source:http://localhost:8000/CSE238/week1/">../../CSE238/week1/</a>" <span class="attribute-name">class</span>="<a class="attribute-value">dropdown-item</a>"&gt;</span><span>Week 1</span><span>&lt;/<span class="end-tag">a</span>&gt;</span><span>
+</span></span><span id="line94"><span></span><span>&lt;/<span class="end-tag">li</span>&gt;</span><span>
+</span></span><span id="line95"><span>                                    
+</span></span><span id="line96"><span></span><span>&lt;<span class="start-tag">li</span>&gt;</span><span>
+</span></span><span id="line97"><span>    </span><span>&lt;<span class="start-tag">a</span> <span class="attribute-name">href</span>="<a class="attribute-value" href="view-source:http://localhost:8000/CSE238/week2/">../../CSE238/week2/</a>" <span class="attribute-name">class</span>="<a class="attribute-value">dropdown-item</a>"&gt;</span><span>Week 2</span><span>&lt;/<span class="end-tag">a</span>&gt;</span><span>
+</span></span><span id="line98"><span></span><span>&lt;/<span class="end-tag">li</span>&gt;</span><span>
+</span></span><span id="line99"><span>                                    
+</span></span><span id="line100"><span></span><span>&lt;<span class="start-tag">li</span>&gt;</span><span>
+</span></span><span id="line101"><span>    </span><span>&lt;<span class="start-tag">a</span> <span class="attribute-name">href</span>="<a class="attribute-value" href="view-source:http://localhost:8000/CSE238/week3/">../../CSE238/week3/</a>" <span class="attribute-name">class</span>="<a class="attribute-value">dropdown-item</a>"&gt;</span><span>Week 3</span><span>&lt;/<span class="end-tag">a</span>&gt;</span><span>
+</span></span><span id="line102"><span></span><span>&lt;/<span class="end-tag">li</span>&gt;</span><span>
+</span></span><span id="line103"><span>                                    
+</span></span><span id="line104"><span></span><span>&lt;<span class="start-tag">li</span>&gt;</span><span>
+</span></span><span id="line105"><span>    </span><span>&lt;<span class="start-tag">a</span> <span class="attribute-name">href</span>="<a class="attribute-value" href="view-source:http://localhost:8000/CSE238/week4/">../../CSE238/week4/</a>" <span class="attribute-name">class</span>="<a class="attribute-value">dropdown-item</a>"&gt;</span><span>Week 4</span><span>&lt;/<span class="end-tag">a</span>&gt;</span><span>
+</span></span><span id="line106"><span></span><span>&lt;/<span class="end-tag">li</span>&gt;</span><span>
+</span></span><span id="line107"><span>                                </span><span>&lt;/<span class="end-tag">ul</span>&gt;</span><span>
+</span></span><span id="line108"><span>                            </span><span>&lt;/<span class="end-tag">li</span>&gt;</span><span>
+</span></span><span id="line109"><span>                            </span><span>&lt;<span class="start-tag">li</span> <span class="attribute-name">class</span>="<a class="attribute-value">nav-item dropdown</a>"&gt;</span><span>
+</span></span><span id="line110"><span>                                </span><span>&lt;<span class="start-tag">a</span> <span class="attribute-name">href</span>="<a class="attribute-value" href="view-source:http://localhost:8000/CSE234/vector/#">#</a>" <span class="attribute-name">class</span>="<a class="attribute-value">nav-link dropdown-toggle</a>" <span class="attribute-name">role</span>="<a class="attribute-value">button</a>" <span class="attribute-name">data-bs-toggle</span>="<a class="attribute-value">dropdown</a>"  <span class="attribute-name">aria-expanded</span>="<a class="attribute-value">false</a>"&gt;</span><span>NET264</span><span>&lt;/<span class="end-tag">a</span>&gt;</span><span>
+</span></span><span id="line111"><span>                                </span><span>&lt;<span class="start-tag">ul</span> <span class="attribute-name">class</span>="<a class="attribute-value">dropdown-menu</a>"&gt;</span><span>
+</span></span><span id="line112"><span>                                    
+</span></span><span id="line113"><span></span><span>&lt;<span class="start-tag">li</span>&gt;</span><span>
+</span></span><span id="line114"><span>    </span><span>&lt;<span class="start-tag">a</span> <span class="attribute-name">href</span>="<a class="attribute-value" href="view-source:http://localhost:8000/NET264/week1/">../../NET264/week1/</a>" <span class="attribute-name">class</span>="<a class="attribute-value">dropdown-item</a>"&gt;</span><span>Week 1</span><span>&lt;/<span class="end-tag">a</span>&gt;</span><span>
+</span></span><span id="line115"><span></span><span>&lt;/<span class="end-tag">li</span>&gt;</span><span>
+</span></span><span id="line116"><span>                                    
+</span></span><span id="line117"><span></span><span>&lt;<span class="start-tag">li</span>&gt;</span><span>
+</span></span><span id="line118"><span>    </span><span>&lt;<span class="start-tag">a</span> <span class="attribute-name">href</span>="<a class="attribute-value" href="view-source:http://localhost:8000/NET264/week2/">../../NET264/week2/</a>" <span class="attribute-name">class</span>="<a class="attribute-value">dropdown-item</a>"&gt;</span><span>Weeks 2 and 3</span><span>&lt;/<span class="end-tag">a</span>&gt;</span><span>
+</span></span><span id="line119"><span></span><span>&lt;/<span class="end-tag">li</span>&gt;</span><span>
+</span></span><span id="line120"><span>                                    
+</span></span><span id="line121"><span></span><span>&lt;<span class="start-tag">li</span>&gt;</span><span>
+</span></span><span id="line122"><span>    </span><span>&lt;<span class="start-tag">a</span> <span class="attribute-name">href</span>="<a class="attribute-value" href="view-source:http://localhost:8000/NET264/week4/">../../NET264/week4/</a>" <span class="attribute-name">class</span>="<a class="attribute-value">dropdown-item</a>"&gt;</span><span>Week 4</span><span>&lt;/<span class="end-tag">a</span>&gt;</span><span>
+</span></span><span id="line123"><span></span><span>&lt;/<span class="end-tag">li</span>&gt;</span><span>
+</span></span><span id="line124"><span>                                </span><span>&lt;/<span class="end-tag">ul</span>&gt;</span><span>
+</span></span><span id="line125"><span>                            </span><span>&lt;/<span class="end-tag">li</span>&gt;</span><span>
+</span></span><span id="line126"><span>                        </span><span>&lt;/<span class="end-tag">ul</span>&gt;</span><span>
+</span></span><span id="line127"><span>
+</span></span><span id="line128"><span>                    </span><span>&lt;<span class="start-tag">ul</span> <span class="attribute-name">class</span>="<a class="attribute-value">nav navbar-nav ms-md-auto</a>"&gt;</span><span>
+</span></span><span id="line129"><span>                        </span><span>&lt;<span class="start-tag">li</span> <span class="attribute-name">class</span>="<a class="attribute-value">nav-item</a>"&gt;</span><span>
+</span></span><span id="line130"><span>                            </span><span>&lt;<span class="start-tag">a</span> <span class="attribute-name">href</span>="<a class="attribute-value" href="view-source:http://localhost:8000/CSE234/vector/#">#</a>" <span class="attribute-name">class</span>="<a class="attribute-value">nav-link</a>" <span class="attribute-name">data-bs-toggle</span>="<a class="attribute-value">modal</a>" <span class="attribute-name">data-bs-target</span>="<a class="attribute-value">#mkdocs_search_modal</a>"&gt;</span><span>
+</span></span><span id="line131"><span>                                </span><span>&lt;<span class="start-tag">i</span> <span class="attribute-name">class</span>="<a class="attribute-value">fa fa-search</a>"&gt;</span><span></span><span>&lt;/<span class="end-tag">i</span>&gt;</span><span> Search
+</span></span><span id="line132"><span>                            </span><span>&lt;/<span class="end-tag">a</span>&gt;</span><span>
+</span></span><span id="line133"><span>                        </span><span>&lt;/<span class="end-tag">li</span>&gt;</span><span>
+</span></span><span id="line134"><span>                            </span><span>&lt;<span class="start-tag">li</span> <span class="attribute-name">class</span>="<a class="attribute-value">nav-item dropdown</a>"&gt;</span><span>
+</span></span><span id="line135"><span>                              </span><span>&lt;<span class="start-tag">button</span> <span class="attribute-name">id</span>="<a class="attribute-value">theme-menu</a>" <span class="attribute-name">aria-expanded</span>="<a class="attribute-value">false</a>" <span class="attribute-name">data-bs-toggle</span>="<a class="attribute-value">dropdown</a>" <span class="attribute-name">data-bs-display</span>="<a class="attribute-value">static</a>" <span class="attribute-name">aria-label</span>="<a class="attribute-value">Toggle theme</a>" <span class="attribute-name">class</span>="<a class="attribute-value">nav-link dropdown-toggle</a>"&gt;</span><span>
+</span></span><span id="line136"><span>                                </span><span>&lt;<span class="start-tag">i</span> <span class="attribute-name">class</span>="<a class="attribute-value">fa-solid fa-circle-half-stroke fa-fw</a>"&gt;</span><span></span><span>&lt;/<span class="end-tag">i</span>&gt;</span><span>
+</span></span><span id="line137"><span>                                </span><span>&lt;<span class="start-tag">span</span> <span class="attribute-name">class</span>="<a class="attribute-value">d-lg-none ms-2</a>"&gt;</span><span>Toggle theme</span><span>&lt;/<span class="end-tag">span</span>&gt;</span><span>
+</span></span><span id="line138"><span>                              </span><span>&lt;/<span class="end-tag">button</span>&gt;</span><span>
+</span></span><span id="line139"><span>                              </span><span>&lt;<span class="start-tag">ul</span> <span class="attribute-name">class</span>="<a class="attribute-value">dropdown-menu dropdown-menu-end</a>"&gt;</span><span>
+</span></span><span id="line140"><span>                                </span><span>&lt;<span class="start-tag">li</span>&gt;</span><span>
+</span></span><span id="line141"><span>                                  </span><span>&lt;<span class="start-tag">button</span> <span class="attribute-name">class</span>="<a class="attribute-value">dropdown-item d-flex align-items-center</a>" <span class="attribute-name">data-bs-theme-value</span>="<a class="attribute-value">light</a>" <span class="attribute-name">aria-pressed</span>="<a class="attribute-value">false</a>"&gt;</span><span>
+</span></span><span id="line142"><span>                                    </span><span>&lt;<span class="start-tag">i</span> <span class="attribute-name">class</span>="<a class="attribute-value">fa-solid fa-sun fa-fw</a>"&gt;</span><span></span><span>&lt;/<span class="end-tag">i</span>&gt;</span><span>
+</span></span><span id="line143"><span>                                    </span><span>&lt;<span class="start-tag">span</span> <span class="attribute-name">class</span>="<a class="attribute-value">ms-2</a>"&gt;</span><span>Light</span><span>&lt;/<span class="end-tag">span</span>&gt;</span><span>
+</span></span><span id="line144"><span>                                    </span><span>&lt;<span class="start-tag">i</span> <span class="attribute-name">class</span>="<a class="attribute-value">fa-solid fa-check ms-auto d-none</a>"&gt;</span><span></span><span>&lt;/<span class="end-tag">i</span>&gt;</span><span>
+</span></span><span id="line145"><span>                                  </span><span>&lt;/<span class="end-tag">button</span>&gt;</span><span>
+</span></span><span id="line146"><span>                                </span><span>&lt;/<span class="end-tag">li</span>&gt;</span><span>
+</span></span><span id="line147"><span>                                </span><span>&lt;<span class="start-tag">li</span>&gt;</span><span>
+</span></span><span id="line148"><span>                                  </span><span>&lt;<span class="start-tag">button</span> <span class="attribute-name">class</span>="<a class="attribute-value">dropdown-item d-flex align-items-center</a>" <span class="attribute-name">data-bs-theme-value</span>="<a class="attribute-value">dark</a>" <span class="attribute-name">aria-pressed</span>="<a class="attribute-value">false</a>"&gt;</span><span>
+</span></span><span id="line149"><span>                                    </span><span>&lt;<span class="start-tag">i</span> <span class="attribute-name">class</span>="<a class="attribute-value">fa-solid fa-moon fa-fw</a>"&gt;</span><span></span><span>&lt;/<span class="end-tag">i</span>&gt;</span><span>
+</span></span><span id="line150"><span>                                    </span><span>&lt;<span class="start-tag">span</span> <span class="attribute-name">class</span>="<a class="attribute-value">ms-2</a>"&gt;</span><span>Dark</span><span>&lt;/<span class="end-tag">span</span>&gt;</span><span>
+</span></span><span id="line151"><span>                                    </span><span>&lt;<span class="start-tag">i</span> <span class="attribute-name">class</span>="<a class="attribute-value">fa-solid fa-check ms-auto d-none</a>"&gt;</span><span></span><span>&lt;/<span class="end-tag">i</span>&gt;</span><span>
+</span></span><span id="line152"><span>                                  </span><span>&lt;/<span class="end-tag">button</span>&gt;</span><span>
+</span></span><span id="line153"><span>                                </span><span>&lt;/<span class="end-tag">li</span>&gt;</span><span>
+</span></span><span id="line154"><span>                                </span><span>&lt;<span class="start-tag">li</span>&gt;</span><span>
+</span></span><span id="line155"><span>                                  </span><span>&lt;<span class="start-tag">button</span> <span class="attribute-name">class</span>="<a class="attribute-value">dropdown-item d-flex align-items-center</a>" <span class="attribute-name">data-bs-theme-value</span>="<a class="attribute-value">auto</a>" <span class="attribute-name">aria-pressed</span>="<a class="attribute-value">true</a>"&gt;</span><span>
+</span></span><span id="line156"><span>                                    </span><span>&lt;<span class="start-tag">i</span> <span class="attribute-name">class</span>="<a class="attribute-value">fa-solid fa-circle-half-stroke fa-fw</a>"&gt;</span><span></span><span>&lt;/<span class="end-tag">i</span>&gt;</span><span>
+</span></span><span id="line157"><span>                                    </span><span>&lt;<span class="start-tag">span</span> <span class="attribute-name">class</span>="<a class="attribute-value">ms-2</a>"&gt;</span><span>Auto</span><span>&lt;/<span class="end-tag">span</span>&gt;</span><span>
+</span></span><span id="line158"><span>                                    </span><span>&lt;<span class="start-tag">i</span> <span class="attribute-name">class</span>="<a class="attribute-value">fa-solid fa-check ms-auto</a>"&gt;</span><span></span><span>&lt;/<span class="end-tag">i</span>&gt;</span><span>
+</span></span><span id="line159"><span>                                  </span><span>&lt;/<span class="end-tag">button</span>&gt;</span><span>
+</span></span><span id="line160"><span>                                </span><span>&lt;/<span class="end-tag">li</span>&gt;</span><span>
+</span></span><span id="line161"><span>                              </span><span>&lt;/<span class="end-tag">ul</span>&gt;</span><span>
+</span></span><span id="line162"><span>                            </span><span>&lt;/<span class="end-tag">li</span>&gt;</span><span>
+</span></span><span id="line163"><span>                    </span><span>&lt;/<span class="end-tag">ul</span>&gt;</span><span>
+</span></span><span id="line164"><span>                </span><span>&lt;/<span class="end-tag">div</span>&gt;</span><span>
+</span></span><span id="line165"><span>            </span><span>&lt;/<span class="end-tag">div</span>&gt;</span><span>
+</span></span><span id="line166"><span>        </span><span>&lt;/<span class="end-tag">div</span>&gt;</span><span>
+</span></span><span id="line167"><span>        </span><span>&lt;<span class="start-tag">script</span> <span class="attribute-name">src</span>="<a class="attribute-value" href="view-source:http://localhost:8000/js/darkmode.js">../../js/darkmode.js</a>"&gt;</span><span></span><span>&lt;/<span class="end-tag">script</span>&gt;</span><span>
+</span></span><span id="line168"><span>
+</span></span><span id="line169"><span>        </span><span>&lt;<span class="start-tag">div</span> <span class="attribute-name">class</span>="<a class="attribute-value">container</a>"&gt;</span><span>
+</span></span><span id="line170"><span>            </span><span>&lt;<span class="start-tag">div</span> <span class="attribute-name">class</span>="<a class="attribute-value">row</a>"&gt;</span><span>
+</span></span><span id="line171"><span>                    </span><span>&lt;<span class="start-tag">div</span> <span class="attribute-name">class</span>="<a class="attribute-value">col-md-3</a>"&gt;</span><span></span><span>&lt;<span class="start-tag">div</span> <span class="attribute-name">class</span>="<a class="attribute-value">navbar-expand-md bs-sidebar hidden-print affix</a>" <span class="attribute-name">role</span>="<a class="attribute-value">complementary</a>"&gt;</span><span>
+</span></span><span id="line172"><span>    </span><span>&lt;<span class="start-tag">div</span> <span class="attribute-name">class</span>="<a class="attribute-value">navbar-header</a>"&gt;</span><span>
+</span></span><span id="line173"><span>        </span><span>&lt;<span class="start-tag">button</span> <span class="attribute-name">type</span>="<a class="attribute-value">button</a>" <span class="attribute-name">class</span>="<a class="attribute-value">navbar-toggler collapsed</a>" <span class="attribute-name">data-bs-toggle</span>="<a class="attribute-value">collapse</a>" <span class="attribute-name">data-bs-target</span>="<a class="attribute-value">#toc-collapse</a>" <span class="attribute-name">title</span>="<a class="attribute-value">Table of Contents</a>"&gt;</span><span>
+</span></span><span id="line174"><span>            </span><span>&lt;<span class="start-tag">span</span> <span class="attribute-name">class</span>="<a class="attribute-value">fa fa-angle-down</a>"&gt;</span><span></span><span>&lt;/<span class="end-tag">span</span>&gt;</span><span>
+</span></span><span id="line175"><span>        </span><span>&lt;/<span class="end-tag">button</span>&gt;</span><span>
+</span></span><span id="line176"><span>    </span><span>&lt;/<span class="end-tag">div</span>&gt;</span><span>
+</span></span><span id="line177"><span>
+</span></span><span id="line178"><span>    
+</span></span><span id="line179"><span>    </span><span>&lt;<span class="start-tag">div</span> <span class="attribute-name">id</span>="<a class="attribute-value">toc-collapse</a>" <span class="attribute-name">class</span>="<a class="attribute-value">navbar-collapse collapse card bg-body-tertiary</a>"&gt;</span><span>
+</span></span><span id="line180"><span>        </span><span>&lt;<span class="start-tag">ul</span> <span class="attribute-name">class</span>="<a class="attribute-value">nav flex-column</a>"&gt;</span><span>
+</span></span><span id="line181"><span>            
+</span></span><span id="line182"><span>            </span><span>&lt;<span class="start-tag">li</span> <span class="attribute-name">class</span>="<a class="attribute-value">nav-item</a>" <span class="attribute-name">data-bs-level</span>="<a class="attribute-value">2</a>"&gt;</span><span></span><span>&lt;<span class="start-tag">a</span> <span class="attribute-name">href</span>="<a class="attribute-value" href="view-source:http://localhost:8000/CSE234/vector/#vector">#vector</a>" <span class="attribute-name">class</span>="<a class="attribute-value">nav-link</a>"&gt;</span><span>Vector</span><span>&lt;/<span class="end-tag">a</span>&gt;</span><span>
+</span></span><span id="line183"><span>              </span><span>&lt;<span class="start-tag">ul</span> <span class="attribute-name">class</span>="<a class="attribute-value">nav flex-column</a>"&gt;</span><span>
+</span></span><span id="line184"><span>              </span><span>&lt;/<span class="end-tag">ul</span>&gt;</span><span>
+</span></span><span id="line185"><span>            </span><span>&lt;/<span class="end-tag">li</span>&gt;</span><span>
+</span></span><span id="line186"><span>            
+</span></span><span id="line187"><span>            </span><span>&lt;<span class="start-tag">li</span> <span class="attribute-name">class</span>="<a class="attribute-value">nav-item</a>" <span class="attribute-name">data-bs-level</span>="<a class="attribute-value">2</a>"&gt;</span><span></span><span>&lt;<span class="start-tag">a</span> <span class="attribute-name">href</span>="<a class="attribute-value" href="view-source:http://localhost:8000/CSE234/vector/#iterators">#iterators</a>" <span class="attribute-name">class</span>="<a class="attribute-value">nav-link</a>"&gt;</span><span>Iterators</span><span>&lt;/<span class="end-tag">a</span>&gt;</span><span>
+</span></span><span id="line188"><span>              </span><span>&lt;<span class="start-tag">ul</span> <span class="attribute-name">class</span>="<a class="attribute-value">nav flex-column</a>"&gt;</span><span>
+</span></span><span id="line189"><span>              </span><span>&lt;/<span class="end-tag">ul</span>&gt;</span><span>
+</span></span><span id="line190"><span>            </span><span>&lt;/<span class="end-tag">li</span>&gt;</span><span>
+</span></span><span id="line191"><span>            
+</span></span><span id="line192"><span>            </span><span>&lt;<span class="start-tag">li</span> <span class="attribute-name">class</span>="<a class="attribute-value">nav-item</a>" <span class="attribute-name">data-bs-level</span>="<a class="attribute-value">2</a>"&gt;</span><span></span><span>&lt;<span class="start-tag">a</span> <span class="attribute-name">href</span>="<a class="attribute-value" href="view-source:http://localhost:8000/CSE234/vector/#vectors-continued">#vectors-continued</a>" <span class="attribute-name">class</span>="<a class="attribute-value">nav-link</a>"&gt;</span><span>Vectors (continued)</span><span>&lt;/<span class="end-tag">a</span>&gt;</span><span>
+</span></span><span id="line193"><span>              </span><span>&lt;<span class="start-tag">ul</span> <span class="attribute-name">class</span>="<a class="attribute-value">nav flex-column</a>"&gt;</span><span>
+</span></span><span id="line194"><span>              </span><span>&lt;/<span class="end-tag">ul</span>&gt;</span><span>
+</span></span><span id="line195"><span>            </span><span>&lt;/<span class="end-tag">li</span>&gt;</span><span>
+</span></span><span id="line196"><span>            
+</span></span><span id="line197"><span>            </span><span>&lt;<span class="start-tag">li</span> <span class="attribute-name">class</span>="<a class="attribute-value">nav-item</a>" <span class="attribute-name">data-bs-level</span>="<a class="attribute-value">2</a>"&gt;</span><span></span><span>&lt;<span class="start-tag">a</span> <span class="attribute-name">href</span>="<a class="attribute-value" href="view-source:http://localhost:8000/CSE234/vector/#list">#list</a>" <span class="attribute-name">class</span>="<a class="attribute-value">nav-link</a>"&gt;</span><span>List</span><span>&lt;/<span class="end-tag">a</span>&gt;</span><span>
+</span></span><span id="line198"><span>              </span><span>&lt;<span class="start-tag">ul</span> <span class="attribute-name">class</span>="<a class="attribute-value">nav flex-column</a>"&gt;</span><span>
+</span></span><span id="line199"><span>              </span><span>&lt;/<span class="end-tag">ul</span>&gt;</span><span>
+</span></span><span id="line200"><span>            </span><span>&lt;/<span class="end-tag">li</span>&gt;</span><span>
+</span></span><span id="line201"><span>        </span><span>&lt;/<span class="end-tag">ul</span>&gt;</span><span>
+</span></span><span id="line202"><span>    </span><span>&lt;/<span class="end-tag">div</span>&gt;</span><span>
+</span></span><span id="line203"><span></span><span>&lt;/<span class="end-tag">div</span>&gt;</span><span></span><span>&lt;/<span class="end-tag">div</span>&gt;</span><span>
+</span></span><span id="line204"><span>                    </span><span>&lt;<span class="start-tag">div</span> <span class="attribute-name">class</span>="<a class="attribute-value">col-md-9</a>" <span class="attribute-name">role</span>="<a class="attribute-value">main</a>"&gt;</span><span>
+</span></span><span id="line205"><span>
+</span></span><span id="line206"><span></span><span>&lt;<span class="start-tag">h2</span> <span class="attribute-name">id</span>="<a class="attribute-value">vector</a>"&gt;</span><span>Vector</span><span>&lt;/<span class="end-tag">h2</span>&gt;</span><span>
+</span></span><span id="line207"><span></span><span>&lt;<span class="start-tag">p</span>&gt;</span><span>The STL Vector is an automatically resizing dynamic array wrapper. When the vector runs out of space to hold new elements, it automatically resizes itself to be twice the size of its previous capacity. Items can be inserted into the beginning or middle of a vector while preserving order. To do so, all elements that come after the inserted element must be shifted. This happens automatically, as well. </span><span>&lt;/<span class="end-tag">p</span>&gt;</span><span>
+</span></span><span id="line208"><span></span><span>&lt;<span class="start-tag">h3</span> <span class="attribute-name">id</span>="<a class="attribute-value">constructioninitialization</a>"&gt;</span><span>Construction/Initialization</span><span>&lt;/<span class="end-tag">h3</span>&gt;</span><span>
+</span></span><span id="line209"><span></span><span>&lt;<span class="start-tag">p</span>&gt;</span><span>Vectors must have the type of data it is storing specified. An initial size can be provided to the constructor. Vectors support copying and assignment, like all STL containers. Like a C-array, a vector can be instantiated with a sequence of values in curly braces.</span><span>&lt;/<span class="end-tag">p</span>&gt;</span><span>
+</span></span><span id="line210"><span></span><span>&lt;<span class="start-tag">pre</span>&gt;</span><span></span><span>&lt;<span class="start-tag">code</span> <span class="attribute-name">class</span>="<a class="attribute-value">language-C++</a>"&gt;</span><span>// need  to include vector
+</span></span><span id="line211"><span>#include <span class="entity"><span>&amp;</span>lt;</span>vector<span class="entity"><span>&amp;</span>gt;</span>
+</span></span><span id="line212"><span>
+</span></span><span id="line213"><span>int main() {
+</span></span><span id="line214"><span>    // declaring an empty vector of integers
+</span></span><span id="line215"><span>    std::vector<span class="entity"><span>&amp;</span>lt;</span>int<span class="entity"><span>&amp;</span>gt;</span> integers;
+</span></span><span id="line216"><span>    // declaring vector with memory for 10 doubles allocated
+</span></span><span id="line217"><span>    std::vector<span class="entity"><span>&amp;</span>lt;</span>double<span class="entity"><span>&amp;</span>gt;</span> doubles(10);
+</span></span><span id="line218"><span>    // declaring vector of c-strings
+</span></span><span id="line219"><span>    std::vector<span class="entity"><span>&amp;</span>lt;</span>const char*<span class="entity"><span>&amp;</span>gt;</span> months = {
+</span></span><span id="line220"><span>        <span class="entity"><span>&amp;</span>quot;</span>Sunday<span class="entity"><span>&amp;</span>quot;</span>. <span class="entity"><span>&amp;</span>quot;</span>Monday<span class="entity"><span>&amp;</span>quot;</span>, <span class="entity"><span>&amp;</span>quot;</span>Tuesday<span class="entity"><span>&amp;</span>quot;</span>, <span class="entity"><span>&amp;</span>quot;</span>Wednesday<span class="entity"><span>&amp;</span>quot;</span>,
+</span></span><span id="line221"><span>        <span class="entity"><span>&amp;</span>quot;</span>Thursday<span class="entity"><span>&amp;</span>quot;</span>, <span class="entity"><span>&amp;</span>quot;</span>Friday<span class="entity"><span>&amp;</span>quot;</span>, <span class="entity"><span>&amp;</span>quot;</span>Saturday<span class="entity"><span>&amp;</span>quot;</span>
+</span></span><span id="line222"><span>    };
+</span></span><span id="line223"><span>    // creating copy of months vector
+</span></span><span id="line224"><span>    // C++17 added type deduction, so you don't need to use
+</span></span><span id="line225"><span>    //  the template argument when it is obvious what the type should be
+</span></span><span id="line226"><span>    std::vector monthsCopy(months);
+</span></span><span id="line227"><span>    // you can also use the equals sign to assign vectors
+</span></span><span id="line228"><span>    //  but they must have the same type
+</span></span><span id="line229"><span>    std::vector<span class="entity"><span>&amp;</span>lt;</span>int<span class="entity"><span>&amp;</span>gt;</span> otherIntegers;
+</span></span><span id="line230"><span>    otherIntegers = integers;
+</span></span><span id="line231"><span>    // can't do this, types mismatch
+</span></span><span id="line232"><span>    // otherIntegers = doubles;
+</span></span><span id="line233"><span>}
+</span></span><span id="line234"><span></span><span>&lt;/<span class="end-tag">code</span>&gt;</span><span></span><span>&lt;/<span class="end-tag">pre</span>&gt;</span><span>
+</span></span><span id="line235"><span></span><span>&lt;<span class="start-tag">h3</span> <span class="attribute-name">id</span>="<a class="attribute-value">adding-elements</a>"&gt;</span><span>Adding Elements</span><span>&lt;/<span class="end-tag">h3</span>&gt;</span><span>
+</span></span><span id="line236"><span></span><span>&lt;<span class="start-tag">p</span>&gt;</span><span>The main way to add new elements to the end of a vector is via the </span><span>&lt;<span class="start-tag">code</span>&gt;</span><span>push_back</span><span>&lt;/<span class="end-tag">code</span>&gt;</span><span> function. Using the subscript </span><span>&lt;<span class="start-tag">code</span>&gt;</span><span>[]</span><span>&lt;/<span class="end-tag">code</span>&gt;</span><span> operator to add new elements is undefined behavior. It may work, it may not, depending on the compiler, and should therefore be avoided.</span><span>&lt;/<span class="end-tag">p</span>&gt;</span><span>
+</span></span><span id="line237"><span></span><span>&lt;<span class="start-tag">pre</span>&gt;</span><span></span><span>&lt;<span class="start-tag">code</span> <span class="attribute-name">class</span>="<a class="attribute-value">language-C++</a>"&gt;</span><span>#include <span class="entity"><span>&amp;</span>lt;</span>iostream<span class="entity"><span>&amp;</span>gt;</span>
+</span></span><span id="line238"><span>#include <span class="entity"><span>&amp;</span>lt;</span>vector<span class="entity"><span>&amp;</span>gt;</span>
+</span></span><span id="line239"><span>
+</span></span><span id="line240"><span>int main() {
+</span></span><span id="line241"><span>    std::vector<span class="entity"><span>&amp;</span>lt;</span>double<span class="entity"><span>&amp;</span>gt;</span> scores;
+</span></span><span id="line242"><span>    double score = 0;
+</span></span><span id="line243"><span>
+</span></span><span id="line244"><span>    while (score <span class="entity"><span>&amp;</span>gt;</span>= 0) {
+</span></span><span id="line245"><span>        std::cout <span class="entity"><span>&amp;</span>lt;</span><span class="entity"><span>&amp;</span>lt;</span> <span class="entity"><span>&amp;</span>quot;</span>Enter score: <span class="entity"><span>&amp;</span>quot;</span>;
+</span></span><span id="line246"><span>        std::cin <span class="entity"><span>&amp;</span>gt;</span><span class="entity"><span>&amp;</span>gt;</span> score;
+</span></span><span id="line247"><span>        scores.push_back(score);
+</span></span><span id="line248"><span>    }
+</span></span><span id="line249"><span>
+</span></span><span id="line250"><span>    return 0;
+</span></span><span id="line251"><span>}
+</span></span><span id="line252"><span></span><span>&lt;/<span class="end-tag">code</span>&gt;</span><span></span><span>&lt;/<span class="end-tag">pre</span>&gt;</span><span>
+</span></span><span id="line253"><span></span><span>&lt;<span class="start-tag">h3</span> <span class="attribute-name">id</span>="<a class="attribute-value">accessing-elements</a>"&gt;</span><span>Accessing Elements</span><span>&lt;/<span class="end-tag">h3</span>&gt;</span><span>
+</span></span><span id="line254"><span></span><span>&lt;<span class="start-tag">p</span>&gt;</span><span>Vectors offer random access of its elements via the subscript operator </span><span>&lt;<span class="start-tag">code</span>&gt;</span><span>[]</span><span>&lt;/<span class="end-tag">code</span>&gt;</span><span>. It is still possible to pass out of range elements to the subscript operator, just like a normal array. A member function </span><span>&lt;<span class="start-tag">code</span>&gt;</span><span>std::vector<span class="entity"><span>&amp;</span>lt;</span>T<span class="entity"><span>&amp;</span>gt;</span>::at(size_t index)</span><span>&lt;/<span class="end-tag">code</span>&gt;</span><span> is used to check if the index is in range. If it is out of range, an exception is thrown. The size of the vector is accessed via the </span><span>&lt;<span class="start-tag">code</span>&gt;</span><span>size()</span><span>&lt;/<span class="end-tag">code</span>&gt;</span><span> member function. The first element of the vector can be accessed via the </span><span>&lt;<span class="start-tag">code</span>&gt;</span><span>front()</span><span>&lt;/<span class="end-tag">code</span>&gt;</span><span> member function, and the last element is accessed via the </span><span>&lt;<span class="start-tag">code</span>&gt;</span><span>back()</span><span>&lt;/<span class="end-tag">code</span>&gt;</span><span> member function. If you need access to the underlying c-array, the </span><span>&lt;<span class="start-tag">code</span>&gt;</span><span>data()</span><span>&lt;/<span class="end-tag">code</span>&gt;</span><span> member function can be used. The </span><span>&lt;<span class="start-tag">code</span>&gt;</span><span>pop_back()</span><span>&lt;/<span class="end-tag">code</span>&gt;</span><span> function can be used to remove the last element of the vector.</span><span>&lt;/<span class="end-tag">p</span>&gt;</span><span>
+</span></span><span id="line255"><span></span><span>&lt;<span class="start-tag">pre</span>&gt;</span><span></span><span>&lt;<span class="start-tag">code</span> <span class="attribute-name">class</span>="<a class="attribute-value">language-C++</a>"&gt;</span><span>#include <span class="entity"><span>&amp;</span>lt;</span>iostream<span class="entity"><span>&amp;</span>gt;</span>
+</span></span><span id="line256"><span>#include <span class="entity"><span>&amp;</span>lt;</span>vector<span class="entity"><span>&amp;</span>gt;</span>
+</span></span><span id="line257"><span>
+</span></span><span id="line258"><span>int main() {
+</span></span><span id="line259"><span>    std::vector<span class="entity"><span>&amp;</span>lt;</span>double<span class="entity"><span>&amp;</span>gt;</span> scores;
+</span></span><span id="line260"><span>    double score = 0;
+</span></span><span id="line261"><span>
+</span></span><span id="line262"><span>    while (score <span class="entity"><span>&amp;</span>gt;</span>= 0) {
+</span></span><span id="line263"><span>        std::cout <span class="entity"><span>&amp;</span>lt;</span><span class="entity"><span>&amp;</span>lt;</span> <span class="entity"><span>&amp;</span>quot;</span>Enter score: <span class="entity"><span>&amp;</span>quot;</span>;
+</span></span><span id="line264"><span>        std::cin <span class="entity"><span>&amp;</span>gt;</span><span class="entity"><span>&amp;</span>gt;</span> score;
+</span></span><span id="line265"><span>        scores.push_back(score);
+</span></span><span id="line266"><span>    }
+</span></span><span id="line267"><span>
+</span></span><span id="line268"><span>    std::cout <span class="entity"><span>&amp;</span>lt;</span><span class="entity"><span>&amp;</span>lt;</span> <span class="entity"><span>&amp;</span>quot;</span>There are <span class="entity"><span>&amp;</span>quot;</span> <span class="entity"><span>&amp;</span>lt;</span><span class="entity"><span>&amp;</span>lt;</span> scores.size() <span class="entity"><span>&amp;</span>lt;</span><span class="entity"><span>&amp;</span>lt;</span> <span class="entity"><span>&amp;</span>quot;</span> scores in the vector\n<span class="entity"><span>&amp;</span>quot;</span>;
+</span></span><span id="line269"><span>    std::cout <span class="entity"><span>&amp;</span>lt;</span><span class="entity"><span>&amp;</span>lt;</span> <span class="entity"><span>&amp;</span>quot;</span>First score: <span class="entity"><span>&amp;</span>quot;</span> <span class="entity"><span>&amp;</span>lt;</span><span class="entity"><span>&amp;</span>lt;</span> scores.front() <span class="entity"><span>&amp;</span>lt;</span><span class="entity"><span>&amp;</span>lt;</span> <span class="entity"><span>&amp;</span>quot;</span>\n<span class="entity"><span>&amp;</span>quot;</span>;
+</span></span><span id="line270"><span>    std::cout <span class="entity"><span>&amp;</span>lt;</span><span class="entity"><span>&amp;</span>lt;</span> <span class="entity"><span>&amp;</span>quot;</span>Last score: <span class="entity"><span>&amp;</span>quot;</span> <span class="entity"><span>&amp;</span>lt;</span><span class="entity"><span>&amp;</span>lt;</span> scores.back() <span class="entity"><span>&amp;</span>lt;</span><span class="entity"><span>&amp;</span>lt;</span> <span class="entity"><span>&amp;</span>quot;</span>\n<span class="entity"><span>&amp;</span>quot;</span>;
+</span></span><span id="line271"><span>
+</span></span><span id="line272"><span>    for (int i = 0; i <span class="entity"><span>&amp;</span>lt;</span> scores.size(); ++i) {
+</span></span><span id="line273"><span>        // accessing scores with the subsctipt operator
+</span></span><span id="line274"><span>        std::cout <span class="entity"><span>&amp;</span>lt;</span><span class="entity"><span>&amp;</span>lt;</span> <span class="entity"><span>&amp;</span>quot;</span>Score <span class="entity"><span>&amp;</span>quot;</span> <span class="entity"><span>&amp;</span>lt;</span><span class="entity"><span>&amp;</span>lt;</span> i + 1 <span class="entity"><span>&amp;</span>lt;</span><span class="entity"><span>&amp;</span>lt;</span> <span class="entity"><span>&amp;</span>quot;</span>: <span class="entity"><span>&amp;</span>quot;</span> <span class="entity"><span>&amp;</span>lt;</span><span class="entity"><span>&amp;</span>lt;</span> scores[i] <span class="entity"><span>&amp;</span>lt;</span><span class="entity"><span>&amp;</span>lt;</span> <span class="entity"><span>&amp;</span>quot;</span>\n<span class="entity"><span>&amp;</span>quot;</span>;
+</span></span><span id="line275"><span>    }
+</span></span><span id="line276"><span>
+</span></span><span id="line277"><span>    int lastIndex = scores.size() - 1;
+</span></span><span id="line278"><span>    scores.pop_back();
+</span></span><span id="line279"><span>    // won't cause an error, but data could be invalidated
+</span></span><span id="line280"><span>    double lastScore = scores[lastIndex];
+</span></span><span id="line281"><span>    // this will throw an exception
+</span></span><span id="line282"><span>    lastScore = scores.at(lastIndex);
+</span></span><span id="line283"><span>
+</span></span><span id="line284"><span>    return 0;
+</span></span><span id="line285"><span>}
+</span></span><span id="line286"><span></span><span>&lt;/<span class="end-tag">code</span>&gt;</span><span></span><span>&lt;/<span class="end-tag">pre</span>&gt;</span><span>
+</span></span><span id="line287"><span></span><span>&lt;<span class="start-tag">p</span>&gt;</span><span>Before talking about the rest of the vector member functions, we need to discuss iterators. </span><span>&lt;/<span class="end-tag">p</span>&gt;</span><span>
+</span></span><span id="line288"><span></span><span>&lt;<span class="start-tag">h2</span> <span class="attribute-name">id</span>="<a class="attribute-value">iterators</a>"&gt;</span><span>Iterators</span><span>&lt;/<span class="end-tag">h2</span>&gt;</span><span>
+</span></span><span id="line289"><span></span><span>&lt;<span class="start-tag">p</span>&gt;</span><span>Before discussing the rest of the STL data types, we need to cover iterators. An iterator is a type of pointer that was developed to standardize access to containers. An iterator is basically a pointer to an element of a container, however, there are additionally operations that can be performed on iterators to make traversing a container consistent no matter which type of container is being accessed. Below is a quick example of a vector being created, and an iterator being used to access its members:</span><span>&lt;/<span class="end-tag">p</span>&gt;</span><span>
+</span></span><span id="line290"><span></span><span>&lt;<span class="start-tag">pre</span>&gt;</span><span></span><span>&lt;<span class="start-tag">code</span> <span class="attribute-name">class</span>="<a class="attribute-value">language-C++</a>"&gt;</span><span>#include <span class="entity"><span>&amp;</span>lt;</span>iostream<span class="entity"><span>&amp;</span>gt;</span>
+</span></span><span id="line291"><span>#include <span class="entity"><span>&amp;</span>lt;</span>vector<span class="entity"><span>&amp;</span>gt;</span>
+</span></span><span id="line292"><span>
+</span></span><span id="line293"><span>int main() {
+</span></span><span id="line294"><span>    std::vector<span class="entity"><span>&amp;</span>lt;</span>int<span class="entity"><span>&amp;</span>gt;</span> values = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+</span></span><span id="line295"><span>    // the begin() member function returns an iterator to the first
+</span></span><span id="line296"><span>    // element of a collection 
+</span></span><span id="line297"><span>    std::vector<span class="entity"><span>&amp;</span>lt;</span>int<span class="entity"><span>&amp;</span>gt;</span>::iterator it = values.begin();
+</span></span><span id="line298"><span>
+</span></span><span id="line299"><span>    // we often use the <span class="entity"><span>&amp;</span>quot;</span>auto<span class="entity"><span>&amp;</span>quot;</span> type for iterators rather than writing it out
+</span></span><span id="line300"><span>    // the end() member function returns the <span class="entity"><span>&amp;</span>quot;</span>past-the-end<span class="entity"><span>&amp;</span>quot;</span> iterator
+</span></span><span id="line301"><span>    // of a collection. this iterator points to the location immediately
+</span></span><span id="line302"><span>    // after the end of a collection
+</span></span><span id="line303"><span>    auto end = values.end();
+</span></span><span id="line304"><span>
+</span></span><span id="line305"><span>    // the end iterator is not referenceable, it is just a sentinel
+</span></span><span id="line306"><span>    // value that marks the end of the container
+</span></span><span id="line307"><span>    while (it != end) {
+</span></span><span id="line308"><span>        // accessing the data an iterator is pointing to requires it 
+</span></span><span id="line309"><span>        // to be dereferenced using *, just like a pointer
+</span></span><span id="line310"><span>        std::cout <span class="entity"><span>&amp;</span>lt;</span><span class="entity"><span>&amp;</span>lt;</span> *it <span class="entity"><span>&amp;</span>lt;</span><span class="entity"><span>&amp;</span>lt;</span> std::endl;
+</span></span><span id="line311"><span>        // ++ is used to move the iterator to point at the next element
+</span></span><span id="line312"><span>        ++it;
+</span></span><span id="line313"><span>    }
+</span></span><span id="line314"><span>    return 0;
+</span></span><span id="line315"><span>}
+</span></span><span id="line316"><span></span><span>&lt;/<span class="end-tag">code</span>&gt;</span><span></span><span>&lt;/<span class="end-tag">pre</span>&gt;</span><span>
+</span></span><span id="line317"><span></span><span>&lt;<span class="start-tag">h3</span> <span class="attribute-name">id</span>="<a class="attribute-value">range-based-for-loops</a>"&gt;</span><span>Range-based for-Loops</span><span>&lt;/<span class="end-tag">h3</span>&gt;</span><span>
+</span></span><span id="line318"><span></span><span>&lt;<span class="start-tag">p</span>&gt;</span><span>One consequence of iterators is the ability to implement range-based for-loops. If you are familiar with for loops in Python or the </span><span>&lt;<span class="start-tag">code</span>&gt;</span><span>foreach</span><span>&lt;/<span class="end-tag">code</span>&gt;</span><span> loop in C#, this concept should be familiar to you. The syntax for a range-based for-loop is below:</span><span>&lt;/<span class="end-tag">p</span>&gt;</span><span>
+</span></span><span id="line319"><span></span><span>&lt;<span class="start-tag">pre</span>&gt;</span><span></span><span>&lt;<span class="start-tag">code</span> <span class="attribute-name">class</span>="<a class="attribute-value">language-C++</a>"&gt;</span><span>for (TypeName x : container) {
+</span></span><span id="line320"><span>
+</span></span><span id="line321"><span>}
+</span></span><span id="line322"><span></span><span>&lt;/<span class="end-tag">code</span>&gt;</span><span></span><span>&lt;/<span class="end-tag">pre</span>&gt;</span><span>
+</span></span><span id="line323"><span></span><span>&lt;<span class="start-tag">p</span>&gt;</span><span>Below shows a traditional for-loop and a range-based for loop that performs the same operation:</span><span>&lt;/<span class="end-tag">p</span>&gt;</span><span>
+</span></span><span id="line324"><span></span><span>&lt;<span class="start-tag">pre</span>&gt;</span><span></span><span>&lt;<span class="start-tag">code</span> <span class="attribute-name">class</span>="<a class="attribute-value">language-C++</a>"&gt;</span><span>#include <span class="entity"><span>&amp;</span>lt;</span>iostream<span class="entity"><span>&amp;</span>gt;</span>
+</span></span><span id="line325"><span>#include <span class="entity"><span>&amp;</span>lt;</span>vector<span class="entity"><span>&amp;</span>gt;</span>
+</span></span><span id="line326"><span>
+</span></span><span id="line327"><span>int main() {
+</span></span><span id="line328"><span>    std::vector<span class="entity"><span>&amp;</span>lt;</span>int<span class="entity"><span>&amp;</span>gt;</span> values = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+</span></span><span id="line329"><span>
+</span></span><span id="line330"><span>    // tradition for loop
+</span></span><span id="line331"><span>    for (int i = 0; i <span class="entity"><span>&amp;</span>lt;</span> values.size(); ++i) {
+</span></span><span id="line332"><span>        std::cout <span class="entity"><span>&amp;</span>lt;</span><span class="entity"><span>&amp;</span>lt;</span> values[i] <span class="entity"><span>&amp;</span>lt;</span><span class="entity"><span>&amp;</span>lt;</span> std::endl;
+</span></span><span id="line333"><span>    }
+</span></span><span id="line334"><span>
+</span></span><span id="line335"><span>    // range-based for loop
+</span></span><span id="line336"><span>    for (int x: values) {
+</span></span><span id="line337"><span>        std::cout <span class="entity"><span>&amp;</span>lt;</span><span class="entity"><span>&amp;</span>lt;</span> x <span class="entity"><span>&amp;</span>lt;</span><span class="entity"><span>&amp;</span>lt;</span> std::endl;
+</span></span><span id="line338"><span>    }
+</span></span><span id="line339"><span>
+</span></span><span id="line340"><span>    return 0;
+</span></span><span id="line341"><span>}
+</span></span><span id="line342"><span></span><span>&lt;/<span class="end-tag">code</span>&gt;</span><span></span><span>&lt;/<span class="end-tag">pre</span>&gt;</span><span>
+</span></span><span id="line343"><span></span><span>&lt;<span class="start-tag">h2</span> <span class="attribute-name">id</span>="<a class="attribute-value">vectors-continued</a>"&gt;</span><span>Vectors (continued)</span><span>&lt;/<span class="end-tag">h2</span>&gt;</span><span>
+</span></span><span id="line344"><span></span><span>&lt;<span class="start-tag">p</span>&gt;</span><span>Iterators can be used to insert at, or delete elements from, the middle of the vector. These operations are expensive, however, since they require shifting the entire vector to adjust for the missing or new element. The </span><span>&lt;<span class="start-tag">code</span>&gt;</span><span>insert()</span><span>&lt;/<span class="end-tag">code</span>&gt;</span><span> function takes an iterator that points to the location the element will be inserted, and the element to be inserted. The element is inserted before the iterator the </span><span>&lt;<span class="start-tag">code</span>&gt;</span><span>insert()</span><span>&lt;/<span class="end-tag">code</span>&gt;</span><span> function is passed. The function returns an iterator to the element that was just inserted. The </span><span>&lt;<span class="start-tag">code</span>&gt;</span><span>erase()</span><span>&lt;/<span class="end-tag">code</span>&gt;</span><span> function is used to remove item(s) from a vector. It expects an iterator that points to the element to be removed. A start and end iterator can be used to erase a range of elements from the vector. It returns an iterator to the next element after the last element that was removed.</span><span>&lt;<span class="start-tag">br</span> <span>/</span>&gt;</span><span>
+</span></span><span id="line345"><span></span><span>&lt;<span class="start-tag">strong</span>&gt;</span><span>Note:</span><span>&lt;/<span class="end-tag">strong</span>&gt;</span><span> </span><span>&lt;<span class="start-tag">code</span>&gt;</span><span>insert()</span><span>&lt;/<span class="end-tag">code</span>&gt;</span><span> and </span><span>&lt;<span class="start-tag">code</span>&gt;</span><span>erase()</span><span>&lt;/<span class="end-tag">code</span>&gt;</span><span> invalidate any existing iterators to a vector. Since the items must be shifted, there is no guarantee that an iterator is pointing to the correct location in memory.</span><span>&lt;/<span class="end-tag">p</span>&gt;</span><span>
+</span></span><span id="line346"><span></span><span>&lt;<span class="start-tag">pre</span>&gt;</span><span></span><span>&lt;<span class="start-tag">code</span> <span class="attribute-name">class</span>="<a class="attribute-value">language-C++</a>"&gt;</span><span>#include <span class="entity"><span>&amp;</span>lt;</span>vector<span class="entity"><span>&amp;</span>gt;</span>
+</span></span><span id="line347"><span>
+</span></span><span id="line348"><span>int main() {
+</span></span><span id="line349"><span>    std::vector<span class="entity"><span>&amp;</span>lt;</span>int<span class="entity"><span>&amp;</span>gt;</span> values = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+</span></span><span id="line350"><span>    auto it = values.begin() + 2; // points to <span class="entity"><span>&amp;</span>quot;</span>3<span class="entity"><span>&amp;</span>quot;</span>
+</span></span><span id="line351"><span>    values.insert(it, 2);
+</span></span><span id="line352"><span>    // vector is now {1, 2, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+</span></span><span id="line353"><span>    // <span class="entity"><span>&amp;</span>quot;</span>it<span class="entity"><span>&amp;</span>quot;</span> is now invalid, so we need to reassign it
+</span></span><span id="line354"><span>    it = values.begin() + 2; 
+</span></span><span id="line355"><span>    values.erase(it); // deletes the 2 that was just inserted
+</span></span><span id="line356"><span>    // vector is now {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, x}
+</span></span><span id="line357"><span>    // the last element is invalid, but still has memory allocated
+</span></span><span id="line358"><span>    values.erase(values.begin(), values.begin() + 5); // erase first 5 elements
+</span></span><span id="line359"><span>    // vector is now {6, 7, 8, 9, 10}
+</span></span><span id="line360"><span>}
+</span></span><span id="line361"><span></span><span>&lt;/<span class="end-tag">code</span>&gt;</span><span></span><span>&lt;/<span class="end-tag">pre</span>&gt;</span><span>
+</span></span><span id="line362"><span></span><span>&lt;<span class="start-tag">h3</span> <span class="attribute-name">id</span>="<a class="attribute-value">common-applications</a>"&gt;</span><span>Common Applications</span><span>&lt;/<span class="end-tag">h3</span>&gt;</span><span>
+</span></span><span id="line363"><span></span><span>&lt;<span class="start-tag">p</span>&gt;</span><span></span><span>&lt;<span class="start-tag">code</span>&gt;</span><span>std::vector</span><span>&lt;/<span class="end-tag">code</span>&gt;</span><span> is the standard container used in C++ for storing collections of data. If you aren't sure which of the other containers to use for an application, that typically means a vector will work fine. Vectors offer balanced performance for most applications.</span><span>&lt;/<span class="end-tag">p</span>&gt;</span><span>
+</span></span><span id="line364"><span></span><span>&lt;<span class="start-tag">h3</span> <span class="attribute-name">id</span>="<a class="attribute-value">example</a>"&gt;</span><span>Example</span><span>&lt;/<span class="end-tag">h3</span>&gt;</span><span>
+</span></span><span id="line365"><span></span><span>&lt;<span class="start-tag">p</span>&gt;</span><span>This example uses vectors to split a string and store the contents of a CSV file that contains information on orders:</span><span>&lt;/<span class="end-tag">p</span>&gt;</span><span>
+</span></span><span id="line366"><span></span><span>&lt;<span class="start-tag">pre</span>&gt;</span><span></span><span>&lt;<span class="start-tag">code</span> <span class="attribute-name">class</span>="<a class="attribute-value">language-C++</a>"&gt;</span><span>
+</span></span><span id="line367"><span>#include <span class="entity"><span>&amp;</span>lt;</span>fstream<span class="entity"><span>&amp;</span>gt;</span>
+</span></span><span id="line368"><span>#include <span class="entity"><span>&amp;</span>lt;</span>iostream<span class="entity"><span>&amp;</span>gt;</span>
+</span></span><span id="line369"><span>#include <span class="entity"><span>&amp;</span>lt;</span>string<span class="entity"><span>&amp;</span>gt;</span>
+</span></span><span id="line370"><span>#include <span class="entity"><span>&amp;</span>lt;</span>vector<span class="entity"><span>&amp;</span>gt;</span>
+</span></span><span id="line371"><span>
+</span></span><span id="line372"><span>// we expect the structure of the file to be
+</span></span><span id="line373"><span>// John Doe,3,1000a,Filter
+</span></span><span id="line374"><span>
+</span></span><span id="line375"><span>// struct to hold order information
+</span></span><span id="line376"><span>struct Order {
+</span></span><span id="line377"><span>    std::string customerName;
+</span></span><span id="line378"><span>    int quantity;
+</span></span><span id="line379"><span>    std::string itemId;
+</span></span><span id="line380"><span>    std::string itemName;
+</span></span><span id="line381"><span>};
+</span></span><span id="line382"><span>
+</span></span><span id="line383"><span>// overloading <span class="entity"><span>&amp;</span>lt;</span><span class="entity"><span>&amp;</span>lt;</span> to print an order
+</span></span><span id="line384"><span>std::ostream<span class="entity"><span>&amp;</span>amp;</span> operator<span class="entity"><span>&amp;</span>lt;</span><span class="entity"><span>&amp;</span>lt;</span>(std::ostream<span class="entity"><span>&amp;</span>amp;</span> out, const Order<span class="entity"><span>&amp;</span>amp;</span> order) {
+</span></span><span id="line385"><span>    out <span class="entity"><span>&amp;</span>lt;</span><span class="entity"><span>&amp;</span>lt;</span> <span class="entity"><span>&amp;</span>quot;</span>Customer:  <span class="entity"><span>&amp;</span>quot;</span> <span class="entity"><span>&amp;</span>lt;</span><span class="entity"><span>&amp;</span>lt;</span> order.customerName <span class="entity"><span>&amp;</span>lt;</span><span class="entity"><span>&amp;</span>lt;</span> <span class="entity"><span>&amp;</span>quot;</span>\n<span class="entity"><span>&amp;</span>quot;</span>;
+</span></span><span id="line386"><span>    out <span class="entity"><span>&amp;</span>lt;</span><span class="entity"><span>&amp;</span>lt;</span> <span class="entity"><span>&amp;</span>quot;</span>Quantity:  <span class="entity"><span>&amp;</span>quot;</span> <span class="entity"><span>&amp;</span>lt;</span><span class="entity"><span>&amp;</span>lt;</span> order.quantity <span class="entity"><span>&amp;</span>lt;</span><span class="entity"><span>&amp;</span>lt;</span> <span class="entity"><span>&amp;</span>quot;</span>\n<span class="entity"><span>&amp;</span>quot;</span>;
+</span></span><span id="line387"><span>    out <span class="entity"><span>&amp;</span>lt;</span><span class="entity"><span>&amp;</span>lt;</span> <span class="entity"><span>&amp;</span>quot;</span>Item ID:   <span class="entity"><span>&amp;</span>quot;</span> <span class="entity"><span>&amp;</span>lt;</span><span class="entity"><span>&amp;</span>lt;</span> order.itemId <span class="entity"><span>&amp;</span>lt;</span><span class="entity"><span>&amp;</span>lt;</span> <span class="entity"><span>&amp;</span>quot;</span>\n<span class="entity"><span>&amp;</span>quot;</span>;
+</span></span><span id="line388"><span>    out <span class="entity"><span>&amp;</span>lt;</span><span class="entity"><span>&amp;</span>lt;</span> <span class="entity"><span>&amp;</span>quot;</span>Item Name: <span class="entity"><span>&amp;</span>quot;</span> <span class="entity"><span>&amp;</span>lt;</span><span class="entity"><span>&amp;</span>lt;</span> order.itemName <span class="entity"><span>&amp;</span>lt;</span><span class="entity"><span>&amp;</span>lt;</span> <span class="entity"><span>&amp;</span>quot;</span>\n<span class="entity"><span>&amp;</span>quot;</span>;
+</span></span><span id="line389"><span>    return out;
+</span></span><span id="line390"><span>}
+</span></span><span id="line391"><span>
+</span></span><span id="line392"><span>// function to split a string on any character
+</span></span><span id="line393"><span>std::vector<span class="entity"><span>&amp;</span>lt;</span>std::string<span class="entity"><span>&amp;</span>gt;</span> split(const std::string<span class="entity"><span>&amp;</span>amp;</span> line, char delim) {
+</span></span><span id="line394"><span>    std::vector<span class="entity"><span>&amp;</span>lt;</span>std::string<span class="entity"><span>&amp;</span>gt;</span> parts;
+</span></span><span id="line395"><span>    size_t start = 0;
+</span></span><span id="line396"><span>    // find index delimitor in string
+</span></span><span id="line397"><span>    size_t end = line.find(delim, start);
+</span></span><span id="line398"><span>    // while end position of substring is not the past the end
+</span></span><span id="line399"><span>    // of the string
+</span></span><span id="line400"><span>    while (end != std::string::npos) {
+</span></span><span id="line401"><span>        // push substring into vector
+</span></span><span id="line402"><span>        parts.push_back(line.substr(start, end - start));
+</span></span><span id="line403"><span>        // set the start of the next substring to the 
+</span></span><span id="line404"><span>        // next index of the string
+</span></span><span id="line405"><span>        start = end + 1;
+</span></span><span id="line406"><span>        // search for the next occurance of <span class="entity"><span>&amp;</span>quot;</span>delim<span class="entity"><span>&amp;</span>quot;</span>
+</span></span><span id="line407"><span>        end = line.find(delim, start);
+</span></span><span id="line408"><span>    }
+</span></span><span id="line409"><span>    // push the last substring into the vector
+</span></span><span id="line410"><span>    // if <span class="entity"><span>&amp;</span>quot;</span>delim<span class="entity"><span>&amp;</span>quot;</span> is never found, it will just
+</span></span><span id="line411"><span>    // push the whole string into the vector
+</span></span><span id="line412"><span>    parts.push_back(line.substr(start, end - start));
+</span></span><span id="line413"><span>    return parts;
+</span></span><span id="line414"><span>}
+</span></span><span id="line415"><span>
+</span></span><span id="line416"><span>// main function
+</span></span><span id="line417"><span>int main(int argc, char **argv) {
+</span></span><span id="line418"><span>    // input filename needs to be provided via command line arg
+</span></span><span id="line419"><span>    if (argc <span class="entity"><span>&amp;</span>lt;</span> 2) {
+</span></span><span id="line420"><span>        std::cerr <span class="entity"><span>&amp;</span>lt;</span><span class="entity"><span>&amp;</span>lt;</span> <span class="entity"><span>&amp;</span>quot;</span>Must provide input filename\n<span class="entity"><span>&amp;</span>quot;</span>;
+</span></span><span id="line421"><span>        std::cerr <span class="entity"><span>&amp;</span>lt;</span><span class="entity"><span>&amp;</span>lt;</span> <span class="entity"><span>&amp;</span>quot;</span>Usage:\n<span class="entity"><span>&amp;</span>quot;</span>;
+</span></span><span id="line422"><span>        std::cerr <span class="entity"><span>&amp;</span>lt;</span><span class="entity"><span>&amp;</span>lt;</span> <span class="entity"><span>&amp;</span>quot;</span>\torder_report orders.csv\n<span class="entity"><span>&amp;</span>quot;</span>;
+</span></span><span id="line423"><span>        return 1;
+</span></span><span id="line424"><span>    }
+</span></span><span id="line425"><span>
+</span></span><span id="line426"><span>    // open and check the input file
+</span></span><span id="line427"><span>    std::ifstream fin(argv[1]);
+</span></span><span id="line428"><span>    if (fin.fail()) {
+</span></span><span id="line429"><span>        std::cerr <span class="entity"><span>&amp;</span>lt;</span><span class="entity"><span>&amp;</span>lt;</span> <span class="entity"><span>&amp;</span>quot;</span>Could not open file: <span class="entity"><span>&amp;</span>quot;</span> <span class="entity"><span>&amp;</span>lt;</span><span class="entity"><span>&amp;</span>lt;</span> argv[1] <span class="entity"><span>&amp;</span>lt;</span><span class="entity"><span>&amp;</span>lt;</span> <span class="entity"><span>&amp;</span>quot;</span>\n<span class="entity"><span>&amp;</span>quot;</span>;
+</span></span><span id="line430"><span>        return 2;
+</span></span><span id="line431"><span>    }
+</span></span><span id="line432"><span>
+</span></span><span id="line433"><span>    // read the lines of the file into the split function
+</span></span><span id="line434"><span>    // convert them to orders and add to the orders vector
+</span></span><span id="line435"><span>    std::vector<span class="entity"><span>&amp;</span>lt;</span>Order<span class="entity"><span>&amp;</span>gt;</span> orders;
+</span></span><span id="line436"><span>    for (std::string line; std::getline(fin, line);) {
+</span></span><span id="line437"><span>        std::vector<span class="entity"><span>&amp;</span>lt;</span>std::string<span class="entity"><span>&amp;</span>gt;</span> orderParts = split(line, ',');
+</span></span><span id="line438"><span>        // verify that the input is not malformed and we have the correct 
+</span></span><span id="line439"><span>        // number of parts
+</span></span><span id="line440"><span>        if (orderParts.size() != 4) {
+</span></span><span id="line441"><span>            continue;
+</span></span><span id="line442"><span>        }
+</span></span><span id="line443"><span>        orders.push_back({
+</span></span><span id="line444"><span>            orderParts[0], 
+</span></span><span id="line445"><span>            std::stoi(orderParts[1]), 
+</span></span><span id="line446"><span>            orderParts[2], 
+</span></span><span id="line447"><span>            orderParts[3]
+</span></span><span id="line448"><span>            });
+</span></span><span id="line449"><span>    }
+</span></span><span id="line450"><span>
+</span></span><span id="line451"><span>    // done with file stream -<span class="entity"><span>&amp;</span>gt;</span> close it
+</span></span><span id="line452"><span>    fin.close();
+</span></span><span id="line453"><span>
+</span></span><span id="line454"><span>    // print out the orders
+</span></span><span id="line455"><span>    std::cout <span class="entity"><span>&amp;</span>lt;</span><span class="entity"><span>&amp;</span>lt;</span> <span class="entity"><span>&amp;</span>quot;</span>Orders:\n<span class="entity"><span>&amp;</span>quot;</span>;
+</span></span><span id="line456"><span>    // using range-based for loop to access elements
+</span></span><span id="line457"><span>    for (const auto<span class="entity"><span>&amp;</span>amp;</span> order: orders) {
+</span></span><span id="line458"><span>        std::cout <span class="entity"><span>&amp;</span>lt;</span><span class="entity"><span>&amp;</span>lt;</span> <span class="entity"><span>&amp;</span>quot;</span>------------------------\n<span class="entity"><span>&amp;</span>quot;</span>;
+</span></span><span id="line459"><span>        std::cout <span class="entity"><span>&amp;</span>lt;</span><span class="entity"><span>&amp;</span>lt;</span> order;
+</span></span><span id="line460"><span>        std::cout <span class="entity"><span>&amp;</span>lt;</span><span class="entity"><span>&amp;</span>lt;</span> <span class="entity"><span>&amp;</span>quot;</span>------------------------\n<span class="entity"><span>&amp;</span>quot;</span>;
+</span></span><span id="line461"><span>    }
+</span></span><span id="line462"><span>    return 0;
+</span></span><span id="line463"><span>}
+</span></span><span id="line464"><span>
+</span></span><span id="line465"><span>
+</span></span><span id="line466"><span></span><span>&lt;/<span class="end-tag">code</span>&gt;</span><span></span><span>&lt;/<span class="end-tag">pre</span>&gt;</span><span>
+</span></span><span id="line467"><span></span><span>&lt;<span class="start-tag">h2</span> <span class="attribute-name">id</span>="<a class="attribute-value">list</a>"&gt;</span><span>List</span><span>&lt;/<span class="end-tag">h2</span>&gt;</span><span>
+</span></span><span id="line468"><span></span><span>&lt;<span class="start-tag">p</span>&gt;</span><span>The STL List class is used to create a doubly linked list. Similar to a vector, lists store a collection of elements while preserving their order. Linked lists are different from vectors in that the elements can no longer be accessed by an index and are not stored contiguously in memory. This can be an advantage or disadvantage depending on the usage. Below is a table that compares lists and vectors.
+</span></span><span id="line469"><span>| Scenario | Vector | List |
+</span></span><span id="line470"><span>| -------- | ------ | ---- |
+</span></span><span id="line471"><span>| Insertion at End | May be instant, unless vector must be resized | Fast |
+</span></span><span id="line472"><span>| Insertion at Middle | Requires shifting all elements that follow the insertion point, Slow | Fast |
+</span></span><span id="line473"><span>| Insertion at Front | Requires shifting all elements, Slow | Fast |
+</span></span><span id="line474"><span>| Deletion | Requires shifting of elements, Slow | Fast, and preserves iterators |
+</span></span><span id="line475"><span>| Random Access (index) | Fast | Impossible |
+</span></span><span id="line476"><span>| Space | Does not need to be known at compile time, but resizing is expensive and can result in massive amounts of wasted space | Does not need to be known at compile time, and there is never wasted space | </span><span>&lt;/<span class="end-tag">p</span>&gt;</span><span>
+</span></span><span id="line477"><span></span><span>&lt;<span class="start-tag">h3</span> <span class="attribute-name">id</span>="<a class="attribute-value">similarities-to-vector</a>"&gt;</span><span>Similarities to Vector</span><span>&lt;/<span class="end-tag">h3</span>&gt;</span><span>
+</span></span><span id="line478"><span></span><span>&lt;<span class="start-tag">p</span>&gt;</span><span>Lists support many of the same operations as vectors, minus the subscript operator </span><span>&lt;<span class="start-tag">code</span>&gt;</span><span>[]</span><span>&lt;/<span class="end-tag">code</span>&gt;</span><span>. Lists add the </span><span>&lt;<span class="start-tag">code</span>&gt;</span><span>push_front()</span><span>&lt;/<span class="end-tag">code</span>&gt;</span><span> and </span><span>&lt;<span class="start-tag">code</span>&gt;</span><span>pop_front()</span><span>&lt;/<span class="end-tag">code</span>&gt;</span><span>, in addition to the </span><span>&lt;<span class="start-tag">code</span>&gt;</span><span>push_back()</span><span>&lt;/<span class="end-tag">code</span>&gt;</span><span> and </span><span>&lt;<span class="start-tag">code</span>&gt;</span><span>pop_back()</span><span>&lt;/<span class="end-tag">code</span>&gt;</span><span> member functions. This allows direct access to the front of the list, whereas vectors only allow access to the back.  </span><span>&lt;/<span class="end-tag">p</span>&gt;</span><span>
+</span></span><span id="line479"><span></span><span>&lt;<span class="start-tag">h3</span> <span class="attribute-name">id</span>="<a class="attribute-value">unique-operations</a>"&gt;</span><span>Unique Operations</span><span>&lt;/<span class="end-tag">h3</span>&gt;</span><span>
+</span></span><span id="line480"><span></span><span>&lt;<span class="start-tag">p</span>&gt;</span><span>Lists provide a few unique member functions for common list operations. First is </span><span>&lt;<span class="start-tag">code</span>&gt;</span><span>splice()</span><span>&lt;/<span class="end-tag">code</span>&gt;</span><span>, which is used to combine two lists (or sub-lists) into one. Splicing allows elements of lists to be transferred between each other, or reordered within the same list, without the overhead of copying.</span><span>&lt;<span class="start-tag">br</span> <span>/</span>&gt;</span><span>
+</span></span><span id="line481"><span>The </span><span>&lt;<span class="start-tag">code</span>&gt;</span><span>merge()</span><span>&lt;/<span class="end-tag">code</span>&gt;</span><span> member functions assumes that you have two sorted lists, and merges them into a single sorted list.</span><span>&lt;<span class="start-tag">br</span> <span>/</span>&gt;</span><span>
+</span></span><span id="line482"><span>The </span><span>&lt;<span class="start-tag">code</span>&gt;</span><span>remove()</span><span>&lt;/<span class="end-tag">code</span>&gt;</span><span> function searches for the value that is passed to it, and removes it from the list. This is different from </span><span>&lt;<span class="start-tag">code</span>&gt;</span><span>erase()</span><span>&lt;/<span class="end-tag">code</span>&gt;</span><span>, which expects an iterator to the element to be removed. The </span><span>&lt;<span class="start-tag">code</span>&gt;</span><span>remove_if()</span><span>&lt;/<span class="end-tag">code</span>&gt;</span><span> function takes a function pointer/functor/lambda and removes items that satisfy the condition of that function. Don't worry too much about this for right now; function pointers/functors/lambdas are a point of discussion for next week.</span><span>&lt;<span class="start-tag">br</span> <span>/</span>&gt;</span><span>
+</span></span><span id="line483"><span>Lists also offer a </span><span>&lt;<span class="start-tag">code</span>&gt;</span><span>reverse()</span><span>&lt;/<span class="end-tag">code</span>&gt;</span><span> member function, that reverses the contents of the list, and </span><span>&lt;<span class="start-tag">code</span>&gt;</span><span>sort()</span><span>&lt;/<span class="end-tag">code</span>&gt;</span><span> which sorts the list.</span><span>&lt;<span class="start-tag">br</span> <span>/</span>&gt;</span><span>
+</span></span><span id="line484"><span>The </span><span>&lt;<span class="start-tag">code</span>&gt;</span><span>unique()</span><span>&lt;/<span class="end-tag">code</span>&gt;</span><span> function removes consecutive duplicated elements. For example, </span><span>&lt;<span class="start-tag">code</span>&gt;</span><span>std::list<span class="entity"><span>&amp;</span>lt;</span>int<span class="entity"><span>&amp;</span>gt;</span>({1, 2, 3, 3, 4, 5, 5, 2, 3}).unique()</span><span>&lt;/<span class="end-tag">code</span>&gt;</span><span> would result in the list </span><span>&lt;<span class="start-tag">code</span>&gt;</span><span>{1, 2, 3, 4, 5, 2, 3}</span><span>&lt;/<span class="end-tag">code</span>&gt;</span><span>. The consecutive 3s and 5s are removed, but the extra 2 and 3 at the end of the list stays.  </span><span>&lt;/<span class="end-tag">p</span>&gt;</span><span>
+</span></span><span id="line485"><span></span><span>&lt;<span class="start-tag">h3</span> <span class="attribute-name">id</span>="<a class="attribute-value">common-applications_1</a>"&gt;</span><span>Common Applications</span><span>&lt;/<span class="end-tag">h3</span>&gt;</span><span>
+</span></span><span id="line486"><span></span><span>&lt;<span class="start-tag">p</span>&gt;</span><span>Lists are used when there are frequent needs for insertions or removals, or to move elements via </span><span>&lt;<span class="start-tag">code</span>&gt;</span><span>splice()</span><span>&lt;/<span class="end-tag">code</span>&gt;</span><span>. </span><span>&lt;/<span class="end-tag">p</span>&gt;</span><span>
+</span></span><span id="line487"><span></span><span>&lt;<span class="start-tag">h3</span> <span class="attribute-name">id</span>="<a class="attribute-value">example_1</a>"&gt;</span><span>Example</span><span>&lt;/<span class="end-tag">h3</span>&gt;</span><span>
+</span></span><span id="line488"><span></span><span>&lt;<span class="start-tag">p</span>&gt;</span><span>A cache is used to store recently accessed items. Many caches store use LRU (least recently used) to decide which item to evict from the cache when it gets full. One example of a cache is the CPU cache. Your computer's CPU has a small amount of memory that is faster than RAM that is part of the CPU. The most recently accessed data is stored in this cache, as it is assumed that recently used data will be accessed again soon. Another example of a cache is a browser cache. Recently accessed webpages, images, etc. are stored locally on your computer. This way, they will be available faster when you access them again.</span><span>&lt;<span class="start-tag">br</span> <span>/</span>&gt;</span><span>
+</span></span><span id="line489"><span>This example shows a class that implements an LRU cache using a list as the internal cache representation. For the example we'll just use integers for data.</span><span>&lt;/<span class="end-tag">p</span>&gt;</span><span>
+</span></span><span id="line490"><span></span><span>&lt;<span class="start-tag">pre</span>&gt;</span><span></span><span>&lt;<span class="start-tag">code</span> <span class="attribute-name">class</span>="<a class="attribute-value">language-C++</a>"&gt;</span><span>#include <span class="entity"><span>&amp;</span>lt;</span>iostream<span class="entity"><span>&amp;</span>gt;</span>
+</span></span><span id="line491"><span>#include <span class="entity"><span>&amp;</span>lt;</span>list<span class="entity"><span>&amp;</span>gt;</span>
+</span></span><span id="line492"><span>
+</span></span><span id="line493"><span>// class that implements LRU Cache using an std::list
+</span></span><span id="line494"><span>class LRUCache {
+</span></span><span id="line495"><span>public:
+</span></span><span id="line496"><span>    LRUCache() {
+</span></span><span id="line497"><span>        maxCacheSize = 64;
+</span></span><span id="line498"><span>    }
+</span></span><span id="line499"><span>    LRUCache(size_t size) {
+</span></span><span id="line500"><span>        maxCacheSize = size;
+</span></span><span id="line501"><span>    }
+</span></span><span id="line502"><span>    // checks for a cache hit, i.e.,
+</span></span><span id="line503"><span>    // if the data is in the cache
+</span></span><span id="line504"><span>    bool hit(int data);
+</span></span><span id="line505"><span>    // returns an iterator the data in the cache
+</span></span><span id="line506"><span>    // if the data is not in the cache, it is added
+</span></span><span id="line507"><span>    // if the data is in the cache, it is moved to
+</span></span><span id="line508"><span>    // the front of the cache
+</span></span><span id="line509"><span>    // if the cache is full, evicts LRU element
+</span></span><span id="line510"><span>    // to make room for new item
+</span></span><span id="line511"><span>    std::list<span class="entity"><span>&amp;</span>lt;</span>int<span class="entity"><span>&amp;</span>gt;</span>::iterator get(int data);
+</span></span><span id="line512"><span>    // get the size of the cache
+</span></span><span id="line513"><span>    size_t size() const { return maxCacheSize; }
+</span></span><span id="line514"><span>private:
+</span></span><span id="line515"><span>    // helper function to find an item in the list
+</span></span><span id="line516"><span>    std::list<span class="entity"><span>&amp;</span>lt;</span>int<span class="entity"><span>&amp;</span>gt;</span>::iterator find(int data);
+</span></span><span id="line517"><span>    // list for the cache
+</span></span><span id="line518"><span>    std::list<span class="entity"><span>&amp;</span>lt;</span>int<span class="entity"><span>&amp;</span>gt;</span> cache;
+</span></span><span id="line519"><span>    // limit to size of cache
+</span></span><span id="line520"><span>    // if a cache is too big, it will become slower to
+</span></span><span id="line521"><span>    // search and won't be as useful
+</span></span><span id="line522"><span>    size_t maxCacheSize;
+</span></span><span id="line523"><span>};
+</span></span><span id="line524"><span>
+</span></span><span id="line525"><span>std::list<span class="entity"><span>&amp;</span>lt;</span>int<span class="entity"><span>&amp;</span>gt;</span>::iterator LRUCache::find(int data) {
+</span></span><span id="line526"><span>    auto it = cache.begin();
+</span></span><span id="line527"><span>    while (it != cache.end()) {
+</span></span><span id="line528"><span>        if (*it == data) {
+</span></span><span id="line529"><span>            return it;
+</span></span><span id="line530"><span>        }
+</span></span><span id="line531"><span>        ++it;
+</span></span><span id="line532"><span>    }
+</span></span><span id="line533"><span>    return it;
+</span></span><span id="line534"><span>}
+</span></span><span id="line535"><span>
+</span></span><span id="line536"><span>bool LRUCache::hit(int data) {
+</span></span><span id="line537"><span>    return find(data) != cache.end();
+</span></span><span id="line538"><span>}
+</span></span><span id="line539"><span>
+</span></span><span id="line540"><span>std::list<span class="entity"><span>&amp;</span>lt;</span>int<span class="entity"><span>&amp;</span>gt;</span>::iterator LRUCache::get(int data) {
+</span></span><span id="line541"><span>    // get iterator to data item
+</span></span><span id="line542"><span>    auto it = find(data);
+</span></span><span id="line543"><span>    // if it is found
+</span></span><span id="line544"><span>    if (it != cache.end()) {
+</span></span><span id="line545"><span>        // move to the front of the cache using splice
+</span></span><span id="line546"><span>        cache.splice(cache.begin(), cache, it);
+</span></span><span id="line547"><span>        // and return the iterator
+</span></span><span id="line548"><span>        return it;
+</span></span><span id="line549"><span>    }
+</span></span><span id="line550"><span>
+</span></span><span id="line551"><span>    // if not, check if the cache is not full
+</span></span><span id="line552"><span>    if (cache.size() <span class="entity"><span>&amp;</span>lt;</span> maxCacheSize) {
+</span></span><span id="line553"><span>        // if it is not full, just push the new data to the front
+</span></span><span id="line554"><span>        cache.push_front(data);
+</span></span><span id="line555"><span>    }
+</span></span><span id="line556"><span>    else {
+</span></span><span id="line557"><span>        // remove the last item of the cache
+</span></span><span id="line558"><span>        cache.pop_back();
+</span></span><span id="line559"><span>        // add the data to the front
+</span></span><span id="line560"><span>        cache.push_front(data);
+</span></span><span id="line561"><span>    }
+</span></span><span id="line562"><span>
+</span></span><span id="line563"><span>    // in both cases, we return the first iterator of the list
+</span></span><span id="line564"><span>    return cache.begin();
+</span></span><span id="line565"><span>}
+</span></span><span id="line566"><span>
+</span></span><span id="line567"><span>int main() {
+</span></span><span id="line568"><span>    LRUCache cache(4);
+</span></span><span id="line569"><span>
+</span></span><span id="line570"><span>    cache.get(1);
+</span></span><span id="line571"><span>    cache.get(2);
+</span></span><span id="line572"><span>    cache.get(3);
+</span></span><span id="line573"><span>    cache.get(4);
+</span></span><span id="line574"><span>    cache.get(1);
+</span></span><span id="line575"><span>    cache.get(5);
+</span></span><span id="line576"><span>
+</span></span><span id="line577"><span>    if (cache.hit(1)) {
+</span></span><span id="line578"><span>        std::cout <span class="entity"><span>&amp;</span>lt;</span><span class="entity"><span>&amp;</span>lt;</span> 1 <span class="entity"><span>&amp;</span>lt;</span><span class="entity"><span>&amp;</span>lt;</span> <span class="entity"><span>&amp;</span>quot;</span> - Cache hit\n<span class="entity"><span>&amp;</span>quot;</span>;
+</span></span><span id="line579"><span>    }
+</span></span><span id="line580"><span>    else {
+</span></span><span id="line581"><span>        std::cout <span class="entity"><span>&amp;</span>lt;</span><span class="entity"><span>&amp;</span>lt;</span> 1 <span class="entity"><span>&amp;</span>lt;</span><span class="entity"><span>&amp;</span>lt;</span> <span class="entity"><span>&amp;</span>quot;</span> - Cache miss\n<span class="entity"><span>&amp;</span>quot;</span>;
+</span></span><span id="line582"><span>    }
+</span></span><span id="line583"><span>    if (cache.hit(2)) {
+</span></span><span id="line584"><span>        std::cout <span class="entity"><span>&amp;</span>lt;</span><span class="entity"><span>&amp;</span>lt;</span> 2 <span class="entity"><span>&amp;</span>lt;</span><span class="entity"><span>&amp;</span>lt;</span> <span class="entity"><span>&amp;</span>quot;</span> - Cache hit\n<span class="entity"><span>&amp;</span>quot;</span>;
+</span></span><span id="line585"><span>    }
+</span></span><span id="line586"><span>    else {
+</span></span><span id="line587"><span>        std::cout <span class="entity"><span>&amp;</span>lt;</span><span class="entity"><span>&amp;</span>lt;</span> 2 <span class="entity"><span>&amp;</span>lt;</span><span class="entity"><span>&amp;</span>lt;</span> <span class="entity"><span>&amp;</span>quot;</span> - Cache miss\n<span class="entity"><span>&amp;</span>quot;</span>;
+</span></span><span id="line588"><span>    }
+</span></span><span id="line589"><span>    if (cache.hit(3)) {
+</span></span><span id="line590"><span>        std::cout <span class="entity"><span>&amp;</span>lt;</span><span class="entity"><span>&amp;</span>lt;</span> 3 <span class="entity"><span>&amp;</span>lt;</span><span class="entity"><span>&amp;</span>lt;</span> <span class="entity"><span>&amp;</span>quot;</span> - Cache hit\n<span class="entity"><span>&amp;</span>quot;</span>;
+</span></span><span id="line591"><span>    }
+</span></span><span id="line592"><span>    else {
+</span></span><span id="line593"><span>        std::cout <span class="entity"><span>&amp;</span>lt;</span><span class="entity"><span>&amp;</span>lt;</span> 3 <span class="entity"><span>&amp;</span>lt;</span><span class="entity"><span>&amp;</span>lt;</span> <span class="entity"><span>&amp;</span>quot;</span> - Cache miss\n<span class="entity"><span>&amp;</span>quot;</span>;
+</span></span><span id="line594"><span>    }
+</span></span><span id="line595"><span>    if (cache.hit(4)) {
+</span></span><span id="line596"><span>        std::cout <span class="entity"><span>&amp;</span>lt;</span><span class="entity"><span>&amp;</span>lt;</span> 4 <span class="entity"><span>&amp;</span>lt;</span><span class="entity"><span>&amp;</span>lt;</span> <span class="entity"><span>&amp;</span>quot;</span> - Cache hit\n<span class="entity"><span>&amp;</span>quot;</span>;
+</span></span><span id="line597"><span>    }
+</span></span><span id="line598"><span>    else {
+</span></span><span id="line599"><span>        std::cout <span class="entity"><span>&amp;</span>lt;</span><span class="entity"><span>&amp;</span>lt;</span> 4 <span class="entity"><span>&amp;</span>lt;</span><span class="entity"><span>&amp;</span>lt;</span> <span class="entity"><span>&amp;</span>quot;</span> - Cache miss\n<span class="entity"><span>&amp;</span>quot;</span>;
+</span></span><span id="line600"><span>    }
+</span></span><span id="line601"><span>    if (cache.hit(5)) {
+</span></span><span id="line602"><span>        std::cout <span class="entity"><span>&amp;</span>lt;</span><span class="entity"><span>&amp;</span>lt;</span> 5 <span class="entity"><span>&amp;</span>lt;</span><span class="entity"><span>&amp;</span>lt;</span> <span class="entity"><span>&amp;</span>quot;</span> - Cache hit\n<span class="entity"><span>&amp;</span>quot;</span>;
+</span></span><span id="line603"><span>    }
+</span></span><span id="line604"><span>    else {
+</span></span><span id="line605"><span>        std::cout <span class="entity"><span>&amp;</span>lt;</span><span class="entity"><span>&amp;</span>lt;</span> 5 <span class="entity"><span>&amp;</span>lt;</span><span class="entity"><span>&amp;</span>lt;</span> <span class="entity"><span>&amp;</span>quot;</span> - Cache miss\n<span class="entity"><span>&amp;</span>quot;</span>;
+</span></span><span id="line606"><span>    }
+</span></span><span id="line607"><span>    return 0;
+</span></span><span id="line608"><span>}
+</span></span><span id="line609"><span></span><span>&lt;/<span class="end-tag">code</span>&gt;</span><span></span><span>&lt;/<span class="end-tag">pre</span>&gt;</span><span>
+</span></span><span id="line610"><span></span><span>&lt;<span class="start-tag">p</span>&gt;</span><span>This will print:</span><span>&lt;/<span class="end-tag">p</span>&gt;</span><span>
+</span></span><span id="line611"><span></span><span>&lt;<span class="start-tag">pre</span>&gt;</span><span></span><span>&lt;<span class="start-tag">code</span>&gt;</span><span>1 - Cache hit
+</span></span><span id="line612"><span>2 - Cache miss
+</span></span><span id="line613"><span>3 - Cache hit
+</span></span><span id="line614"><span>4 - Cache hit
+</span></span><span id="line615"><span>5 - Cache hit
+</span></span><span id="line616"><span></span><span>&lt;/<span class="end-tag">code</span>&gt;</span><span></span><span>&lt;/<span class="end-tag">pre</span>&gt;</span><span></span><span>&lt;/<span class="end-tag">div</span>&gt;</span><span>
+</span></span><span id="line617"><span>            </span><span>&lt;/<span class="end-tag">div</span>&gt;</span><span>
+</span></span><span id="line618"><span>        </span><span>&lt;/<span class="end-tag">div</span>&gt;</span><span>
+</span></span><span id="line619"><span>
+</span></span><span id="line620"><span>        </span><span>&lt;<span class="start-tag">footer</span> <span class="attribute-name">class</span>="<a class="attribute-value">col-md-12</a>"&gt;</span><span>
+</span></span><span id="line621"><span>            </span><span>&lt;<span class="start-tag">hr</span>&gt;</span><span>
+</span></span><span id="line622"><span>            </span><span>&lt;<span class="start-tag">p</span>&gt;</span><span>Documentation built with </span><span>&lt;<span class="start-tag">a</span> <span class="attribute-name">href</span>="<a class="attribute-value" href="view-source:https://www.mkdocs.org/">https://www.mkdocs.org/</a>"&gt;</span><span>MkDocs</span><span>&lt;/<span class="end-tag">a</span>&gt;</span><span>.</span><span>&lt;/<span class="end-tag">p</span>&gt;</span><span>
+</span></span><span id="line623"><span>        </span><span>&lt;/<span class="end-tag">footer</span>&gt;</span><span>
+</span></span><span id="line624"><span>        </span><span>&lt;<span class="start-tag">script</span> <span class="attribute-name">src</span>="<a class="attribute-value" href="view-source:http://localhost:8000/js/bootstrap.bundle.min.js">../../js/bootstrap.bundle.min.js</a>"&gt;</span><span></span><span>&lt;/<span class="end-tag">script</span>&gt;</span><span>
+</span></span><span id="line625"><span>        </span><span>&lt;<span class="start-tag">script</span>&gt;</span><span>
+</span></span><span id="line626"><span>            var base_url = "../..",
+</span></span><span id="line627"><span>                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+</span></span><span id="line628"><span>        </span><span>&lt;/<span class="end-tag">script</span>&gt;</span><span>
+</span></span><span id="line629"><span>        </span><span>&lt;<span class="start-tag">script</span> <span class="attribute-name">src</span>="<a class="attribute-value" href="view-source:http://localhost:8000/js/base.js">../../js/base.js</a>"&gt;</span><span></span><span>&lt;/<span class="end-tag">script</span>&gt;</span><span>
+</span></span><span id="line630"><span>        </span><span>&lt;<span class="start-tag">script</span> <span class="attribute-name">src</span>="<a class="attribute-value" href="view-source:http://localhost:8000/search/main.js">../../search/main.js</a>"&gt;</span><span></span><span>&lt;/<span class="end-tag">script</span>&gt;</span><span>
+</span></span><span id="line631"><span>
+</span></span><span id="line632"><span>        </span><span>&lt;<span class="start-tag">div</span> <span class="attribute-name">class</span>="<a class="attribute-value">modal</a>" <span class="attribute-name">id</span>="<a class="attribute-value">mkdocs_search_modal</a>" <span class="attribute-name">tabindex</span>="<a class="attribute-value">-1</a>" <span class="attribute-name">role</span>="<a class="attribute-value">dialog</a>" <span class="attribute-name">aria-labelledby</span>="<a class="attribute-value">searchModalLabel</a>" <span class="attribute-name">aria-hidden</span>="<a class="attribute-value">true</a>"&gt;</span><span>
+</span></span><span id="line633"><span>    </span><span>&lt;<span class="start-tag">div</span> <span class="attribute-name">class</span>="<a class="attribute-value">modal-dialog modal-lg</a>"&gt;</span><span>
+</span></span><span id="line634"><span>        </span><span>&lt;<span class="start-tag">div</span> <span class="attribute-name">class</span>="<a class="attribute-value">modal-content</a>"&gt;</span><span>
+</span></span><span id="line635"><span>            </span><span>&lt;<span class="start-tag">div</span> <span class="attribute-name">class</span>="<a class="attribute-value">modal-header</a>"&gt;</span><span>
+</span></span><span id="line636"><span>                </span><span>&lt;<span class="start-tag">h4</span> <span class="attribute-name">class</span>="<a class="attribute-value">modal-title</a>" <span class="attribute-name">id</span>="<a class="attribute-value">searchModalLabel</a>"&gt;</span><span>Search</span><span>&lt;/<span class="end-tag">h4</span>&gt;</span><span>
+</span></span><span id="line637"><span>                </span><span>&lt;<span class="start-tag">button</span> <span class="attribute-name">type</span>="<a class="attribute-value">button</a>" <span class="attribute-name">class</span>="<a class="attribute-value">btn-close</a>" <span class="attribute-name">data-bs-dismiss</span>="<a class="attribute-value">modal</a>" <span class="attribute-name">aria-label</span>="<a class="attribute-value">Close</a>"&gt;</span><span></span><span>&lt;/<span class="end-tag">button</span>&gt;</span><span>
+</span></span><span id="line638"><span>            </span><span>&lt;/<span class="end-tag">div</span>&gt;</span><span>
+</span></span><span id="line639"><span>            </span><span>&lt;<span class="start-tag">div</span> <span class="attribute-name">class</span>="<a class="attribute-value">modal-body</a>"&gt;</span><span>
+</span></span><span id="line640"><span>                </span><span>&lt;<span class="start-tag">p</span>&gt;</span><span>From here you can search these documents. Enter your search terms below.</span><span>&lt;/<span class="end-tag">p</span>&gt;</span><span>
+</span></span><span id="line641"><span>                </span><span>&lt;<span class="start-tag">form</span>&gt;</span><span>
+</span></span><span id="line642"><span>                    </span><span>&lt;<span class="start-tag">div</span> <span class="attribute-name">class</span>="<a class="attribute-value">form-group</a>"&gt;</span><span>
+</span></span><span id="line643"><span>                        </span><span>&lt;<span class="start-tag">input</span> <span class="attribute-name">type</span>="<a class="attribute-value">search</a>" <span class="attribute-name">class</span>="<a class="attribute-value">form-control</a>" <span class="attribute-name">placeholder</span>="<a class="attribute-value">Search...</a>" <span class="attribute-name">id</span>="<a class="attribute-value">mkdocs-search-query</a>" <span class="attribute-name">title</span>="<a class="attribute-value">Type search term here</a>"&gt;</span><span>
+</span></span><span id="line644"><span>                    </span><span>&lt;/<span class="end-tag">div</span>&gt;</span><span>
+</span></span><span id="line645"><span>                </span><span>&lt;/<span class="end-tag">form</span>&gt;</span><span>
+</span></span><span id="line646"><span>                </span><span>&lt;<span class="start-tag">div</span> <span class="attribute-name">id</span>="<a class="attribute-value">mkdocs-search-results</a>" <span class="attribute-name">data-no-results-text</span>="<a class="attribute-value">No results found</a>"&gt;</span><span></span><span>&lt;/<span class="end-tag">div</span>&gt;</span><span>
+</span></span><span id="line647"><span>            </span><span>&lt;/<span class="end-tag">div</span>&gt;</span><span>
+</span></span><span id="line648"><span>            </span><span>&lt;<span class="start-tag">div</span> <span class="attribute-name">class</span>="<a class="attribute-value">modal-footer</a>"&gt;</span><span>
+</span></span><span id="line649"><span>            </span><span>&lt;/<span class="end-tag">div</span>&gt;</span><span>
+</span></span><span id="line650"><span>        </span><span>&lt;/<span class="end-tag">div</span>&gt;</span><span>
+</span></span><span id="line651"><span>    </span><span>&lt;/<span class="end-tag">div</span>&gt;</span><span>
+</span></span><span id="line652"><span></span><span>&lt;/<span class="end-tag">div</span>&gt;</span><span></span><span>&lt;<span class="start-tag">div</span> <span class="attribute-name">class</span>="<a class="attribute-value">modal</a>" <span class="attribute-name">id</span>="<a class="attribute-value">mkdocs_keyboard_modal</a>" <span class="attribute-name">tabindex</span>="<a class="attribute-value">-1</a>" <span class="attribute-name">role</span>="<a class="attribute-value">dialog</a>" <span class="attribute-name">aria-labelledby</span>="<a class="attribute-value">keyboardModalLabel</a>" <span class="attribute-name">aria-hidden</span>="<a class="attribute-value">true</a>"&gt;</span><span>
+</span></span><span id="line653"><span>    </span><span>&lt;<span class="start-tag">div</span> <span class="attribute-name">class</span>="<a class="attribute-value">modal-dialog</a>"&gt;</span><span>
+</span></span><span id="line654"><span>        </span><span>&lt;<span class="start-tag">div</span> <span class="attribute-name">class</span>="<a class="attribute-value">modal-content</a>"&gt;</span><span>
+</span></span><span id="line655"><span>            </span><span>&lt;<span class="start-tag">div</span> <span class="attribute-name">class</span>="<a class="attribute-value">modal-header</a>"&gt;</span><span>
+</span></span><span id="line656"><span>                </span><span>&lt;<span class="start-tag">h4</span> <span class="attribute-name">class</span>="<a class="attribute-value">modal-title</a>" <span class="attribute-name">id</span>="<a class="attribute-value">keyboardModalLabel</a>"&gt;</span><span>Keyboard Shortcuts</span><span>&lt;/<span class="end-tag">h4</span>&gt;</span><span>
+</span></span><span id="line657"><span>                </span><span>&lt;<span class="start-tag">button</span> <span class="attribute-name">type</span>="<a class="attribute-value">button</a>" <span class="attribute-name">class</span>="<a class="attribute-value">btn-close</a>" <span class="attribute-name">data-bs-dismiss</span>="<a class="attribute-value">modal</a>" <span class="attribute-name">aria-label</span>="<a class="attribute-value">Close</a>"&gt;</span><span></span><span>&lt;/<span class="end-tag">button</span>&gt;</span><span>
+</span></span><span id="line658"><span>            </span><span>&lt;/<span class="end-tag">div</span>&gt;</span><span>
+</span></span><span id="line659"><span>            </span><span>&lt;<span class="start-tag">div</span> <span class="attribute-name">class</span>="<a class="attribute-value">modal-body</a>"&gt;</span><span>
+</span></span><span id="line660"><span>              </span><span>&lt;<span class="start-tag">table</span> <span class="attribute-name">class</span>="<a class="attribute-value">table</a>"&gt;</span><span>
+</span></span><span id="line661"><span>                </span><span>&lt;<span class="start-tag">thead</span>&gt;</span><span>
+</span></span><span id="line662"><span>                  </span><span>&lt;<span class="start-tag">tr</span>&gt;</span><span>
+</span></span><span id="line663"><span>                    </span><span>&lt;<span class="start-tag">th</span> <span class="attribute-name">style</span>="<a class="attribute-value">width: 20%;</a>"&gt;</span><span>Keys</span><span>&lt;/<span class="end-tag">th</span>&gt;</span><span>
+</span></span><span id="line664"><span>                    </span><span>&lt;<span class="start-tag">th</span>&gt;</span><span>Action</span><span>&lt;/<span class="end-tag">th</span>&gt;</span><span>
+</span></span><span id="line665"><span>                  </span><span>&lt;/<span class="end-tag">tr</span>&gt;</span><span>
+</span></span><span id="line666"><span>                </span><span>&lt;/<span class="end-tag">thead</span>&gt;</span><span>
+</span></span><span id="line667"><span>                </span><span>&lt;<span class="start-tag">tbody</span>&gt;</span><span>
+</span></span><span id="line668"><span>                  </span><span>&lt;<span class="start-tag">tr</span>&gt;</span><span>
+</span></span><span id="line669"><span>                    </span><span>&lt;<span class="start-tag">td</span> <span class="attribute-name">class</span>="<a class="attribute-value">help shortcut</a>"&gt;</span><span></span><span>&lt;<span class="start-tag">kbd</span>&gt;</span><span>?</span><span>&lt;/<span class="end-tag">kbd</span>&gt;</span><span></span><span>&lt;/<span class="end-tag">td</span>&gt;</span><span>
+</span></span><span id="line670"><span>                    </span><span>&lt;<span class="start-tag">td</span>&gt;</span><span>Open this help</span><span>&lt;/<span class="end-tag">td</span>&gt;</span><span>
+</span></span><span id="line671"><span>                  </span><span>&lt;/<span class="end-tag">tr</span>&gt;</span><span>
+</span></span><span id="line672"><span>                  </span><span>&lt;<span class="start-tag">tr</span>&gt;</span><span>
+</span></span><span id="line673"><span>                    </span><span>&lt;<span class="start-tag">td</span> <span class="attribute-name">class</span>="<a class="attribute-value">next shortcut</a>"&gt;</span><span></span><span>&lt;<span class="start-tag">kbd</span>&gt;</span><span>n</span><span>&lt;/<span class="end-tag">kbd</span>&gt;</span><span></span><span>&lt;/<span class="end-tag">td</span>&gt;</span><span>
+</span></span><span id="line674"><span>                    </span><span>&lt;<span class="start-tag">td</span>&gt;</span><span>Next page</span><span>&lt;/<span class="end-tag">td</span>&gt;</span><span>
+</span></span><span id="line675"><span>                  </span><span>&lt;/<span class="end-tag">tr</span>&gt;</span><span>
+</span></span><span id="line676"><span>                  </span><span>&lt;<span class="start-tag">tr</span>&gt;</span><span>
+</span></span><span id="line677"><span>                    </span><span>&lt;<span class="start-tag">td</span> <span class="attribute-name">class</span>="<a class="attribute-value">prev shortcut</a>"&gt;</span><span></span><span>&lt;<span class="start-tag">kbd</span>&gt;</span><span>p</span><span>&lt;/<span class="end-tag">kbd</span>&gt;</span><span></span><span>&lt;/<span class="end-tag">td</span>&gt;</span><span>
+</span></span><span id="line678"><span>                    </span><span>&lt;<span class="start-tag">td</span>&gt;</span><span>Previous page</span><span>&lt;/<span class="end-tag">td</span>&gt;</span><span>
+</span></span><span id="line679"><span>                  </span><span>&lt;/<span class="end-tag">tr</span>&gt;</span><span>
+</span></span><span id="line680"><span>                  </span><span>&lt;<span class="start-tag">tr</span>&gt;</span><span>
+</span></span><span id="line681"><span>                    </span><span>&lt;<span class="start-tag">td</span> <span class="attribute-name">class</span>="<a class="attribute-value">search shortcut</a>"&gt;</span><span></span><span>&lt;<span class="start-tag">kbd</span>&gt;</span><span>s</span><span>&lt;/<span class="end-tag">kbd</span>&gt;</span><span></span><span>&lt;/<span class="end-tag">td</span>&gt;</span><span>
+</span></span><span id="line682"><span>                    </span><span>&lt;<span class="start-tag">td</span>&gt;</span><span>Search</span><span>&lt;/<span class="end-tag">td</span>&gt;</span><span>
+</span></span><span id="line683"><span>                  </span><span>&lt;/<span class="end-tag">tr</span>&gt;</span><span>
+</span></span><span id="line684"><span>                </span><span>&lt;/<span class="end-tag">tbody</span>&gt;</span><span>
+</span></span><span id="line685"><span>              </span><span>&lt;/<span class="end-tag">table</span>&gt;</span><span>
+</span></span><span id="line686"><span>            </span><span>&lt;/<span class="end-tag">div</span>&gt;</span><span>
+</span></span><span id="line687"><span>            </span><span>&lt;<span class="start-tag">div</span> <span class="attribute-name">class</span>="<a class="attribute-value">modal-footer</a>"&gt;</span><span>
+</span></span><span id="line688"><span>            </span><span>&lt;/<span class="end-tag">div</span>&gt;</span><span>
+</span></span><span id="line689"><span>        </span><span>&lt;/<span class="end-tag">div</span>&gt;</span><span>
+</span></span><span id="line690"><span>    </span><span>&lt;/<span class="end-tag">div</span>&gt;</span><span>
+</span></span><span id="line691"><span></span><span>&lt;/<span class="end-tag">div</span>&gt;</span><span>
+</span></span><span id="line692"><span>
+</span></span><span id="line693"><span>    </span><span>&lt;<span class="start-tag">script</span>&gt;</span><span>
+</span></span><span id="line694"><span>var livereload = function(epoch, requestId) {
+</span></span><span id="line695"><span>    var req, timeout;
+</span></span><span id="line696"><span>
+</span></span><span id="line697"><span>    var poll = function() {
+</span></span><span id="line698"><span>        req = new XMLHttpRequest();
+</span></span><span id="line699"><span>        req.onloadend = function() {
+</span></span><span id="line700"><span>            if (parseFloat(this.responseText) &gt; epoch) {
+</span></span><span id="line701"><span>                location.reload();
+</span></span><span id="line702"><span>            } else {
+</span></span><span id="line703"><span>                timeout = setTimeout(poll, this.status === 200 ? 0 : 3000);
+</span></span><span id="line704"><span>            }
+</span></span><span id="line705"><span>        };
+</span></span><span id="line706"><span>        req.open("GET", "/livereload/" + epoch + "/" + requestId);
+</span></span><span id="line707"><span>        req.send();
+</span></span><span id="line708"><span>    }
+</span></span><span id="line709"><span>
+</span></span><span id="line710"><span>    var stop = function() {
+</span></span><span id="line711"><span>        if (req) {
+</span></span><span id="line712"><span>            req.abort();
+</span></span><span id="line713"><span>        }
+</span></span><span id="line714"><span>        if (timeout) {
+</span></span><span id="line715"><span>            clearTimeout(timeout);
+</span></span><span id="line716"><span>        }
+</span></span><span id="line717"><span>        req = timeout = undefined;
+</span></span><span id="line718"><span>    };
+</span></span><span id="line719"><span>
+</span></span><span id="line720"><span>    window.addEventListener("load", function() {
+</span></span><span id="line721"><span>        if (document.visibilityState === "visible") {
+</span></span><span id="line722"><span>            poll();
+</span></span><span id="line723"><span>        }
+</span></span><span id="line724"><span>    });
+</span></span><span id="line725"><span>    window.addEventListener("visibilitychange", function() {
+</span></span><span id="line726"><span>        if (document.visibilityState === "visible") {
+</span></span><span id="line727"><span>            poll();
+</span></span><span id="line728"><span>        } else {
+</span></span><span id="line729"><span>            stop();
+</span></span><span id="line730"><span>        }
+</span></span><span id="line731"><span>    });
+</span></span><span id="line732"><span>    window.addEventListener("beforeunload", stop);
+</span></span><span id="line733"><span>
+</span></span><span id="line734"><span>    console.log('Enabled live reload');
+</span></span><span id="line735"><span>}
+</span></span><span id="line736"><span>livereload(139304154, 139325304);
+</span></span><span id="line737"><span></span><span>&lt;/<span class="end-tag">script</span>&gt;</span><span></span><span>&lt;/<span class="end-tag">body</span>&gt;</span><span>
+</span></span><span id="line738"><span></span><span>&lt;/<span class="end-tag">html</span>&gt;</span><span>
+</span></span><span id="line739"><span></span></span></body></html>

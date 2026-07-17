@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>Installing and Compiling C++ - </title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../css/brands.min.css" rel="stylesheet">
+        <link href="../../css/solid.min.css" rel="stylesheet">
+        <link href="../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" disabled>
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../.."></a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../cv/" class="nav-link">CV</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../teaching/" class="nav-link">Teaching</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item dropdown">
+                              <button id="theme-menu" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static" aria-label="Toggle theme" class="nav-link dropdown-toggle">
+                                <i class="fa-solid fa-circle-half-stroke fa-fw"></i>
+                                <span class="d-lg-none ms-2">Toggle theme</span>
+                              </button>
+                              <ul class="dropdown-menu dropdown-menu-end">
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
+                                    <i class="fa-solid fa-sun fa-fw"></i>
+                                    <span class="ms-2">Light</span>
+                                    <i class="fa-solid fa-check ms-auto d-none"></i>
+                                  </button>
+                                </li>
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
+                                    <i class="fa-solid fa-moon fa-fw"></i>
+                                    <span class="ms-2">Dark</span>
+                                    <i class="fa-solid fa-check ms-auto d-none"></i>
+                                  </button>
+                                </li>
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="auto" aria-pressed="true">
+                                    <i class="fa-solid fa-circle-half-stroke fa-fw"></i>
+                                    <span class="ms-2">Auto</span>
+                                    <i class="fa-solid fa-check ms-auto"></i>
+                                  </button>
+                                </li>
+                              </ul>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <script src="../../js/darkmode.js"></script>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#installing-and-compiling-c" class="nav-link">Installing and Compiling C++</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#github-codespace-easiest" class="nav-link">GitHub Codespace (Easiest)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#jetbrains-clion-easy-but-requires-install" class="nav-link">JetBrains CLion (Easy, but requires install)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#local-compiler-on-mac-easy" class="nav-link">Local Compiler on Mac (Easy)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#local-compiler-on-chromebook-easy" class="nav-link">Local Compiler on Chromebook (Easy)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#local-compiler-on-debian-based-linux-easy" class="nav-link">Local Compiler on Debian-based Linux (Easy)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#local-compiler-on-rhel-based-linux-easy" class="nav-link">Local Compiler on RHEL-based Linux (Easy)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#local-compiler-on-windows-weird" class="nav-link">Local Compiler on Windows (Weird)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#editors" class="nav-link">Editors</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#compiling" class="nav-link">Compiling</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="installing-and-compiling-c">Installing and Compiling C++</h1>
+<p>Here are some options to install and compile C++ programs in this class. </p>
+<h2 id="github-codespace-easiest">GitHub Codespace (Easiest)</h2>
+<p>The easiest option is to create a GitHub Codespace. You will need to create a GitHub account to do so (<a href="https://github.com/">GitHub Homepage</a>). From the home page, you should see an option on the left to create a new repository. It is the green button that says "New". Enter a name for the repository, set the visibility to private, and create a README. If you want to submit your labs by sending me a link to your GitHub repo, put your first and last name in the description.  </p>
+<p><img alt="GitHub new repo page" src="../image-1.png" /></p>
+<p>After creating the repo, you'll be taken to the repo's main page. Click the green <code>&lt;&gt; Code</code> button, select "Codespace", then click the "Create codespace on main" on main option.  </p>
+<p><img alt="GitHub repo page" src="../image-2.png" /></p>
+<p>This will open a new tab, and after a minute or two the codespace will finish generating. This opens a web version of VS Code with a Linux virtual machine terminal. Using VS Code is discussed in the VS Code section of this document, so skip to there. In the future, when you access the Codespace, you will want to select the previous one you created instead of creating a new one. </p>
+<h2 id="jetbrains-clion-easy-but-requires-install">JetBrains CLion (Easy, but requires install)</h2>
+<p>CLion is a cross-platform IDE for Windows, Mac, and Linux by JetBrains. JetBrains makes IDEs for pretty much all major programming languages. You can download the installer from <a href="https://www.jetbrains.com/clion/download/">here</a>. It should auto-detect your operating system and take you to the correct installer. On Linux, it is tar.gz archive that you just extract and run the CLion program, which is in the bin folder. On Windows and Mac, there is an installer. Follow the prompts in the installer to install it. Then, you can run it like any other program. On Windows, it installs the MinGW C++ compiler for you. If you are on Mac, you will need to make sure <code>clang</code> is installed. See the Mac local instructions for how to check if <code>clang</code> is installed and install it.  </p>
+<p>From the main page when you open CLion, select "New project" when you create a new lab, or "Open" to reopen a lab you already started. When you create a project, it will ask you where to save it. I'd suggest giving it a descriptive name. The "C++ Executable" should be the default project type and preselected for you. This is the option you want.  </p>
+<p><img alt="CLion New Project" src="../image-3.png" />  </p>
+<p>When you create the project, a popup window will appear. You should be able to answer yes to it. The <code>main.cpp</code> file should automatically open for you in the editor. By default, it has some hints telling you how to use the editor. These are comments, so you can delete them. To prevent them from being generated, uncheck the "Add onboarding tips" option when creating the project. You can click the play button at the top to run your code.  </p>
+<p><img alt="CLion " src="../image-4.png" /></p>
+<h2 id="local-compiler-on-mac-easy">Local Compiler on Mac (Easy)</h2>
+<p>Open the Terminal application. Type <code>clang++ --version</code>. If you get a message saying it is not found/installed, you can install it with this command: <code>xcode-select --install</code>. If you run <code>clang++ --version</code>, it should now print the compiler's version. Check the "Editors" section to see the options for editing code.  </p>
+<h2 id="local-compiler-on-chromebook-easy">Local Compiler on Chromebook (Easy)</h2>
+<p>You can install a C++ compiler on a Chromebook. First, you need to enable the Linux terminal. Here are the instructions from Google to do so, but it's just enabling the setting: <a href="https://support.google.com/chromebook/answer/9145439?hl=en">Enable Linux on a Chromebook</a>. Next, follow the instructions for installing the compiler on Debian-based Linux.</p>
+<h2 id="local-compiler-on-debian-based-linux-easy">Local Compiler on Debian-based Linux (Easy)</h2>
+<p>Debian-based distributions include Debian, Ubuntu, Mint, ChromeOS, Kali, and the many Ubuntu derivatives. To install <code>g++</code> and other C++ tools, run the command <code>sudo apt install build-essential</code> in a Terminal. Run <code>g++ --version</code> in a terminal to check that it is installed. Check the "Editors" section for options for code editors.</p>
+<h2 id="local-compiler-on-rhel-based-linux-easy">Local Compiler on RHEL-based Linux (Easy)</h2>
+<p>RHEL-based distributions include Red Hat Enterprise Linux, Rocky, Fedora, and CentOS. To install <code>g++</code> and other C++ tools, run the command <code>sudo dnf group install "Development Tools"</code> in a Terminal. Run <code>g++ --version</code> in a terminal to check that it is installed. Check the "Editors" section for options for code editors.</p>
+<h2 id="local-compiler-on-windows-weird">Local Compiler on Windows (Weird)</h2>
+<p>Installing a local compiler on Windows can be a bit challenging. The two options are the Visual C++ compiler for Visual Studio or the MinGW port of <code>g++</code>. Visual C++ is easier to install, but harder to use outside of Visual Studio. MinGW is harder to install, but is consistent with compiling C++ on Mac and Linux. You can also activate WSL and work in Linux.</p>
+<h3 id="visual-studio-full-easy">Visual Studio Full (Easy)</h3>
+<p>Installing the full Visual Studio is pretty easy. Download the installer, run it, select the C++ workload (it is under the desktop development section), and wait for it to install. The issue with Visual Studio is that it is HUGE. Expect it to take about 20GB (it varies by version) at least, and that's if you only install the C++ workload along with the main IDE. You can technically install the Visual Studio compiler for C++ on its own, but using it is difficult (unless you use VS Code as your editor). If you scroll down on the Visual Studio Download page, there is a section where you can install just the build tools. </p>
+<h3 id="mingw-g-port-hard">MinGW G++ Port (Hard)</h3>
+<p>Here are the instructions from Microsoft to install MinGW and use it with VS Code (<a href="https://code.visualstudio.com/docs/cpp/config-mingw">MinGW Installation</a>). You can use it with any editor, however. You will just have to compile your code from the command line. </p>
+<h3 id="wsl-medium">WSL (Medium)</h3>
+<p>WSL (Windows Subsystem for Linux) creates a Linux terminal within Windows. Here are the instructions from Microsoft to install WSL. The default Ubuntu Linux is fine (<a href="https://learn.microsoft.com/en-us/windows/wsl/install">Install WSL</a>). Once you have your WSL instance, follow the instructions for "Local Compiler on Debian-based Linux" to install the compiler.</p>
+<h2 id="editors">Editors</h2>
+<p>Once you have a compiler, you'll need to choose a code editor. Here are some common options.</p>
+<h3 id="vs-code-all-operating-systems">VS Code (All Operating Systems)</h3>
+<p>VS Code can be installed on any system (even ChromeOS). Go to VS Code's website to download the correct version for your system. GitHub Codespaces open a web version of VS Code in your browser, so you can read these instructions for how to use VS Code.</p>
+<p>I can't stop you from using the AI features, but if you want to actually learn how to code, I'd recommend turning them off. To do so, click the settings gear in the bottom left corner and select "Command Palette" or hit F1. In the search box that appears at the top of the screen, type in "hide AI features". Select the "Chat: Learn How to Hide AI Features" option, and check the box to hide them.  </p>
+<p>In a GitHub Codespace, your repo folder will already be open. On the locally installed version, select "Open Folder" from the welcome page. I'd recommend making a folder for all the labs in this class. VS Code has a C++ extension available that will give you syntax highlighting and tooltips. The extension marketplace is the icon with the four boxes on the toolbar on the far left of the screen. Search "C++" and install the "C/C++ Extension Pack" that is published by Microsoft. <br />
+<img alt="C/C++ Extension pack in VS Code Marketplace" src="../image-7.png" /> <br />
+Clicking the layered file icon will display the files in the folder you have opened. Since I'm using a Codespace for this demo, the only file I have right now is the README.md file that was generated by GitHub. If you created a new folder locally, yours may be empty.<br />
+<img alt="File View in VS Code" src="../image-8.png" />  </p>
+<p>Hovering over the name of the folder will cause some icons to show up. The file icon with the plus can be clicked to create a new file.<br />
+<img alt="Create File icon in VS Code" src="../image-9.png" /><br />
+Enter a name for the file, and it will create the file and open it in the editor:<br />
+<img alt="New file named" src="../image-10.png" /><br />
+The code can be typed in the opened editor. The keyboard shortcut "CTRL + S" (Windows/Linux) or "CMD + S" (Mac) can be used to save the file. Or, you can go to the file menu and press save. A little dot will appear next to the file's name at the top of the editor if it is not saved. Using the keyboard shortcut and saving the file frequently is a good habit to get in to.<br />
+<img alt="Code added to file" src="../image-11.png" /><br />
+The keyboard shortcut "CTRL + ~" (Windows/Linux) and "CMD + ~" (Mac) can be used to open the terminal, or by going to the terminal menu and selecting "New Terminal". Below is a screenshot of the created C++ file being compiled and ran in the integrated terminal:<br />
+<img alt="Compile and run program" src="../image-12.png" /><br />
+VS Code can also build the file for you. Pressing "CTRL + F5" (or "CMD + F5" (Mac)) or going to "Run -&gt; Run Without Debugging" to build the file. It will ask you to choose a configuration. VS Code should automatically detect your compiler, allowing you to select the top option. This will open a new terminal window below the editor with the program's output in it. I recommend compiling with the command line, however.</p>
+<h3 id="sublime-text">Sublime Text</h3>
+<p>Sublime is a popular text editor for Windows, Mac, and Linux. It has fewer features than VS Code, but still works well and offers enough for this class. Use "File -&gt; Open Folder" to open the folder you are using for this class. Right-click the folder name on the left of the screen and select "New file" to add a file. You will need to open a separate terminal outside the editor to compile your code, or install a sublime extension like "terminus" if you want an integrated terminal like VS Code. It also offers a one button build for single C++ files. To do so, either go to "Tools -&gt; Build" or use the "CTRL + B" ("CMD + B" on Mac) shortcut. The program output is displayed at the bottom of the screen. </p>
+<h3 id="clion">CLion</h3>
+<p>The process for CLion is described in the CLion section. It is a full IDE, so it has its own build chain that you can activate by pressing the play button. </p>
+<h3 id="visual-studio-windows-only">Visual Studio (Windows only)</h3>
+<p>To create a Visual Studio project for C++, select the option to "Create New Project", filter the language to be "C++", filter the project type to be "Console", and select the "Console Application" option. You will need to create a new project for each lab. Like CLion, Visual Studio auto-generates comments with tips within the file. It tells you how to run the program. Note: I do not want a Visual Studio project as a submission. I only want the C++ source code file. By default, Visual Studio puts projects in "C:\Users\YourUsername\source\repos\". You will find a folder with the name of you lab. Inside that folder, you may find another folder with that name. Finally, within in that folder, you should find the "C++ Source File" for your lab. That is the file you need to turn in.</p>
+<h3 id="notepad-windows-only">Notepad++ (Windows only)</h3>
+<p>A popular editor for Windows. I've never used it personally, but there are people who like it. I don't believe it has build options, so you'd have to do all your work in an external terminal.</p>
+<h3 id="xcode-mac-only">XCode (Mac only)</h3>
+<p>I'm not a Mac user. I know nothing about XCode other than that it exists and can be used for C++.</p>
+<h2 id="compiling">Compiling</h2>
+<p>I recommend compiling with the command line. You will learn more from it. There is a separate document in this week that explains a bit about navigating a terminal. </p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script src="../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

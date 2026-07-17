@@ -8,7 +8,7 @@
         
         
         <link rel="shortcut icon" href="../img/favicon.ico">
-        <title>John Sipahioglu - John Sipahioglu</title>
+        <title>CV - </title>
         <link href="../css/bootstrap.min.css" rel="stylesheet">
         <link href="../css/fontawesome.min.css" rel="stylesheet">
         <link href="../css/brands.min.css" rel="stylesheet">
@@ -24,7 +24,7 @@
     <body>
         <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
             <div class="container">
-                <a class="navbar-brand" href="..">John Sipahioglu</a>
+                <a class="navbar-brand" href=".."></a>
                 <!-- Expander button -->
                 <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -38,45 +38,10 @@
                                 <a href=".." class="nav-link">Home</a>
                             </li>
                             <li class="nav-item">
+                                <a href="./" class="nav-link active" aria-current="page">CV</a>
+                            </li>
+                            <li class="nav-item">
                                 <a href="../teaching/" class="nav-link">Teaching</a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">CSE122</a>
-                                <ul class="dropdown-menu">
-                                    
-<li>
-    <a href="../CSE122/" class="dropdown-item">Home</a>
-</li>
-                                    
-<li>
-    <a href="../CSE122/setup/" class="dropdown-item">Setup Help</a>
-</li>
-                                    
-<li>
-    <a href="../CSE122/dotnet_commands/" class="dropdown-item">Creating Labs</a>
-</li>
-                                    
-<li>
-    <a href="../CSE122/terminal_basics/" class="dropdown-item">Terminal Basics</a>
-</li>
-                                </ul>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">NET264</a>
-                                <ul class="dropdown-menu">
-                                    
-<li>
-    <a href="../NET264/week1/" class="dropdown-item">Week 1</a>
-</li>
-                                    
-<li>
-    <a href="../NET264/week2/" class="dropdown-item">Weeks 2 and 3</a>
-</li>
-                                    
-<li>
-    <a href="../NET264/week4/" class="dropdown-item">Week 4</a>
-</li>
-                                </ul>
                             </li>
                         </ul>
 
@@ -86,6 +51,16 @@
                                 <i class="fa fa-search"></i> Search
                             </a>
                         </li>
+                            <li class="nav-item">
+                                <a rel="prev" href=".." class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../teaching/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
                             <li class="nav-item dropdown">
                               <button id="theme-menu" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static" aria-label="Toggle theme" class="nav-link dropdown-toggle">
                                 <i class="fa-solid fa-circle-half-stroke fa-fw"></i>
@@ -160,6 +135,10 @@
               <ul class="nav flex-column">
               </ul>
             </li>
+            <li class="nav-item" data-bs-level="2"><a href="#publications-and-scholarly-works" class="nav-link">Publications and Scholarly Works</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
             <li class="nav-item" data-bs-level="2"><a href="#professional-activitiesservices" class="nav-link">Professional Activities/Services</a>
               <ul class="nav flex-column">
               </ul>
@@ -180,8 +159,8 @@
                     <div class="col-md-9" role="main">
 
 <h1 id="john-sipahioglu">John Sipahioglu</h1>
-<p>Instructor </p>
-<p>PDF Version (Coming Soon)   </p>
+<p>Instructor - Computer Science - Stark State College</p>
+<p><a href="../jsipahioglu_cv.pdf">PDF Version</a></p>
 <p><em>Academic Contact Information:</em><br />
 jsipahio@kent.edu<br />
 Department of Computer Science<br />
@@ -203,13 +182,14 @@ North Canton, Ohio, USA 44720  </p>
 <p>Prof. Jonathan I. Maletic (Ph.D., 2024 - Present)<br />
 Dr. Younghun Chae (M.S., 2023 - 2024)</p>
 <h2 id="research-statement">Research Statement</h2>
-<p>Interests: Code reuse, design recovery, code quality, software engineering, evolution, and maintenance  </p>
+<p>Interests: Code reuse, design recovery, code quality, software engineering, evolution, technical debt, and maintenance  </p>
 <p>I am currently contributing to the srcML infrastructure, which supports source code fact extraction, querying, transformation, and syntactic differencing.</p>
 <h3 id="projects">Projects</h3>
 <ul>
 <li><code>srcML</code> - Contribute to writing grammars to add new languages to srcML and presently implementing parsing for Rust. The srcML tool wraps source code elements in XML tags to embed the abstract syntax tree into the source code. srcML serves as the base for other tools to query, difference, parse, and transform source code.</li>
 <li><code>srcBind</code> - A tool for creating idiomatic bindings and wrappers of C (and eventually Rust) libraries in object-oriented languages, such as Python, C++ and Java. </li>
 <li><code>srcDispatch</code> - Contribute to continued development and support of more language features in srcDispatch. srcDispatch is a SAX (simple API for XML parsing) event dispatcher for srcML.</li>
+<li>Technical Debt - Exploring methods to identify technical debt in systems.</li>
 </ul>
 <h2 id="academic-experience">Academic Experience</h2>
 <ul>
@@ -224,22 +204,45 @@ Dr. Younghun Chae (M.S., 2023 - 2024)</p>
 </ul>
 <h2 id="funding-awards">Funding Awards</h2>
 <ul>
-<li><em>Summer Research Worker</em> (May 2025 - August 2025) - Funded under NSF grant CNS 20-16465. Created markup specification to add the Rust programming language to srcML and contributed to srcDispatch to parse srcML</li>
+<li>Summer Research Worker (May 2025 - August 2025) - Funded under NSF grant CNS 20-16465. Created markup specification to add the Rust programming language to srcML and contributed to srcDispatch to parse srcML</li>
 <li>Ohio Space Consortium Grant (August 2023 - May 2024) - Awarded $10,000 for research into potential benefits of updating protocols for securing Deep Space Network </li>
 <li>Choose Ohio First - Computer Science Scholarship (January 2022 - May 2024) - Awarded funds for undergraduate tuition as part of the COF-CS program </li>
+</ul>
+<h2 id="publications-and-scholarly-works">Publications and Scholarly Works</h2>
+<h4 id="works-under-review-or-near-submission">Works Under Review or Near Submission</h4>
+<ul>
+<li>Al-Ramadan, F., Sipahioglu, J.A., Behler, J.A.C., Dragan, N., Decker, M.J., Collard, M.L., Maletic, J.I., "Should this Method be Static? Automatic Identification of Static Method Candidates", submitted May 16th, 2026 to IEEE Transactions on Software Engineering (TSE).</li>
+<li>Sipahioglu, J.A., Al-Ramadan, F., Rossi, K.N., Behler, J.A.C., Decker, M.J., Collard, M.L., Maletic, J.I., "Reverse Engineering Object-Oriented Designs from C Systems", to be submitted Fall 2026 to the 34th IEEE International Conference on Software Analysis, Evolution and Reengineering (SANER).</li>
+</ul>
+<h4 id="accepted-and-to-appear">Accepted and to Appear</h4>
+<ul>
+<li>Sipahioglu, J.A., Behler, J.A.C., Testa, S., Al-Ramadan, A., Decker, M.J., Collard, M.L., Maletic, J.I., (2026) “nameCollector: Extracting Source Code Identifiers Along with their Types and Context”, in the Proceedings of 42nd IEEE International Conference on Software Maintenance &amp; Evolution (ICSME), Tool Demonstrations Track, Benevento, Italy, Sept 14 - 18, 5 pages. (TO APPEAR)</li>
+</ul>
+<h4 id="publications-refereed">Publications (Refereed)</h4>
+<p>N/A</p>
+<h4 id="theses">Theses</h4>
+<ul>
+<li>Sipahioglu, J.A., "Modernizing Deep Space Network Security", M.S. Thesis, Kent State University, Department of Computer Science, August 2024.</li>
 </ul>
 <h2 id="professional-activitiesservices">Professional Activities/Services</h2>
 <h4 id="conference-reviewer">Conference Reviewer</h4>
 <ul>
-<li>2026 IEEE/ACM International Conference on Program Comprehension (ICPC) - Additional Reviewer</li>
+<li>2026 14th IEEE Working Conference on Software Visualization (VISSOFT) - Additional Reviewer</li>
+<li>2026 42nd IEEE International Conference on Software Maintenance and Evolution (ICSME '26) - Additional Reviewer</li>
+<li>2026 34th IEEE/ACM International Conference on Program Comprehension (ICPC) - Additional Reviewer</li>
 </ul>
 <h2 id="university-activitiesservices">University Activities/Services</h2>
 <ul>
 <li>2025 Choose Ohio First (COF) Poster Competition at Kent State University - Judged 6 computer science posters</li>
+<li>13th International Conference on Intelligent Human Computer Interaction (IHCI 2021) at Kent State University - Assisted with High School outreach workshop</li>
 </ul>
 <h2 id="teaching">Teaching</h2>
 <p><strong>Stark State College</strong><br />
-<em>Spring 2026</em><br />
+<em>Summer 2026</em> <br />
+    - CSE233 - C++ Programming
+    - CSE234 - Advanced C++ Programming
+    - CSE235 - Python Development
+<em>Spring 2026</em> <br />
     - CSE121 - Mobile Development Architecture<br />
     - CSE122 - Programming Logic and Problem Solving<br />
     - CSE233 - C++ Programming<br />
@@ -282,6 +285,8 @@ Dr. Younghun Chae (M.S., 2023 - 2024)</p>
                 shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
         </script>
         <script src="../js/base.js"></script>
+        <script src="../javascripts/mathjax.js"></script>
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
         <script src="../search/main.js"></script>
 
         <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">

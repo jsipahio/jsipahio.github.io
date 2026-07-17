@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>CSE235 Week 4: While and For Loops - </title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../css/brands.min.css" rel="stylesheet">
+        <link href="../../css/solid.min.css" rel="stylesheet">
+        <link href="../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" disabled>
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../.."></a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../cv/" class="nav-link">CV</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../teaching/" class="nav-link">Teaching</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item dropdown">
+                              <button id="theme-menu" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static" aria-label="Toggle theme" class="nav-link dropdown-toggle">
+                                <i class="fa-solid fa-circle-half-stroke fa-fw"></i>
+                                <span class="d-lg-none ms-2">Toggle theme</span>
+                              </button>
+                              <ul class="dropdown-menu dropdown-menu-end">
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
+                                    <i class="fa-solid fa-sun fa-fw"></i>
+                                    <span class="ms-2">Light</span>
+                                    <i class="fa-solid fa-check ms-auto d-none"></i>
+                                  </button>
+                                </li>
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
+                                    <i class="fa-solid fa-moon fa-fw"></i>
+                                    <span class="ms-2">Dark</span>
+                                    <i class="fa-solid fa-check ms-auto d-none"></i>
+                                  </button>
+                                </li>
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="auto" aria-pressed="true">
+                                    <i class="fa-solid fa-circle-half-stroke fa-fw"></i>
+                                    <span class="ms-2">Auto</span>
+                                    <i class="fa-solid fa-check ms-auto"></i>
+                                  </button>
+                                </li>
+                              </ul>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <script src="../../js/darkmode.js"></script>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#cse235-week-4-while-and-for-loops" class="nav-link">CSE235 Week 4: While and For Loops</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#while-loops" class="nav-link">While Loops</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#for-loops" class="nav-link">For Loops</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#break-and-continue-statements" class="nav-link">Break and Continue Statements</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#infinite-loops" class="nav-link">Infinite Loops</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#examples" class="nav-link">Examples</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#conclusion" class="nav-link">Conclusion</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="cse235-week-4-while-and-for-loops">CSE235 Week 4: While and For Loops</h1>
+<p>This week, we'll be discussing two more conditional statements in Python, the while and for loops. While loops execute a block of code so long as its condition is true. For loops iterate over a range of values. </p>
+<h2 id="while-loops">While Loops</h2>
+<p>A while loop is used to execute a set of statements <em>while</em> a given condition is true. Below is the basic syntax:</p>
+<pre><code class="language-py">while condition:
+    statement
+</code></pre>
+<p>The while loop starts with the <code>while</code> keyword followed by a condition. Just like the if statement, the condition does not require parentheses, and is followed by a colon. The body of the while loop is a block, so the statements that are executed by the while loop must be indented. Below is a basic while loop that reads and sums five numbers:</p>
+<pre><code class="language-py"># initialize sum and counter variable to 0
+sum = 0
+i = 0
+# run the loop as long as i is less than 5
+while i &lt; 5:
+    # add the number input by the user to the sum
+    sum += float(input(&quot;Enter a number: &quot;))
+    # increase i by 1
+    # the loop will run when i is 0, 1, 2, 3, and 4
+    # when i is increased to 5, the loop will end
+    i += 1
+
+# the loop is over, so return to the original indent level
+print(&quot;Total sum =&quot;, sum)
+</code></pre>
+<p>This is an example of a definite loop. Definite are controlled by a counter that is compared to a value that is either known when writing the code, like the example above, or read in from the user before the loop. Below is an example that will ask the user how many numbers they will enter, then computes the average of the numbers after they are entered:</p>
+<pre><code class="language-py"># read in the total number of numbers from the user
+total = int(input(&quot;Enter how many numbers will be input: &quot;))
+
+# initialize counter and sum
+i = 0
+sum = 0
+
+# run the loop while i is less than the total
+while i &lt; total:
+    # add the number input by the user to the sum
+    sum += float(input(&quot;Enter a number: &quot;))
+    # increase i by 1
+    i += 1
+
+# compute the average
+average = sum / total
+# print the average
+print(&quot;The average is&quot;, average)
+</code></pre>
+<p>Counter controlled loops do not have to count up like the previous examples. You can also count down:</p>
+<pre><code class="language-py"># reading in the drink choice
+drink = input(&quot;Enter drink: &quot;)
+# reading in the number of bottles
+bottles = int(input(&quot;Enter number of bottles: &quot;))
+# line that separates the input from the song
+print(&quot;\n------------------------------------------------\n&quot;)
+
+# while loop that prints the song
+# since we are counting down, we want our control variable to be 
+# greater than the minimum, which is 0 in this case
+while bottles &gt; 0:
+    # print the first set of lyrics in a verse
+    print(bottles, &quot;bottles of&quot;, drink, &quot;on the wall&quot;)
+    print(bottles, &quot;bottles of&quot;, drink)
+    print(&quot;Take one down, pass it around&quot;)
+    # since the next line of the song has 1 fewer bottle
+    # we'll decrement that value of bottles here.
+    bottles -= 1
+    print(bottles, &quot;bottles of&quot;, drink, &quot;on the wall&quot;)
+</code></pre>
+<p>The other type of condition you can have for a while loop is indefinite, also called sentinel controlled. In these loops, the value entered by the user is compared to a "sentinel value". A sentinel value is a value that is predefined or read from the user before the loop to determine when the loop stops. The loop will then run until the user enters that value. Below is an example that reads names from the user until they enter the value "quit", at which point the loop ends:</p>
+<pre><code class="language-py"># read a name from the user
+name = input(&quot;Enter a name (or 'quit' to stop): &quot;)
+
+# run the loop while name is not &quot;quit&quot;
+while name != &quot;quit&quot;:
+    print(&quot;You entered:&quot;, name)
+    # read another name
+    name = input(&quot;Enter a name (or 'quit' to stop): &quot;)
+
+# remember to return the the old indent level when the loop is done
+print(&quot;Loop is done&quot;)
+</code></pre>
+<p>We can also read the sentinel value from the user. This program shows how to compute the average of numbers input by the user using a sentinel controlled loop:</p>
+<pre><code class="language-py"># read in the number to stop at
+stop = float(input(&quot;Enter the STOP number: &quot;))
+# initialize the count and sum to 0
+count = 0
+sum = 0
+
+# read in a number
+num = float(input(&quot;Enter number: &quot;))
+
+# loop while the input number is not the stop value
+while num != stop:
+    # add the number that was just input to the sum
+    sum += num
+    # increase the count
+    count += 1
+
+average = sum / count
+print(&quot;The average is&quot;, average)
+</code></pre>
+<p><br/></p>
+<h2 id="for-loops">For Loops</h2>
+<p>For loops in Python are a little different compared to C-like languages (C, C++, C#, Java, etc.). In those languages, a for loop consists of a variable declaration, condition, and step value. In Python, a for loop looks like the following:</p>
+<pre><code class="language-py">for variable in container:
+    statement
+</code></pre>
+<p>All for loops in Python are range based, meaning they iterate through a collection of values. If you want to use a Python for loop like a traditional for loop, there is the <code>range()</code> function that is used to generate a sequence of integers to iterate through. There are three versions of <code>range()</code>:  </p>
+<ul>
+<li><code>range(end)</code> - this version returns integers from 0 to one less than <code>end</code>, increasing by 1 each time</li>
+<li><code>range(start, end)</code> - returns integers from <code>start</code> to one less than <code>end</code>, increasing by 1 each time</li>
+<li><code>range(start, end, step)</code> -returns integers from <code>start</code> to one less than <code>end</code>, increasing by <code>step</code> each time. This version can also be used to count backwards</li>
+</ul>
+<p>Here is the first while loop example rewritten using a for loop:</p>
+<pre><code class="language-py">sum = 0
+
+# loop will run for i = 0, 1, 2, 3, 4
+for i in range(5):
+    sum += float(input(&quot;Enter a number: &quot;))
+
+print(&quot;Total sum =&quot;, sum)
+</code></pre>
+<p>A for loop can be used anywhere a definite while loop is used:</p>
+<pre><code class="language-py">total = int(input(&quot;Enter how many numbers will be input: &quot;))
+sum = 0
+
+# a variable can be used for the max as well
+for i in range(0, total):
+    sum += float(input(&quot;Enter a number: &quot;))
+
+average = sum / total
+print(&quot;The average is&quot;, average)
+</code></pre>
+<p>And the third example, showing how <code>range()</code> can be used to count down:</p>
+<pre><code class="language-py"># reading in the drink choice
+drink = input(&quot;Enter drink: &quot;)
+# reading in the number of bottles
+bottles = int(input(&quot;Enter number of bottles: &quot;))
+# line that separates the input from the song
+print(&quot;\n------------------------------------------------\n&quot;)
+
+# using a for loop to count down. 
+# to count down, pass a negative as the step value
+#  and have the start be larger than the end of the range
+for bottle in range(bottle, 0, -1):
+    # print the first set of lyrics in a verse
+    print(bottle, &quot;bottles of&quot;, drink, &quot;on the wall&quot;)
+    print(bottle, &quot;bottles of&quot;, drink)
+    print(&quot;Take one down, pass it around&quot;)
+    # the next line of the song has 1 fewer bottle
+    print(bottle - 1, &quot;bottles of&quot;, drink, &quot;on the wall&quot;)
+</code></pre>
+<p>For loops cannot be used in place of an indefinite loop.</p>
+<h2 id="break-and-continue-statements">Break and Continue Statements</h2>
+<p>Break statements are used to exit a loop early. A break statement is simply the keyword <code>break</code> on its own line. Continue statements skip to the next iteration of a loop. A continue statement consists of the <code>continue</code> keyword on its own line. Below is an example of continue and break being used:</p>
+<pre><code class="language-py"># prints only odd numbers
+for i in range(10):
+    if i % 2 == 0:
+        # skip to the next loop iteration
+        continue
+    print(&quot;i =&quot;, i)
+
+# breaks out of the while loop early 
+# if the user enters a negative number
+count = 0
+MAX = 10
+while count &lt; MAX:
+    number = float(input(&quot;Enter a positive number: &quot;))
+    # check if the number is less than 0
+    if number &lt; 0:
+        print(&quot;Negative entered.&quot;)
+        # break out of the loop
+        break
+    print(&quot;You entered&quot;, number)
+
+print(&quot;After the loop&quot;)
+</code></pre>
+<h2 id="infinite-loops">Infinite Loops</h2>
+<p>An infinite loop is a loop whose condition will never be false. Sometimes, this is done intentionally, and a break statement is used to break the loop. In general, though, infinite loops are the result of programmer mistakes. Here are some common errors that cause infinite loops:  </p>
+<ul>
+<li>Using the wrong comparison</li>
+<li>Incrementing a counter when you should decrement (and vice versa)</li>
+<li>Using an impossible sentinel value</li>
+</ul>
+<h2 id="examples">Examples</h2>
+<p>Here are some examples using while and for loops:</p>
+<h3 id="even-numbers-from-0-to-100-while-loop">Even Numbers from 0 to 100 (While Loop)</h3>
+<pre><code class="language-py"># start count at 0
+i = 0
+# go up to 100, including 100
+while i &lt;= 100:
+    print(i)
+    # increase by 2 to only print even numbers
+    i += 2
+</code></pre>
+<h3 id="even-numbers-from-0-to-100-for-loop">Even Numbers from 0 to 100 (For Loop)</h3>
+<pre><code class="language-py"># go up to 100, including 100
+# use the step of 2 to only have even numbers
+for i in range(0, 101, 2):
+    print(i)
+</code></pre>
+<h3 id="printing-a-rectangle-for-loop">Printing a Rectangle (For Loop)</h3>
+<pre><code class="language-py"># outer loop handles the rows
+for i in range(10):
+    # inner loop prints each row of 10 '#'
+    for j in range(10):
+        print('#', end='')
+    # move to the next line
+    print()  
+</code></pre>
+<p>The output would look like this:</p>
+<pre><code>##########
+##########
+##########
+##########
+##########
+##########
+##########
+##########
+##########
+##########
+</code></pre>
+<h3 id="grade-summation-while-loops">Grade Summation (While Loops)</h3>
+<pre><code class="language-py"># read first name
+name = input(&quot;Enter first student: &quot;)
+
+# run loop while name is not &quot;quit&quot;
+while name != &quot;quit&quot;:
+    # initialize variables for computing grades
+    count = 0
+    grade = 0
+    total_grade = 0
+
+    # read first grade
+    grade = float(input(&quot;Enter first grade for&quot;, name, &quot;: &quot;))
+
+    # read grades while grade is &gt;= 0
+    while grade &gt;= 0:
+        count += 1
+        total_grade += grade
+        grade = float(input(&quot;Enter next grade (-1 to stop): &quot;))
+
+    # compute the average (each grade out of 100)
+    average = total_grade / (count * 100)
+
+    # print results
+    print(&quot;Total of&quot;, count, &quot;grades for &quot;, name, &quot;is&quot;, total_grade)
+    print(&quot;Average grade for&quot;, name, &quot;is&quot;, average * 100, &quot;%&quot;)
+
+    # read the next name
+    name = input(&quot;Enter next student (or 'quit'): &quot;)
+
+print(&quot;Bye!&quot;)
+
+</code></pre>
+<h2 id="conclusion">Conclusion</h2>
+<p>Loops are used to repeat a set of instructions multiple times. First, we discussed while loops, which execute their body as long as their condition is true. Definite while loops use a counter variable to determine how many times the loop needs to run. Indefinite loops, on the other hand, compare their input to a sentinel value to determine when to stop running. Any definite while loop can also be written as a for loop, which runs for a range of values. We discussed the <code>range()</code> function to use a for loop in place of a definite while loop. We also discussed break and continue statements, and common situations that may cause an infinite loop.</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script src="../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

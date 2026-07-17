@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../../img/favicon.ico">
+        <title>Radix and Bucket Sort - </title>
+        <link href="../../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../../css/brands.min.css" rel="stylesheet">
+        <link href="../../../css/solid.min.css" rel="stylesheet">
+        <link href="../../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" disabled>
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../../.."></a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../../cv/" class="nav-link">CV</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../../teaching/" class="nav-link">Teaching</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item dropdown">
+                              <button id="theme-menu" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static" aria-label="Toggle theme" class="nav-link dropdown-toggle">
+                                <i class="fa-solid fa-circle-half-stroke fa-fw"></i>
+                                <span class="d-lg-none ms-2">Toggle theme</span>
+                              </button>
+                              <ul class="dropdown-menu dropdown-menu-end">
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
+                                    <i class="fa-solid fa-sun fa-fw"></i>
+                                    <span class="ms-2">Light</span>
+                                    <i class="fa-solid fa-check ms-auto d-none"></i>
+                                  </button>
+                                </li>
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
+                                    <i class="fa-solid fa-moon fa-fw"></i>
+                                    <span class="ms-2">Dark</span>
+                                    <i class="fa-solid fa-check ms-auto d-none"></i>
+                                  </button>
+                                </li>
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="auto" aria-pressed="true">
+                                    <i class="fa-solid fa-circle-half-stroke fa-fw"></i>
+                                    <span class="ms-2">Auto</span>
+                                    <i class="fa-solid fa-check ms-auto"></i>
+                                  </button>
+                                </li>
+                              </ul>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <script src="../../../js/darkmode.js"></script>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#radix-and-bucket-sort" class="nav-link">Radix and Bucket Sort</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#lecture-notes-non-comparison-sorting-algorithms-on" class="nav-link">Lecture Notes: Non-Comparison Sorting Algorithms (\(O(n)\))</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#1-counting-sort-the-tally-strategy" class="nav-link">1. Counting Sort: The Tally Strategy</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#2-radix-sort-the-digit-by-digit-strategy" class="nav-link">2. Radix Sort: The Digit-by-Digit Strategy</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#3-bucket-sort-the-distribution-strategy" class="nav-link">3. Bucket Sort: The Distribution Strategy</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#summary-of-non-comparison-sorting-algorithms" class="nav-link">Summary of Non-Comparison Sorting Algorithms</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="radix-and-bucket-sort">Radix and Bucket Sort</h1>
+<h1 id="lecture-notes-non-comparison-sorting-algorithms-on">Lecture Notes: Non-Comparison Sorting Algorithms (<span class="arithmatex">\(O(n)\)</span>)</h1>
+<p>Up until now, every sorting algorithm we have looked at (Bubble, Selection, Insertion, Merge, Quick, and Heap Sort) has been a <strong>comparison-based sort</strong>. This means the algorithm decides the order of elements by comparing them to each other (asking: "Is <span class="arithmatex">\(A &lt; B\)</span>?").</p>
+<p>There is a mathematical rule in computer science: <strong>No comparison-based sorting algorithm can ever run faster than <span class="arithmatex">\(O(n \log n)\)</span> in the worst case.</strong> But what if we didn't compare numbers at all? What if we sorted them by taking advantage of <em>properties</em> of the data itself, like their digits or their range?</p>
+<p>This week, we explore <strong>Counting Sort</strong>, <strong>Radix Sort</strong>, and <strong>Bucket Sort</strong>. Under the right conditions, these algorithms can sort data in <strong><span class="arithmatex">\(O(n)\)</span> (linear) time</strong>!</p>
+<hr />
+<h2 id="1-counting-sort-the-tally-strategy">1. Counting Sort: The Tally Strategy</h2>
+<p>Imagine you are a teacher grading quizzes. The scores are all whole numbers between 0 and 5. To sort a stack of 100 quizzes, you wouldn't use Merge Sort. Instead, you would make 6 piles on your desk (one pile for 0s, one for 1s, etc.), tally how many quizzes are in each pile, and then rebuild the stack in order.</p>
+<p>This is exactly how <strong>Counting Sort</strong> works.</p>
+<h3 id="how-it-works">How it Works</h3>
+<ol>
+<li>Find the maximum value in the input array to determine the range of numbers.</li>
+<li>Create a "Count Array" of size <span class="arithmatex">\(\text{Max} + 1\)</span>, initialized to all 0s. This array acts as our tally board.</li>
+<li>Traverse the input array. For each number you see, increment its corresponding index in the Count Array.</li>
+<li>Iterate through the Count Array and overwrite the original array with the tallied numbers.</li>
+</ol>
+<h3 id="c-code-implementation-basic-version">C++ Code Implementation (Basic Version)</h3>
+<pre><code class="language-cpp">void countingSort(int arr[], int n) {
+    // 1. Find the maximum element in the array
+    int maxVal = arr[0];
+    for (int i = 1; i &lt; n; i++) {
+        if (arr[i] &gt; maxVal) {
+            maxVal = arr[i];
+        }
+    }
+
+    // 2. Create and initialize the Count Array with 0s
+    // (Size must be maxVal + 1 to include the max number as an index)
+    int* count = new int[maxVal + 1](); 
+
+    // 3. Tally the frequencies of each number
+    for (int i = 0; i &lt; n; i++) {
+        count[arr[i]]++;
+    }
+
+    // 4. Overwrite the original array using the tallies
+    int index = 0;
+    for (int i = 0; i &lt;= maxVal; i++) {
+        while (count[i] &gt; 0) {
+            arr[index] = i;
+            index++;
+            count[i]--;
+        }
+    }
+
+    // Clean up dynamic memory
+    delete[] count;
+}
+
+</code></pre>
+<h3 id="complexity-the-gotcha">Complexity &amp; The "Gotcha"</h3>
+<ul>
+<li><strong>Time Complexity:</strong> <strong><span class="arithmatex">\(O(n + k)\)</span></strong>, where <span class="arithmatex">\(n\)</span> is the number of elements, and <span class="arithmatex">\(k\)</span> is the range of the input data (the maximum value). If <span class="arithmatex">\(k\)</span> is small, this runs in essentially <span class="arithmatex">\(O(n)\)</span> linear time!</li>
+<li><strong>Auxiliary Space Complexity:</strong> <strong><span class="arithmatex">\(O(k)\)</span></strong> to allocate the Count Array.</li>
+<li><strong>The Catastrophic Worst-Case:</strong> Counting Sort is incredibly fast <em>only</em> if the range of numbers (<span class="arithmatex">\(k\)</span>) is relatively small. If you have an array of just 5 elements: <code>[1, 2, 1, 3, 1000000]</code>, Counting Sort will allocate a temporary array of size <strong>1,000,001</strong> to sort just five numbers! This wastes a massive amount of memory and CPU cycles.</li>
+</ul>
+<hr />
+<h2 id="2-radix-sort-the-digit-by-digit-strategy">2. Radix Sort: The Digit-by-Digit Strategy</h2>
+<p>If Counting Sort breaks down when numbers get large, how do we sort larger numbers without comparisons? We use <strong>Radix Sort</strong>.</p>
+<p>Instead of looking at a whole number, Radix Sort breaks numbers down digit by digit, starting from the <strong>Least Significant Digit (ones place)</strong> and moving toward the <strong>Most Significant Digit (tens, hundreds, etc.)</strong>.</p>
+<h3 id="how-it-works_1">How it Works</h3>
+<ol>
+<li>Find the maximum number to see how many digits it has (e.g., 457 has 3 digits).</li>
+<li>Use a stable sorting algorithm (usually <strong>Counting Sort</strong>) to sort the array based on the <strong>1s place</strong>.</li>
+<li>Sort the resulting array based on the <strong>10s place</strong>.</li>
+<li>Sort it again based on the <strong>100s place</strong>, and so on, until you run out of digits.</li>
+</ol>
+<p>Because the underlying sort (Counting Sort) is <em>stable</em>, the relative order of numbers sorted in previous steps is preserved.</p>
+<h3 id="c-code-implementation">C++ Code Implementation</h3>
+<pre><code class="language-cpp">// A modified counting sort that sorts based on a specific digit represented by 'exp'
+// (exp = 1 for 1s place, 10 for 10s place, 100 for 100s place, etc.)
+void countingSortForRadix(int arr[], int n, int exp) {
+    int output[n]; 
+    int count[10] = {0}; // Digits are always 0-9, so count size is always 10!
+
+    // Store count of occurrences of each digit
+    for (int i = 0; i &lt; n; i++) {
+        int digit = (arr[i] / exp) % 10;
+        count[digit]++;
+    }
+
+    // Change count[i] so that it contains the actual position of this digit in output[]
+    for (int i = 1; i &lt; 10; i++) {
+        count[i] += count[i - 1];
+    }
+
+    // Build the output array (going backward to maintain stability)
+    for (int i = n - 1; i &gt;= 0; i--) {
+        int digit = (arr[i] / exp) % 10;
+        output[count[digit] - 1] = arr[i];
+        count[digit]--;
+    }
+
+    // Copy the output array back to arr[]
+    for (int i = 0; i &lt; n; i++) {
+        arr[i] = output[i];
+    }
+}
+
+void radixSort(int arr[], int n) {
+    // Find the maximum number to know the number of digits
+    int maxVal = arr[0];
+    for (int i = 1; i &lt; n; i++) {
+        if (arr[i] &gt; maxVal) maxVal = arr[i];
+    }
+
+    // Do counting sort for every digit. 
+    // Instead of passing digit number, exp is passed (10^i)
+    for (int exp = 1; maxVal / exp &gt; 0; exp *= 10) {
+        countingSortForRadix(arr, n, exp);
+    }
+}
+
+</code></pre>
+<h3 id="complexity-worst-case">Complexity &amp; Worst Case</h3>
+<ul>
+<li><strong>Time Complexity:</strong> <strong><span class="arithmatex">\(O(d \cdot (n + k))\)</span></strong>, where <span class="arithmatex">\(d\)</span> is the number of digits in the maximum number, <span class="arithmatex">\(n\)</span> is the number of elements, and <span class="arithmatex">\(k\)</span> is the base of the numbers (base 10 for decimal numbers, so <span class="arithmatex">\(k = 10\)</span>). Since <span class="arithmatex">\(d\)</span> and <span class="arithmatex">\(k\)</span> are usually constant properties of the system, this behaves as <strong><span class="arithmatex">\(O(n)\)</span></strong>.</li>
+<li><strong>Auxiliary Space Complexity:</strong> <strong><span class="arithmatex">\(O(n + k)\)</span></strong>.</li>
+<li><strong>Worst-Case Trigger:</strong> If you have an array where almost all numbers are small, but a single outlier is extremely long (like <span class="arithmatex">\(1,000,000,000,000\)</span>), <span class="arithmatex">\(d\)</span> becomes massive. You will have to run the outer loop many unnecessary times just to handle that one outlier.</li>
+</ul>
+<hr />
+<h2 id="3-bucket-sort-the-distribution-strategy">3. Bucket Sort: The Distribution Strategy</h2>
+<p>Bucket Sort is a "divide and conquer" sorting algorithm that works by distributing the elements of an array into several recursively sorted groups called <strong>buckets</strong>. It is exceptionally useful when the input data is <strong>uniformly distributed</strong> over a known range (such as decimals between 0.0 and 1.0).</p>
+<h3 id="how-it-works_2">How it Works</h3>
+<ol>
+<li>Create an array of empty "buckets" (linked lists or dynamic arrays).</li>
+<li>Put each input element into its corresponding bucket based on a mathematical formula (like <span class="arithmatex">\(\text{index} = n \times \text{element}\)</span>).</li>
+<li>Sort each individual bucket using a simple sorting algorithm (usually <strong>Insertion Sort</strong>).</li>
+<li>Concatenate all the sorted buckets back together into the original array.</li>
+</ol>
+<h3 id="c-code-implementation-for-floats-between-00-and-10">C++ Code Implementation (For Floats between 0.0 and 1.0)</h3>
+<pre><code class="language-cpp">#include &lt;vector&gt;
+#include &lt;algorithm&gt;
+
+void bucketSort(float arr[], int n) {
+    // 1. Create n empty buckets
+    std::vector&lt;float&gt;* buckets = new std::vector&lt;float&gt;[n];
+
+    // 2. Put array elements in different buckets
+    for (int i = 0; i &lt; n; i++) {
+        int bucketIndex = n * arr[i]; // Index in bucket
+        buckets[bucketIndex].push_back(arr[i]);
+    }
+
+    // 3. Sort individual buckets (std::sort usually defaults to QuickSort/InsertionSort)
+    for (int i = 0; i &lt; n; i++) {
+        std::sort(buckets[i].begin(), buckets[i].end());
+    }
+
+    // 4. Concatenate all buckets into arr[]
+    int index = 0;
+    for (int i = 0; i &lt; n; i++) {
+        for (size_t j = 0; j &lt; buckets[i].size(); j++) {
+            arr[index++] = buckets[i][j];
+        }
+    }
+
+    delete[] buckets;
+}
+
+</code></pre>
+<h3 id="complexity-worst-case_1">Complexity &amp; Worst Case</h3>
+<ul>
+<li><strong>Average Time Complexity:</strong> <strong><span class="arithmatex">\(O(n)\)</span></strong>. If the data is distributed evenly, each bucket will hold only a few elements, making the individual sorting step incredibly fast.</li>
+<li><strong>Worst-Case Time Complexity:</strong> <strong><span class="arithmatex">\(O(n^2)\)</span></strong>.</li>
+<li><strong>Worst-Case Trigger:</strong> This occurs when the data is highly clustered instead of uniformly distributed. If every single item in the array hashes to the exact same bucket, Bucket Sort degrades into whatever sorting algorithm is used on that single bucket (e.g., Insertion Sort).</li>
+<li><strong>Auxiliary Space Complexity:</strong> <strong><span class="arithmatex">\(O(n + k)\)</span></strong>, where <span class="arithmatex">\(k\)</span> is the number of buckets.</li>
+</ul>
+<hr />
+<h2 id="summary-of-non-comparison-sorting-algorithms">Summary of Non-Comparison Sorting Algorithms</h2>
+<table>
+<thead>
+<tr>
+<th>Algorithm</th>
+<th>Best Time</th>
+<th>Avg Time</th>
+<th>Worst Time</th>
+<th>Aux. Space</th>
+<th>Best Used When...</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Counting Sort</strong></td>
+<td><span class="arithmatex">\(O(n + k)\)</span></td>
+<td><span class="arithmatex">\(O(n + k)\)</span></td>
+<td><span class="arithmatex">\(O(n + k)\)</span></td>
+<td><span class="arithmatex">\(O(k)\)</span></td>
+<td>You have a massive array of small integers (e.g., age data, exam scores).</td>
+</tr>
+<tr>
+<td><strong>Radix Sort</strong></td>
+<td><span class="arithmatex">\(O(d \cdot n)\)</span></td>
+<td><span class="arithmatex">\(O(d \cdot n)\)</span></td>
+<td><span class="arithmatex">\(O(d \cdot n)\)</span></td>
+<td><span class="arithmatex">\(O(n + k)\)</span></td>
+<td>You are sorting keys with a fixed, known number of digits (e.g., zip codes, phone numbers).</td>
+</tr>
+<tr>
+<td><strong>Bucket Sort</strong></td>
+<td><span class="arithmatex">\(O(n)\)</span></td>
+<td><strong><span class="arithmatex">\(O(n)\)</span></strong></td>
+<td><strong><span class="arithmatex">\(O(n^2)\)</span></strong></td>
+<td><span class="arithmatex">\(O(n + k)\)</span></td>
+<td>Your data is uniformly distributed floats (e.g., percentage scores, probabilities between 0 and 1).</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p>This concludes our deep dive into sorting algorithms! Would you like to move on to drafting the lecture notes for the next unit of your course, or would you like to review some practice questions for these sorting modules?</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../../js/base.js"></script>
+        <script src="../../../javascripts/mathjax.js"></script>
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script src="../../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

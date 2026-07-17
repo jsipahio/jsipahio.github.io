@@ -1,0 +1,17 @@
+<h1>Example Markdown</h1>
+<p>Markdown is a markup language that is simpler to use than HTML for creating formatted text documents. </p>
+<h2>Basic Markdown Elements</h2>
+<p>Here, we'll discuss the basic Markdown elements.</p>
+<h3>Header Elements</h3>
+<p>Header elements start with a pound symbol #, and represent the h1-h5 HTML elements. A single pound symbol is h1, two are h2, etc. There needs to be a space between the pound symbol(s) and any text in the header for it to be parsed as a header.</p>
+<h3>List Elements</h3>
+<p>A list is created by writing a dash/hyphen - at the start of a line. List items can be nested, but we won't consider them for the converter. Here is an example list.</p>
+<ul>
+<li>First Item</li>
+<li>Second Item</li>
+<li>Third Item</li>
+</ul>
+<h3>Paragraph Elements</h3>
+<p>Text that is on its own line is treated as a paragraph. One thing we won't consider in the parser is that paragraphs are technically ended by two spaces and a new line, instead of a single newline. In our parser, however, we'll consider a new line to be the end of a paragraph.</p>
+<h3>Other Elements That We Won't Handle</h3>
+<p>We aren't going to handle any nested formatting elements, like `code`, *italic*, and **bold** text. We also won't handle fenced code blocks, numbered lists, and tables. </p>

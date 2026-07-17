@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>CSE235 Week 9: Dictionaries - </title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../css/brands.min.css" rel="stylesheet">
+        <link href="../../css/solid.min.css" rel="stylesheet">
+        <link href="../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" disabled>
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../.."></a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../cv/" class="nav-link">CV</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../teaching/" class="nav-link">Teaching</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item dropdown">
+                              <button id="theme-menu" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static" aria-label="Toggle theme" class="nav-link dropdown-toggle">
+                                <i class="fa-solid fa-circle-half-stroke fa-fw"></i>
+                                <span class="d-lg-none ms-2">Toggle theme</span>
+                              </button>
+                              <ul class="dropdown-menu dropdown-menu-end">
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
+                                    <i class="fa-solid fa-sun fa-fw"></i>
+                                    <span class="ms-2">Light</span>
+                                    <i class="fa-solid fa-check ms-auto d-none"></i>
+                                  </button>
+                                </li>
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
+                                    <i class="fa-solid fa-moon fa-fw"></i>
+                                    <span class="ms-2">Dark</span>
+                                    <i class="fa-solid fa-check ms-auto d-none"></i>
+                                  </button>
+                                </li>
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="auto" aria-pressed="true">
+                                    <i class="fa-solid fa-circle-half-stroke fa-fw"></i>
+                                    <span class="ms-2">Auto</span>
+                                    <i class="fa-solid fa-check ms-auto"></i>
+                                  </button>
+                                </li>
+                              </ul>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <script src="../../js/darkmode.js"></script>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#cse235-week-9-dictionaries" class="nav-link">CSE235 Week 9: Dictionaries</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#set" class="nav-link">Set</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#dictionaries" class="nav-link">Dictionaries</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#json" class="nav-link">JSON</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#conclusion" class="nav-link">Conclusion</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="cse235-week-9-dictionaries">CSE235 Week 9: Dictionaries</h1>
+<p>Lists in Python are indexed by integers starting at 0. A dictionary is like a list, but it stores key-value pairs, allowing the "keys" to be used as subscripts. These are similar to associative arrays or maps in other languages. First, we'll look at sets, which are the other built-in container type in Python.</p>
+<h2 id="set">Set</h2>
+<p>A set is a collection where all its elements are unique. A set can be constructed like a list or tuple, except the set uses curly braces <code>{}</code> instead of square brackets. An empty set cannot be created using <code>empty_set = {}</code>, however, since curly braces are also used for dictionaries, and take precedence for dictionaries. </p>
+<pre><code class="language-py"># create an empty set
+set1 = set()
+# create a set with strings
+set2 = { &quot;a&quot;, &quot;cat&quot;, &quot;apple&quot;, &quot;car&quot; }
+# create a set with mixed elements
+set3 = { 1, &quot;fish&quot;, 2.0, &quot;fish&quot;, &quot;red&quot;, &quot;fish&quot;, True, &quot;fish&quot; }
+# create a set using a set comprehension
+set4 = { x for x in range(10) }
+# create a set from a list
+set5 = set([])
+</code></pre>
+<p>When creating a set, any duplicate items will automatically be removed from the set. For example:</p>
+<pre><code class="language-py">no_duplicates = { &quot;apple&quot;, &quot;orange&quot;, &quot;apple&quot;, &quot;banana&quot;, &quot;orange&quot; }
+print(no_duplicates)
+# prints: {'banana', 'orange', 'apple'}
+# note that sets do not preserve order
+</code></pre>
+<p>Any iterable collection can be converted to a set (anything that supports the <code>for x in y</code> syntax). Even a string can be used to create a set:</p>
+<pre><code class="language-py">set_from_str = set(&quot;This is an example of creating a set from a string&quot;)
+print(set_from_str)
+# prints: 
+# {'r','x','t','a','n',' ','f','g','s','h','m','c','i','o','p','e','T','l'}
+</code></pre>
+<p>New elements can be added to the set with the <code>add()</code> function and element can be removed with the <code>remove()</code> function. <code>remove()</code> will throw a <code>KeyError</code> exception if the element is not present. The <code>discard()</code> function is a version of <code>remove()</code> that does not throw an exception if the value is not present.</p>
+<pre><code class="language-py">fruits = {&quot;apple&quot;, &quot;banana&quot;, &quot;grape&quot;, &quot;orange&quot;}
+fruits.add(&quot;pear&quot;)
+
+try:
+    fruits.remove(&quot;cherry&quot;)
+except KeyError as ex:
+    print(f&quot;Key Error: {ex}&quot;)
+    # prints: Key Error: 'cherry'
+
+# this is fine, no exception is thrown 
+# even though cherry is not present in the set
+fruits.discard(&quot;cherry&quot;)
+</code></pre>
+<p>Sets are primarily used to check if items are present in a collection. There is no way to access the individual elements of a set.</p>
+<pre><code class="language-py">fruits = {&quot;apple&quot;, &quot;banana&quot;, &quot;grape&quot;, &quot;orange&quot;}
+test_value = input(&quot;Enter a fruit: &quot;)
+# check if the input value is in the set using the `in` operator
+if test_value in fruits:
+    print(f&quot;{} is in the fruit set&quot;)
+else:
+    print(f&quot;{} is not in the fruit set&quot;)
+</code></pre>
+<p>Set elements can be looped through like a list:</p>
+<pre><code class="language-py">fruits = {&quot;apple&quot;, &quot;banana&quot;, &quot;grape&quot;, &quot;orange&quot;}
+for fruit in fruits:
+    print(fruit)
+</code></pre>
+<p>Output:</p>
+<pre><code>orange
+grape
+apple
+banana
+</code></pre>
+<p>All elements of a set must be "hashable". Python's data types that are not modified when passed to a function (like int, float, str, bool) are hashable. Classes (discussed next week) can have hashes implemented for them, as well. The specific details of implementing a good hash function are beyond the scope of this course.</p>
+<h2 id="dictionaries">Dictionaries</h2>
+<p>Dictionaries store "key, value" pairs. The keys of a dictionary are unique, and like set elements, must be hashable. A dictionary can be created using the following syntax:</p>
+<pre><code class="language-py"># create an empty dictionary
+dict1 = {}
+# create an empty dictionary
+dict2 = dict()
+# create a dictionary using {}
+dict3 = { &quot;key1&quot;: 0, &quot;key2&quot;, 1}
+# create a dictionary using dict()
+dict4 = dict((&quot;key1&quot;, 0), (&quot;key2&quot;, 1))
+</code></pre>
+<p>Elements of a dictionary can be accessed by passing its key to the subscript operator:</p>
+<pre><code class="language-py">student = { &quot;Name&quot;: &quot;John Doe&quot;, &quot;GPA&quot;: 3.5 }
+print(f&quot;Name: {student[&quot;Name&quot;]}&quot;)
+print(f&quot;GPA:  {student[&quot;GPA&quot;]}&quot;)
+</code></pre>
+<p>The subscript operator can also be used to modify an existing key's value, or add a key to the dictionary:</p>
+<pre><code class="language-py">student = { &quot;Name&quot;: &quot;John Doe&quot;, &quot;GPA&quot;: 3.5 }
+student[&quot;Credit Hours&quot;] = 90
+</code></pre>
+<p>Attempting to read a key that does not exist in a dictionary raises a <code>KeyError</code>. The <code>get()</code> function can be used to try to read a key's value. If the key is not present, it will return <code>None</code> instead of raising an exception.</p>
+<pre><code class="language-py">student = { &quot;Name&quot;: &quot;John Doe&quot;, &quot;GPA&quot;: 3.5 }
+student[&quot;Credit Hours&quot;] = 90
+# raises a key error
+grade_level = student[&quot;Level&quot;]
+# grade_level is None
+grade_level = student.get(&quot;Level&quot;)
+</code></pre>
+<p>The <code>keys()</code> member function returns a view of the dictionary's keys. A view is what the <code>range()</code> function returns. It can be converted to a list using the <code>list()</code> function, or used directly in a for loop:</p>
+<pre><code class="language-py"># create a list based on the keys
+list_of_keys = list(student.keys())
+
+# print the keys of the dictionary
+for key in student.keys():
+    print(key)
+</code></pre>
+<p>The <code>values()</code> function returns a view of the dictionary's values:</p>
+<pre><code class="language-py"># print the values in the dictionary
+for value in student.values():
+    print(value)
+</code></pre>
+<p>The <code>items()</code> function returns a view of tuples with each (key, value) pair. They can be unpacked like the following for-loop shows</p>
+<pre><code class="language-py"># print the keys and values in the dictionary
+for key, value in student.items():
+    print(f&quot;{key}:\t{value}&quot;)
+</code></pre>
+<p>Items are removed from a dictionary using the <code>del</code> operator or the <code>pop()</code> function. The <code>popitem()</code> function removes the (key, value) pair and returns it. A <code>KeyError</code> is raised if the key is not present.</p>
+<pre><code class="language-py">del student[&quot;Name&quot;]
+student.pop(&quot;GPA&quot;)
+key, value = student.popitem(&quot;Credit Hours&quot;)
+</code></pre>
+<p>Dictionaries are used to store data. In the next section, we'll look at JSON, which is a data format that is easily represented by a dictionary. The rows of a SQL table can also be represented by a dictionary, along with CSV data. Dictionaries can be used any time the data being stored has a label that makes access easier (compared to a list, which only uses indices to access individual elements).</p>
+<h2 id="json">JSON</h2>
+<p>JSON is an acronym for JavaScript Object Notation. It is a popular data format, especially for the web, but has a wide variety of applications beyond that as well. Python has a built-in module for handling JSON files, called <code>json</code>. JSON contains two top-level entities:  </p>
+<ul>
+<li>Objects<ul>
+<li>Enclosed in curly braces <code>{}</code></li>
+<li>Keys are raw text, but converted to strings when parsed</li>
+<li>Values: strings, numbers, Boolean values, objects, and arrays</li>
+</ul>
+</li>
+<li>Arrays<ul>
+<li>Enclosed in square brackets <code>[]</code></li>
+<li>Values when top-level: objects</li>
+<li>Values when used as a value in an object: anything an object can store</li>
+</ul>
+</li>
+</ul>
+<p>Here are some examples of JSON. First, just an object:</p>
+<pre><code class="language-json">{
+    name: &quot;project1&quot;,
+    version: &quot;1.0.1&quot;,
+    author: &quot;jdoe99&quot;
+}
+</code></pre>
+<p>An array of objects:</p>
+<pre><code class="language-json">[
+    {
+        name: &quot;John Doe&quot;,
+        courses: [&quot;CSE233&quot;, &quot;CSE235&quot;]
+    },
+    {
+        name: &quot;Jane Doe&quot;,
+        courses: [&quot;CSE234&quot;, &quot;CSE235&quot;]
+    }
+]
+</code></pre>
+<p>An object of arrays:</p>
+<pre><code class="language-json">{
+    courses: [
+        {
+            code: &quot;CSE233&quot;,
+            name: &quot;C++ Programming&quot;
+        },
+        {
+            code: &quot;CSE234&quot;,
+            name: &quot;Advanced C++ Programming&quot;
+        },
+        {
+            code: &quot;CSE235&quot;,
+            name: &quot;Python Development&quot;
+        }
+    ],
+    sections: [
+        {
+            code: &quot;CSE233&quot;,
+            sectionId: 1,
+            instructor: &quot;staff&quot;
+        },
+        {
+            code: &quot;CSE233&quot;,
+            sectionId: 2,
+            instructor: &quot;staff&quot;
+        }
+    ]
+}
+</code></pre>
+<p>Objects map to dictionaries in Python, while arrays map to lists. This makes converting JSON data to Python data structures simple. The <code>json</code> module will do this for you. The <code>json.load()</code> function reads a JSON file. It will return either a dictionary, or a list of dictionaries, depending on the format of the input file. The <code>json.dump()</code> function writes a JSON file:</p>
+<pre><code class="language-py">import json
+
+# open the JSON file
+with open(&quot;input.json&quot;) as f:
+    # read the data
+    json_data = json.loads(f)
+
+# write the json data to another file
+with open(&quot;output.json&quot;, mode=&quot;w&quot;) as f:
+    json.dumpd(f)
+</code></pre>
+<p>For the first JSON example, <code>json.load()</code> would return a dictionary like the following:</p>
+<pre><code class="language-py">{
+    'name': &quot;project1&quot;,
+    'version': &quot;1.0.1&quot;,
+    'author': &quot;jdoe99&quot;
+}
+</code></pre>
+<p>For the second JSON example, <code>json.load()</code> would return a list of dictionaries:</p>
+<pre><code class="language-py">[
+    {
+        'name': &quot;John Doe&quot;,
+        'courses': [&quot;CSE233&quot;, &quot;CSE235&quot;]
+    },
+    {
+        'name': &quot;Jane Doe&quot;,
+        'courses': [&quot;CSE234&quot;, &quot;CSE235&quot;]
+    }
+]
+</code></pre>
+<p>For the third, it would return a dictionary with lists as its values:</p>
+<pre><code class="language-py">{
+    'courses': [
+        {
+            'code': &quot;CSE233&quot;,
+            'name': &quot;C++ Programming&quot;
+        },
+        {
+            'code': &quot;CSE234&quot;,
+            'name': &quot;Advanced C++ Programming&quot;
+        },
+        {
+            'code': &quot;CSE235&quot;,
+            'name': &quot;Python Development&quot;
+        }
+    ],
+    'sections': [
+        {
+            'code': &quot;CSE233&quot;,
+            'sectionId': 1,
+            'instructor': &quot;staff&quot;
+        },
+        {
+            'code': &quot;CSE233&quot;,
+            'sectionId': 2,
+            'instructor': &quot;staff&quot;
+        }
+    ]
+}
+</code></pre>
+<p>The <code>json</code> module also provides member functions called <code>loads()</code> and <code>dumps()</code>. The <code>s</code> stands for strings, and is used to convert strings to JSON (<code>loads()</code>), or dictionaries (or a list of dictionaries) to JSON (<code>dumps()</code>).</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>This week, we discussed sets and dictionaries in Python. Sets are collections of elements where every element is unique. Dictionaries store (key, value) pairs. The keys in a dictionary are unique, but the values are not. The elements of sets and keys of dictionaries have to be "hashable". The basic, immutable types (ones that aren't modifiable by functions) in Python are all hashable. JSON is a common data format that is easily represented by Python's lists and dictionaries.</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script src="../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

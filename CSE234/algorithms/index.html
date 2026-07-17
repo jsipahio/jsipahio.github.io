@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>CSE234 - STL Algorithm - </title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../css/brands.min.css" rel="stylesheet">
+        <link href="../../css/solid.min.css" rel="stylesheet">
+        <link href="../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" disabled>
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../.."></a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../cv/" class="nav-link">CV</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../teaching/" class="nav-link">Teaching</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item dropdown">
+                              <button id="theme-menu" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static" aria-label="Toggle theme" class="nav-link dropdown-toggle">
+                                <i class="fa-solid fa-circle-half-stroke fa-fw"></i>
+                                <span class="d-lg-none ms-2">Toggle theme</span>
+                              </button>
+                              <ul class="dropdown-menu dropdown-menu-end">
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
+                                    <i class="fa-solid fa-sun fa-fw"></i>
+                                    <span class="ms-2">Light</span>
+                                    <i class="fa-solid fa-check ms-auto d-none"></i>
+                                  </button>
+                                </li>
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
+                                    <i class="fa-solid fa-moon fa-fw"></i>
+                                    <span class="ms-2">Dark</span>
+                                    <i class="fa-solid fa-check ms-auto d-none"></i>
+                                  </button>
+                                </li>
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="auto" aria-pressed="true">
+                                    <i class="fa-solid fa-circle-half-stroke fa-fw"></i>
+                                    <span class="ms-2">Auto</span>
+                                    <i class="fa-solid fa-check ms-auto"></i>
+                                  </button>
+                                </li>
+                              </ul>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <script src="../../js/darkmode.js"></script>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#cse234-stl-algorithm" class="nav-link">CSE234 - STL Algorithm</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#function-pointers-functors-and-lambda-expressions" class="nav-link">Function Pointers, Functors, and Lambda Expressions</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#for-each" class="nav-link">For Each</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#searching" class="nav-link">Searching</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#copying" class="nav-link">Copying</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#modifying" class="nav-link">Modifying</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="cse234-stl-algorithm">CSE234 - STL Algorithm</h1>
+<p>The <code>algorithm</code> header provides a set of common computer science algorithms that operate primarily on containers. <code>algorithm</code> was added in C++11. To use it, <code>#include &lt;algorithm&gt;</code>. All functions are provided in <code>algorithm</code> are in the <code>std</code> namespace. All algorithms have the option to provide an "execution policy", but these will not be discussed in this course.  </p>
+<p>For this class, we'll use <code>std::transform()</code> as an introduction to the STL algorithms. All the algorithms follow a similar pattern of usage. But first, we'll discuss the mechanisms to provide callbacks: function pointers, functors (also called function objects), and lambdas. C++ treats functions as "first-class citizens", which basically means functions can be stored in variables, used as parameters to other functions, and can be returned from other functions. This directly applies to STL algorithms, since many of them expects a callback function as one of their parameters. </p>
+<h2 id="function-pointers-functors-and-lambda-expressions">Function Pointers, Functors, and Lambda Expressions</h2>
+<p>Before discussing <code>std::transform()</code>, we'll describe the mechanisms for passing callback functions.</p>
+<h3 id="function-pointers">Function Pointers</h3>
+<p>To declare a function pointer, you need to provide the return type, name of the function pointer variable (which has the pointer asterisk in front of it and is wrapped in parentheses), and the list of types expected for the parentheses. In the following example, the third parameter of <code>addOrSubtract()</code> is a function pointer that returns an integer, and expects two integers as its parameters. The name of the function pointer is <code>operation</code>. It can be used directly as a function, as seen in the return statement of the <code>addOrSubtract()</code>. </p>
+<pre><code class="language-C++">#include &lt;assert.h&gt;
+// addOrSubtract takes two integers, x and y, that should be
+// added or subtracted, and a function pointer, operation
+// that performs the operation
+int addOrSubtract(int x, int y, int (*operation)(int, int)) {
+    return operation(x, y);
+}
+
+int add(int x, int y) {
+    return x + y;
+}
+
+int subtract(int x, int y) {
+    return x - y;
+}
+
+int main() {
+    // to use add, we need to use an ampersand
+    // on add's name to pass its address
+    int additionResult = addOrSubtract(2, 2, &amp;add);
+    assert(additionResult == 4);
+    // same for subtract, we need the ampersand to pass its address
+    int subtractionResult = addOrSubtract(3, 2, subtract);
+    assert(subtractionResult == 1);
+}
+</code></pre>
+<p>C++ 11 added a header <code>&lt;functional&gt;</code> that includes an <code>std::function</code> type. Below, the <code>addOrSubtract</code> function has been modified to use <code>std::function</code> as its type:</p>
+<pre><code class="language-C++">// need to include the functional header
+#include &lt;functional&gt;
+// std::function is a generic type
+// the template argument is the return type, followed by the parameter
+// list's data types in parentheses
+// so, operation is a function that returns an int 
+//  and expects two ints as parameters
+int addOrSubtract(int x, int y, std::function&lt;int(int,int)&gt; operation) {
+    return operation(x, y);
+}
+// the rest of the program would be the same
+</code></pre>
+<h3 id="functors">Functors</h3>
+<p>A functor is a class/struct that overloads the function call operator, i.e., it implements <code>operator ()</code>. Typically, functors only implement this operator, although they can implement other functions as well. The advantage of functors is that they can maintain state via their member variables. The below example implements a functor to computer the average of values in an array:</p>
+<pre><code class="language-C++">#include &lt;iostream&gt;
+#include &lt;array&gt;
+
+// Average is a functor since it implements the call operator
+template &lt;typename T&gt;
+struct Average {
+    // Constructor to init fields to 0
+    Average() {
+        sum = 0;
+        count = 0;
+    }
+
+    // operator() adds the value passed to it to the sum,
+    // and increments the count
+    void operator()(T value) {
+        sum += value;
+        ++count;
+    }
+
+    // property to return computed average
+    double average() const {
+        if (count == 0) return 0;
+        else return static_cast&lt;double&gt;(sum) / count;
+    }
+private:
+    T sum;
+    unsigned count;
+};
+
+int main() {
+    std::array&lt;int, 7&gt; values = { 2, 6, 24, 76, 3, 67, 5 };
+    // IMPORTANT: declare an instance of functor
+    Average&lt;int&gt; average;
+
+    // later we will see how to do this using the algorith header
+    for (int x: values) {
+        // overloading operator() allows us to use the object
+        // like it was a function by calling it
+        average(x);
+    }
+
+    std::cout &lt;&lt; &quot;Average = &quot; &lt;&lt; average.average() &lt;&lt; std::endl;
+
+    return 0;
+}
+</code></pre>
+<h3 id="lambda-expressions">Lambda Expressions</h3>
+<p>Also called "lambdas" or "anonymous functions", lambda expressions allow you to put a function anywhere you would put an expression, such as the right-hand side of an equals sign or as an argument to a function. Lambdas consist of three parts: a capture, a parameter list, and a body. The capture is denoted with square brackets, and allows you to pass local variables to the lambda's scope. If the lambda needs to modify a variable it captures, the variable must be passed by reference using the ampersand (&amp;). The parameter list is like a typical parameter list for a normal function. It has the types and names of the expected arguments to the lambda. Finally, the body contains the expressions that will be executed when the lambda is called. The body has its own local scope like any other block would. Remember that the body of the lambda cannot access any local variables from the block it is called in unless they are passed via the capture. Below is an example of using a lambda to compute the average of the same array from the functor example:</p>
+<pre><code class="language-C++">#include &lt;iostream&gt;
+#include &lt;array&gt;
+
+int main() {
+    std::array&lt;int, 7&gt; values = { 2, 6, 24, 76, 3, 67, 5 };
+
+    // we need to declare variables for the sum and count locally now
+    int count = 0;
+    int sum = 0;
+
+    // we can either use auto type or std::function&lt;&gt; to declare a 
+    // lambda &quot;variable&quot;
+    // to allow the lambda to modify the values of count and sum,
+    // they must be passed by reference
+    auto average = [&amp;count, &amp;sum] (int value) mutable {
+        sum += value;
+        ++count;
+    }; // since this is an expression, the body must be ended with a semicolon
+
+    // later we will see how to do this using the algorith header
+    for (int x: values) {
+        average(x);
+    }
+
+    std::cout &lt;&lt; &quot;Average = &quot; &lt;&lt; static_cast&lt;double&gt;(sum) / count &lt;&lt; std::endl;
+
+    return 0;
+}
+</code></pre>
+<h2 id="for-each">For Each</h2>
+<p>The first algorithm we will look at is <code>std::for_each</code>. This function has three parameters: the starting iterator of a collection, the ending iterator of a collection, and a function object that takes an element of the collection as a parameter. As promised in the comments of the above examples, let's use <code>for_each</code> to compute the average:</p>
+<pre><code class="language-C++">// must include algorithm
+#include &lt;algorithm&gt;
+#include &lt;iostream&gt;
+#include &lt;array&gt;
+
+// declaring a global variable to track the current average
+// computed by the updateAverage function
+static double currentAverage = 0;
+
+template &lt;typename T&gt;
+void updateAverage(const T&amp; value) {
+    // declaring count and sum as static variables means
+    // they will only be instatiated and initialized the
+    // first time the function is called
+    static int count = 0;
+    static T sum = 0;
+
+    sum += value;
+    ++count;
+    // currentAverage has to be updated each time the 
+    // function is called to keep it up to date
+    currentAverage = static_cast&lt;double&gt;(sum) / count;
+}
+
+// this is the same functor as in the first functor example
+template &lt;typename T&gt;
+struct Average {
+    Average() {
+        sum = 0;
+        count = 0;
+    }
+
+    void operator()(const T&amp; value) {
+        sum += value;
+        ++count;
+    }
+
+    double average() const {
+        if (count == 0) return 0;
+        else return static_cast&lt;double&gt;(sum) / count;
+    }
+private:
+    T sum;
+    unsigned count;
+};
+
+int main() {
+    int sum = 0;
+    int count = 0;
+
+    std::array&lt;int, 7&gt; values = { 2, 6, 24, 76, 3, 67, 5 };
+
+    // use for_each with function pointer
+    std::for_each(values.begin(), values.end(), &amp;updateAverage&lt;int&gt;);
+
+    // use for_each with functor
+    Average&lt;int&gt; average = std::for_each(values.begin(), values.end(), Average&lt;int&gt;());
+
+    // use for_each with lambda. 
+    // this is the same lambda as we used in the lambda example
+    std::for_each(values.begin(), values.end(), [&amp;sum, &amp;count](int x) {
+        sum += x;
+        ++count;
+    });
+
+    std::cout &lt;&lt; &quot;Average from function pointer: &quot; &lt;&lt; currentAverage &lt;&lt; std::endl;
+    std::cout &lt;&lt; &quot;Average from functor: &quot; &lt;&lt; average.average() &lt;&lt; std::endl;
+    std::cout &lt;&lt; &quot;Average from lambda: &quot; 
+        &lt;&lt; static_cast&lt;double&gt;(sum) / count &lt;&lt; std::endl;
+
+    return 0;
+}
+</code></pre>
+<p>As you can see, I had to do quite a lot of coercing with the function pointer to make it work for this example. The sum and count had to be declared as static locals in the function, and the average needed to be declared globally. In cases where state is important, function pointers are best to be avoided. With the lambda we were able to keep everything local to the main function, which is preferable, and the functor kept all data and operations local. Notice that when we use <code>for_each</code> with a functor, it returns an object of that functor.</p>
+<p>The start and end iterator do not need to be the start and end of the collection (although the start must come before the end, of course). If we wanted to exclude the start and end of the range, we could do so as follows:</p>
+<pre><code class="language-C++">Average&lt;int&gt; average = std::for_each(values.begin() + 1, values.start() + values.size() - 2, Average&lt;int&gt;());
+</code></pre>
+<p>Another version of <code>for_each</code>, <code>for_each_n</code> (C++17), also exists. This takes three arguments as well: the start iterator of the collection, the number of elements to operate on, and the function object. This makes the syntax for operating on partial ranges more concise. For example, if we wanted to average the first three elements of <code>values</code>:</p>
+<pre><code class="language-C++">// with for_each
+Average&lt;int&gt; average = std::for_each(values.begin(), values.start() + 3, Average&lt;int&gt;());
+// with for_each_n
+Average&lt;int&gt; average_n = std::for_each_n(values.begin(), 3, Average&lt;int&gt;());
+</code></pre>
+<h2 id="searching">Searching</h2>
+<p>There are many algorithms provided for searching through a collection, as searching is a common task in computer programs.</p>
+<h3 id="any-all-and-none">Any, All, and None</h3>
+<p>The first three searching algorithms we'll discuss return <code>bool</code>. The first function, <code>std::any_of</code>, returns true if <strong>at least one</strong> element in the collection meet the search criteria. <code>std::all_of</code> returns true if <strong>all</strong> items in the collection meet the search criteria. Finally, <code>std::none_of</code> returns true if <strong>no</strong> elements meet the criteria. All three functions have three arguments: the starting iterator, the ending iterator, and a predicate (a function object that returns a boolean). Below are some examples of each function's usage:</p>
+<pre><code class="language-C++">#include &lt;algorithm&gt;
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+
+int main() {
+    std::vector&lt;int&gt; values = { 1, -2, 5, 34, 2, 90, 365, -67 };
+
+    // this will return true since there is 
+    // at least one negative value in the vector
+    if (std::any_of(values.begin(), values.end(), [](int x) { return x &lt; 0; }))
+        std::cout &lt;&lt; &quot;values contains a negative number&quot; &lt;&lt; std::endl;
+    else
+        std::cout &lt;&lt; &quot;values contains no negatives&quot; &lt;&lt; std::endl;
+
+    // this will be false since there are even numbers in values
+    if (std::all_of(vales.begin(), values.end(), [](int x) { return x % 2; }))
+        std::cout &lt;&lt; &quot;All values are odd&quot; &lt;&lt; std::endl;
+    else
+        std::cout &lt;&lt; &quot;Some values are even&quot; &lt;&lt; std::endl;
+
+    // this will be true since there are no 0s in values
+    if (std::none_of(values.begin(), values.end(), [](int x) { return x == 0; })) 
+        std::cout &lt;&lt; &quot;There are no 0s in values&quot; &lt;&lt; std::endl;
+    else 
+        std::cout &lt;&lt; &quot;There is at least one 0 in values&quot; &lt;&lt; std::endl;
+
+    return 0;
+}
+</code></pre>
+<p>To be more concrete with our definitions, <code>any_of</code> returns true iff (if and only if) the predicate returns true at least once. <code>all_of</code> returns true iff the predicate returns false zero times. <code>none_of</code> returns true iff the predicate returns true zero times.  </p>
+<h3 id="find-find-if-and-find-if-not">Find, Find If, and Find If Not</h3>
+<p>If you want to find a certain element, or if a certain element matches (or doesn't match) a criterion, then <code>std::find</code>, <code>std::find_if</code>, and <code>std::find_if_not</code> can be used. <code>std::find</code> takes a starting and ending iterator as its first two parameters, and the value to search for as its third parameter. If you are not looking for a specific value, but if a value in the collection meets a certain condition, <code>std::find_if</code> can be used. <code>find_if</code> also takes a start and end iterator as its first two parameters, but instead of a value it expects a predicate as the third argument. If you want to find an element that does not match a condition, <code>std::find_if_not</code> is used the same way. All three functions return an iterator to the found element, or an iterator to the end of the collection if no match is found. If there are multiple matches, only the first match's iterator is returned. </p>
+<pre><code class="language-C++">// add code example
+</code></pre>
+<h3 id="find-first-of">Find First Of</h3>
+<p>The <code>std::find_first_of</code> is similar to <code>std::string::find_first_of</code>. Its parameters are the start and end iterators of the collection to search, along with the start and end iterators of the collection of search targets. If any of the elements in the second collection are found in the first, an iterator to that element is returned.</p>
+<pre><code class="language-C++">// add code example
+</code></pre>
+<h3 id="find-end">Find End</h3>
+<p><code>std::find_end</code> finds the last occurrence of a collection within another. </p>
+<h3 id="count-and-count-if">Count and Count If</h3>
+<p>To determine how many times an element appears in a collection, <code>std::count</code> can be used. <code>std::count</code> expects a starting iterator, ending iterator, and an element to search for and count as parameters. It returns the number of instances of the provided element in the collection as a <code>size_t</code> value. To count the number of elements that match a certain criterion, use <code>std::count_if</code>. Again, <code>std::count_if</code> expects the start and end iterator, but instead of a specific element it instead takes a predicate, and will count all elements for which that predicate returns true.</p>
+<pre><code class="language-C++">// add code example
+</code></pre>
+<h3 id="search">Search</h3>
+<p>The <code>std::search</code> function takes two ranges as input. It searches for the first occurrence of the second range within the first, and returns an iterator to the result of the search. For example:</p>
+<pre><code class="language-C++">#include &lt;algorithm&gt;
+#include &lt;vector&gt;
+
+int main() {
+    std::vector&lt;int&gt; values = { 1, 2, 3, 1, 2, 6, 3, 1, 2 };
+    std::vector&lt;int&gt; target = { 1, 2, 6 };
+    // pass the beginning and end of the range to search
+    // and the beginning and end of the range we want to find
+    auto it = std::search(values.begin(), values.end(), target.begin(), target.end());
+    // the iterator returned should point to the 4th element of the vector
+    assert(*it == values[3]);
+    assert(*(it + 1) == values[4]);
+    assert(*(it + 2) == values[5]);
+    target = { 1, 2, 5};
+    // since target is not in the range we are searching, we expect not to find it
+    it = std::search(values.begin(), values.end(), target.begin(), target.end());
+    // when the target is not found it returns the second argument,
+    // i.e., the end of the search range
+    assert(it == values.end());
+    return 0;
+}
+</code></pre>
+<h3 id="search-n">Search N</h3>
+<p>Unlike <code>for_each_n</code>, which was basically the same as <code>for_each</code>, <code>search_n</code> is pretty different from search. Rather than taking a range to search for, <code>search_n</code> looks for consecutive occurrences of a single value. The parameters are the start and end iterators of a collection to search in, the number of times the target should appear consecutively, and the target to search for. Example:</p>
+<pre><code class="language-C++">#include &lt;algorithm&gt;
+#include &lt;cassert&gt;
+#include &lt;vector&gt;
+
+int main() {
+    std::vector&lt;int&gt; values = { 1, 1, 2, 1, 1, 1, 2, 3, 1, 1, 1, 1, 1, 2 };
+    auto it2 = std::search_n(values.begin(), values.end(), 2, 1);
+    auto it3 = std::search_n(values.begin(), values.end(), 3, 1);
+    auto it4 = std::search_n(values.begin(), values.end(), 4, 1);
+    auto it5 = std::search_n(values.begin(), values.end(), 5, 1);
+    auto it6 = std::search_n(values.begin(), values.end(), 6, 1);
+    assert(it2 == values.begin());
+    assert(it3 == values.begin() + 3);
+    assert(it4 == values.begin() + 8);
+    assert(it5 == values.begin() + 8);
+    assert(it6 == values.end());
+    return 0;
+}
+</code></pre>
+<h2 id="copying">Copying</h2>
+<p><code>std::copy</code> takes the start and end iterators of the collection being copied, along with the start iterator of the destination collection. <code>std::copy_if</code> takes an additional parameter, a predicate, that should return true if the element should be copied and false if it should not. <code>std::copy_n</code> takes the starting iterator of the collection being copied from, the number of items to copy, and the starting iterator of the destination collection. <code>std::copy_backward</code> takes the start and end iterator of the collection to be copied, and the end iterator of the destination collection. The elements are copied in order, but placed at the end of the destination collection.</p>
+<pre><code class="language-C++">#include &lt;algorithm&gt;
+#include &lt;vector&gt;
+
+int main() {
+    std::vector&lt;int&gt; values = { 1, 2, 3, 4, 5, 6, 7, 8 };
+    // the destination needs to be large enough to hold the result
+    std::vector&lt;int&gt; valuesCopy(values.size());
+    std::vector&lt;int&gt; evenValues(values.size());
+    std::vector&lt;int&gt; firstHalf(values.size() / 2);
+    std::vector&lt;int&gt; twoCopies(values.size() * 2);
+    // pass the beginning and end of the range to be copied,
+    // and the start iterator of the destination to copy it to
+    // valuesCopy == { 1, 2, 3, 4, 5, 6, 7, 8 }
+    std::copy(values.begin(), values.end(), valuesCopy.begin());
+    // pass the beginning and end of the range to be copied from,
+    // an iterator to the start of the destination range,
+    // and a predicate that returns true if the element should 
+    // be copied, and false if it should not be copied
+    // evenValues == { 2, 4, 6, 8, ?, ?, ?, ? }
+    std::copy_if(values.begin(), values.end(), evenValues.begin(), [](int x) {
+        return !(x % 2);
+    });
+    // pass the beginning iterator of the range to be copied from,
+    // the number of elements to copy, and the start iterator of
+    // the range to copy the elements to
+    // firstHalf == { 1, 2, 3, 4 }
+    std::copy_n(values.begin(), values.size() / 2, firstHalf.begin());
+    // copy values into first half of twoCopies
+    std::copy(values.begin(), values.end(), twoCopies.begin());
+    // now, use copy_backward to put second copy of values at the end
+    // twoCopies == { 1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 4, 5, 6, 7, 8 }
+    std::copy_backward(values.begin(), values.end(), twoCopies.end());
+    return 0;
+}
+</code></pre>
+<p>We'll talk about <code>std::remove</code> in the next section, but the functions <code>std::remove_copy</code> and <code>std::remove_copy_if</code> will be discussed here, since they are still copying a collection rather than directly modifying it. These functions will copy a collection to a new collection, but omit elements that meet the specified criteria. Both have the same first three arguments as <code>std::copy</code>, the start and end iterator of the collection being copied and the start iterator of the target collection. The fourth argument of <code>std::remove_copy</code> is the value that will be omitted when performing the copy. The fourth argument of <code>std::remove_copy_if</code> is a predicate that returns true if an element will be omitted, and false if it will be copied.</p>
+<pre><code class="language-C++">#include &lt;algorithm&gt;
+#include &lt;vector&gt;
+
+int main() {
+    std::vector&lt;int&gt; values = { 0, 1, 3, -6, 1, 0, -5, 6, -2, 0 };
+    std::vector&lt;int&gt; noZeros(values.size());
+    std::vector&lt;int&gt; noNegativeValues(values.size());
+    // copy values into noZeros, excluding elements that are 0
+    // after operation:
+    // values == { 0, 1, 3, -6, 1, 0, -5, 6, -2, 0 }
+    // noZeros == { 1, 3, -6, 1, -5, 6, -2, ?, ?, ? }
+    std::remove_copy(values.begin(), values.end(), noZeros.begin(), 0);
+    // copy values into noNegativeValues, excluding elements that are less than 0
+    // after operation: 
+    // values = { 0, 1, 3, -6, 1, 0, -5, 6, -2, 0 }
+    // noNegativeValues = { 0, 1, 3, 1, 0, 6, 0, ?, ?, ? }
+    std::remove_copy_if(values.begin(), values.end(), noNegativeValues.begin(), [](int x) {
+        // predicate returns true if element is ignored
+        return x &lt; 0;
+    });
+    return 0;
+}
+</code></pre>
+<p>There are also <code>std::replace_copy</code> and <code>std::replace_copy_if</code> which work exactly the same as the remove variants, but rather than omitting the element they instead take an additional fifth argument, which is a value to replace the target with. See the later section on <code>std::replace</code> and <code>std::replace_if</code> for an example of replacement.</p>
+<h2 id="modifying">Modifying</h2>
+<p>These algorithms modify the state of a collection, including removing, transforming, and moving items.</p>
+<h3 id="removal">Removal</h3>
+<p><code>std::remove</code> and <code>std::remove_if</code> remove items from a collection. Both take the start and end iterators of the collection. <code>std::remove</code> expects a possible element of the collection to be removed. <code>std::remove_if</code> expects a predicate that returns true if the element needs to be removed.</p>
+<pre><code class="language-C++">#include &lt;algorithm&gt;
+#include &lt;vector&gt;
+
+int main() {
+    std::vector&lt;int&gt; values = { 0, 1, 3, -6, 1, 0, -5, 6, -2, 0 };
+    // remove 0s from values
+    // after operation:
+    // values == { 1, 3, -6, 1, -5, 6, -2, ?, ?, ? }
+    std::remove_copy(values.begin(), values.end(), 0);
+    // remove negatives from values
+    // values = { 1, 3, 1, 6, ?, ?, ?, ?, ?, ? }
+    std::remove_copy_if(values.begin(), values.end(), [](int x) {
+        // predicate returns true if element is ignored
+        return x &lt; 0;
+    });
+    return 0;
+}
+</code></pre>
+<h3 id="move">Move</h3>
+<p><code>std::move</code> <em>moves</em> elements from one collection to another. Its parameters are the same as those of <code>std::copy</code>: the start and end iterator of the collection being copied and the start iterator of the destination (there is also a <code>std::move_backward</code> that follows the same logic as <code>std::copy_backward</code>). The result on the destination collection is the same. However, the source collection cannot be guaranteed to have the same elements as before the move. The source collection's memory is still valid and allocated, and it will have valid elements, just not the same elements. There are some data types that cannot be copied, and therefore to put them in another collection they must be moved. An example would be <code>std::jthread</code> objects.  </p>
+<p><strong>Note:</strong> There is another <code>std::move</code> defined in the "utility" header. This deals with C++ move semantics, which are not a topic of discussion in this class.</p>
+<h3 id="swap">Swap</h3>
+<p><code>std::swap</code> takes two elements and swaps their values:</p>
+<pre><code class="language-C++">#include &lt;algorithm&gt;
+
+int main() {
+    int x = 5;
+    int y = 3;
+    std::swap(x, y);
+    // x == 3
+    // y == 5
+    return 0;
+}
+</code></pre>
+<p><code>std::iter_swap</code> swaps two elements of a collection using their iterators:</p>
+<pre><code class="language-C++">#include &lt;algorithm&gt;
+#include &lt;list&gt;
+#include &lt;string&gt;
+
+int main() {
+    std::list&lt;std::string&gt; todoList = {
+        &quot;mow grass&quot;,
+        &quot;water plants&quot;,
+        &quot;buy groceries&quot;,
+        &quot;pay bills&quot;
+    }; 
+    // this swaps the order of &quot;water plants&quot; and &quot;buy groceries&quot;
+    // in the list
+    std::iter_swap(todoList.begin() + 1, todoList.begin() + 2);
+    return 0;
+}
+</code></pre>
+<p>There is also <code>std::swap_ranges</code>, which takes the start and end iterator of a range of a collection, and the start iterator of the range it is being swapped with. </p>
+<pre><code class="language-C++">#include &lt;algorithm&gt;
+#include &lt;string&gt;
+
+int main() {
+    std::string str = &quot;world hello&quot;;
+    std::swap_ranges(str.begin(), str.begin() + 5, str.begin() + 6);
+    // str == &quot;hello world&quot;
+    return 0;
+}
+</code></pre>
+<h3 id="replace">Replace</h3>
+<p><code>std::replace</code> operates similarly to <code>std::remove</code>, but rather than deleting the element from the collection, it replaces it with another. Similarly, <code>std::replace_if</code> replaces all elements that meet the provided criteria with another element.</p>
+<pre><code class="language-C++">#include &lt;algorithm&gt;
+#include &lt;vector&gt;
+
+int main() {
+    std::vector&lt;int&gt; values = { 0, 4, 1, 6, 2, 5, 2, 5, 6 };
+    // replaces all instances of 2 with -2
+    // values == { 0, 4, 1, 6, -2, 5, -2, 5, 6 }
+    std::replace(values.begin(), values.end(), 2, -2);
+    // replaces all numbers greater than 3 with 3
+    // values == { 0, 3, 1, 3, -2, 3, -2, 3, 3 }
+    std::replace(values.begin(), values.end(), [](int x) { return x &gt; 3; }, 3);
+    return 0;
+}
+</code></pre>
+<h3 id="transform">Transform</h3>
+<p><code>std::transform</code> has two variants. The first takes the start and end iterator of a collection, and a function object/pointer/lambda to apply to each element of the collection. The function object should return the modified element.</p>
+<pre><code class="language-C++">#include &lt;algorithm&gt;
+#include &lt;string&gt;
+
+int main() {
+    std::string str = &quot;hello world&quot;;
+    std::transform(str.begin(), str.end(), [](const char&amp; c) {
+        return toupper(c);
+    });
+    // str == &quot;HELLO WORLD&quot;
+    return 0;
+}
+</code></pre>
+<p>For the next version, I'll provide an example first and then explain:</p>
+<pre><code class="language-C++">#include &lt;algorithm&gt;
+#include &lt;cmath&gt;
+#include &lt;vector&gt;
+
+// this will calculate the hypotenuses of triangles using std::transform
+int main() {
+    std::vector&lt;int&gt; bases = { 1, 2, 3, 4, 5, 6, 7, 8 };
+    std::vector&lt;int&gt; heights = { 2, 3, 4, 5, 12, 13, 24, 15 };
+    std::vector&lt;double&gt; hypotenuses(bases.size());
+    // I typically hate comments on the same line as code, but
+    // in this case I'll do it to explain each parameter
+    std::transform(
+        bases.begin(), // the start iterator of the first range
+        bases.end(), // the end iterator of the first range
+        heights.begin(), // the start iterator of the second range
+        hypotenuses.begin(), // the start iterator of the destination range
+        [](int a, int b) { // a will be an element of the first range, b is from the second
+            return  pow(pow(a, 2) + pow(b, 2), 0.5); // return value is stored in the destination range
+        }
+    );
+    // hypotenuses == { 2.23607, 3.60555, 5, 6.40312, 13, 14.3178, 25, 17 }
+    return 0;
+}
+</code></pre>
+<p>This version of transform is basically used to combine elements of two ranges. If you view the example on C++ Reference (https://en.cppreference.com/w/cpp/algorithm/transform.html) you can see that this could be used to edit a single collection as well. The first two parameters are the start and end of the first range. The third parameter is the start of the second range (the end is deduced based on the distance between the start and end of the first range). The fourth parameter is the start iterator of the destination range. The last parameter is a function object that has two parameters, one from each input range. Its return value will be stored in the destination range.</p>
+<h3 id="unique">Unique</h3>
+<p>The <code>std::unique</code> function will remove consecutive, duplicate elements from a range. The function takes iterators to the start and end of the range to remove duplicate elements from. Optionally, you can provide a predicate that returns true if the two elements are the same. Otherwise, the algorithm uses <code>operator==</code> to compare elements. An iterator to the new last element of the range is returned. </p>
+<pre><code class="language-C++">#include &lt;algorithm&gt;
+#include &lt;vector&gt;
+
+int main() {
+    std::vector&lt;int&gt; values = {  };
+    std::vector&lt;int&gt; uniqueValues(values);
+    std::unique(uniqueValues.begin(), uniqueValues.end());
+}
+</code></pre></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script src="../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

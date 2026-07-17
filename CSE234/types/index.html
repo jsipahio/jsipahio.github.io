@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>CSE234 - STL Data Types - </title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../css/brands.min.css" rel="stylesheet">
+        <link href="../../css/solid.min.css" rel="stylesheet">
+        <link href="../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" disabled>
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../.."></a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../cv/" class="nav-link">CV</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../teaching/" class="nav-link">Teaching</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item dropdown">
+                              <button id="theme-menu" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static" aria-label="Toggle theme" class="nav-link dropdown-toggle">
+                                <i class="fa-solid fa-circle-half-stroke fa-fw"></i>
+                                <span class="d-lg-none ms-2">Toggle theme</span>
+                              </button>
+                              <ul class="dropdown-menu dropdown-menu-end">
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
+                                    <i class="fa-solid fa-sun fa-fw"></i>
+                                    <span class="ms-2">Light</span>
+                                    <i class="fa-solid fa-check ms-auto d-none"></i>
+                                  </button>
+                                </li>
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
+                                    <i class="fa-solid fa-moon fa-fw"></i>
+                                    <span class="ms-2">Dark</span>
+                                    <i class="fa-solid fa-check ms-auto d-none"></i>
+                                  </button>
+                                </li>
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="auto" aria-pressed="true">
+                                    <i class="fa-solid fa-circle-half-stroke fa-fw"></i>
+                                    <span class="ms-2">Auto</span>
+                                    <i class="fa-solid fa-check ms-auto"></i>
+                                  </button>
+                                </li>
+                              </ul>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <script src="../../js/darkmode.js"></script>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#cse234-stl-data-types" class="nav-link">CSE234 - STL Data Types</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#vector" class="nav-link">Vector</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#iterators" class="nav-link">Iterators</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#common-methods" class="nav-link">Common Methods</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#array" class="nav-link">Array</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#list-and-forward-list" class="nav-link">List (and Forward List)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#set-and-unordered-set" class="nav-link">Set (and Unordered Set)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#map-and-unordered-map" class="nav-link">Map (and Unordered Map)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#deque" class="nav-link">Deque</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#stack" class="nav-link">Stack</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#queue" class="nav-link">Queue</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#comparison-of-container-uses" class="nav-link">Comparison of Container Uses</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="cse234-stl-data-types">CSE234 - STL Data Types</h1>
+<p>The Standard Template Library (STL) provides implementations of most common data structures. These include arrays, vectors, lists, sets, maps, stacks, and queues. All of these have dynamically changing size, except for array, whose size must be known and specified at compile-time. Below is a brief overview of each:  </p>
+<ul>
+<li><strong>Array</strong> - A fixed-size collection of elements that preserves order and allows random access (index)</li>
+<li><strong>Vector</strong> - An automatically resizing collection that preserves order and allows random access (index)</li>
+<li><strong>List</strong> - A collection that does not support random access but does preserve order</li>
+<li><strong>Set</strong> - A collection that does not support random access. Elements of a set are unique</li>
+<li><strong>Multiset</strong> - A set where items are not unique, but there is a count of how many times an element occurs</li>
+<li><strong>Map</strong> - A collection of (key, value) pairs with unique keys</li>
+<li><strong>Multimap</strong> - A collection of (key, value) pairs where the keys are not unique</li>
+<li><strong>Stack</strong> - A container where items can only be accessed in last-in, first-out (LIFO) order (like a stack of dishes, the last dish put on the top of the stack is the first one to be removed)</li>
+<li><strong>Queue</strong> - A container where items can only be accessed in first-in, first-out (FIFO) order (like a line (queue) waiting to check out at a store)</li>
+</ul>
+<p>We'll discuss <code>std::vector&lt;T&gt;</code> first, then describe iterators and the methods defined across almost all STL containers. </p>
+<h2 id="vector">Vector</h2>
+<p>The STL Vector is an automatically resizing dynamic array wrapper. When the vector runs out of space to hold new elements, it automatically resizes itself to be twice the size of its previous capacity. Items can be inserted into the beginning or middle of a vector while preserving order. To do so, all elements that come after the inserted element must be shifted. This happens automatically, as well. </p>
+<h3 id="constructioninitialization">Construction/Initialization</h3>
+<p>Vectors, like arrays, must have the type of data it is storing specified. Vectors do not require a size as one of its template arguments, however. An initial size can be provided to the constructor, however. Vectors support copying and assignment, like all STL containers.</p>
+<h3 id="adding-elements">Adding Elements</h3>
+<p>The main way to add new elements to the end of a vector is via the <code>push_back</code> functions. </p>
+<h3 id="accessing-elements">Accessing Elements</h3>
+<h3 id="resizing">Resizing</h3>
+<h3 id="common-applications">Common Applications</h3>
+<p><code>std::vector</code> is the standard container used in C++ for storing collections of data. If you aren't sure which of the other containers to use for an application, that typically means a vector will work fine. Vectors offer balanced performance for most applications.</p>
+<h2 id="iterators">Iterators</h2>
+<p>Before discussing the rest of the STL data types, we need to cover iterators. An iterator is a type of pointer that was developed to standardize access to containers. An iterator is basically a pointer to an element of a container, however, there are additionally operations that can be performed on iterators to make traversing a container consistent no matter which type of container is being accessed. Below is a quick example of a vector being created, and an iterator being used to access its members:</p>
+<pre><code class="language-C++">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+
+int main() {
+    std::vector&lt;int&gt; values = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+    // the begin() member function returns an iterator to the first
+    // element of a collection 
+    std::vector&lt;int&gt;::iterator it = values.begin();
+
+    // we often use the &quot;auto&quot; type for iterators rather than writing it out
+    // the end() member function returns the &quot;past-the-end&quot; iterator
+    // of a collection. this iterator points to the location immediately
+    // after the end of a collection
+    auto end = values.end();
+
+    // the end iterator is not referenceable, it is just a sentinel
+    // value that marks the end of the container
+    while (it != end) {
+        // accessing the data an iterator is pointing to requires it 
+        // to be dereferenced using *, just like a pointer
+        std::cout &lt;&lt; *it &lt;&lt; std::endl;
+        // ++ is used to move the iterator to point at the next element
+        ++it;
+    }
+    return 0;
+}
+</code></pre>
+<h3 id="range-based-for-loops">Range-based for-Loops</h3>
+<p>One consequence of iterators is the ability to implement range-based for-loops. If you are familiar with for loops in Python or the <code>foreach</code> loop in C#, this concept should be familiar to you. The syntax for a range-based for-loop is below:</p>
+<pre><code class="language-C++">for (Typename x : container) {
+
+}
+</code></pre>
+<p>Below shows a traditional for-loop and a range-based for loop that performs the same operation:</p>
+<pre><code class="language-C++">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+
+int main() {
+    std::vector&lt;int&gt; values = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+
+    // tradition for loop
+    for (int i = 0; i &lt; values.size(); ++i) {
+        std::cout &lt;&lt; values[i] &lt;&lt; std::endl;
+    }
+
+    // range-based for loop
+    for (int x: values) {
+        std::cout &lt;&lt; x &lt;&lt; std::endl;
+    }
+
+    return 0;
+}
+</code></pre>
+<h2 id="common-methods">Common Methods</h2>
+<p>STL data types share the names and operations for many of their methods. For example, all collections provide <code>begin()</code> and <code>end()</code> to access the start and end iterators of the collection. Below is a table of common method names, the parameters expected, and a column for STL collections that do not implement that method, if applicable.  </p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Parameters</th>
+<th>Behavior</th>
+<th>Exceptions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>begin()</td>
+<td></td>
+<td>Returns an iterator to the first element of the container</td>
+<td></td>
+</tr>
+<tr>
+<td>end()</td>
+<td></td>
+<td>Returns an iterator to the "past-the-end" iterator of the container</td>
+<td></td>
+</tr>
+<tr>
+<td>front()</td>
+<td></td>
+<td>Returns the first element of the collection</td>
+<td></td>
+</tr>
+<tr>
+<td>back()</td>
+<td></td>
+<td>Returns the last element of the collection</td>
+<td></td>
+</tr>
+<tr>
+<td>empty()</td>
+<td></td>
+<td>Returns <code>true</code> if the container is empty</td>
+<td></td>
+</tr>
+<tr>
+<td>size()</td>
+<td></td>
+<td>Returns the number of elements stored in the container</td>
+<td></td>
+</tr>
+<tr>
+<td>clear()</td>
+<td></td>
+<td>Deletes every element of the container, but not the container itself</td>
+<td><code>array</code></td>
+</tr>
+<tr>
+<td>insert()</td>
+<td>iterator to insertion point, value to be inserted</td>
+<td>Inserts a new element immediately before the location pointed to by the iterator</td>
+<td><code>array</code></td>
+</tr>
+<tr>
+<td>erase()</td>
+<td>iterator to element to be deleted</td>
+<td>deletes element from collection</td>
+<td><code>array</code></td>
+</tr>
+<tr>
+<td>emplace()</td>
+<td>iterator to insertion point, arguments to element's constructor</td>
+<td>calls elements constructor with provided arguments, inserts immediately before the iterator that is passed</td>
+<td><code>array</code></td>
+</tr>
+<tr>
+<td>swap()</td>
+<td>another collection</td>
+<td>swaps the calling collection with its argument</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="insert-vs-emplace">insert() vs emplace()</h3>
+<p>At first, <code>insert()</code> and <code>emplace()</code> seem very similar, as they both add new elements to a collection at a provided insertion point. However, <code>insert()</code> requires the new value to already be constructed. <code>emplace()</code> instead takes the arguments to the data type's constructor, calls the constructor to create a new element, and inserts the newly created element. Below is an example that illustrates this difference.</p>
+<pre><code class="language-C++">#include &lt;vector&gt;
+
+struct Date {
+    Date(int d, int m, int y) {
+        day = d;
+        month = m;
+        year = y;
+    }
+private:
+    int day;
+    int month;
+    int year;
+};
+
+int main() {
+    std::vector&lt;Date&gt; dates = {
+        { 2, 11, 2025 },
+        { 2, 12, 2026 },
+        { 2, 13, 2026 },
+        { 2, 14, 2026 }
+    };
+    // create a new Date object and insert it
+    Date date(2, 10, 2026);
+    dates.insert(dates.begin(), date);
+
+    // implicitly call the constructor to insert one
+    dates.insert(dates.begin(), Date(2, 9, 2026));
+
+    // pass arguments to constructor to emplace to create new Date
+    dates.emplace(dates.begin(), 2, 8, 2026);
+
+    return 0;
+}
+</code></pre>
+<h3 id="comparison-operators">Comparison Operators</h3>
+<p>All STL containers provide comparison operators (==, &lt;=, &gt;=, &lt;, &gt;, !=) to compare two containers. </p>
+<h2 id="array">Array</h2>
+<p>The STL Array class is a template class that wraps a normal C array. It has the same constraint as a C array, in that the size of the array must be known at compile time. However, it provides protections against out-of-range access via its <code>at</code> member function, provides iterators, and has member functions to return the size of the container, unlike standard C arrays where the size of the array is tracked by the programmer.</p>
+<h3 id="unique-operations">Unique Operations</h3>
+<p>Like a C array, STL arrays support random access via the subscript operator (i.e., using an index). They also provide an <code>at()</code> member function that raises an exception when an invalid index is provided. </p>
+<h2 id="list-and-forward-list">List (and Forward List)</h2>
+<p>The STL List class is used to create a linked list. Similar to an array/vector, lists store a collection of elements while preserving their order. Linked lists are different from arrays/vectors in that the elements can no longer be accessed by an index and are not stored contiguously in memory. This can be an advantage or disadvantage depending on the usage. Below is a table that compares lists and vectors.
+| Scenario | Array | Vector | List |
+| -------- | ----- | ------ | ---- |
+| Insertion at End | Impossible | May be instant, unless vector must be resized | Fast |
+| Insertion at Middle | Impossible | Requires shifting all elements that follow the insertion point, Slow | Fast |
+| Insertion at Front | Impossible | Requires shifting all elements, Slow | Fast |
+| Deletion | Impossible | Requires shifting of elements, Slow | Fast, and preserves iterators |
+| Random Access (index) | Fast | Fast | Impossible |
+| Space | Must be known at compile time - empty indices are wasted space | Does not need to be known at compile time, but resizing is expensive and can result in massive amounts of wasted space | Does not need to be known at compile time, and there is never wasted space | </p>
+<h3 id="unique-operations_1">Unique Operations</h3>
+<p><code>std::list</code> provides <code>push_front()</code> to add elements to the front of the list, and <code>push_back()</code> to add elements to the end of the list. Similarly, it offers <code>pop_front()</code> and <code>pop_back()</code> to remove elements from the front and end of the list, respectively. The <code>std::forward_list</code> class only supports <code>push_front()</code> and <code>pop_front()</code>.<br />
+Lists provide a few unique member functions for common list operations. First is <code>splice()</code>, which expects an iterator and </p>
+<h2 id="set-and-unordered-set">Set (and Unordered Set)</h2>
+<p>The STL set is used store a collection of unique values. The multiset is used to collection of values that are not unique, but do not need to be kept in order. The multiset tracks the number of times a duplicate element has been "inserted". There are unordered variants of both the set and multiset. Most applications where sets are used do not need to preserve order, so <code>std::unordered_set</code> and <code>std::unordered_multiset</code> are typically preferred. </p>
+<h3 id="example-applications">Example Applications</h3>
+<p>Sets can be used anytime you want to create a collection of unique items. Sets offer faster retrieval of items than a list, with the penalty of slower insertion and deletion than list. Since vectors have random access, they offer faster retrieval of items (although searching is slower), but inserting items that are not at the end of the vector is slower than inserting an item to a set.<br />
+Unordered sets are faster than list and vector in almost all cases, but do not preserve order. If you need to store a collection of items where order is not needed, unordered sets are best.  </p>
+<h3 id="example">Example</h3>
+<p>This example shows how an unordered set can be used to count the number of unique words in a text file:</p>
+<pre><code class="language-C++">#include &lt;fstream&gt;
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;unordered_set&gt;
+
+std::unordered_set&lt;std::string&gt; readUniqueWords(std::ifstream &amp;fin) {
+    std::string word;
+    std::unordered_set&lt;std::string&gt; uniqueWords;
+    while (fin &gt;&gt; word) {
+        uniqueWords.insert(word);
+    }
+    return uniqueWords;
+}
+
+void printReport(const std::unordered_set&lt;std::string&gt; &amp;words) {
+    for (const auto&amp; word: words) {
+        std::cout &lt;&lt; word &lt;&lt; &quot;: &quot; &lt;&lt; words.count(word) &lt;&lt; &quot;\n&quot;;
+    }
+}
+
+int main(int argc, char **argv) {
+    if (argc &lt; 2) {
+        std::cerr &lt;&lt; &quot;Not enough arguments provided. Expected 1, got 0\n&quot;;
+        std::cerr &lt;&lt; &quot;Usage: \n&quot;;
+        std::cerr &lt;&lt; &quot;\t./count_words [filename]\n&quot;;
+        return 0;
+    }
+
+    std::ifstream fin(argv[1]);
+    if (fin.fail()) {
+        std::cerr &lt;&lt; &quot;Could not open file &quot; &lt;&lt; argv[1] &lt;&lt; &quot;\n&quot;;
+        return 1;
+    }
+
+    std::unordered_set&lt;std::string&gt; uniqueWords = readUniqueWords(fin);
+    fin.close();
+    printReport(uniqueWords);
+
+    return 0;
+}
+</code></pre>
+<h2 id="map-and-unordered-map">Map (and Unordered Map)</h2>
+<p>STL Maps are used to store (key, value) pairs. There are four variations of map: <code>std::map</code>, <code>std::multimap</code>, <code>std::unordered_map</code> and <code>std::unordered_multimap</code>. If the keys in the map must be unique, <code>std::map</code> or <code>std::unordered_map</code> can be used. If there can be duplicate keys, then <code>std::multimap</code> and <code>std::unordered_multimap</code> must be used. The <code>std::map</code> and <code>std::multimap</code> collections preserve the insertion order of elements. If this is not required, using the <code>unordered</code> variants can provide a large performance boost.</p>
+<h3 id="unique-methods">Unique Methods</h3>
+<p>Maps support random access using the subscript <code>operator[]</code>, passing a key as the index. </p>
+<h3 id="example-applications_1">Example Applications</h3>
+<h3 id="example_1">Example</h3>
+<p>Here, </p>
+<h2 id="deque">Deque</h2>
+<p>A deque is a doubly-ended queue, which allows for quick access to elements at the beginning and end of the collection. The cost of random access is also fast. Like a vector, insertions and removals in the middle of the collection are slower since they require shifting elements. Expanding a deque is faster than a vector, since it does not require copying the collection, but deques use more space on average.</p>
+<h2 id="stack">Stack</h2>
+<p>The STL stack is actually a container adapter, meaning it is used to limit the access to a container. By default, it uses a deque, but it can use any sequential container (vector and list) to store the data. Stacks provide access to data in a last-in, first-out (LIFO) ordering. To enforce this, stack limits access to the container via the <code>push()</code>, <code>pop()</code>, and <code>top()</code> methods. The <code>push()</code> method inserts an element to the end of the container. The <code>pop()</code> method removes the last element from the container. The <code>top()</code> method returns the value of the last item in the container. Stacks are often used for compiler implementation, parsing, and backtracking. Below is a (very simplified) implementation of a back and forward button (such as for a browser) using stacks.</p>
+<pre><code class="language-C++">#include &lt;assert.h&gt;
+#include &lt;string&gt;
+
+// class to maintain state of stacks
+class History {
+private:
+    // store the previously visited pages
+    std::stack&lt;std::string&gt; previousPages;
+    // store the pages after the user hits the back button
+    // these get cleared after the user moves forward to a unique page
+    std::stack&lt;std::string&gt; forwardPages;
+public:
+    History() {}
+    // add a page to the previously visited pages
+    void addPage(const std::string&amp; page) {
+        // push the page to the top of the history
+        previousPages.push(page);
+        // wipe any forward pages
+        forwardPages.clear();
+    }
+    // return false and empty string if there is no previous page
+    // return true and the url if there is a previous page
+    // add page to forwardPages so the forward arrow can access it
+    std::pair&lt;bool, std::string&gt; getPreviousPage() {
+        // check if there is not a page to return 
+        if (previousPages.empty()) {
+            return std::make_pair(false, &quot;&quot;);
+        }
+        else {
+            // save the top of the previousPages stack
+            std::pair returnValue = std::make_pair(true, previousPages.top());
+            // remove the page from the previousPages stack
+            previousPages.pop();
+            // add to the forward pages
+            forwardPages.push(returnValue.second);
+            return returnValue;
+        }
+    }
+    // return false and empty string if there is no forward page
+    // return true and the url if there is a forward page
+    // add the page back to the previous pages
+    std::pair&lt;bool, std::string&gt; getForwardPage() {
+        // check if there is not a forward page
+        if (forwardPages.empty()) {
+            return std::make_pair(false, &quot;&quot;);
+        }
+        else {
+            // save the top of the forwardPages stack
+            std::pair returnValue = std::make_pair(true, forwardPages.top());
+            // remove the page from the forwardPages stack
+            forwardPages.pop();
+            // add page back to the previousPages
+            previousPages.push(returnValue.second);
+            return returnValue;
+        }
+    }
+};
+
+int main() {
+    // create history object
+    History history;
+    // add a couple pages to the history
+    history.addPage(&quot;https://www.google.com&quot;);
+    history.addPage(&quot;https://www.cppreference.com&quot;);
+
+    // move back to the previous page
+    auto previousPage = history.getPreviousPage();
+    // check if there was a previous page (we expect this to be true)
+    if (previousPage.first) {
+        assert(previousPage.second == &quot;https://www.google.com&quot;);
+    }
+
+    // move to the page we just went back from
+    auto forwardPage = history.getForwardPage();
+    // check if there was a forward page (we expect this will be true)
+    if (forwardPage.first) { 
+        assert(forwardPage.second == &quot;https://www.cppreference.com&quot;);
+    }
+
+    // move back a page, then forward to a new page
+    if (history.getPreviousPage().first) {
+        history.addPage(&quot;https://www.cplusplus.com&quot;);
+    }
+    // we expect that there are no longer any previous 
+    // pages since we added a new page to the history stack
+    assert(history.getForwardPage() == std::make_pair(false, &quot;&quot;));
+
+    return 0;
+}
+
+</code></pre>
+<h2 id="queue">Queue</h2>
+<p>Like stack the STL queue is also a container adapter. The queue data structure limits access to data so that it is accessed in first-in, first-out (FIFO) order. To do so, it limits users to the <code>push()</code>, <code>front()</code>, <code>back()</code>, and <code>pop()</code> methods. The <code>push()</code> method adds an element to the back of the queue. <code>front()</code> and <code>back()</code> return the values at the front and end of the queue, respectively. The <code>pop()</code> method removes the first element of the queue. Queues are used for buffers, such as process wait lists in operating systems, ordering the processing of network requests, and some graph traversal implementations. There is a specialized version of queue, <code>std::priority_queue</code>, which orders elements by both insertion order and a "priority" level, so that elements with more priority end up at the front of the queue, even if they are inserted after lower priority elements.</p>
+<h3 id="example-applications_2">Example Applications</h3>
+<p>Queues are used to implement process queues (i.e., waitlist), any kind of waitlist in general. </p>
+<h3 id="example_2">Example</h3>
+<p>Below is an example of a first-come, first-serve process queue:</p>
+<pre><code class="language-C++">#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;queue&gt;
+
+int main() {
+    std::queue&lt;std::string&gt; processQueue;
+    // use push to add elements to back of queue
+    processQueue.push(&quot;process 1029&quot;);
+    processQueue.push(&quot;process 1192&quot;);
+    processQueue.push(&quot;process 399&quot;);
+    processQueue.push(&quot;process 1922&quot;);
+    processQueue.push(&quot;process 245&quot;);
+
+    // while the queue is not empty
+    while (!processQueue.empty()) {
+        // print the element at the front of queue
+        std::cout &lt;&lt; processQueue.front() &lt;&lt; &quot;\n&quot;;
+        // remove the element from the front of the queue
+        processQueue.pop();
+    }
+
+    return 0;
+}
+</code></pre>
+<p>Example Output:</p>
+<pre><code>process 1029
+process 1192
+process 399
+process 1922
+process 245
+</code></pre>
+<p>Here is an example using <code>priority_queue</code> for a simple CPU SJF (shortest job first) task scheduler:</p>
+<pre><code class="language-C++">#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;queue&gt;
+
+// create a struct to hold (very simple) process info
+struct Process {
+    std::string name;
+    unsigned int estimatedDuration;
+    Process(std::string n, unsigned int duration) {
+        name = n;
+        estimatedDuration = duration;
+    }
+    // need to implement &lt; for priority_queue
+    bool operator&lt;(const Process&amp; other) const {
+        return estimatedDuration &gt; other.estimatedDuration;
+    }
+};
+
+int main() {
+    // declaring 5 processes with various estimated durations
+    Process p1 = { &quot;process 1&quot;, 1000 };
+    Process p2 = { &quot;process 2&quot;, 100 };
+    Process p3 = { &quot;process 3&quot;, 500 };
+    Process p4 = { &quot;process 4&quot;, 400 };
+    Process p5 = { &quot;process 5&quot;, 50 };
+
+    // add the processes the queue
+    std::priority_queue&lt;Process&gt; sjfQueue;
+    sjfQueue.push(p1);
+    sjfQueue.push(p2);
+    sjfQueue.push(p3);
+    sjfQueue.push(p4);
+    sjfQueue.push(p5);
+
+    // while the queue is not empty
+    while (!sjfQueue.empty()) {
+        // use top() to access the highest priority item
+        std::cout &lt;&lt; sjfQueue.top().name &lt;&lt; &quot;\n&quot;;
+        // remove the highest priority item
+        sjfQueue.pop();
+    }
+
+    return 0;
+}
+</code></pre>
+<p>Example Output:</p>
+<pre><code>process 5
+process 2
+process 4
+process 3
+process 1
+</code></pre>
+<h2 id="comparison-of-container-uses">Comparison of Container Uses</h2>
+<p>So, the question that arises at this point is when to use which container. It's easy to decide if a map is needed, since it is the only container that supports key-value pairs. For set and map, unless insertion order needs to be preserved, it is always better to use the "unordered" variants. Vectors offer balanced performance for many applications, but can use excessive space and can be slowed down if many insertions have to occur at the beginning or middle of the vector. If many of these types of insertion must be made, a list may make more sense. If the order of elements needs to be preserved, and the number of elements is known ahead of time, an array may be sufficient. Sets provide quick access to unique elements, while a multiset provides quick access to the counts of a specific element in the collection. </p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script src="../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

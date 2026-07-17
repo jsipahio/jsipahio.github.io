@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>Temp - </title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../css/brands.min.css" rel="stylesheet">
+        <link href="../../css/solid.min.css" rel="stylesheet">
+        <link href="../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" disabled>
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../.."></a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../cv/" class="nav-link">CV</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../teaching/" class="nav-link">Teaching</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item dropdown">
+                              <button id="theme-menu" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static" aria-label="Toggle theme" class="nav-link dropdown-toggle">
+                                <i class="fa-solid fa-circle-half-stroke fa-fw"></i>
+                                <span class="d-lg-none ms-2">Toggle theme</span>
+                              </button>
+                              <ul class="dropdown-menu dropdown-menu-end">
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
+                                    <i class="fa-solid fa-sun fa-fw"></i>
+                                    <span class="ms-2">Light</span>
+                                    <i class="fa-solid fa-check ms-auto d-none"></i>
+                                  </button>
+                                </li>
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
+                                    <i class="fa-solid fa-moon fa-fw"></i>
+                                    <span class="ms-2">Dark</span>
+                                    <i class="fa-solid fa-check ms-auto d-none"></i>
+                                  </button>
+                                </li>
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="auto" aria-pressed="true">
+                                    <i class="fa-solid fa-circle-half-stroke fa-fw"></i>
+                                    <span class="ms-2">Auto</span>
+                                    <i class="fa-solid fa-check ms-auto"></i>
+                                  </button>
+                                </li>
+                              </ul>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <script src="../../js/darkmode.js"></script>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="2"><a href="#task-decomposition-and-refactoring" class="nav-link">Task Decomposition and Refactoring</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h2 id="task-decomposition-and-refactoring">Task Decomposition and Refactoring</h2>
+<p>Writing a program requires decomposing the task you have been given into more manageable sub-tasks. Then, you can solve the individual sub-tasks until you've created a program that solves the whole task you've been given. However, the resulting code of the program will often be messy, inefficient, and disorganized. Refactoring is the process in which you go through after writing the initial code and clean up the program. Next week, when we discuss testing and test driven development, you'll see a couple of longer examples of this. Here, I'll stick with a shorter example.<br />
+Let's say that we have been given the task of writing a program that, given a range of integers, finds the integer that takes the most steps to reach 1 following the Collatz conjecture. The Collatz conjecture states the following: Given a positive integer, if it is even, divide it by 2. If it is odd, multiply it by 3 and subtract 1. Every integer will eventually reach 1 by doing this. This has never been formally proved, which is why it is called a conjecture and not a theorem, but there has never been an example to disprove it, either.<br />
+Let's break down the requirements of the program into manageable tasks:
+1. Read two numbers
+2. Apply the Collatz conjecture to each number
+3. Count the number of steps to reduce the number to 1
+4. Keep track of the number that took the most steps
+5. Report the number that took the most steps to reach 1</p>
+<p>With these tasks in mind, let's start implementing a solution. The easiest thing to do is to read the two numbers in, so let's do that:</p>
+<pre><code class="language-py">print(&quot;This program will find which positive integer&quot;
+        &quot; in a given range takes the most steps to reach 1&quot;
+        &quot; following the Collatz Conjecture&quot;)
+
+start = int(input(&quot;Enter start of range: &quot;))
+end = int(input(&quot;Enter end of range: &quot;))
+</code></pre>
+<p>That's task 1 done. However, in writing this, I thought a problem. While I am asking for the minimum and maximum number explicitly, the user could still enter them in the wrong order. They could also enter the same number twice. In that case, we'd only be checking one number. This is technically valid, so we'll allow the user to enter the same number, so the program can be used to check how many steps it takes to reduce a single number to 1. However, we should validate that the min is less than or equal to the max. We could allow the user to continually reenter numbers, but I'd rather just report the invalid usage and end the program. It is short program that only asks the user to enter two numbers, so forcing them to run it again to use it correctly is easier than writing the code to prompt the user to enter the correct value.</p>
+<pre><code class="language-py">print(&quot;This program will find which positive integer&quot;
+        &quot; in a given range takes the most steps to reach 1&quot;
+        &quot; following the Collatz Conjecture&quot;)
+
+start = int(input(&quot;Enter start of range: &quot;))
+end = int(input(&quot;Enter end of range: &quot;))
+
+# add logic to check that input is a valid range
+if start &gt; end:
+    print(&quot;Invalid usage. Start must be less than end&quot;)
+    exit(1)
+</code></pre>
+<p>Now, we can test if the program works. Below are some example inputs (the explanation message is excluded):</p>
+<pre><code>python3 collatz.py
+Enter start of range: 1
+Enter end of range: 5
+python3 collatz.py
+Enter start of range: 5
+Enter end of range: 1
+Invalid usage. Start must be less than end
+python3 collatz.py
+Enter start of range: 0
+Enter end of range: 5
+</code></pre>
+<p>In testing it, I discovered another problem. 0 is not a valid input for the program. The input also cannot be 0 or negative. The conjecture does not apply to those values. Therefore, we need to eliminate the possibility that either element of the range is 0 or less.</p>
+<pre><code class="language-py">print(&quot;This program will find which positive integer&quot;
+        &quot; in a given range takes the most steps to reach 1&quot;
+        &quot; following the Collatz Conjecture&quot;)
+
+start = int(input(&quot;Enter start of range: &quot;))
+end = int(input(&quot;Enter end of range: &quot;))
+
+if start &gt; end:
+    print(&quot;Invalid usage. Start must be less than end&quot;)
+    exit(1)
+
+# add logic to check that 0 is not part of the range
+if start &lt;= 0 or end &lt;= 0:
+    print(&quot;Invalid usage. Range must be positive&quot;)
+    exit(2)
+</code></pre>
+<p>Now, we can test it again:</p>
+<pre><code>python3 collatz.py
+Enter start of range: 0
+Enter end of range: 5
+Invalid usage. Range must be positive
+python3 collatz.py
+Enter start of range: -4
+Enter end of range: -1
+Invalid usage. Range must be positive
+</code></pre>
+<p>Now, we've handled getting input from the user. Next, we need to apply the Collatz conjecture to each of them. First, let's loop through the numbers:</p>
+<pre><code class="language-py">print(&quot;This program will find which positive integer&quot;
+        &quot; in a given range takes the most steps to reach 1&quot;
+        &quot; following the Collatz Conjecture&quot;)
+
+start = int(input(&quot;Enter start of range: &quot;))
+end = int(input(&quot;Enter end of range: &quot;))
+
+if start &gt; end:
+    print(&quot;Invalid usage. Start must be less than end&quot;)
+    exit(1)
+
+if start &lt;= 0 or end &lt;= 0:
+    print(&quot;Invalid usage. Range must be positive&quot;)
+    exit(2)
+
+for i in range(start, end + 1):
+    print(i)
+</code></pre>
+<p>Before implementing anything else, we can check to make sure the loop works as intended:</p>
+<pre><code>python3 collatz.py
+Enter start of range: 1
+Enter end of range: 5
+1
+2
+3
+4
+5
+python3 collatz.py
+Enter start of range: 500
+Enter end of range: 500
+500
+</code></pre>
+<p>Once we are satisfied, we can eliminate the print statement from the loop. Now, we need to write the algorithm for the Collatz conjecture. Rather testing it on each number in the range, we will comment out the for loop for now, and just run the algorithm on the first element of the range. That way, we can test if it works before running it on each number in the range.</p>
+<pre><code class="language-py">print(&quot;This program will find which positive integer&quot;
+        &quot; in a given range takes the most steps to reach 1&quot;
+        &quot; following the Collatz Conjecture&quot;)
+
+start = int(input(&quot;Enter start of range: &quot;))
+end = int(input(&quot;Enter end of range: &quot;))
+
+if start &gt; end:
+    print(&quot;Invalid usage. Start must be less than end&quot;)
+    exit(1)
+
+if start &lt;= 0 or end &lt;= 0:
+    print(&quot;Invalid usage. Range must be positive&quot;)
+    exit(2)
+
+# for i in range(start, end + 1):
+#     print(i)
+
+value = start
+while value != 1:
+    if value % 2 == 0:
+        value //= 2
+    else:
+        value = value * 3 + 1
+
+print(&quot;value now equals&quot;, value)
+</code></pre>
+<p>We expect that for any number we enter, that start eventually becomes 1. Now, our third requirement states that we need to count the number of steps it takes for the number to reach 1. Again, before looping through each number in the range, let's implement the counting mechanism:</p>
+<pre><code class="language-py">print(&quot;This program will find which positive integer&quot;
+        &quot; in a given range takes the most steps to reach 1&quot;
+        &quot; following the Collatz Conjecture&quot;)
+
+start = int(input(&quot;Enter start of range: &quot;))
+end = int(input(&quot;Enter end of range: &quot;))
+
+if start &gt; end:
+    print(&quot;Invalid usage. Start must be less than end&quot;)
+    exit(1)
+
+if start &lt;= 0 or end &lt;= 0:
+    print(&quot;Invalid usage. Range must be positive&quot;)
+    exit(2)
+
+# for i in range(start, end + 1):
+#     print(i)
+
+steps = 0
+value = start
+
+while value != 1:
+    if value % 2 == 0:
+        value //= 2
+    else:
+        value = value * 3 + 1
+    steps += 1
+
+print(&quot;value now equals&quot;, value)
+print(&quot;it took&quot;, steps, &quot;steps&quot;)
+</code></pre>
+<p>To verify that it is correct, we can hand calculate a couple of examples:  <br />
+<strong>1</strong><br />
+1 is 1. It takes 0 steps  </p>
+<p><strong>5</strong></p>
+<ol>
+<li>5 is odd. 5 * 3 + 1 = 16</li>
+<li>16 is even. 16 / 2 = 8</li>
+<li>8 is even. 8 / 2 = 4</li>
+<li>4 is even. 4/ 2 = 2</li>
+<li>2 is even. 2/2 = 1</li>
+<li>1 is 1. It took 5 steps to get here  </li>
+</ol>
+<p><strong>10</strong>  </p>
+<ol>
+<li>10 us even. 10 / 2 = 5</li>
+<li>5 is odd. But, we know from our previous work that it takes 5 steps to get 5 to 1. Therefore, it takes 1 + 5 = 6 steps for 10 to get to 1.   </li>
+</ol>
+<p><strong>13</strong>  </p>
+<ol>
+<li>13 is odd. 13 * 3 + 1 = 40</li>
+<li>40 is even. 40 / 2 = 20</li>
+<li>20 is even. 20 / 10 = 10</li>
+<li>10 is even. But, we know from previous work that it takes 6 steps to get 10 to 1. Therefore, it takes 3 + 6 = 9 steps for 13 to get to 1.  </li>
+</ol>
+<p>Once satisfied with the number of test cases, we can run the program with them. Once satisfied that it works, we can move on to the next step, running the Collatz algorithm on all numbers in the range. To do so, we will move the code into the for loop, and replace <code>start</code> with <code>i</code>.</p>
+<pre><code class="language-py">print(&quot;This program will find which positive integer&quot;
+        &quot; in a given range takes the most steps to reach 1&quot;
+        &quot; following the Collatz Conjecture&quot;)
+
+start = int(input(&quot;Enter start of range: &quot;))
+end = int(input(&quot;Enter end of range: &quot;))
+
+if start &gt; end:
+    print(&quot;Invalid usage. Start must be less than end&quot;)
+    exit(1)
+
+if start &lt;= 0 or end &lt;= 0:
+    print(&quot;Invalid usage. Range must be positive&quot;)
+    exit(2)
+
+for i in range(start, end + 1):
+    steps = 0
+    value = i
+    while value != 1:
+        if value % 2 == 0:
+            value //= 2
+        else:
+            value = value * 3 + 1
+        steps += 1
+
+    print(&quot;value now equals&quot;, value)
+    print(&quot;it took&quot;, steps, &quot;steps&quot;)
+</code></pre>
+<p>Here is some example output for this point in development:</p>
+<pre><code>python3 collatz.py
+Enter start of range: 5
+Enter end of range: 6
+value now equals 1
+it took 5 steps
+value now equals 1
+it took 8 steps
+</code></pre>
+<p>Now, the requirements did not say to print out the steps for each number in the range. We are only supposed to print out the number of steps and the number which took the most steps. Therefore, we'll eliminate the print statements in the for loop that we used for testing, now that we are confident in the logic of the program. To store the number that took the most steps, and the number of steps, we'll need two more variables. Since these need to be used outside the while loop to report the final results at the end of the program, we need to declare them before the while loop.<br />
+The minimum possible number of steps is 0, which happens if the value is 1. Therefore, we assume that the maximum number of steps taken is 0 to start off with. Then, each time we run the Collatz algorithm on a number, we check if the number of steps taken was more than the current maximum. If it is, we update the maximum number of steps and the value that caused the maximum number of steps. This will allow us to save the max steps.</p>
+<pre><code class="language-py">print(&quot;This program will find which positive integer&quot;
+        &quot; in a given range takes the most steps to reach 1&quot;
+        &quot; following the Collatz Conjecture&quot;)
+
+start = int(input(&quot;Enter start of range: &quot;))
+end = int(input(&quot;Enter end of range: &quot;))
+
+if start &gt; end:
+    print(&quot;Invalid usage. Start must be less than end&quot;)
+    exit(1)
+
+if start &lt;= 0 or end &lt;= 0:
+    print(&quot;Invalid usage. Range must be positive&quot;)
+    exit(2)
+
+max_steps = 0
+value_with_max_steps = start
+
+for i in range(start, end + 1):
+    steps = 0
+    value = i
+    while value != 1:
+        if value % 2 == 0:
+            value //= 2
+        else:
+            value = value * 3 + 1
+        steps += 1
+
+    if steps &gt; max_steps:
+        max_steps = steps
+        value_with_max_steps = i
+
+print(&quot;Most steps:&quot;, max_steps)
+print(&quot;For value:&quot;, value_with_max_steps)
+</code></pre>
+<p>Once again, we will test the program to ensure it works. At this point, all requirements have been met. However, we can clean up the program a bit. First, let's move the greeting message to a separate function. It takes up several lines of the main function, without contributing anything meaningful to anyone reading the code:</p>
+<pre><code class="language-py">def print_greeting():
+    print(&quot;This program will find which positive integer&quot;
+          &quot; in a given range takes the most steps to reach 1&quot;
+          &quot; following the Collatz Conjecture&quot;)
+
+
+print_greeting()
+
+start = int(input(&quot;Enter start of range: &quot;))
+end = int(input(&quot;Enter end of range: &quot;))
+
+if start &gt; end:
+    print(&quot;Invalid usage. Start must be less than end&quot;)
+    exit(1)
+
+if start &lt;= 0 or end &lt;= 0:
+    print(&quot;Invalid usage. Range must be positive&quot;)
+    exit(2)
+
+max_steps = 0
+value_with_max_steps = start
+
+for i in range(start, end + 1):
+    steps = 0
+    value = i
+    while value != 1:
+        if value % 2 == 0:
+            value //= 2
+        else:
+            value = value * 3 + 1
+        steps += 1
+
+    if steps &gt; max_steps:
+        max_steps = steps
+        value_with_max_steps = i
+
+print(&quot;Most steps:&quot;, max_steps)
+print(&quot;For value:&quot;, value_with_max_steps)
+</code></pre>
+<p>Next, let's move the error handling to a separate function. Recall that we can use the <code>exit()</code> function from <code>cstdlib</code> to exit the program if an error occurs. This will allow us to terminate the program from a non-main function:</p>
+<pre><code class="language-py">def print_greeting():
+    print(&quot;This program will find which positive integer&quot;
+          &quot; in a given range takes the most steps to reach 1&quot;
+          &quot; following the Collatz Conjecture&quot;)
+
+
+def validate_input(start, end):
+    if start &lt;= 0 or end &lt;= 0:
+        print(&quot;Invalid usage. Range must be positive&quot;)
+        exit(1)
+
+    if start &gt; end:
+        print(&quot;Invalid usage. Start must be less than end&quot;)
+        exit(2)
+
+
+print_greeting()
+
+start = int(input(&quot;Enter start of range: &quot;))
+end = int(input(&quot;Enter end of range: &quot;))
+
+validate_input(start, end)
+
+max_steps = 0
+value_with_max_steps = start
+
+for i in range(start, end + 1):
+    steps = 0
+    value = i
+    while value != 1:
+        if value % 2 == 0:
+            value //= 2
+        else:
+            value = value * 3 + 1
+        steps += 1
+
+    if steps &gt; max_steps:
+        max_steps = steps
+        value_with_max_steps = i
+
+print(&quot;Most steps:&quot;, max_steps)
+print(&quot;For value:&quot;, value_with_max_steps)
+</code></pre>
+<p>Now, we can move the logic of performing the Collatz algorithm to a separate function. The only thing that we are interested in from the Collatz algorithm is how many steps it takes to complete, so we will have it return the number of steps:</p>
+<pre><code class="language-py">def print_greeting():
+    print(&quot;This program will find which positive integer&quot;
+          &quot; in a given range takes the most steps to reach 1&quot;
+          &quot; following the Collatz Conjecture&quot;)
+
+
+def validate_input(start, end):
+    if start &lt;= 0 or end &lt;= 0:
+        print(&quot;Invalid usage. Range must be positive&quot;)
+        exit(1)
+
+    if start &gt; end:
+        print(&quot;Invalid usage. Start must be less than end&quot;)
+        exit(2)
+
+
+def count_collatz_steps(value):
+    steps = 0
+    while value != 1:
+        if value % 2 == 0:
+            value //= 2
+        else:
+            value = value * 3 + 1
+        steps += 1
+    return steps
+
+
+print_greeting()
+
+start = int(input(&quot;Enter start of range: &quot;))
+end = int(input(&quot;Enter end of range: &quot;))
+
+validate_input(start, end)
+
+max_steps = 0
+value_with_max_steps = start
+
+for i in range(start, end + 1):
+    steps = count_collatz_steps(i)
+
+print(&quot;Most steps:&quot;, max_steps)
+print(&quot;For value:&quot;, value_with_max_steps)
+</code></pre>
+<p>We can also move printing the results to a separate function:</p>
+<pre><code class="language-py">def print_greeting():
+    print(&quot;This program will find which positive integer&quot;
+          &quot; in a given range takes the most steps to reach 1&quot;
+          &quot; following the Collatz Conjecture&quot;)
+
+
+def validate_input(start, end):
+    if start &lt;= 0 or end &lt;= 0:
+        print(&quot;Invalid usage. Range must be positive&quot;)
+        exit(1)
+
+    if start &gt; end:
+        print(&quot;Invalid usage. Start must be less than end&quot;)
+        exit(2)
+
+
+def count_collatz_steps(value):
+    steps = 0
+    while value != 1:
+        if value % 2 == 0:
+            value //= 2
+        else:
+            value = value * 3 + 1
+        steps += 1
+    return steps
+
+
+def print_results(steps, value):
+    print(&quot;Most steps:&quot;, steps)
+    print(&quot;For value:&quot;, value)
+
+
+print_greeting()
+
+start = int(input(&quot;Enter start of range: &quot;))
+end = int(input(&quot;Enter end of range: &quot;))
+
+validate_input(start, end)
+
+max_steps = 0
+value_with_max_steps = start
+
+for i in range(start, end + 1):
+    steps = count_collatz_steps(i)
+
+print(max_steps, value_with_max_steps)
+</code></pre>
+<p>We've now made <code>main()</code> function cleaner, with logic that is easier to follow. Next week, when discussing unit testing, we will see that breaking the program up into smaller functions that handle single tasks make it easier to test programs, as well. </p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script src="../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

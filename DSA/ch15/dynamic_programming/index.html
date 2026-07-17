@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../../img/favicon.ico">
+        <title>Dynamic Programming - </title>
+        <link href="../../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../../css/brands.min.css" rel="stylesheet">
+        <link href="../../../css/solid.min.css" rel="stylesheet">
+        <link href="../../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" disabled>
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../../.."></a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../../cv/" class="nav-link">CV</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../../teaching/" class="nav-link">Teaching</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item dropdown">
+                              <button id="theme-menu" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static" aria-label="Toggle theme" class="nav-link dropdown-toggle">
+                                <i class="fa-solid fa-circle-half-stroke fa-fw"></i>
+                                <span class="d-lg-none ms-2">Toggle theme</span>
+                              </button>
+                              <ul class="dropdown-menu dropdown-menu-end">
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
+                                    <i class="fa-solid fa-sun fa-fw"></i>
+                                    <span class="ms-2">Light</span>
+                                    <i class="fa-solid fa-check ms-auto d-none"></i>
+                                  </button>
+                                </li>
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
+                                    <i class="fa-solid fa-moon fa-fw"></i>
+                                    <span class="ms-2">Dark</span>
+                                    <i class="fa-solid fa-check ms-auto d-none"></i>
+                                  </button>
+                                </li>
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="auto" aria-pressed="true">
+                                    <i class="fa-solid fa-circle-half-stroke fa-fw"></i>
+                                    <span class="ms-2">Auto</span>
+                                    <i class="fa-solid fa-check ms-auto"></i>
+                                  </button>
+                                </li>
+                              </ul>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <script src="../../../js/darkmode.js"></script>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#dynamic-programming" class="nav-link">Dynamic Programming</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#lecture-notes-introduction-to-dynamic-programming-dp" class="nav-link">Lecture Notes: Introduction to Dynamic Programming (DP)</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#1-when-does-dynamic-programming-outperform-the-rest" class="nav-link">1. When Does Dynamic Programming Outperform the Rest?</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#2-the-classic-case-study-the-fibonacci-sequence" class="nav-link">2. The Classic Case Study: The Fibonacci Sequence</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#3-where-dp-beats-greedy-the-01-knapsack-problem" class="nav-link">3. Where DP Beats Greedy: The 0/1 Knapsack Problem</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#summary-cheat-sheet-for-students" class="nav-link">Summary Cheat Sheet for Students</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="dynamic-programming">Dynamic Programming</h1>
+<h1 id="lecture-notes-introduction-to-dynamic-programming-dp">Lecture Notes: Introduction to Dynamic Programming (DP)</h1>
+<p>Over the last few weeks, we have explored different algorithmic strategies:</p>
+<ul>
+<li><strong>Divide and Conquer</strong> (like Merge Sort), which breaks a problem into completely independent sub-problems, solves them, and combines the results.</li>
+<li><strong>Greedy Algorithms</strong> (like Dijkstra's), which make the single best "local" choice at each step, hoping it leads to a global solution.</li>
+</ul>
+<p>This week, we introduce <strong>Dynamic Programming (DP)</strong>.</p>
+<p>Do not let the name intimidate you. "Dynamic Programming" was coined in the 1950s by Richard Bellman as a fancy-sounding military research phrase, but its core concept is incredibly simple: <strong>It is Divide and Conquer, but with a memory.</strong> Dynamic Programming is a technique used to solve complex problems by breaking them down into simpler, <em>overlapping</em> sub-problems, solving each sub-problem exactly <strong>once</strong>, and storing their answers so we never have to recompute them.</p>
+<hr />
+<h2 id="1-when-does-dynamic-programming-outperform-the-rest">1. When Does Dynamic Programming Outperform the Rest?</h2>
+<p>To understand why we need Dynamic Programming, we must look at the structural differences between these three major techniques.</p>
+<h3 id="the-key-requirements-for-dp">The Key Requirements for DP:</h3>
+<p>An algorithm is a prime candidate for Dynamic Programming if it possesses two distinct properties:</p>
+<ol>
+<li><strong>Overlapping Sub-problems:</strong> Solving the main problem requires solving the <em>same</em> smaller sub-problems over and over again. (This is where plain Divide and Conquer fails because it wastes time recalculating them).</li>
+<li><strong>Optimal Substructure:</strong> An optimal overall solution can be constructed efficiently from the optimal solutions of its sub-problems.</li>
+</ol>
+<p>Let's compare them side-by-side:</p>
+<table>
+<thead>
+<tr>
+<th>Strategy</th>
+<th>Sub-problems</th>
+<th>Decision Making</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Divide &amp; Conquer</strong></td>
+<td><strong>Independent</strong> (e.g., sorting the left half of an array has nothing to do with sorting the right half).</td>
+<td>Explores all split parts.</td>
+<td>Merge Sort</td>
+</tr>
+<tr>
+<td><strong>Greedy</strong></td>
+<td><strong>Dependent</strong>, but we only ever explore <em>one</em> choice at each step.</td>
+<td>Commits to the local best immediately. Never backtracks or looks at other paths.</td>
+<td>Dijkstra's Algorithm</td>
+</tr>
+<tr>
+<td><strong>Dynamic Programming</strong></td>
+<td><strong>Overlapping</strong> (The same sub-calculations are needed by many different parts of the algorithm).</td>
+<td>Evaluates all possibilities for a sub-problem, remembers the best one, and builds upward.</td>
+<td>Fibonacci, Knapsack</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="2-the-classic-case-study-the-fibonacci-sequence">2. The Classic Case Study: The Fibonacci Sequence</h2>
+<p>The absolute best way to see the power of Dynamic Programming is through the Fibonacci sequence:</p>
+<div class="arithmatex">\[0, 1, 1, 2, 3, 5, 8, 13, 21, 34, ...\]</div>
+<p>Each number is the sum of the two preceding ones: <span class="arithmatex">\(F(n) = F(n-1) + F(n-2)\)</span>, with base cases <span class="arithmatex">\(F(0) = 0\)</span> and <span class="arithmatex">\(F(1) = 1\)</span>.</p>
+<h3 id="the-plain-divide-conquer-approach-naive-recursion">The Plain Divide &amp; Conquer Approach (Naive Recursion)</h3>
+<p>If we write this directly as a recursive function, we get:</p>
+<pre><code class="language-cpp">int fibNaive(int n) {
+    if (n &lt;= 1) return n;
+    return fibNaive(n - 1) + fibNaive(n - 2);
+}
+
+</code></pre>
+<p>This code looks clean, but it is <strong>catastrophically slow</strong>. Let's look at the execution tree for <code>fibNaive(5)</code>:</p>
+<p>Notice the massive redundancy:</p>
+<ul>
+<li><code>fib(3)</code> is computed <strong>2 times</strong>.</li>
+<li><code>fib(2)</code> is computed <strong>3 times</strong>.</li>
+<li><code>fib(1)</code> is computed <strong>5 times</strong>.</li>
+</ul>
+<p>As <span class="arithmatex">\(n\)</span> grows, this redundancy explodes. The time complexity of this naive approach is <strong><span class="arithmatex">\(O(2^n)\)</span></strong>—exponential time! Trying to calculate <code>fibNaive(50)</code> will literally freeze your computer.</p>
+<hr />
+<h3 id="the-dynamic-programming-cure-two-approaches">The Dynamic Programming Cure: Two Approaches</h3>
+<p>Dynamic Programming solves this by ensuring we calculate each Fibonacci number exactly <strong>once</strong>. We can implement this in two ways:</p>
+<h4 id="way-1-memoization-top-down">Way 1: Memoization (Top-Down)</h4>
+<p>We keep our recursive structure, but we check a lookup table (like an array or hash map) before we do any math. If the answer is already in the table, we return it instantly. If not, we calculate it and save it to the table.</p>
+<pre><code class="language-cpp">#include &lt;vector&gt;
+
+// Initialize a memoization array filled with -1 (meaning uncalculated)
+std::vector&lt;int&gt; memo;
+
+int fibTopDown(int n) {
+    if (n &lt;= 1) return n;
+
+    // If we have already solved this sub-problem, return the saved answer!
+    if (memo[n] != -1) {
+        return memo[n];
+    }
+
+    // Otherwise, calculate it and store it in our memo table
+    memo[n] = fibTopDown(n - 1) + fibTopDown(n - 2);
+    return memo[n];
+}
+
+</code></pre>
+<h4 id="way-2-tabulation-bottom-up">Way 2: Tabulation (Bottom-Up)</h4>
+<p>Instead of recursion, we start at the very bottom (the base cases) and fill up an array iteratively.</p>
+<pre><code class="language-cpp">int fibBottomUp(int n) {
+    if (n &lt;= 1) return n;
+
+    std::vector&lt;int&gt; table(n + 1);
+    table[0] = 0;
+    table[1] = 1;
+
+    for (int i = 2; i &lt;= n; i++) {
+        table[i] = table[i - 1] + table[i - 2];
+    }
+
+    return table[n];
+}
+
+</code></pre>
+<h3 id="the-result">The Result:</h3>
+<p>By utilizing DP, we collapsed the time complexity from an impossible <strong><span class="arithmatex">\(O(2^n)\)</span></strong> down to a blazing fast <strong><span class="arithmatex">\(O(n)\)</span></strong> linear time!</p>
+<hr />
+<h2 id="3-where-dp-beats-greedy-the-01-knapsack-problem">3. Where DP Beats Greedy: The 0/1 Knapsack Problem</h2>
+<p>To see where DP shines over the Greedy approach, let's look at the famous <strong>0/1 Knapsack Problem</strong>.</p>
+<p>Imagine you are a thief breaking into a vault with a knapsack that can hold a maximum weight of <strong><span class="arithmatex">\(W = 50\text{ kg}\)</span></strong>. Inside, you find three items:</p>
+<ul>
+<li><strong>Item 1:</strong> Value: $60, Weight: 10 kg</li>
+<li><strong>Item 2:</strong> Value: $100, Weight: 20 kg</li>
+<li><strong>Item 3:</strong> Value: $120, Weight: 30 kg</li>
+</ul>
+<p>You cannot take a fraction of an item (it's "0/1"—you either take the whole item or leave it behind). You want to maximize the dollar value of the items you steal without breaking your bag.</p>
+<h3 id="the-greedy-attempt-and-why-it-fails">The Greedy Attempt (and why it fails)</h3>
+<p>A greedy algorithm might suggest sorting items by <strong>value-to-weight ratio</strong>:</p>
+<ul>
+<li>Item 1 ratio: <span class="arithmatex">\(\frac{\$60}{10\text{ kg}} = \$6/\text{kg}\)</span></li>
+<li>Item 2 ratio: <span class="arithmatex">\(\frac{\$100}{20\text{ kg}} = \$5/\text{kg}\)</span></li>
+<li>Item 3 ratio: <span class="arithmatex">\(\frac{\$120}{30\text{ kg}} = \$4/\text{kg}\)</span></li>
+</ul>
+<p>Following the greedy approach:</p>
+<ol>
+<li>Grab Item 1 first (best ratio). Remaining capacity: 40 kg. Current Value: $60.</li>
+<li>Grab Item 2 next (second best). Remaining capacity: 20 kg. Current Value: $160.</li>
+<li>
+<p>Item 3 (30 kg) will no longer fit in the bag!</p>
+</li>
+<li>
+<p><strong>Greedy Total Value: $160</strong> (Items 1 and 2).</p>
+</li>
+</ol>
+<p>But look closely! What if we had ignored the greedy ratio and taken <strong>Item 2 and Item 3</strong> instead?</p>
+<ul>
+<li>Combined Weight: <span class="arithmatex">\(20\text{ kg} + 30\text{ kg} = 50\text{ kg}\)</span> (Fits perfectly!).</li>
+<li><strong>Optimal Total Value: $220</strong> (Items 2 and 3).</li>
+</ul>
+<p>The greedy algorithm failed because it made a short-sighted decision early on (grabbing Item 1) that blocked the much more lucrative combination of Items 2 and 3.</p>
+<hr />
+<h3 id="the-dynamic-programming-solution">The Dynamic Programming Solution</h3>
+<p>To solve this optimally, we must evaluate the choice we face for every single item: <strong>Do we include it, or do we exclude it?</strong> Let <span class="arithmatex">\(dp[i][w]\)</span> represent the maximum value we can get using the first <span class="arithmatex">\(i\)</span> items with a bag of weight capacity <span class="arithmatex">\(w\)</span>.</p>
+<p>For each item, we evaluate:</p>
+<ul>
+<li><strong>If we exclude item <span class="arithmatex">\(i\)</span>:</strong> The value is the same as the best we could do <em>without</em> this item: <span class="arithmatex">\(dp[i-1][w]\)</span>.</li>
+<li><strong>If we include item <span class="arithmatex">\(i\)</span> (if it fits):</strong> The value is the item's value plus the best we could do with the <em>remaining</em> weight: <span class="arithmatex">\(\text{value}[i] + dp[i-1][w - \text{weight}[i]]\)</span>.</li>
+</ul>
+<p>We greedily take the maximum of these two choices:</p>
+<div class="arithmatex">\[dp[i][w] = \max\Big(dp[i-1][w], \, \text{value}[i-1] + dp[i-1][w - \text{weight}[i-1]]\Big)\]</div>
+<h4 id="c-tabulation-implementation">C++ Tabulation Implementation</h4>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;algorithm&gt;
+
+int knapsack(int W, const std::vector&lt;int&gt;&amp; weights, const std::vector&lt;int&gt;&amp; values, int n) {
+    // 2D Table: rows represent items (0 to n), columns represent weight capacities (0 to W)
+    std::vector&lt;std::vector&lt;int&gt;&gt; dp(n + 1, std::vector&lt;int&gt;(W + 1, 0));
+
+    // Build the table bottom-up
+    for (int i = 1; i &lt;= n; i++) {
+        for (int w = 1; w &lt;= W; w++) {
+            if (weights[i - 1] &lt;= w) {
+                // We have a choice: Include or Exclude the item
+                dp[i][w] = std::max(
+                    values[i - 1] + dp[i - 1][w - weights[i - 1]], // Include
+                    dp[i - 1][w]                                    // Exclude
+                );
+            } else {
+                // Item is too heavy, we must exclude it
+                dp[i][w] = dp[i - 1][w];
+            }
+        }
+    }
+
+    return dp[n][W]; // Bottom-right corner contains the final optimal answer
+}
+
+</code></pre>
+<h3 id="complexity">Complexity</h3>
+<ul>
+<li><strong>Time Complexity:</strong> <strong><span class="arithmatex">\(O(n \cdot W)\)</span></strong>, where <span class="arithmatex">\(n\)</span> is the number of items and <span class="arithmatex">\(W\)</span> is the maximum capacity. This is vastly superior to the brute-force recursive strategy which would take <span class="arithmatex">\(O(2^n)\)</span> time.</li>
+<li><strong>Auxiliary Space Complexity:</strong> <strong><span class="arithmatex">\(O(n \cdot W)\)</span></strong> to store the 2D grid.</li>
+</ul>
+<hr />
+<h2 id="summary-cheat-sheet-for-students">Summary Cheat Sheet for Students</h2>
+<table>
+<thead>
+<tr>
+<th>Algorithm Technique</th>
+<th>Ideal Problem Structure</th>
+<th>Risk / Tradeoff</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Divide &amp; Conquer</strong></td>
+<td>Independent sub-problems.</td>
+<td>Redundant calculations if sub-problems overlap.</td>
+</tr>
+<tr>
+<td><strong>Greedy</strong></td>
+<td>No-regret choices; local optimum matches global optimum.</td>
+<td>Can easily get trapped in sub-optimal paths.</td>
+</tr>
+<tr>
+<td><strong>Dynamic Programming</strong></td>
+<td>Overlapping sub-problems with optimal substructure.</td>
+<td>Requires extra memory to store state tables (<span class="arithmatex">\(O(n)\)</span> or <span class="arithmatex">\(O(n^2)\)</span> space).</td>
+</tr>
+</tbody>
+</table>
+<hr /></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../../js/base.js"></script>
+        <script src="../../../javascripts/mathjax.js"></script>
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script src="../../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

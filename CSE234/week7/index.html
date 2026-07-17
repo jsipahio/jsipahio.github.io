@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>CSE234 Week 7: Callback Mechanisms - </title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../css/brands.min.css" rel="stylesheet">
+        <link href="../../css/solid.min.css" rel="stylesheet">
+        <link href="../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" disabled>
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../.."></a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../cv/" class="nav-link">CV</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../teaching/" class="nav-link">Teaching</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item dropdown">
+                              <button id="theme-menu" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static" aria-label="Toggle theme" class="nav-link dropdown-toggle">
+                                <i class="fa-solid fa-circle-half-stroke fa-fw"></i>
+                                <span class="d-lg-none ms-2">Toggle theme</span>
+                              </button>
+                              <ul class="dropdown-menu dropdown-menu-end">
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
+                                    <i class="fa-solid fa-sun fa-fw"></i>
+                                    <span class="ms-2">Light</span>
+                                    <i class="fa-solid fa-check ms-auto d-none"></i>
+                                  </button>
+                                </li>
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
+                                    <i class="fa-solid fa-moon fa-fw"></i>
+                                    <span class="ms-2">Dark</span>
+                                    <i class="fa-solid fa-check ms-auto d-none"></i>
+                                  </button>
+                                </li>
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="auto" aria-pressed="true">
+                                    <i class="fa-solid fa-circle-half-stroke fa-fw"></i>
+                                    <span class="ms-2">Auto</span>
+                                    <i class="fa-solid fa-check ms-auto"></i>
+                                  </button>
+                                </li>
+                              </ul>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <script src="../../js/darkmode.js"></script>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#cse234-week-7-callback-mechanisms" class="nav-link">CSE234 Week 7: Callback Mechanisms</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#function-pointers" class="nav-link">Function Pointers</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#functors" class="nav-link">Functors</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#lambda-expressions" class="nav-link">Lambda Expressions</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#terminology" class="nav-link">Terminology</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#file-io" class="nav-link">File I/O</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#conclusion" class="nav-link">Conclusion</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="cse234-week-7-callback-mechanisms">CSE234 Week 7: Callback Mechanisms</h1>
+<p>This week, we will discuss the mechanisms provided in C++ for callbacks. A callback is a function that is passed to other functions as an argument. This allows one function to call different functions depending on its argument. The STL algorithms library depends heavily on callbacks, so we must discuss them before moving on to the algorithms library. C++ provides three mechanisms for callbacks: function pointers, function objects (functors), and lambda expressions. </p>
+<h2 id="function-pointers">Function Pointers</h2>
+<p>To declare a function pointer, you need to provide the return type, name of the function pointer variable (which has the pointer asterisk in front of it and is wrapped in parentheses), and the list of types expected for the parentheses. In the following example, the third parameter of <code>addOrSubtract()</code> is a function pointer that returns an integer, and expects two integers as its parameters. The name of the function pointer is <code>operation</code>. It can be used directly as a function, as seen in the return statement of <code>addOrSubtract()</code>. </p>
+<pre><code class="language-C++">#include &lt;assert.h&gt;
+// addOrSubtract takes two integers, x and y, that should be
+// added or subtracted, and a function pointer, operation
+// that performs the operation
+int addOrSubtract(int x, int y, int (*operation)(int, int)) {
+    return operation(x, y);
+}
+
+int add(int x, int y) {
+    return x + y;
+}
+
+int subtract(int x, int y) {
+    return x - y;
+}
+
+int main() {
+    // to use add, we can use an ampersand
+    // on add's name to pass its address
+    int additionResult = addOrSubtract(2, 2, &amp;add);
+    assert(additionResult == 4);
+    // however, the ampersand is optoinal
+    // the compiler always knows to pass the address of a function
+    int subtractionResult = addOrSubtract(3, 2, subtract);
+    assert(subtractionResult == 1);
+
+    return 0;
+}
+</code></pre>
+<p>C++ 11 added a header <code>&lt;functional&gt;</code> that includes the <code>std::function</code> type. <code>std::function</code> is a generic type which takes a nameless function signature as its template parameter. Below, the <code>addOrSubtract</code> function has been modified to use <code>std::function</code> as its type:</p>
+<pre><code class="language-C++">// need to include the functional header
+#include &lt;functional&gt;
+// std::function is a generic type
+// the template argument is the return type, followed by 
+//  the parameter list's data types in parentheses
+// so, operation is a function that returns an int 
+//  and expects two ints as parameters
+int addOrSubtract(int x, int y, 
+    std::function&lt;int(int,int)&gt; operation
+    ) {
+    return operation(x, y);
+}
+// the rest of the program would be the same
+</code></pre>
+<p>Any function with an <code>std::function</code> parameter can also accept a functor or lambda as an argument, provided it matches the signature. For the most part, using <code>std::function</code> has replaced the need for function pointer types in </p>
+<h2 id="functors">Functors</h2>
+<p>A functor is a class or struct that overloads the function call operator, i.e., it implements <code>operator ()</code>. Typically, functors only implement this operator, although they can implement other functions as well. The advantage of functors is that they can maintain state via their member variables. The below example implements a functor to computer the average of values in an array:</p>
+<pre><code class="language-C++">#include &lt;iostream&gt;
+#include &lt;array&gt;
+
+// Average is a functor since it implements the call operator
+struct Average {
+    // Constructor to init fields to 0
+    Average() {
+        sum = 0;
+        count = 0;
+    }
+
+    // operator() adds the value passed to it to the sum,
+    // and increments the count
+    void operator()(in value) {
+        sum += value;
+        ++count;
+    }
+
+    // property to return computed average
+    double average() const {
+        if (count == 0) return 0;
+        else return static_cast&lt;double&gt;(sum) / count;
+    }
+private:
+    int sum;
+    unsigned count;
+};
+
+int main() {
+    std::array&lt;int, 7&gt; values = { 2, 6, 24, 76, 3, 67, 5 };
+    // declare an instance of the functor functor
+    Average average;
+
+    for (int x: values) {
+        // overloading operator() allows us to use the object
+        // like it was a function by calling it
+        average(x);
+    }
+
+    std::cout &lt;&lt; &quot;Average = &quot; &lt;&lt; average.average() &lt;&lt; std::endl;
+
+    return 0;
+}
+</code></pre>
+<p>Here is an example of a function that finds the maximum value in an array. It expects an <code>std::function</code> as a parameter, and we'll declare a functor to use as the argument.</p>
+<pre><code class="language-cpp">#include &lt;array&gt;
+#include &lt;functional&gt;
+#include &lt;iostream&gt;
+
+std::size_t findIndexOfMax(
+    const std::array&lt;int, 7&gt; &amp;arr, 
+    std::function&lt;int(int, int)&gt; compare
+    ) {
+    int currentMaxIndex = 0;
+    for (std::size_t i = 1; i &lt; arr.size(); ++i) {
+        if (compare(arr[currentMaxIndex], arr[i]) &lt; 0) {
+            currentMaxIndex = i;
+        }
+    }
+}
+
+// returns -1 if x &lt; y
+// returns 0 if x == y
+// returns 1 if x &gt; y
+struct Comparator {
+    int operator(int x, int y) {
+        if (x &lt; y) return -1;
+        else if (x &gt; y) return 1;
+        else return 0;
+    }
+};
+
+int main() {
+    std::array&lt;int, 7&gt; values = { 2, 6, 24, 76, 3, 67, 5 };
+    // passing a Comparator directly by invoking its constructor
+    std::size_t maxIndex = findIndexOfMax(values, Comparator());
+    std::cout &lt;&lt; &quot;Max index: &quot; &lt;&lt; maxIndex &lt;&lt; &quot;\n&quot;;
+    std::cout &lt;&lt; &quot;Max value: &quot; &lt;&lt; values[maxIndex] &lt;&lt; &quot;\n&quot;;
+
+    return 0;
+}
+</code></pre>
+<h2 id="lambda-expressions">Lambda Expressions</h2>
+<p>Also called "lambdas" or "anonymous functions", lambda expressions allow you to put a function anywhere you would put an expression, such as the right-hand side of an equals sign or as an argument to a function. Lambdas consist of three parts: a capture, a parameter list, and a body. Below is the basic syntax of a lambda:</p>
+<pre><code class="language-cpp">auto lambda = [capture1, capture2](type1 param1, type2 param2) {
+    statements;
+};
+</code></pre>
+<p>The capture is denoted with square brackets, and allows you to pass local variables to the lambda's scope. If the lambda needs to modify a variable it captures, the lambda needs to be marked as mutable and the variable must be passed by reference using the ampersand (&amp;). Otherwise, passing captures by reference is treated as a const reference. The parameter list is like a typical parameter list for a normal function. It has the types and names of the expected arguments to the lambda. Finally, the body contains the statements that will be executed when the lambda is called. The body has its own local scope like any other function. Any statements that can be placed in the body of a function can be put in a lambda's body as well. Remember that the body of the lambda cannot access any local variables from the block it is called in unless they are passed via the capture. Below is an example of using a lambda to compute the average of the same array from the functor example:</p>
+<pre><code class="language-C++">#include &lt;iostream&gt;
+#include &lt;array&gt;
+
+int main() {
+    std::array&lt;int, 7&gt; values = { 2, 6, 24, 76, 3, 67, 5 };
+
+    // we need to declare variables for the sum and count locally now
+    int count = 0;
+    int sum = 0;
+
+    // we can either use auto type or std::function&lt;&gt; to declare a 
+    // lambda &quot;variable&quot;
+    // to allow the lambda to modify the values of count and sum,
+    // they must be passed by reference and the lambda
+    // needs to be marked as mutable
+    auto averager = [&amp;count, &amp;sum] (int value) mutable {
+        sum += value;
+        ++count;
+    }; // since this is part of a declaration, we need a semicolon
+
+    for (int x: values) {
+        averager(x);
+    }
+
+    std::cout &lt;&lt; &quot;Average = &quot; &lt;&lt; static_cast&lt;double&gt;(sum) / count &lt;&lt; std::endl;
+
+    return 0;
+}
+</code></pre>
+<p><strong>Note:</strong> It is very easy to forget to put a semicolon at the end of a lambda expression, so pay attention.</p>
+<p>The return type of a lambda can be explicitly provided as well. Often, the return type of a lambda can be deduced by the compiler, but sometimes it may be required. For example, if one path of the lambda returns a string literal and another returns an <code>std::string</code>, the compiler will not choose between <code>const char*</code> and <code>std::string</code> for its return type:</p>
+<pre><code class="language-cpp">// need to specify the return type since the compiler will not 
+// choose between std::string and C strings on its own
+auto cStringOrString = [](bool returnStdString) -&gt; std::string {
+    if (returnStdString) {
+        std::string str = &quot;hello world\n&quot;;
+        // returning an std::string
+        return str;
+    }
+    else {
+        // returning a string literal (a C string)
+        return &quot;hello world\n&quot;;
+    }
+};
+</code></pre>
+<h2 id="terminology">Terminology</h2>
+<p>There are a few common categories of callbacks used by the STL algorithms. Here, we'll define them for future reference when discussing the algorithms library.  </p>
+<ul>
+<li>Unary Function - A void function that takes one parameter.</li>
+<li>Unary Predicate - A function that returns a boolean and expects one parameter.</li>
+<li>Binary Predicate - A function that returns a boolean and expects two parameters.</li>
+<li>Binary Operation - A function that expects two parameters of the same types, and returns the type of its parameters.</li>
+</ul>
+<p>Now, let's look at some examples of each. All the examples are using lambdas to define the callbacks, since that is the most common way to define a callback after C++11 was released.</p>
+<h3 id="example-unary-callbacks">Example Unary Callbacks</h3>
+<pre><code class="language-cpp">// this lambda doubles an int
+auto doubler = [](int &amp;x) { x *= 2; };
+// this lambda prints a double with 2 decimal points
+auto printDouble = [](double x) {
+    std::cout &lt;&lt; std::fixed &lt;&lt; std::setprecision(2) &lt;&lt; x;
+};
+</code></pre>
+<h3 id="example-unary-predicate-callbacks">Example Unary Predicate Callbacks</h3>
+<pre><code class="language-cpp">// this lambda returns true if a number is even
+auto isEven = [](int x) { return x % 2 == 0; }
+// this lambda returns true if a character is
+// an uppercase letter
+auto isUpper = [](char c) {
+    return c &gt;= 'A' &amp;&amp; c &lt;= 'Z';
+};
+</code></pre>
+<h3 id="example-binary-predicate-callbacks">Example Binary Predicate Callbacks</h3>
+<pre><code class="language-cpp">// returns true if the first parameter is greater
+// than the second parameter
+auto isGreater = [](double x, double y) {
+    return x &gt; y;
+};
+
+// returns true if the first parameter is 
+// divisible by the second
+auto isDivisible = [](int x, int y) {
+    return x % y == 0;
+};
+</code></pre>
+<h3 id="example-binary-operations">Example Binary Operations</h3>
+<pre><code class="language-cpp">// returns the sum of its arguments
+auto sum = [](double x, double y) {
+    return x + y;
+};
+
+// removes a substring from a string, if the substring
+// exists. otherwise, it returns an empty string
+auto removeSubstring = 
+[](const std::string&amp; str, const std::string&amp; substr) {
+    std::size_t substrStart = str.find(substr);
+
+    if (substrStart != std::string::npos) {
+        std::string copy = str;
+        copy.erase(substrStart, substr.length());
+
+        return copy;
+    }
+    // explicitly calling string constructor so the 
+    // return type does not need to be specified
+    else return std::string(&quot;&quot;);
+};
+</code></pre>
+<h2 id="file-io">File I/O</h2>
+<p>Reading and writing to files is the primary task for most computer programs. C++ provides the <code>fstream</code> header to read and write files. The <code>std::ifstream</code> class is used to read files and the <code>std::ofstream</code> class is used for writing files. These input and output streams provide the same operations as <code>std::cin</code> and <code>std::cout</code>, respectively. The difference is you first have to open a file for reading or writing. </p>
+<h3 id="reading-files">Reading Files</h3>
+<p>To read a file, you need to declare an <code>std::ifstream</code> object. Files can be opened by passing a file path to the <code>ifstream</code> constructor, or by calling the <code>open()</code> function:</p>
+<pre><code class="language-cpp">#include &lt;fstream&gt;
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+
+// reading file path from commmand line args
+int main(int argc, char** argv) {
+    if (argc &lt; 2) {
+        std::cerr &lt;&lt; &quot;Specify input file path as command line arg\n&quot;;
+        return 1;
+    }
+
+    // open file with constructor
+    std::ifstream fin(argv[1]);
+    // alternative method:
+    /*
+    std::ifstream fin;
+    fin.open(argv[1]);
+    */
+
+    // check that the file was opened correctly
+    if (fin.is_open()) {
+        // printing the contents of the file
+        std::string input;
+        // the &gt;&gt; operator works just like it does
+        // for std::cin. it reads characters until 
+        // reaching a whitespace character
+        // when reaching the end of the file, this 
+        // will return a &quot;false-like&quot; value
+        while (fin &gt;&gt; input)
+            std::cout &lt;&lt; input &lt;&lt; &quot;\n&quot;;
+    }
+    else {
+        std::cerr &lt;&lt; &quot;Failed to open file &quot; &lt;&lt; argv[1] &lt;&lt; &quot;\n&quot;;
+        return 2;
+    }
+
+    // always close a file when you are done with it
+    fin.close();
+
+    return 0;
+}
+</code></pre>
+<p>If we assume the contents of the file we are reading look like this:</p>
+<pre><code>To be, or not to be, that is the question.
+2 + 2 = 4
+Lorem ipsum dolor...
+</code></pre>
+<p>Then the output of this program would be:</p>
+<pre><code>To
+be,
+or
+not
+to
+be,
+that
+is
+the
+question.
+2
++
+2
+=
+4
+Lorem
+ipsum
+dolor...
+</code></pre>
+<p>Like <code>cin</code>, <code>ifstream</code> objects can also directly read numbers and other data types from a file. Let's assume we have a file that looks like this:</p>
+<pre><code>2 2
+4 4
+6 6
+8 8
+</code></pre>
+<p>We want to write a program that reads in the pairs of numbers and prints the result to the console. </p>
+<pre><code class="language-cpp">#include &lt;fstream&gt;
+#include &lt;iostream&gt;
+
+// filestreams always need to be passed by reference
+int readAndAdd(std::ifstream&amp; fin) {
+    int x;
+    int y;
+    int sum = 0;
+    if (fin &gt;&gt; x &gt;&gt; y) {
+        sum = x + y;
+    }
+    return sum;
+}
+
+int main(int argc, char** argv) {
+    if (argc &lt; 2) {
+        std::cerr &lt;&lt; &quot;Specify input file path as command line arg\n&quot;;
+        return 1;
+    }
+
+    // open file with constructor
+    std::ifstream fin(argv[1]);
+
+    // alternate method to check if file is open:
+    if (fin.fail()) {
+        std::cerr &lt;&lt; &quot;Failed to open file &quot; &lt;&lt; argv[1] &lt;&lt; &quot;\n&quot;;
+        return 2;
+    }
+
+    // run the function readAndAdd() until the file is empty
+    // fin.eof() returns true when the end of the file is reached
+    while (!fin.eof()) {
+        int sum = readAndAdd(fin);
+        std::cout &lt;&lt; &quot;Sum = &quot; &lt;&lt; sum &lt;&lt; &quot;\n&quot;;
+    }
+
+    // close file
+    fin.close();
+
+    return 0;
+}
+</code></pre>
+<p>There is the <code>std::getline()</code> function, which can read an entire line from a file into a string, preserving the whitespace. The first argument to <code>std::getline()</code> is an <code>ifstream</code> object, and the second argument is the <code>std::string</code> the line will be stored in. </p>
+<h3 id="writing-files">Writing Files</h3>
+<p>Creating and checking if an <code>std::ofstream</code> object is open is the same as it is for input files. Like <code>cout</code>, <code>ofstream</code> uses the insertion operator (<code>&lt;&lt;</code>) to write data to files. By default, output file streams truncate (i.e., delete) the contents of a file before writing to it. If the file does not exist, it will create the file. If you want to add data to an existing file, the <code>ios::app</code> option can be specified when opening the file. This flag is an option argument to the constructor and <code>open()</code> function. Below is an example program that copies one files contents to another. Here, we are using another member function of <code>ifstream</code>, <code>get()</code>, which reads a single character at a time:</p>
+<pre><code class="language-cpp">#include &lt;fstream&gt;
+#include &lt;iostream&gt;
+
+int main(int argc, char** argv) {
+    const char* errmsg = &quot;Invalid usage. Expected 2 arguments\n&quot;;
+    const char* help = &quot;Usage: ./copy input_file output_file\n&quot;;
+
+    if (argc &lt; 3) {
+        std::cerr &lt;&lt; errmsg;
+        std::cerr &lt;&lt; help;
+    }
+
+    std::ifstream fin(argv[1]);
+    if (fin.fail()) {
+        std::cerr &lt;&lt; &quot;Failed to open file &quot; &lt;&lt; argv[1] &lt;&lt; &quot;\n&quot;;
+        return 2;
+    }
+    std::ofstream fout(argv[2]);
+    if (fin.fail()) {
+        // close fin before ending the program
+        fin.close();
+        std::cerr &lt;&lt; &quot;Failed to open file &quot; &lt;&lt; argv[2] &lt;&lt; &quot;\n&quot;;
+        return 3;
+    }
+
+    char c;
+    // while we are not at eof and can read a character
+    while (!fin.eof() &amp;&amp; fin.get(c)) {
+        // print that character to the output file
+        // this will create a character for character copy
+        // of the input file, since get() does not skip whitespace
+        fout &lt;&lt; c;
+    }
+
+    fin.close();
+    fout.close();
+}
+</code></pre>
+<h2 id="conclusion">Conclusion</h2>
+<p>This week, we discussed the three mechanisms for callback functions in C++. First, we looked at function pointers. Function pointers have a unique syntax for the parameter of the function that expects a call back, but any function can be passed as an argument to become a function pointer. The function pointer parameter syntax has largely been supplanted by the <code>std::function</code> type in modern C++. <code>std::function</code> also allows functors and lambdas to be passed. A functor (also called a function object), is a class or struct that implements <code>operator()</code>, making objects of that class (or struct) callable like they are functions. Functors are useful in cases where data needs to be maintained with the callable function. The final type of callback is lambda expressions. Lambdas were introduced in C++11, and permit inline function declarations as expressions. Finally, we discussed some terminology that will be used to describe callback functions as they relate to their usage with the STL algorithms. Afterwards, a quick overview of reading and writing files was provided. </p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script src="../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

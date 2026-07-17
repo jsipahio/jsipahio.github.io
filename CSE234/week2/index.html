@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>CSE234 Week 2: Arrays, STL Array, Command Line Arguments - </title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../css/brands.min.css" rel="stylesheet">
+        <link href="../../css/solid.min.css" rel="stylesheet">
+        <link href="../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" disabled>
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../.."></a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../cv/" class="nav-link">CV</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../teaching/" class="nav-link">Teaching</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item dropdown">
+                              <button id="theme-menu" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static" aria-label="Toggle theme" class="nav-link dropdown-toggle">
+                                <i class="fa-solid fa-circle-half-stroke fa-fw"></i>
+                                <span class="d-lg-none ms-2">Toggle theme</span>
+                              </button>
+                              <ul class="dropdown-menu dropdown-menu-end">
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
+                                    <i class="fa-solid fa-sun fa-fw"></i>
+                                    <span class="ms-2">Light</span>
+                                    <i class="fa-solid fa-check ms-auto d-none"></i>
+                                  </button>
+                                </li>
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
+                                    <i class="fa-solid fa-moon fa-fw"></i>
+                                    <span class="ms-2">Dark</span>
+                                    <i class="fa-solid fa-check ms-auto d-none"></i>
+                                  </button>
+                                </li>
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="auto" aria-pressed="true">
+                                    <i class="fa-solid fa-circle-half-stroke fa-fw"></i>
+                                    <span class="ms-2">Auto</span>
+                                    <i class="fa-solid fa-check ms-auto"></i>
+                                  </button>
+                                </li>
+                              </ul>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <script src="../../js/darkmode.js"></script>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#cse234-week-2-arrays-stl-array-command-line-arguments" class="nav-link">CSE234 Week 2: Arrays, STL Array, Command Line Arguments</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#static-and-dynamic-arrays" class="nav-link">Static and Dynamic Arrays</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#stl-array" class="nav-link">STL Array</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#command-line-arguments" class="nav-link">Command Line Arguments</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#conclusion" class="nav-link">Conclusion</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="cse234-week-2-arrays-stl-array-command-line-arguments">CSE234 Week 2: Arrays, STL Array, Command Line Arguments</h1>
+<p>Containers are an important data structure in computer structure. Containers are abstractions that store multiple data elements. The most basic container is an array. Arrays store a collection of data items of the same type. The data is stored contiguously in memory. There are two primitive types of array in C++, static and dynamic. Static arrays are declared like <code>int arr[10];</code>, and the size of a static array needs to be known at compile time. Dynamic arrays use pointers, and the size can be determined at runtime. After reviewing static and dynamic arrays, we'll begin discussing the C++ Standard Template Library (STL) and its array class. Afterwards, we'll discuss command line arguments.</p>
+<h2 id="static-and-dynamic-arrays">Static and Dynamic Arrays</h2>
+<p>Static arrays are used when the size of the array is known at compile time (i.e., when you are writing the code). Below is an example of a static array:</p>
+<pre><code class="language-C++">// declaring the array
+int values[10];
+
+// inserting values into it
+for (int i = 0; i &lt; 10; ++i) {
+    values[i] = i;
+}
+</code></pre>
+<p>Static arrays are declared by putting square brackets with the size of the array in them at the end of the name. The square brackets can be passed an integer to access that element of the array. Arrays are 0-indexed, so the first element in the array is index 0, the second element is index 1, etc. The last element of the array is the one less than its size. For loops work well for iterating through the individual indices of the array. Accessing values that are out of bounds is undefined behavior in C++. It will not throw an exception, but it will read garbage values.<br />
+If the size of the array is not known at compile time, a dynamic array can be used. A dynamic array uses a pointer and allocates memory using the <code>new</code> operator. Below is an example:</p>
+<pre><code class="language-C++">// read in the size
+int num_scores;
+std::cout &lt;&lt; &quot;Enter the number of scores: &quot;;
+std::cin &gt;&gt; num_scores;
+
+// declare a pointer and pass the 
+// size to the new operator
+int *scores = new int[num_scores];
+
+// afterwards, use it like a normal array
+for (int i = 0; i &lt; num_scores; ++i) {
+    std::cout &lt;&lt; &quot;Enter a score: &quot;;
+    std::cin &gt;&gt; scores[i];
+}
+
+// dynamic arrays need to be freed with delete[]
+delete[] scores;
+</code></pre>
+<p>Dynamic arrays are in the same way as a static array after they have been declared. However, when you are done with the array, it needs to be deleted. <code>delete[]</code> with the array brackets is used to free dynamic arrays. Failure to free memory can lead to memory leaks. Memory leaks will be discussed later in the course.  </p>
+<h2 id="stl-array">STL Array</h2>
+<p>The Standard Template Library (STL) provides implementations of most common data structures. These include arrays, vectors, lists, sets, maps, stacks, and queues. All of these have dynamically changing size, except for array, whose size must be known and specified at compile-time. Below is a brief overview of each:  </p>
+<ul>
+<li><strong>Array</strong> - A fixed-size collection of elements that preserves order and allows random access (index)</li>
+<li><strong>Vector</strong> - An automatically resizing collection that preserves order and allows random access (index)</li>
+<li><strong>List</strong> - A collection that does not support random access but does preserve order</li>
+<li><strong>Set</strong> - A collection that does not support random access. Elements of a set are unique</li>
+<li><strong>Multiset</strong> - A set where items are not unique, but there is a count of how many times an element occurs</li>
+<li><strong>Map</strong> - A collection of (key, value) pairs with unique keys</li>
+<li><strong>Multimap</strong> - A collection of (key, value) pairs where the keys are not unique</li>
+<li><strong>Stack</strong> - A container where items can only be accessed in last-in, first-out (LIFO) order (like a stack of dishes, the last dish put on the top of the stack is the first one to be removed)</li>
+<li><strong>Queue</strong> - A container where items can only be accessed in first-in, first-out (FIFO) order (like a line (queue) waiting to check out at a store)</li>
+</ul>
+<p>This week, we'll discuss the array class. The array is a class wrapping a static array, so the size must be known at compile time like a normal static array. Vectors, which will be discussed next week, are dynamically resizing arrays. </p>
+<h3 id="array">Array</h3>
+<p><code>std::array</code>, and all STL classes, are template classes. We'll discuss how to write templates towards the end of the course, but using them is simple. When declaring an instance of the class, the type is followed by a set of angle brackets. For <code>std::array</code>, the data type the array stores and the size of the array are put between the angle brackets. This is called the template argument list. For example, to declare an array with 10 integers, we would write the following code:</p>
+<pre><code class="language-C++">std::array&lt;int, 10&gt; values;
+</code></pre>
+<p>To use <code>std::array</code> we must include the <code>array</code> header.</p>
+<h4 id="accessing-elements">Accessing Elements</h4>
+<p>There are two ways to access the elements of an array. You can use the subscript operators, just like you would for a normal C array, or you can use the <code>at()</code> member function. The <code>at()</code> function will throw an exception if you try to access an out-of-bounds element. For example:</p>
+<pre><code class="language-C++">std::array&lt;int, 5&gt; values;
+
+// this is undefined behavior
+// this illegal write may not cause
+// an immediate problem, but in a large
+// program it can cause a crash later on
+values[5] = 5; 
+// this will throw an std::out_of_range exception
+// since 5 is not a valid index
+values.at(5) = 5;
+</code></pre>
+<p>The <code>at()</code> member function can be used for both reading and writing to values of the array.<br />
+There are also <code>front()</code> and <code>back()</code> members which return the first and last element, respectively.</p>
+<h4 id="size">Size</h4>
+<p>There are two member functions for accessing the size of the array: <code>size()</code> and <code>max_size()</code>. <code>max_size()</code> returns the actual number of elements the array is capable of holding, while <code>size()</code> returns the highest index that has had data written to it. The example will illustrate:</p>
+<pre><code class="language-C++">std::array&lt;int, 10&gt; values;
+for (int i = 0; i &lt; 5; ++i) {
+    values[i] = i;
+}
+
+// this will output 5
+std::cout &lt;&lt; values.size() &lt;&lt; std::endl;
+// this will output 10
+std::cout &lt;&lt; values.max_size() &lt;&lt; std::endl;
+
+values[9] = 9;
+// this will output 10
+std::cout &lt;&lt; values.size() &lt;&lt; std::endl;
+</code></pre>
+<h4 id="example">Example</h4>
+<pre><code class="language-C++">#include &lt;iostream&gt;
+// needed to use std::array
+#include &lt;array&gt;
+
+int main() {
+    // an array can be declared and provided an initalizer
+    // just like a normal array can
+    std::array&lt;int, 5&gt; scores = {10, 20, 30, 40, 50};
+
+    // size() member function
+    std::cout &lt;&lt; &quot;The array contains &quot; &lt;&lt; scores.size() &lt;&lt; &quot; elements.\n\n&quot;;
+
+    // accessing elements with the subscript is faster but undefined
+    // if the index passed is invalid
+    std::cout &lt;&lt; &quot;First element (using []): &quot; &lt;&lt; scores[0] &lt;&lt; &quot;\n&quot;;
+
+    // at() is safer but slower
+    std::cout &lt;&lt; &quot;Third element (using .at()): &quot; &lt;&lt; scores.at(2) &lt;&lt; &quot;\n&quot;;
+
+    // modify elements the same as a static array
+    scores[4] = 100;
+
+    // can be iterated with a traditional for loop
+    // or a range-based for loop
+    std::cout &lt;&lt; &quot;All scores: &quot;;
+    for (int score : scores) {
+        std::cout &lt;&lt; score &lt;&lt; &quot; &quot;;
+    }
+    std::cout &lt;&lt; &quot;\n&quot;;
+
+    double total = 0;
+    for (int i = 0; i &lt; scores.size(); ++i) {
+        total += scores.at(i);
+    }
+
+    std::cout &lt;&lt; &quot;The average is &quot; &lt;&lt; total / scores.size() &lt;&lt; std::endl;
+
+    return 0;
+}
+</code></pre>
+<h2 id="command-line-arguments">Command Line Arguments</h2>
+<p>Command line arguments are an array of C-strings that are provided to a program when run from the command line. Even desktop applications typically have the ability to accept command line arguments when they are run. Command line args are an important mechanism for passing data to a program. Most command line programs do not have interactive user input. Instead, they read all the data they expect from the user from the command line args.  </p>
+<p>To access them, you need to add two parameters to your main function:</p>
+<pre><code class="language-C++">int main(int argc, char **argv) {}
+// alternatively, you can do this for argv
+int main(int argc, char *argv[]) {}
+// or even this
+int main(int argc, char argv[][]) {}
+</code></pre>
+<p>The argument, <code>argc</code> is the number of command line arguments passed to the program. The argument <code>argv</code> is an array of C-strings (and C-strings are also arrays, so it is an array of arrays) that contain the actual arguments. Every program has at least one command line argument, which is the command used to run the program itself. So, to access the actual arguments to your program, you will need to start at the index of 1. Below is an example:</p>
+<pre><code class="language-C++">int main(int argc, char **argv) {
+
+    std::cout &lt;&lt; &quot;The name of the program is &quot;
+       &lt;&lt; argv[0] &lt;&lt; std::endl;
+
+    std::cout &lt;&lt; &quot;The remaining arguments are: &quot; &lt;&lt; std::endl;
+    // start for loop at i = 1 to skip program name
+    for (int i = 1; i &lt; argc; ++i) {
+       std::cout &lt;&lt; argv[i] &lt;&lt; std::endl;
+    }
+
+    return 0;
+}
+</code></pre>
+<p>Command line arguments are separated by spaces, so if we provided:</p>
+<pre><code>apple orange banana
+</code></pre>
+<p>as our command line args, and the name of the program was "fruit", then to run the program with those arguments we would do:</p>
+<pre><code>./fruit apple orange banana
+</code></pre>
+<p>in the terminal (many IDEs have ways to pass command line arguments for you).  </p>
+<p>The final output for this program would be:</p>
+<pre><code>The name of the program is `./fruit`
+The remaining command line arguments are: 
+apple
+orange
+banana
+</code></pre>
+<h2 id="conclusion">Conclusion</h2>
+<p>This week, we reviewed static and dynamic arrays. We also introduced the STL Array class. Finally, we discussed command line arguments as an alternate mechanism for reading user input.</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script src="../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

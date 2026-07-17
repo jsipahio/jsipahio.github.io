@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>CSE233 Week 11: User Defined Data Types (Enums, Structs, and Classes) - </title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../css/brands.min.css" rel="stylesheet">
+        <link href="../../css/solid.min.css" rel="stylesheet">
+        <link href="../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" disabled>
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../.."></a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../cv/" class="nav-link">CV</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../teaching/" class="nav-link">Teaching</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item dropdown">
+                              <button id="theme-menu" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static" aria-label="Toggle theme" class="nav-link dropdown-toggle">
+                                <i class="fa-solid fa-circle-half-stroke fa-fw"></i>
+                                <span class="d-lg-none ms-2">Toggle theme</span>
+                              </button>
+                              <ul class="dropdown-menu dropdown-menu-end">
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
+                                    <i class="fa-solid fa-sun fa-fw"></i>
+                                    <span class="ms-2">Light</span>
+                                    <i class="fa-solid fa-check ms-auto d-none"></i>
+                                  </button>
+                                </li>
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
+                                    <i class="fa-solid fa-moon fa-fw"></i>
+                                    <span class="ms-2">Dark</span>
+                                    <i class="fa-solid fa-check ms-auto d-none"></i>
+                                  </button>
+                                </li>
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="auto" aria-pressed="true">
+                                    <i class="fa-solid fa-circle-half-stroke fa-fw"></i>
+                                    <span class="ms-2">Auto</span>
+                                    <i class="fa-solid fa-check ms-auto"></i>
+                                  </button>
+                                </li>
+                              </ul>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <script src="../../js/darkmode.js"></script>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#cse233-week-11-user-defined-data-types-enums-structs-and-classes" class="nav-link">CSE233 Week 11: User Defined Data Types (Enums, Structs, and Classes)</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#enums" class="nav-link">Enums</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#structs" class="nav-link">Structs</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#classes" class="nav-link">Classes</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#comparing-structs-and-classes" class="nav-link">Comparing Structs and Classes</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#conclusion" class="nav-link">Conclusion</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="cse233-week-11-user-defined-data-types-enums-structs-and-classes">CSE233 Week 11: User Defined Data Types (Enums, Structs, and Classes)</h1>
+<p>Throughout the course we have been using the predefined data types provided by C++, such as int, double, and std::string. This week, we will discuss the mechanisms provided by C++ for creating our own data types. First, we'll discuss enums, which provide a way to group global constant values. In the past couple weeks we've used arrays, which allow you to create collections of the same data type. Structs and classes allow you to create your own data types with different underlying data types.</p>
+<h2 id="enums">Enums</h2>
+<p>Enums assign human-readable names to integral constants. C++ has two types of enum, the classical C enum, and the more modern enum class. First, let's look at a C enum:</p>
+<pre><code class="language-cpp">enum Day { 
+    SUNDAY, MONDAY, TUESDAY, 
+    WEDNESDAY, THURSDAY, 
+    FRIDAY, SATURDAY 
+};
+</code></pre>
+<p>Under the hood, the value 0 is assigned to SUNDAY, 1 is assigned to MONDAY, 2 to TUESDAY, and so on. This code below is roughly equivalent:</p>
+<pre><code class="language-cpp">const int SUNDAY = 0;
+const int MONDAY = 1;
+const int TUESDAY = 2;
+const int WEDNESDAY = 3;
+const int THURSDAY = 4;
+const int FRIDAY = 5;
+const int SATURDAY = 6;
+</code></pre>
+<p>We can also assign different values to the enum values:</p>
+<pre><code class="language-cpp">enum Color {
+    RED = 40,
+    GREEN = -30,
+    BLUE = 0,
+    YELLOW = 1000
+};
+</code></pre>
+<p>Enums will automatically start counting up again from the last specified value:</p>
+<pre><code class="language-cpp">enum Direction {
+    EAST = 1,
+    WEST, // = 2
+    SOUTH, // = 3
+    NORTH = 10,
+    NORTHEAST, // = 11
+    // ...
+};
+</code></pre>
+<p>Most of the time, letting the enum automatically assign values is sufficient.  </p>
+<p>Enums provide a convenient way to create named constants to represent a group of related values. An enum variable is created by using the enum's name as the type:</p>
+<pre><code class="language-cpp">// enum can be scoped with the enum name
+Day sunday = Day::SUNDAY;
+// but doesn't have to be
+Day monday = MONDAY;
+// the underlying integer value can also be used
+Day tuesday = 2;
+</code></pre>
+<p>Enums can also be used as parameters and return values of functions:</p>
+<pre><code class="language-cpp">Day readDay() {
+    std::string day;
+    std::cout &lt;&lt; &quot;Enter day: &quot;;
+    std::cin &gt;&gt; day;
+    if (day == &quot;Sunday&quot;) {
+        return Day::SUNDAY;
+    }
+    else if (day == &quot;Monday&quot;) {
+        return Day::MONDAY;
+    }
+    else if (day == &quot;Tuesday&quot;) {
+        return Day::TUESDAY;
+    }
+    else if (day == &quot;Wednesday&quot;) {
+        return Day::WEDNESDAY;
+    }
+    else if (day == &quot;Thursday&quot;) {
+        return Day::THURSDAY;
+    }
+    else if (day == &quot;Friday&quot;) {
+        return Day::FRIDAY;
+    }
+    else if (day == &quot;Saturday&quot;) {
+        return Day::SATURDAY;
+    }
+    else {
+        // code to handle invalid input would go here
+    }
+}
+void printDay(Day day) {
+    switch (day) {
+        case SUNDAY:
+            std::cout &lt;&lt; &quot;Sunday&quot;;
+        case MONDAY:
+            std::cout &lt;&lt; &quot;Monday&quot;;
+        case TUESDAY:
+            std::cout &lt;&lt; &quot;Tuesday&quot;;
+        case WEDNESDAY:
+            std::cout &lt;&lt; &quot;Wednesday&quot;;
+        case THURSDAY:
+            std::cout &lt;&lt; &quot;Thursday&quot;;
+        case FRIDAY:
+            std::cout &lt;&lt; &quot;Friday&quot;;
+        case SATURDAY:
+            std::cout &lt;&lt; &quot;Saturday&quot;;
+    }
+}
+</code></pre>
+<p>One limitation of enums is that they are just integers underneath, which means that invalid values can be assigned to an enum variable very easily:</p>
+<pre><code class="language-cpp">// -1 is not a valid day, but the compiler may not prevent this
+Day day = -1;
+</code></pre>
+<p>C++11 added enum classes to deal with this. An enum class is like a normal enum, but adds several limitations:  </p>
+<ul>
+<li>The underlying integer value can no longer be used to access the enum's values</li>
+<li>The enum values are always scoped</li>
+<li>Invalid values can no longer be assigned to enums</li>
+</ul>
+<p>Here is the <code>Day</code> enum as an enum class:</p>
+<pre><code class="language-cpp">enum class Day { 
+    SUNDAY, MONDAY, TUESDAY, 
+    WEDNESDAY, THURSDAY, 
+    FRIDAY, SATURDAY 
+};
+</code></pre>
+<p>Now, the only way to assign an enum class value is to scope it.</p>
+<pre><code class="language-cpp">// still legal
+Day sunday = Day::SUNDAY;
+// not legal
+// Day monday = MONDAY;
+// the value must be scoped
+Day monday = Day::MONDAY;
+// also no longer legal
+// Day tuesday = 2
+// again, needs to be scoped
+Day tuesday = Day::TUESDAY;
+</code></pre>
+<p>Enum classes are still integers underneath, and can otherwise be used in the exact same way as C enums.</p>
+<h2 id="structs">Structs</h2>
+<p>A struct (short for structure) is a composite data type. A struct consists of member variables, called fields, that are stored within each instance of the struct. Below is an example struct:</p>
+<pre><code class="language-cpp">struct RGBColor {
+    int red;
+    int green;
+    int blue;
+};
+</code></pre>
+<p>A struct declaration consists of the <code>struct</code> keyword, followed by the name of the struct and a block. The block contains the struct's fields. The struct ends with a semicolon. The above struct has three fields, which are all integers. RGB (red, green blue) color is the predominant way of storing colors in digital formats, with values between 0 and 255 assigned to each color channel to form a single pixel. However, the fields of a struct do not have to have the same data type:</p>
+<pre><code class="language-cpp">struct Student {
+    std::string firstName;
+    std::string lastName;
+    int creditHours;
+    double gpa;
+};
+</code></pre>
+<p>The student struct consists of two strings for a student's first and last name, an int for the number of credit hours completed, and a double for the student's GPA. To declare a struct variable, we use the name of the struct as any other data type:</p>
+<pre><code class="language-cpp">Student student;
+</code></pre>
+<p>We can access the fields of the struct using the dot operator:</p>
+<pre><code class="language-cpp">Student student;
+student.firstName = &quot;John&quot;;
+student.lastName = &quot;Doe&quot;;
+student.creditHours = 60;
+student.gpa = 3.1;
+</code></pre>
+<p>When creating the struct, we can also use an initializer list to provide initial values to the struct variable's fields. The initializer list is a set of curly braces with values separated by commas. The values passed to the initializer list are assigned to the struct's fields in the order they appear in the struct declaration. </p>
+<pre><code class="language-cpp">// legal, firstName is &quot;John&quot;, the rest are unassigned
+Student student1 = {&quot;John&quot;};
+// legal, firstName is &quot;John&quot; and lastName is &quot;Doe&quot;
+Student student2 = {&quot;John&quot;, &quot;Doe&quot;};
+// legal, firstName is &quot;John&quot;, lastName is &quot;Doe&quot;, creditHours is 60
+Student student3 = {&quot;John&quot;, &quot;Doe&quot;, 60};
+// legal, firstName is &quot;John&quot;, lastName is &quot;Doe&quot;, 
+// creditHours is 60, gpa is 3.1
+Student student4 = {&quot;John&quot;, &quot;Doe&quot;, 60, 3.1};
+// illegal, will try to store 3.1 in an int (creditHours),
+// which can't be done
+Student student5 = {&quot;John&quot;, &quot;Doe&quot;, 3.1};
+</code></pre>
+<p>For the most part, structs can be used like any other primitive type. They can be used as both return types and parameters to functions. You can also create arrays of structs:</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+
+struct Student {
+    std::string firstName;
+    std::string lastName;
+    int creditHours;
+    double gpa;
+};
+
+void printStudent(const Student &amp;student) {
+    std::cout &lt;&lt; &quot;Name:    &quot; &lt;&lt; student.firstName 
+        &lt;&lt; &quot; &quot; &lt;&lt; student.lastName &lt;&lt; &quot;\n&quot;;
+
+    std::cout &lt;&lt; &quot;Credits: &quot; &lt;&lt; student.creditHours &lt;&lt; &quot;\n&quot;;
+    std::cout &lt;&lt; &quot;GPA:     &quot; &lt;&lt; student.gpa &lt;&lt; &quot;\n&quot;;
+}
+
+int main() {
+    Student students[10];
+
+    std::cout &lt;&lt; &quot;Enter student information: \n&quot;;
+    for (int i = 0; i &lt; 10; ++i) {
+        std::cout &lt;&lt; &quot;Enter first name: &quot;;
+        std::cin &gt;&gt; student[i].firstName;
+        std::cout &lt;&lt; &quot;Enter last name: &quot;;
+        std::cin &gt;&gt; student[i].lastName;
+        std::cout &lt;&lt; &quot;Enter credit hours: &quot;;
+        std::cin &gt;&gt; student[i].creditHours;
+        std::cout &lt;&lt; &quot;Enter GPA: &quot;;
+        std::cin &gt;&gt; student[i].gpa;
+    }
+
+    std::cout &lt;&lt; &quot;You entered\n&quot;;
+    for (int i = 0; i &lt; 10; ++i) {
+        std::cout &lt;&lt; &quot;\nStudent &quot; &lt;&lt; i + 1 &lt;&lt; &quot; -----------\n&quot;;
+        printStudent(students[i]);
+        std::cout &lt;&lt; &quot;---------------------\n&quot;;
+    }
+
+    return 0;
+}
+</code></pre>
+<p>The only thing we can't do with structs is use operators like +, -, ==, &lt;, &gt;, etc. on them, or directly print them using <code>std::cout &lt;&lt;</code> or similar. Next week, we will discuss operator overloading, which will allow us to use these operators for structs. </p>
+<h2 id="classes">Classes</h2>
+<p>A class is very similar to a struct (in C++, they are basically the same, but programmers use them differently). Structs are used to store simple data with few or no operations. All data in a struct is public, by default. In a class, data and member functions are private, by default. The <code>public:</code> region specifier must be used to make fields and member functions usable outside the class. Below is a basic class:</p>
+<pre><code class="language-c++">class Student {
+public:
+    std::string firstName;
+    std::string lastName;
+    int creditHours;
+    double gpa;
+};
+</code></pre>
+<p>In this case, we've made all the fields public, so this class is basically the same as a struct. In object-oriented design, we typically make the data fields of a class private. This means that the fields of the class can no longer be accessed directly by objects when we attempt to use them:</p>
+<pre><code class="language-cpp">class Student {
+private:
+    std::string firstName;
+    std::string lastName;
+    int creditHours;
+    double gpa;
+};
+
+int main() {
+    Student student;
+    // can't do this, firstName is private
+    student.firstName = &quot;John&quot;;
+}
+</code></pre>
+<p>In the following sections, we'll discuss the categories of functions that are defined for classes to allow us to use the data stored by the class.</p>
+<h3 id="constructors">Constructors</h3>
+<p>A constructor is special function that classes have to create new objects. Constructors are member functions with no return type and the same name as the class. The constructor is called whenever an object is created. Functions, like the constructor, can be defined directly within the class.</p>
+<pre><code class="language-cpp">class Student {
+// public region specifier, anything after this is public
+public:
+    // default constructor, does nothing
+    Student() {}
+    // constructor that allows us to set the fields
+    // due to width constraints on the PDF, poor names are being used
+    // for the parameters in this example
+    // the full code is provided in a C++ file this week with better names
+    Student(std::string f, std::string l, double g, int c) {
+        // the names of the member variables are used directly
+        // directly inside of class member functions
+        // no dot operator or this/self reference is required
+        firstName = f;
+        lastName = l;
+        creditHours = c;
+        gpa = g;
+    }
+// private region specifier, ends the public region
+// anything after this is now private
+private:
+    std::string firstName;
+    std::string lastName;
+    int creditHours;
+    double gpa;
+};
+</code></pre>
+<p>Or, more typically in C++, they are defined outside the class after they are declared. The function must be scoped to the class by putting the class name before the name of the function, separated by double colons.</p>
+<pre><code class="language-cpp">class Student {
+public:
+    // default constructor, does nothing
+    Student() {}
+    // constructor that allows us to set the fields
+    Student(std::string f, std::string l, double g, int c);
+private:
+    std::string firstName;
+    std::string lastName;
+    int creditHours;
+    double gpa;
+};
+// defined outside the class. the constructor is associated with the class 
+// thanks to Student:: being placed before the name
+Student::Student(std::string f, std::string l, double g, int c) {
+    firstName = first;
+    lastName = last;
+    creditHours = credits;
+    gpa = grade;
+}
+</code></pre>
+<p>The constructor is called by passing arguments to the object being created:</p>
+<pre><code class="language-cpp">int main() {
+    // create a student object with the constructor
+    Student johnDoe(&quot;John&quot;, &quot;Doe&quot;, 3.5, 24);
+    // create another student object
+    Student janeDoe(&quot;Jane&quot;, &quot;Doe&quot;, 3.5, 24);
+
+    return 0;
+}
+</code></pre>
+<p>While this allows us to create objects with data, it doesn't allow us to access the data. The next category of member function is used to read and modify the properties of a class.</p>
+<h3 id="accessors">Accessors</h3>
+<p>An accessor is a function used to access the values of a class's fields. There are two primary categories of member function: getters and setters. Getters are used to read the values of a field. Setters are used to modify the values of fields. There is no rule for how to name this functions, but getters typically start with <code>get</code> and setters typically start with <code>set</code>. In some cases, getters and setters can also just be the name of a field.</p>
+<pre><code class="language-cpp">class Student {
+public:
+    Student() {}
+    Student(std::string f, std::string l, double g, int c);
+    // getters
+    std::string getFirstName() const;
+    std::string getLastName() const;
+    int getCreditHours() const;
+    double getGpa() const;
+    // setters
+    void setFirstName(const std::string&amp; name);
+    void setLastName(const std::string&amp; name);
+    void setCreditHours(int credits);
+    void setGpa(double grade);
+private:
+    std::string firstName;
+    std::string lastName;
+    int creditHours;
+    double gpa;
+};
+Student::Student(std::string f, std::string l, double g, int c) {
+    firstName = first;
+    lastName = last;
+    creditHours = credits;
+    gpa = grade;
+}
+// remember, the name of the class goes on the name of the function
+std::string Student::getFirstName() const {
+    return firstName;
+}
+
+std::string Student::getLastName() const {
+    return lastName;
+}
+
+int Student::getCreditHours() const {
+    return creditHours;
+}
+
+double Student::getGpa() const {
+    return gpa;
+}
+
+void Student::setFirstName(const std::string&amp; name) {
+    firstName = name;
+}
+
+void Student::setLastName(const std::string&amp; name) {
+    lastName = name;
+}
+
+void Student::setCreditHours(int credits) {
+    creditHours = credits;
+}
+
+void Student::setGpa(double grade) {
+    gpa = grade;
+}
+</code></pre>
+<p>Notice that the getters are marked as <code>const</code>. Placing <code>const</code> after the function signature indicates that the member function does not modify the state of the class. Since the getters are only returning copies of the member variables, they do not have any chance of modifying the object calling the function's state. Meanwhile, the setters do modify the values of the object that calls them, so they cannot be marked <code>const</code>. Here are some examples of the get/set functions in use:</p>
+<pre><code class="language-cpp">int main() {
+    Student student1(&quot;John&quot;, &quot;Doe&quot;, 3.5, 24);
+    Student student2(&quot;Jane&quot;, &quot;Doe&quot;, 3.5, 24);
+
+    std::cout &lt;&lt; &quot;Before calling setters\n&quot;;
+
+    std::cout &lt;&lt; &quot;Student 1: \n&quot;;
+    std::cout &lt;&lt; &quot;    &quot; &lt;&lt; student1.getFirstName() &lt;&lt; &quot; &quot; 
+        &lt;&lt; student1.getLastName() &lt;&lt; &quot;\n&quot;;
+    std::cout &lt;&lt; &quot;    &quot; 
+        &lt;&lt; student1.getGpa() &lt;&lt; &quot; GPA\n&quot;;
+    std::cout &lt;&lt; &quot;    &quot; 
+        &lt;&lt; student1.getCreditHours() &lt;&lt; &quot; Credit Hours\n&quot;;
+
+    std::cout &lt;&lt; &quot;\nStudent 2: \n&quot;;
+    std::cout &lt;&lt; &quot;    &quot; &lt;&lt; student2.getFirstName() &lt;&lt; &quot; &quot; 
+        &lt;&lt; student2.getLastName() &lt;&lt; &quot;\n&quot;;
+    std::cout &lt;&lt; &quot;    &quot; 
+        &lt;&lt; student2.getGpa() &lt;&lt; &quot; GPA\n&quot;;
+    std::cout &lt;&lt; &quot;    &quot; 
+        &lt;&lt; student2.getCreditHours() &lt;&lt; &quot; Credit Hours\n&quot;;
+
+    student1.setFirstName(&quot;Mike&quot;);
+    student1.setLastName(&quot;Smith&quot;);
+    student1.setGpa(3.6);
+    student1.setCreditHours(12);
+
+    student2.setFirstName(&quot;Sam&quot;);
+    student2.setGpa(500);
+
+    std::cout &lt;&lt; &quot;\nAfter calling setters\n&quot;;
+        std::cout &lt;&lt; &quot;Student 1: \n&quot;;
+    std::cout &lt;&lt; &quot;    &quot; &lt;&lt; student1.getFirstName() &lt;&lt; &quot; &quot; 
+        &lt;&lt; student1.getLastName() &lt;&lt; &quot;\n&quot;;
+    std::cout &lt;&lt; &quot;    &quot; 
+        &lt;&lt; student1.getGpa() &lt;&lt; &quot; GPA\n&quot;;
+    std::cout &lt;&lt; &quot;    &quot; 
+        &lt;&lt; student1.getCreditHours() &lt;&lt; &quot; Credit Hours\n&quot;;
+
+    std::cout &lt;&lt; &quot;\nStudent 2: \n&quot;;
+    std::cout &lt;&lt; &quot;    &quot; &lt;&lt; student2.getFirstName() &lt;&lt; &quot; &quot; 
+        &lt;&lt; student2.getLastName() &lt;&lt; &quot;\n&quot;;
+    std::cout &lt;&lt; &quot;    &quot; 
+        &lt;&lt; student2.getGpa() &lt;&lt; &quot; GPA\n&quot;;
+    std::cout &lt;&lt; &quot;    &quot; 
+        &lt;&lt; student2.getCreditHours() &lt;&lt; &quot; Credit Hours\n&quot;;
+
+    return 0;
+}
+</code></pre>
+<p>Output:</p>
+<pre><code>Before calling setters
+Student 1:
+    John Doe
+    3.5 GPA
+    24 Credit Hours
+
+Student 2:
+    Jane Doe
+    3.5 GPA
+    24 Credit Hours
+
+After calling setters
+Student 1:
+    Mike Smith
+    3.6 GPA
+    12 Credit Hours
+
+Student 2:
+    Sam Doe
+    500 GPA
+    24 Credit Hours
+</code></pre>
+<p>As can be seen, implementing a simple set function may be inadequate. GPAs should be between 0 and 4, but we were able to set it to 500. This is one reason not to make the data members of a class public, as it makes it easy to set them to invalid values. We can add a guard to the setter for the GPA to ensure its value is valid (this check should also be added to the constructor):</p>
+<pre><code class="language-cpp">void Student::setGpa(double grade) {
+    if (grade &lt; 4 &amp;&amp; grade &gt; 0) {
+        gpa = grade;
+    }
+    else if (grade &gt; 4) {
+        gpa = 4;
+    }
+    else {
+        gpa = 0;
+    }
+}
+</code></pre>
+<h3 id="other-member-functions">Other Member Functions</h3>
+<p>Classes can have other member functions than constructors and accessors. For example, we can add member functions that return the student's full name, updates their GPA and credit hours, and </p>
+<pre><code class="language-cpp">class Student {
+public:
+    Student() {}
+    Student(std::string f, std::string l, double g, int c);
+    // getters
+    std::string getFirstName() const;
+    std::string getLastName() const;
+    int getCreditHours() const;
+    double getGpa() const;
+    // setters
+    void setFirstName(const std::string&amp; name);
+    void setLastName(const std::string&amp; name);
+    void setCreditHours(int credits);
+    void setGpa(double grade);
+    // other functions
+    // returns the name in &quot;First Last&quot; format
+    std::string getFullName() const;
+    // allows users to specify the output format of the name
+    // looks for {first} and {last} in the format string
+    // for example, format = &quot;{last}, {first}&quot; outputs a name
+    // as &quot;Last, First&quot;
+    std::string getFullName(const std::string&amp; format) const;
+    void completeClass(double grade, int credits);
+private:
+    std::string firstName;
+    std::string lastName;
+    int creditHours;
+    double gpa;
+};
+// other member functions omitted for brevity
+std::string Student::getFullName() const {
+    return firstName + &quot; &quot; + lastName;
+}
+
+std::string Student::getFullName(const std::string&amp; format) const {
+    std::string output = format;
+    // find &quot;{first}&quot; and replace it with firstName
+    int firstPos = output.find(&quot;{first}&quot;);
+    if (firstPos != std::string::npos) {
+        output.replace(firstPos, 7, firstName);
+    }
+
+    // find &quot;{last}&quot; and replace it with lastName
+    int lastPos = output.find(&quot;{last}&quot;);
+    if (lastPos != std::string::npos) {
+        output.replace(lastPos, 6, lastName);
+    }
+
+    return output;
+}
+
+void Student::completeClass(double grade, int credits) {
+    // convert grade to gradePoint
+    double gradePoint;
+    // A is 4.0
+    if (grade &gt;= 90) {
+        gradePoint = 4;
+    }
+    // B is 3.0
+    else if (grade &gt;= 80) {
+        gradePoint = 3;
+    }
+    // C is 2.0
+    else if (grade &gt;= 70) {
+        gradePoint = 2;
+    }
+    // D is 1.0
+    else if (grade &gt;= 60) {
+        gradePoint = 1;
+    }
+    // F is 0
+    else {
+        gradePoint = 0;
+    }
+    // now, use weighted average calculation to determine
+    // overall GPA based on the old GPA and new class
+    int newCredits = credits + creditHours;
+    // (double)newCredits temporarily converts newCredits to a double
+    // that way, it performs floating point division instead of integer
+    // also doing some funky formatting so it fits on the page
+    double weightedGpa 
+        = (creditHours / (double)newCredits) * gpa;
+    double weightedGradePoint 
+        = (credits / (double)newCredits) * gradePoint;
+    gpa = weightedGpa + weightedGradePoint;
+    creditHours = newCredits;
+}
+</code></pre>
+<p>Example of these new member functions being used:</p>
+<pre><code class="language-cpp">int main() {
+    Student student(&quot;John&quot;, &quot;Doe&quot;, 3.5, 24);
+    std::cout &lt;&lt; student.getFullName() &lt;&lt; &quot;\n&quot;;
+    std::cout 
+        &lt;&lt; student.getFullName(&quot;Student: {last}, {first}&quot;) &lt;&lt; &quot;\n&quot;;
+    std::cout &lt;&lt; student.getGpa() &lt;&lt; &quot; GPA\n&quot;;
+    std::cout &lt;&lt; student.getCreditHours() &lt;&lt; &quot; Credit Hours\n&quot;;
+
+    // simulate student completing three classes 
+    // and getting 2 As and a B
+    student.completeClass(95, 3);
+    student.completeClass(87, 3);
+    student.completeClass(91, 3);
+
+    // print updated gpa and credit hours
+    std::cout &lt;&lt; &quot;\nUpdated credit hours and GPA\n&quot;;
+    std::cout &lt;&lt; student.getGpa() &lt;&lt; &quot; GPA\n&quot;;
+    std::cout &lt;&lt; student.getCreditHours() &lt;&lt; &quot; Credit Hours\n&quot;;
+
+    return 0;
+}
+</code></pre>
+<p>Output:</p>
+<pre><code>John Doe
+Student: Doe, John
+3.5 GPA
+24 Credit Hours
+
+Updated credit hours and GPA
+3.54545 GPA
+33 Credit Hours
+</code></pre>
+<h2 id="comparing-structs-and-classes">Comparing Structs and Classes</h2>
+<p>Technically speaking, there is almost no difference between a struct and class in C++. The main difference to most programmers is that everything is public by default in a struct, while everything is private by default in a class. There are some low-level differences when dealing with backwards compatibility with C code, but for the sake of this course a struct and a class can do the same things. Despite this, C++ programmers generally use structs and classes in different ways. When a programmer-defined data type is only being used to store simple data with few or no operations, structs are typically used. When the inner data is more complex or has more complex relations (where private visibility is needed), classes are preferred. Classes are also typically used when a type has many operations defined for it. If the only operations defined are get/set functions, then you may be better off using a struct and making everything public.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>This week we discussed programmer defined data types in C++. Enums are used to declare named constants, typically those that can be grouped together. Structs and classes are mechanically the same in C++, but used in different ways. Structs are used to store plain data with few or no operations. The data in structs is public (accessible by objects outside the struct). Classes have private access by default, meaning that the data and member functions cannot be accessed by objects declared outside the class. Classes typically implement constructors to allow the initial values of an object's fields to be set when the class is created. Accessor functions are used to read and modify the values of an object's fields. Classes can also implement other member functions for various other operations.</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script src="../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

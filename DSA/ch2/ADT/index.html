@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../../img/favicon.ico">
+        <title>Abstract Data Type - </title>
+        <link href="../../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../../css/brands.min.css" rel="stylesheet">
+        <link href="../../../css/solid.min.css" rel="stylesheet">
+        <link href="../../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" disabled>
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../../.."></a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../../cv/" class="nav-link">CV</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../../teaching/" class="nav-link">Teaching</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item dropdown">
+                              <button id="theme-menu" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static" aria-label="Toggle theme" class="nav-link dropdown-toggle">
+                                <i class="fa-solid fa-circle-half-stroke fa-fw"></i>
+                                <span class="d-lg-none ms-2">Toggle theme</span>
+                              </button>
+                              <ul class="dropdown-menu dropdown-menu-end">
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
+                                    <i class="fa-solid fa-sun fa-fw"></i>
+                                    <span class="ms-2">Light</span>
+                                    <i class="fa-solid fa-check ms-auto d-none"></i>
+                                  </button>
+                                </li>
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
+                                    <i class="fa-solid fa-moon fa-fw"></i>
+                                    <span class="ms-2">Dark</span>
+                                    <i class="fa-solid fa-check ms-auto d-none"></i>
+                                  </button>
+                                </li>
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="auto" aria-pressed="true">
+                                    <i class="fa-solid fa-circle-half-stroke fa-fw"></i>
+                                    <span class="ms-2">Auto</span>
+                                    <i class="fa-solid fa-check ms-auto"></i>
+                                  </button>
+                                </li>
+                              </ul>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <script src="../../../js/darkmode.js"></script>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#abstract-data-type" class="nav-link">Abstract Data Type</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#components-of-an-adt" class="nav-link">Components of an ADT</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#designing-the-datetime-adt" class="nav-link">Designing the DateTime ADT</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#implementing-the-datetime-adt" class="nav-link">Implementing the DateTime ADT</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#looking-ahead" class="nav-link">Looking Ahead</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="abstract-data-type">Abstract Data Type</h1>
+<h3 id="cse238-data-structures-and-algorithms">CSE238 - Data Structures and Algorithms</h3>
+<p>An Abstract Data Type is a model for how data is stored, how it is operated on, and the expected conditions for the data type. Throughout the class, we will be describing the ADT for the common data structures encountered in computer science.  </p>
+<h2 id="components-of-an-adt">Components of an ADT</h2>
+<p>An ADT consists of three components: operations, data, and rules. The operations define what the ADT can do. The data is the internal representation of data within the ADT. The rules, also called invariants, describe conditions that should be true for a data type no matter. Often, there are rules for certain situations, for example, if a string is empty, its length must be 0. This rule describes a certain feature of the string (its length) under a certain condition (that the string is empty). These concepts will be better explained via the following example, where we design and implement an ADT for <code>DateTime</code>.</p>
+<h2 id="designing-the-datetime-adt">Designing the <code>DateTime</code> ADT</h2>
+<p>Let's learn about abstract data types, by example. For this, we'll model and implement a <code>DateTime</code> ADT. The point of the <code>DateTime</code> ADT is, as the name would suggest, to model dates and times in a computer program. Since this is an example, our <code>DateTime</code> ADT might be a bit limited, but that's fine. The point is to show what an ADT is for right now, not to develop a professional software library.</p>
+<h4 id="operations">Operations</h4>
+<p>Below is an (ASCII-art) class diagram for the <code>DateTime</code> ADT (note that here I am providing a Model Driven Architecture style class diagram, where the attributes are the public facing attributes (assumed to have get/set methods as needed), and not reflective of the private implementation features):</p>
+<pre><code>----------------------------------
+|            DateTime            |
+|--------------------------------|
+| +second: unsigned int          |
+| +minute: unsigned int          |
+| +hour:   unsigned int          |
+| +day:    unsigned int          |
+| +month:  unsigned int          |
+| +year:   unsigned int          |                         
+|--------------------------------|
+| +operator+(int):      DateTime | 
+| +operator-(DateTime): int      |
+| +__now__():           DateTime |
+----------------------------------
+</code></pre>
+<p>So, the "fields" in the middle of the diagram, I'm actually going to refer to those as attributes. These may or may not be the private fields of the class that implements the ADT. But, they are the data we want outside users of the ADT to think of as representing the data of the ADT. Our <code>DateTime</code> ADT could be considered a Plain Old Data Type (POD). It doesn't offer much in the way of complex functionality. It is mostly data and some simple arithmetic operations. But for an example, that's fine.</p>
+<h4 id="data-representation">Data Representation</h4>
+<p>We have our class diagram that defines the public interface and operations for our class. Now, we need to decide how to represent the data. We have attributes for the seconds, minutes, etc. We could create a private field for each of these. However, this requires storing many fields, which would all need to be checked and updated each time a change is made to the Date or Time. If we observe the <code>Clock</code> class from last week, we'll notice that rather than storing the hours, minutes, and seconds separately, we only stored the seconds since midnight, then computed hours and minutes when we needed. We can use that approach here, as well. However, we need a reference point. The current time is always changing, so using the current time as a reference point would not work. Many systems use the "Unix Epoch", which is midnight, January 1st, 1970 UTC, as a reference point for dates and times.  </p>
+<p>Note that the point in time we choose as a reference, and even using seconds since a reference time, is a totally internal design decision, and has no impact on the interface that users of our <code>DateTime</code> use. That is the point of an ADT. The user does not need to know any of the implementation details, only what the ADT is (public attributes) and what it does (public methods). The user does not care if the attribute <code>hours</code> is stored as a private field called <code>hours</code>, or if we computed from the seconds since the Unix Epoch. All they need to know is that they can access the <code>hours</code> of a <code>DateTime</code> object.  </p>
+<h4 id="rulesaxioms">Rules/Axioms</h4>
+<p>The rules describe conditions that should be checked for to ensure the correct operation of the ADT. For example, the <code>now()</code> method returns the current date and time in a <code>DateTime</code> object at the moment the method is called. The attributes all return <code>unsigned int</code>, meaning they always refer to time in a positive context (note that if we wanted to have dates and times before the Unix Epoch, we would need to model it using negative seconds internally to the class). The rules/axioms basically define expected behavior of the ADT, and specify misuse conditions where the ADT may raise an error or have undefined behavior.</p>
+<h2 id="implementing-the-datetime-adt">Implementing the <code>DateTime</code> ADT</h2>
+<p>Now that we have sketched out the design for <code>DateTime</code>, we will realize it in C++. ADTs are implemented as classes in C++. So, we will have a class <code>DateTime</code> that implements the required methods and attributes, uses a private member <code>seconds</code> to keep track of time, and whose methods will follow the rules and axioms we discussed for the ADT. We will start with the class declaration, which will be contained in <code>DateTime.hpp</code>. (Remember, comments in the below code represent my thoughts as writing the code, not the doc comments that should be there. View the included code in the <code>DateTime-example.zip</code> file to see the correct doc comments.) <br />
+<em>DateTime.hpp</em></p>
+<pre><code class="language-C++">// so, first, we need the include guards
+#ifndef DATETIME_HPP
+#define DATETIME_HPP
+
+// I'm going to implement DateTime as a wrapper around the 
+// C standard time operations, so we need to include the 
+// sys/types.h header for the standard library types
+#include &lt;sys/types.h&gt;
+// I want to include a toString method for printing, so
+// we need to include string as well.
+#include &lt;string&gt;
+
+// I'm using better name for tm struct that is 
+// defined in the sys/types.h and time.h headers
+// The standard library types, especially in C
+// do not have the most descriptive names...
+// So, I am renaming the tm struct to TimeParts 
+typedef tm TimeParts;
+
+// here I'm declaring the DateTime class
+class DateTime {
+// I prefer to start with the public section
+// most C++ code you see does as well
+public:
+    // For a plain old data type like this, you always want to
+    // have a default constructor. People should be able to write:
+    // DateTime dateTime;
+    // to create an instance of the class, and know exactly what value
+    // and state the DateTime object has.
+    // In this case, we will set it to the Unix Epoch, which is pretty
+    // standard for &quot;null&quot; times
+    DateTime();
+    // This constructor let's users pass a TimeParts struct that 
+    // specifies the days, year, hour, etc. for a DateTime object
+    // Since the C struct &quot;tm&quot; already does this, and is used for 
+    // accessing the standard library time functions, I'm reusing it here
+    // As stated above, I gave it the more descriptive TimeParts name
+    DateTime(TimeParts parts);
+    // this function returns the current time whenever it is called.
+    // Since it is creating a new object and returning it, and not
+    // operating on the fields or state of a &quot;calling&quot; object, 
+    // this function is marked static
+    static DateTime now();
+
+    // this function returns the number of seconds between two DateTime objects
+    time_t operator-(const DateTime &amp;rhs) const;
+    // this function adds a number of seconds to a DateTime object
+    DateTime operator+(time_t rhs) const;
+    // this function compares if two DateTime objects are equal
+    bool operator==(const DateTime &amp;rhs) const;
+    // this function compares if the DateTime object on the left occurs
+    // before the datetime object on the right
+    bool operator&lt;(const DateTime &amp;rhs) const;
+
+    // not much explanation needed for these
+    // they are simple accessor methods that return what their name suggests
+    unsigned int second() const;
+    unsigned int minute() const;
+    unsigned int hour() const;
+    unsigned int day() const;
+    unsigned int month() const;
+    unsigned int year() const;
+
+    // again, simple accessor method to update the values of the DateTime object's &quot;fields&quot;
+    void second(unsigned int s);
+    void minute(unsigned int m);
+    void hour(unsigned int h);
+    void day(unsigned int d);
+    void month(unsigned int m);
+    void year(unsigned int y);
+
+    // this function returns a standard library string representation
+    // of the DateTime object using a provided format.
+    // There is also a default format provided that provides the US style date
+    // with a military time
+    std::string toString(std::string format = &quot;%m/%d/%Y %H:%M:%S&quot;);
+// the private section comes at the end
+private:
+    // there are a lot of ways to go about this
+    // we could have stored the year/month/day/hour/minute/second
+    // as individual fields, but, since the standard library
+    // date and time functions use the seconds since the Unix Epoch
+    // that is how we are going to represent the date and time
+    // internally to our class.
+    time_t seconds;
+};
+
+#endif
+
+</code></pre>
+<p>Now let's move to implementing the class. We'll do so in a file called <code>DateTime.cpp</code>. <br />
+<em>DateTime.cpp</em></p>
+<pre><code class="language-C++">// we need ctime to access the standard library functions 
+// for manipulating date/time
+#include &lt;ctime&gt;
+// we need to include the DateTime.hpp file to have access to 
+// the declaration of our DateTime class
+// the sys/types.h and string headers are also chained into this include
+#include &quot;DateTime.hpp&quot;
+
+// constructors don't have a return type,
+// so we just have DateTime::DateTime()
+DateTime::DateTime() {
+    // since our internal representation is seconds since the Unix Epoch
+    // and we defined our default constructor as setting the object to 
+    // the Unix Epoch, we just set seconds to 0
+    seconds = 0;
+}
+
+// Here, we have the constructor that takes a TimeParts object as its parameter
+DateTime::DateTime(TimeParts parts) {
+    // to make the DateTime class as portable as possible, we will use
+    // GMT (aka UTC) times
+    // the standard library &quot;timegm&quot; function returns the seconds since the 
+    // Unix Epoch UTC based on the TimeParts struct we pass it 
+    // (thus, why we resued C's struct tm rather than making our own for this)
+    seconds = timegm(&amp;parts);
+}
+
+// this function returns a new DateTime object with the current date/time
+// note that we only have to put static in the class declaration (header file)
+// and cannot mark it as static here
+DateTime DateTime::now() {
+    // this gets the system time from 
+    // the C time.h library
+    // passing an argument of 0 to time gets the current (local) system time
+    time_t t = time(0);
+    // we now convert to UTC
+    TimeParts parts = *gmtime(&amp;t);
+    // return a new DateTime object
+    return DateTime(parts);
+    // since this function never accesses the &quot;seconds&quot; field of &quot;this&quot; object
+    // it is stateless and marked as static
+}
+
+// this is the operator overload that returns the difference (in seconds)
+// between two DateTime objects
+time_t DateTime::operator-(const DateTime &amp;rhs) const {
+    // pretty simple due to the way we store the time
+    // we can just directly subtract the seconds
+    return seconds - rhs.seconds;
+}
+
+// this adds a number of seconds to a DateTime object,
+// and returns a new DateTime object that is the
+// original object advanced by the number of seconds
+DateTime DateTime::operator+(time_t rhs) const {
+    // first, we need the total seconds of the DateTime object
+    // and the parameter
+    time_t t = seconds + rhs;
+    // then we get a TimeParts object to pass to the constructor
+    TimeParts parts = *gmtime(&amp;t);
+    // we use the constructor to return a new DateTime object with the
+    // correct time
+    return DateTime(parts);
+}
+
+// This overloaded operator compares two DateTime objects
+// to see if they are equal
+bool DateTime::operator==(const DateTime&amp; rhs) const {
+    // pretty simple, same seconds since the Unix Epoch -&gt; same date and time
+    return seconds == rhs.seconds;
+}
+
+// This overloaded operator compares two DateTime objects
+// to see if the one on the left (when the operator is called) is less than the right
+bool DateTime::operator&lt;(const DateTime&amp; rhs) const {
+    // again, the way we represent the date and time make this pretty simple
+    // just see which one has the lower value for seconds
+    return seconds &lt; rhs.seconds;
+}
+
+// all of the accessors work the same, so I'll only explain the first one
+unsigned int DateTime::second() const {
+    // to be safe, since we are passing a memory address, I'm making a 
+    // copy of the seconds and storing it in this variable
+    time_t t = seconds;
+    // get the UTC TimeParts for this number of seconds since the Unix Epoch
+    // this function, gmtime returns a pointer to a TimeParts object and takes a pointer
+    // to a time_t variable. Instead of creating a time_t pointer, I'm using the &amp; to
+    // pass the memory address instead
+    TimeParts *timeParts = gmtime(&amp;t);
+    // returning the seconds from the TimeParts object
+    // (the other accessors follow the same steps, but return the minutes, hours, etc.)
+    return timeParts-&gt;tm_sec;
+}
+
+unsigned int DateTime::minute() const {
+    time_t t = seconds;
+    TimeParts *timeParts = gmtime(&amp;t);
+    return timeParts-&gt;tm_min;
+}
+
+unsigned int DateTime::hour() const {
+    time_t t = seconds;
+    TimeParts *timeParts = gmtime(&amp;t);
+    return timeParts-&gt;tm_hour;
+}
+
+unsigned int DateTime::day() const {
+    time_t t = seconds;
+    TimeParts *timeParts = gmtime(&amp;t);
+    return timeParts-&gt;tm_mday;
+}
+
+unsigned int DateTime::month() const {
+    time_t t = seconds;
+    TimeParts *timeParts = gmtime(&amp;t);
+    return timeParts-&gt;tm_mon;
+}
+
+unsigned int DateTime::year() const {
+    time_t t = seconds;
+    TimeParts *timeParts = gmtime(&amp;t);
+    // the tm_year is relative to 1900
+    // for some reason
+    return 1900 + timeParts-&gt;tm_year;
+}
+
+// all of the mutators work the same as well
+// so again, I'll only explain the first one in-depth
+void DateTime::second(unsigned int s) {
+    // create a copy of the seconds
+    time_t t = seconds;
+    // call the gmtime function, just like
+    // in the accessors
+    TimeParts *timeParts = gmtime(&amp;t);
+    // update the seconds (luckily, the TimeParts struct)
+    // and C standard time functions automatically
+    // handle over/underflow and roll over time for us
+    timeParts-&gt;tm_sec = s;
+    // get the seconds from the Unix epoch
+    t = mktime(timeParts);
+    // set seconds accordingly
+    seconds = t;
+}
+
+void DateTime::minute(unsigned int m) {
+    time_t t = seconds;
+    TimeParts *timeParts = gmtime(&amp;t);
+    timeParts-&gt;tm_min = m;
+    t = mktime(timeParts);
+    seconds = t;
+}
+
+void DateTime::hour(unsigned int h) {
+    time_t t = seconds;
+    TimeParts *timeParts = gmtime(&amp;t);
+    timeParts-&gt;tm_hour = h;
+    t = mktime(timeParts);
+    seconds = t;
+}
+
+void DateTime::day(unsigned int d) {
+    time_t t = seconds;
+    TimeParts *timeParts = gmtime(&amp;t);
+    timeParts-&gt;tm_mday = d;
+    t = mktime(timeParts);
+    seconds = t;
+}
+
+void DateTime::month(unsigned int m) {
+    time_t t = seconds;
+    TimeParts *timeParts = gmtime(&amp;t);
+    timeParts-&gt;tm_mon = m;
+    t = mktime(timeParts);
+    seconds = t;
+}
+
+void DateTime::year(unsigned int y) {
+    time_t t = seconds;
+    TimeParts *timeParts = gmtime(&amp;t);
+    timeParts-&gt;tm_year = y;
+    t = mktime(timeParts);
+    seconds = t;
+}
+
+// this function returns a the Date/Time as a string
+// according to a user specified format
+std::string DateTime::toString(std::string format) {
+    // We need a C string to store the result in
+    // we'll just use a static array for this
+    // if someone creates a date format longer than 1024
+    // characters, that is their own fault...
+    char dateTime[1024];
+    // create a copy of the seconds since the Unix Epoch
+    time_t t = seconds;
+    // create our TimeParts struct
+    TimeParts *timeParts = gmtime(&amp;t);
+    // here, we are using the standard library strftime function.
+    // it needs a C-string pointer to store the result in
+    // the max size the C string can be, the format string,
+    // and the TimeParts to format into a string
+    // since C-strings need to end with the '\0' character,
+    // the size we pass the function is one smaller than the 
+    // size of the array we created to store the result
+    strftime(dateTime, 1023, format.c_str(), timeParts);
+    return std::string(dateTime); 
+}
+
+</code></pre>
+<p>We've implemented the <code>DateTime</code> class as a wrapper around the C <code>&lt;time.h&gt;</code> header. Converting between seconds since the Unix Epoch and actual days, months, years, etc. is actually non-trivial, so that's why we'll skip that for this example and just use the C header.  </p>
+<p>You can view the code for this ADT in the <code>DateTime-example.zip</code> file. </p>
+<h2 id="looking-ahead">Looking Ahead</h2>
+<p>The next lecture will cover testing for this ADT. For your lab assignment this week, you will need to implement tests for an ADT called <code>Bigint</code>. The <code>Bigint</code> ADT represents unsigned integers that are larger than the maximum size of integers. As an exercise, try developing the class diagram for the <code>Bigint</code> ADT, and try to imagine how <code>Bigint</code> might be implemented (i.e., what would the private field(s) look like).  </p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../../js/base.js"></script>
+        <script src="../../../javascripts/mathjax.js"></script>
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script src="../../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

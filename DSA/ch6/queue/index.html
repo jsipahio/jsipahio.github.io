@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../../img/favicon.ico">
+        <title>Queue ADT - </title>
+        <link href="../../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../../css/brands.min.css" rel="stylesheet">
+        <link href="../../../css/solid.min.css" rel="stylesheet">
+        <link href="../../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" disabled>
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../../.."></a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../../cv/" class="nav-link">CV</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../../teaching/" class="nav-link">Teaching</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item dropdown">
+                              <button id="theme-menu" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static" aria-label="Toggle theme" class="nav-link dropdown-toggle">
+                                <i class="fa-solid fa-circle-half-stroke fa-fw"></i>
+                                <span class="d-lg-none ms-2">Toggle theme</span>
+                              </button>
+                              <ul class="dropdown-menu dropdown-menu-end">
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
+                                    <i class="fa-solid fa-sun fa-fw"></i>
+                                    <span class="ms-2">Light</span>
+                                    <i class="fa-solid fa-check ms-auto d-none"></i>
+                                  </button>
+                                </li>
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
+                                    <i class="fa-solid fa-moon fa-fw"></i>
+                                    <span class="ms-2">Dark</span>
+                                    <i class="fa-solid fa-check ms-auto d-none"></i>
+                                  </button>
+                                </li>
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="auto" aria-pressed="true">
+                                    <i class="fa-solid fa-circle-half-stroke fa-fw"></i>
+                                    <span class="ms-2">Auto</span>
+                                    <i class="fa-solid fa-check ms-auto"></i>
+                                  </button>
+                                </li>
+                              </ul>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <script src="../../../js/darkmode.js"></script>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#queue-adt" class="nav-link">Queue ADT</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#data" class="nav-link">Data</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#operations" class="nav-link">Operations</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#rules" class="nav-link">Rules</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#operation-efficiency" class="nav-link">Operation Efficiency</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#deque" class="nav-link">Deque</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#queue-applications" class="nav-link">Queue Applications</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#full-example-cpu-scheduler" class="nav-link">Full Example: CPU Scheduler</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="queue-adt">Queue ADT</h1>
+<p>The queue ADT, similar to stack, provides access to elements in a controlled order. While the stack allowed access to elements in last-in, first-out (LIFO) order, queues provide access in first-in, first-out (FIFO) order. Like how at a <em>queue</em> for a cash register, the first person to enter the queue is the first person to check out, the first element to enter the queue is the first one to exit the queue. Similar to stack, in this chapter we'll implement our queue using an array. </p>
+<h2 id="data">Data</h2>
+<p>Like stack, queue needs to store a series of elements while maintaining their insertion order. Therefore, an array or list must be used. Lists are next chapter's topic, so an array will be used here. For an array-based implementation, we need to track the index of the front of the queue, as well as the maximum size of the array, so we do not overflow the queue. Additionally, since new elements are added to the back of the queue, the index of the back needs to be tracked as well.</p>
+<h2 id="operations">Operations</h2>
+<p>The primary queue operations are <code>enqueue()</code> and <code>dequeue()</code>. <code>enqueue()</code> adds an element to the end of the queue. The <code>dequeue()</code> operation removes an item from the front of the queue. Like with stack, some implementations of queue implement a separate function to access the item at the front of the queue, and make <code>dequeue()</code> a void function that only removes an item from the front of the queue, rather than removing and returning it. We should provide a member function that checks if the queue is empty, so clients can guard against attempts to dequeue from an empty queue. In an array based implementation, we should also include operations to check if the queue is full, so that clients can guard against pushing to a full queue.</p>
+<h2 id="rules">Rules</h2>
+<p>Users should not be able to enqueue an element to a queue that is full in an array based implementation. In any underlying implementation, users should not be able to access the front of a queue that is empty.</p>
+<h2 id="operation-efficiency">Operation Efficiency</h2>
+<p>Due to its controlled access, queue, like stack, should provide O(1) time complexity for its <code>enqueue()</code> and <code>dequeue()</code> operations. However, when looking at the array-based implementation of a queue, there is an issue with achieving this:</p>
+<pre><code>ADT Queue:
+    Array data
+    num front
+    num back
+    num max
+
+    operation enqueue(e):
+        if (back + 1 == max):
+            throw FullQueueError
+        else:
+            back = back + 1
+            data[back] = e
+
+    operation dequeue():
+        if (front &lt; 0 and back &lt; 0):
+            throw EmptyQueueError
+        else:
+            e = data[front]
+            front = front + 1
+            return e
+
+    operation full():
+        if back + 1 == max:
+            return true
+        else:
+            return false
+
+    operation empty():
+        if front &lt; 0 and back &lt; 0:
+            return true
+        else:
+            return false
+
+    operation size():
+        return back - front
+</code></pre>
+<p>In this implementation, the <code>enqueue()</code> and <code>dequeue()</code> operations achieve O(1) time complexity. However, every time we remove an item from the queue, the front is moved towards the end of the queue. This means that each time we remove an item, we are shrinking the capacity of the queue. How can we resolve this? One option is to shift all the elements of the array forwards each time we perform <code>dequeue()</code>:</p>
+<pre><code>operation dequeue():
+    if front &lt; 0 and back &lt; 0:
+        throw EmptyQueueError
+
+    else:
+        for i in 1..back:
+            data[i - 1] = data[i]
+
+        front = 0
+        back = back - 1
+</code></pre>
+<p>In this implementation, we don't give up the front elements of the array every time we perform a <code>dequeue()</code> operation. However, we now have to loop through (potentially) every element in the array for each <code>dequeue()</code>. The time complexity has exploded from O(1) to O(n). Is there any way we can avoid wasting elements of the array when removing elements, while still maintaining O(1) time complexity? We can. While physically, the array is a linear container, we can imagine whatever structure we want. What if the array were a circle, connected end to end? Then, when we reach the last index of the array, we can start over and store elements at the original front of the array. By implementing a <em>circular</em> queue, we can make use of the entire array's capacity, while still providing O(1) time complexity for <code>enqueue()</code> and <code>dequeue()</code>. We can use the modulus operator to automatically wrap the back of the queue back around to the front of the queue. In this case, the queue becomes full when <code>(back + 1) % max</code> equals the front, i.e., inserting an element would overwrite the current front of the queue. The queue is empty when the front equals the back. Below is the pseudocode for the circular queue implementation:</p>
+<pre><code>ADT Queue:
+    Array data
+    num front
+    num back
+    num max
+
+    operation enqueue(e):
+        if (back + 1) % max == front:
+            throw FullQueueError
+        else:
+            data[back] = e
+            back = (back + 1) % max
+
+    operation dequeue():
+        if back == front:
+            throw EmptyQueueError
+        else:
+            e = data[front]
+            front = (front + 1) % max
+
+    operation empty():
+        if back == front:
+            return true
+        else:
+            return false
+
+    operation full():
+        if (back + 1) % max == front:
+            return true
+        else:
+            return false
+
+    operation size():
+        if front == back:
+            return 0
+        else if front &lt; back:
+            return back - front
+        else:
+            return back - front + max
+</code></pre>
+<p>In this case, <code>enqueue()</code> is still O(1). The only change is we take the modulus of back + 1 (taking the modulus allows the back index to wrap around to the front of the array) and compare it to front, rather than checking if the back is less than the max size. For <code>dequeue()</code>, we now move front forward by one position and take the modulus. In this implementation, <code>dequeue()</code> is doing single, simple arithmetic and boolean comparisons, so it is O(1). The <code>size()</code> operation is modified so that it handles three cases: the front equals the back, the front is less than the back, and the back is less than the front. If the front equals the back, this is our empty condition, so the queue has a size of 0. If the front is less than the back, then we can just subtract the front index from the back index. The final case is when the back is less than the front, in which case the back has wrapped around. In this case, we need to add to find the difference between the front and back, and then subtract that from the number of maximum size of the array.  </p>
+<h2 id="deque">Deque</h2>
+<p>A doubly ended queue, called a deque (pronounced like "deck"), is a data structure that allows the front and rear elements to be removed.</p>
+<h2 id="queue-applications">Queue Applications</h2>
+<p>Queues have a more narrow (than stack), but well-defined set of applications. Any kind of waiting list in a program is most effectively implemented using a queue. This can be used in programs that need to model a real life waiting list (line at a DMV, traffic simulations, simulation in a game, etc.), as well as waitlists used by your computer. Your operating system maintains process queues for CPU access, I/O access, etc. Processes are switched between these queues based on what stage of life they are in.</p>
+<h2 id="full-example-cpu-scheduler">Full Example: CPU Scheduler</h2>
+<p>One of the responsibilities of a computer's operating system is ensuring access to your computer's resources to the applications that you are trying to run. On very old systems, this was a simple task: one application could run at a time, and it had unlimited access to a computer's resources until it completed execution. However, as the uses for computers expanded and processing power increased, the need arose for systems capable of multiprocessing. First, some terminology: a process (sometimes referred to as a task or job, as well) is an application that has been loaded into memory and is ready to execute. The role of the operating system is to provide processes access to the CPU, files, input buffers, output buffers, etc. The next sections describe the states that a process can be in and how operating systems manage access to computer resources.</p>
+<h3 id="process-model-and-states">Process Model and States</h3>
+<p>Most computer science literature describes five states for a process:<br />
+- <strong>New:</strong> The process has been created, and the OS is initializing the process control block (PCB)
+- <strong>Ready:</strong> The process is ready to utilize the CPU
+- <strong>Running:</strong> The process is actively using the CPU
+- <strong>Waiting:</strong> The process has to wait (usually for I/O) and is unable to use the CPU
+- <strong>Terminated:</strong> The process has completed execution and is waiting for the OS to clean it up</p>
+<p>The process control block is a data structure that describes a process and the data the operating system needs to manage it. At a high level, this includes the process's state, identifying information, memory mappings, and register values. It allows the OS to suspend a process in favor of another, and then have all the information it needs to restart the process to its previous state.</p>
+<h3 id="scheduling-algorithms">Scheduling Algorithms</h3>
+<p>There have been multiple algorithms proposed to schedule CPU access. All use some form of "ready queue", which is a queue that stores processes that are in the "ready" state.<br />
+The simplest algorithm is first-come, first-serve (FCFS). FCFS allows processes to access the CPU in the order they request it. In this case, the ready queue is used directly. The processes in the queue are allowed to execute in the order they arrive in the queue. This is a simple solution, but not an efficient one. Consider this: 3 processes enter the queue (P1, P2, P3). P1 enters first and requires 500ms of CPU time. P2 enters next and requires 200ms of CPU time. Then, P3 enters, and needs 100ms of CPU time. In FCFS, P1 would have access to the CPU first, and would use it for 500ms, requiring P2 and P3 to wait 500ms. Next, P2 executes, which forces P3 to wait another 200ms. Finally, P3 gets access to the CPU. The combined waiting times are 0 for P1, 500 for P2, and 700 for P3, leading to an average waiting time of (0 + 500 + 700) / 3 = 400ms. FCFS, while simple and easy to implement, unfairly allows long processes to dominate the CPU, increasing the average wait time. Consider if the processes arrived in the reverse order (P3, P2, P1). Then P3 would execute first, forcing P2 and P1 to wait 100ms. Then, P2 would execute, which requires P1 to wait 200ms more. Finally, P1 executes. The total wait times would then be: 0, 100, 300, and the average wait would be approximately 133ms.<br />
+This brings us to the next scheduling algorithm, shortest-job first (SJF). In this approach, the OS selects the process with the shortest processing time each time the CPU is available. This is a type of priority scheduling algorithm, where priority is given to the element with the shortest completion time. This, however, requires a special type of queue, a priority queue. We save that topic for chapter 10. SJF is, however, the optimal scheduling algorithm. However, it requires knowledge of the CPU burst time for each process, which is not known ahead of time. Therefore, the burst times are estimated based on past usage by that process. A limitation of SJF is that it is not fair. If short processes continually enter the ready queue, they will always have priority over a longer process that is stuck waiting. This leads to starvation. <br />
+The two prior approaches are based non-preemptive, which means that once a process has control of the CPU, the OS will not interrupt it until it is finished using the CPU. Preemptive schedulers can preempt a process, meaning the OS removes the process from the CPU in favor of another, and forces the process that was using the CPU back into the ready queue. First, we can consider a further optimization of the SJF algorithm that uses preemption: shortest-remaining time first (SRTF). The difference between this algorithm and SJF is that in SRTF, if a shorter process than the one currently using the CPU enters the ready queue, the current process on the CPU will be removed in favor of the new, shorter process.<br />
+Finally, we discuss round-robin (RR) scheduling. RR scheduling is similar to FCFS, except it uses preemption to prevent a single process from accessing the CPU for too long. The RR scheduler as a <em>time quantum</em>, which is the maximum amount of time a single process can access the CPU in a single burst. If a process requires less time than the quantum, it completes and is removed from the ready queue. Otherwise, when its time runs out it is preempted and moved to the end of the ready queue, allowing the next process in the queue its turn at the CPU. The RR algorithm is a balance of being fair while reducing average wait times. Consider this example:  </p>
+<table>
+<thead>
+<tr>
+<th>Process</th>
+<th>Time (ms)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>P1</td>
+<td>300</td>
+</tr>
+<tr>
+<td>P2</td>
+<td>50</td>
+</tr>
+<tr>
+<td>P3</td>
+<td>100</td>
+</tr>
+</tbody>
+</table>
+<p>Using FCFS, the average wait time for these processes would be (0 + 300 + 350) / 3 ~= 217ms. If we used SJF, the average waiting time would be (0 + 50 + 150) / 3 ~= 67ms. We will skip SRTF, and assume that these three processes arrived at approximately the same time, causing SRTF to be approximately the same as SJF. For RR, the average wait time is dependent on the value chosen for the time quantum. Another thing to consider with RR is that preempting processes is not free; it takes time to suspend a process, move it to the end of the ready queue, and load the next process onto the CPU. Let's assume that it takes 10ms to switch processes. The next table shows the average wait times for RR when using various time quanta.  </p>
+<table>
+<thead>
+<tr>
+<th>Time Quantum (ms)</th>
+<th>Execution Order</th>
+<th>Average Wait Time (ms)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>20</td>
+<td>P1(20) P2(20) P3(20) P1(20) P2(20) P3(20) P1(20) P2(10) P3(20) P1(20) P3(20) P1(20) P3(20) P1(20) * 10</td>
+<td>TODO</td>
+</tr>
+<tr>
+<td>50</td>
+<td>P1(50) P2(50) P3(50) P1(50) P3(50) P1(50) * 4</td>
+<td>TODO</td>
+</tr>
+<tr>
+<td>100</td>
+<td>P1(100) P2(50) P3(100) P1(100) * 2</td>
+<td>TODO</td>
+</tr>
+<tr>
+<td>200</td>
+<td>P1(200) P2(50) P3(100) P1(100)</td>
+<td>TODO</td>
+</tr>
+</tbody>
+</table>
+<p>As you can see, having too short of a time quantum causes switching between processes to have too much of an impact on the overall time due to how frequently processes are switched (and this scales even worse when there are more processes to cycle through). On the other hand, too long of a quantum causes the average wait time of RR to decay to be the same as FCFS. Therefore, the overall efficiency of RR depends on the number of concurrent processes in the ready queue and the choice of time quantum.  </p>
+<h3 id="planning-our-scheduler">Planning Our Scheduler</h3>
+<p>For our CPU scheduler, we will use the RR algorithm. It is simple to implement with our queue ADT, and is more efficient than FCFS, which can also be implemented with a normal queue. First, we need to define a data structure to store the PCB. Since we are creating a simulation, we do not need a complete PCB data structure. We should maintain the name of the process, the process ID, the process state, and the sequence of CPU bursts and I/O waits the process needs. Below is a struct that implements our PCB, as well as an enum to store the process states. </p>
+<pre><code class="language-C++">// enum that stores the 5 process states
+enum ProcessState {
+    NEW,
+    READY,
+    RUNNING,
+    WAIT,
+    TERMINATE
+};
+
+// enum for the operations a process can perform
+enum OperationType {
+    CPU_BURST,
+    IO_REQUEST
+};
+
+// struct to store pairs of operations and their times
+struct Operation {
+    OperationType operation;
+    int time;
+};
+
+// struct for the PCB
+struct ProcessControlBlock {
+    // name of the process
+    std::string name;
+    // process id
+    int pid;
+    // current state of the process
+    ProcessState state;
+    // sequence of operations the process will perform
+    std::vector&lt;Operation&gt; operations;
+};
+</code></pre>
+<p>Now, we need a class that handles dispatching the processes. The <code>Dispatcher</code> class will contain a pointer to the ready queue and the wait queue. The </p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../../js/base.js"></script>
+        <script src="../../../javascripts/mathjax.js"></script>
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script src="../../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

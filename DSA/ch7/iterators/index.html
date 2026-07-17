@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../../img/favicon.ico">
+        <title>Iterators - </title>
+        <link href="../../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../../css/brands.min.css" rel="stylesheet">
+        <link href="../../../css/solid.min.css" rel="stylesheet">
+        <link href="../../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" disabled>
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../../.."></a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../../cv/" class="nav-link">CV</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../../teaching/" class="nav-link">Teaching</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item dropdown">
+                              <button id="theme-menu" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static" aria-label="Toggle theme" class="nav-link dropdown-toggle">
+                                <i class="fa-solid fa-circle-half-stroke fa-fw"></i>
+                                <span class="d-lg-none ms-2">Toggle theme</span>
+                              </button>
+                              <ul class="dropdown-menu dropdown-menu-end">
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
+                                    <i class="fa-solid fa-sun fa-fw"></i>
+                                    <span class="ms-2">Light</span>
+                                    <i class="fa-solid fa-check ms-auto d-none"></i>
+                                  </button>
+                                </li>
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
+                                    <i class="fa-solid fa-moon fa-fw"></i>
+                                    <span class="ms-2">Dark</span>
+                                    <i class="fa-solid fa-check ms-auto d-none"></i>
+                                  </button>
+                                </li>
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="auto" aria-pressed="true">
+                                    <i class="fa-solid fa-circle-half-stroke fa-fw"></i>
+                                    <span class="ms-2">Auto</span>
+                                    <i class="fa-solid fa-check ms-auto"></i>
+                                  </button>
+                                </li>
+                              </ul>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <script src="../../../js/darkmode.js"></script>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#iterators" class="nav-link">Iterators</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#basic-conceptstructure" class="nav-link">Basic Concept/Structure</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#how-to-define-an-iterator" class="nav-link">How to Define an Iterator</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#example-usage" class="nav-link">Example Usage</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="iterators">Iterators</h1>
+<p>In the past, if we want to inspect the contents of an array, we'd use a for-loop to iterate over each index. However, you cannot do this for a list. Data is not stored contiguously like in an array; lists are a collection of nodes that reference the next (and sometimes previous) element. So, how can we step through the elements of a container whose underlying implementation is list-based? Iterators are an abstraction that allows for lists to be iterated through. Iterators can also be defined for array-based containers, allowing for a unified method of traversal for all containers. The standard template library defines iterators for all container types. </p>
+<h2 id="basic-conceptstructure">Basic Concept/Structure</h2>
+<p>An iterator is essentially a pointer to an element in a container. However, iterators also define operations that allow them to move to the next item in the container. For some container types, such as a doubly linked list, bidirectional iterators that allow the iterator to move backwards through the container can also be defined. In C++, an iterator should define the following methods:<br />
+- <code>operator++()</code>: The <code>++</code> operator allows the iterator to move forward in the container
+- <code>operator*()</code>: In this case, <code>*</code> is pointer dereferencing, not multiplication. This allows the user to access the value pointed to by the iterator.
+- <code>operator-&gt;()</code>: This allows the pointer to an object to access its members without needing to be dereferenced.
+- <code>operator==()</code>: This is used to compare iterators. While not directly useful to the iterator itself, it is needed to check when the end of the container has been reached.
+If we want to implement a bidirectional iterator, then <code>--</code> must also be implemented:<br />
+- <code>operator--()</code>: This allows the iterator to access the previous element in the container.</p>
+<p>Iterators are somewhat odd in that they handle very little logic on their own. It is the role of the data structure using the iterator to guarantee the proper behavior of the iterator. Containers that provide access via iterators need to define the following members:
+- <code>begin()</code>: This member function returns an iterator that points to the first element in the collection.
+- <code>end()</code>: This member function returns an iterator to a location that is "just past the end" of the container. In an array, it would be equivalent to a pointer to the element at <code>array[SIZE]</code>, i.e., the location where the next element would be. For some list-based containers, this may be <code>nullptr</code>. For others, there may be a sentinel node that marks the end of the container, but does not store data.</p>
+<p>Bidirectional iterators can also provide the following members to allow containers to be accessed in reverse order:
+- <code>rbegin()</code>: This member function returns an iterator that points to the last element of the container. Unlike <code>end()</code>, this should point to the last element that actually stores data.
+- <code>rend()</code>: Like <code>end()</code>, this returns an iterator to "just before the front" of the container. If it were an array, this would be like returning the -1 index of the array. This may be implemented by either using <code>nullptr</code>, or a sentinel node before the front of the container.</p>
+<h2 id="how-to-define-an-iterator">How to Define an Iterator</h2>
+<p>There are a few ways to define an iterator, depending on how specialized it is to the class it is being implemented for. One option is to implement iterators as a nested class. This is the approach taken by C++'s standard library. This allows the iterators to access private implementation details of the class while making clear that they are coupled to the class. Another option for if the iterator needs access to the class's private members is to make the iterator a friend class. In this case, the iterator is forward declared as a friend within the body of class it is being defined for, and then defined elsewhere. If the iterator does not need access to the private members, it is possible to define the iterator as a totally separate class. Since the C++ standard library uses nested classes for its iterators, that is the approach we will use here. Below is an example of an iterator defined for the doubly-linked list we created in the last section. The parts of the list that have been defined already are truncated from this example, but the full code can be viewed in the examples provided with this chapter.</p>
+<pre><code class="language-C++"></code></pre>
+<h2 id="example-usage">Example Usage</h2>
+<p>Iterators can be used to loop through a container. To begin with, we can define a basic for loop using the iterator:</p>
+<pre><code class="language-C++">#include &lt;iostream&gt;
+#include &quot;list.hpp&quot;
+
+int main() {
+    List&lt;int&gt; list;
+
+    for (int i = 0; i &lt; 10; ++i) {
+        list.insertBack(i);
+    }
+
+    for (auto it = list.begin(); it != list.end(); ++it) {
+        std::cout &lt;&lt; *it &lt;&lt; std::endl;
+    }
+
+    return 0;
+}
+</code></pre>
+<p>However, we can do better. Provided you have implemented the functions listed earlier for you iterator and class, you can use a range-based for loop to iterate through the container instead:</p>
+<pre><code class="language-C++">#include &lt;iostream&gt;
+#include &quot;list.hpp&quot;
+
+int main() {
+    List&lt;int&gt; list;
+
+    for (int i = 0; i &lt; 10; ++i) {
+        list.insertBack(i);
+    }
+
+    for (int x: list) {
+        std::cout &lt;&lt; x &lt;&lt; std::endl;
+    }
+
+    return 0;
+}
+</code></pre>
+<p>The iterator we defined is not constant, so we can also modify data elements while we iterate. Note that when using a range-based for loop, we need to add the ampersand to note that <code>x</code> should be a reference and not a copy.</p>
+<pre><code class="language-C++">#include &lt;iostream&gt;
+#include &quot;list.hpp&quot;
+
+int main() {
+    List&lt;int&gt; list;
+
+    for (int i = 0; i &lt; 10; ++i) {
+        list.insertBack(i);
+    }
+
+    for (int&amp; x: list) {
+        x *= 2;
+    }
+
+    for (int x: list) {
+        std::cout &lt;&lt; x &lt;&lt; std::endl;
+    }
+
+    return 0;
+}
+</code></pre>
+<p>There are times when you may need to guarantee that an iterator will not modify elements of the container. In that case, you need to define a separate <code>ConstIterator</code> that returns <code>const</code> references to the container's elements. Additionally, you'll have to define separate <code>cbegin()</code> and <code>cend()</code> members that return the constant iterator. </p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../../js/base.js"></script>
+        <script src="../../../javascripts/mathjax.js"></script>
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script src="../../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

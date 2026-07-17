@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>CSE234 Week 12: Concepts - </title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../css/brands.min.css" rel="stylesheet">
+        <link href="../../css/solid.min.css" rel="stylesheet">
+        <link href="../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" disabled>
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../.."></a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../cv/" class="nav-link">CV</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../teaching/" class="nav-link">Teaching</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item dropdown">
+                              <button id="theme-menu" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static" aria-label="Toggle theme" class="nav-link dropdown-toggle">
+                                <i class="fa-solid fa-circle-half-stroke fa-fw"></i>
+                                <span class="d-lg-none ms-2">Toggle theme</span>
+                              </button>
+                              <ul class="dropdown-menu dropdown-menu-end">
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
+                                    <i class="fa-solid fa-sun fa-fw"></i>
+                                    <span class="ms-2">Light</span>
+                                    <i class="fa-solid fa-check ms-auto d-none"></i>
+                                  </button>
+                                </li>
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
+                                    <i class="fa-solid fa-moon fa-fw"></i>
+                                    <span class="ms-2">Dark</span>
+                                    <i class="fa-solid fa-check ms-auto d-none"></i>
+                                  </button>
+                                </li>
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="auto" aria-pressed="true">
+                                    <i class="fa-solid fa-circle-half-stroke fa-fw"></i>
+                                    <span class="ms-2">Auto</span>
+                                    <i class="fa-solid fa-check ms-auto"></i>
+                                  </button>
+                                </li>
+                              </ul>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <script src="../../js/darkmode.js"></script>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#cse234-week-12-concepts" class="nav-link">CSE234 Week 12: Concepts</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#motivating-example" class="nav-link">Motivating Example</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#concept-declarations" class="nav-link">Concept Declarations</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#conjunctions-and-disjunctions" class="nav-link">Conjunctions and Disjunctions</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#requires-requires" class="nav-link">Requires Requires</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#conclusion" class="nav-link">Conclusion</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="cse234-week-12-concepts">CSE234 Week 12: Concepts</h1>
+<p>Last week, we covered generic types. Generic types allow us to define functions and classes once that work for a variety of data types. However, there may be times when the generic type cannot work for any type. Concepts provide a way to constrain the types that a generic type will accept as generic arguments to ensure that the generic type will handle that concrete type. Concepts are a C++20 feature, so you'll have to ensure that you are targeting a minimum C++ standard of C++20 when compiling.</p>
+<h2 id="motivating-example">Motivating Example</h2>
+<p>Let's consider this very basic add function:</p>
+<pre><code class="language-c++">template &lt;typename T&gt;
+T add(T x, T y) {
+    return x + y;
+}
+</code></pre>
+<p>This works fine if the types we pass in are numeric types, like int or double. It will also work if we pass in std::string, since std::string implements the addition operator for </p>
+<pre><code class="language-cpp">#include &lt;vector&gt;
+
+template &lt;typename T&gt;
+T add(T x, T y) {
+    return x + y;
+}
+
+int main() {
+    std::vector v1 = {1, 2, 3};
+    std::vector v2 = {4, 5, 6};
+    std::vector v3 = add&lt;std::vector&lt;int&gt;&gt;(v1, v2);
+
+    return 0;
+}
+</code></pre>
+<p>Attempting to compile this leads to a rather confusing error message:</p>
+<pre><code>test.cpp: In instantiation of ‘T add(T, T) [with T = std::vector&lt;int, std::allocator&lt;int&gt; &gt;]’:
+test.cpp:12:43:   required from here
+test.cpp:6:14: error: no match for ‘operator+’ (operand types are ‘std::vector&lt;int, std::allocator&lt;int&gt; &gt;’ and ‘std::vector&lt;int, std::allocator&lt;int&gt; &gt;’)
+    6 |     return x + y;
+      |            ~~^~~
+In file included from /usr/include/c++/13/bits/stl_algobase.h:67,
+                 from /usr/include/c++/13/vector:62,
+                 from test.cpp:2:
+/usr/include/c++/13/bits/stl_iterator.h:634:5: note: candidate: ‘template&lt;class _Iterator&gt; constexpr std::reverse_iterator&lt;_Iterator&gt; std::operator+(typename reverse_iterator&lt;_Iterator&gt;::difference_type, const reverse_iterator&lt;_Iterator&gt;&amp;)’
+  634 |     operator+(typename reverse_iterator&lt;_Iterator&gt;::difference_type __n,
+      |     ^~~~~~~~
+/usr/include/c++/13/bits/stl_iterator.h:634:5: note:   template argument deduction/substitution failed:
+test.cpp:6:14: note:   ‘std::vector&lt;int, std::allocator&lt;int&gt; &gt;’ is not derived from ‘const std::reverse_iterator&lt;_Iterator&gt;’
+    6 |     return x + y;
+      |            ~~^~~
+/usr/include/c++/13/bits/stl_iterator.h:1808:5: note: candidate: ‘template&lt;class _Iterator&gt; constexpr std::move_iterator&lt;_IteratorL&gt; std::operator+(typename move_iterator&lt;_IteratorL&gt;::difference_type, const move_iterator&lt;_IteratorL&gt;&amp;)’
+ 1808 |     operator+(typename move_iterator&lt;_Iterator&gt;::difference_type __n,
+      |     ^~~~~~~~
+/usr/include/c++/13/bits/stl_iterator.h:1808:5: note:   template argument deduction/substitution failed:
+test.cpp:6:14: note:   ‘std::vector&lt;int, std::allocator&lt;int&gt; &gt;’ is not derived from ‘const std::move_iterator&lt;_IteratorL&gt;’
+    6 |     return x + y;
+      |            ~~^~~
+</code></pre>
+<p>We can define a concept called <code>Addable</code> that we can use to constrain the types that can be substituted for T:</p>
+<pre><code class="language-cpp">#include &lt;vector&gt;
+
+template &lt;typename T&gt;
+concept Addable = requires(T x, T y) {
+    x + y;
+};
+
+template &lt;typename T&gt;
+requires Addable&lt;T&gt;
+T add(T x, T y) {
+    return x + y;
+}
+
+int main() {
+    std::vector v1 = {1, 2, 3};
+    std::vector v2 = {4, 5, 6};
+    std::vector v3 = add&lt;std::vector&lt;int&gt;&gt;(v1, v2);
+
+    return 0;
+}
+</code></pre>
+<p>Now, if we try to compile this program, we get an error message like the following:</p>
+<pre><code>test.cpp: In function ‘int main()’:
+test.cpp:18:43: error: no matching function for call to ‘add&lt;std::vector&lt;int, std::allocator&lt;int&gt; &gt; &gt;(std::vector&lt;int, std::allocator&lt;int&gt; &gt;&amp;, std::vector&lt;int, std::allocator&lt;int&gt; &gt;&amp;)’
+   18 |     std::vector v3 = add&lt;std::vector&lt;int&gt;&gt;(v1, v2);
+      |                      ~~~~~~~~~~~~~~~~~~~~~^~~~~~~~
+test.cpp:11:3: note: candidate: ‘template&lt;class T&gt;  requires  Addable&lt;T&gt; T add(T, T)’
+   11 | T add(T x, T y) {
+      |   ^~~
+test.cpp:11:3: note:   template argument deduction/substitution failed:
+test.cpp:11:3: note: constraints not satisfied
+test.cpp: In substitution of ‘template&lt;class T&gt;  requires  Addable&lt;T&gt; T add(T, T) [with T = std::vector&lt;int, std::allocator&lt;int&gt; &gt;]’:
+test.cpp:18:43:   required from here
+test.cpp:5:9:   required for the satisfaction of ‘Addable&lt;T&gt;’ [with T = std::vector&lt;int, std::allocator&lt;int&gt; &gt;]
+test.cpp:5:19:   in requirements with ‘T x’, ‘T y’ [with T = std::vector&lt;int, std::allocator&lt;int&gt; &gt;]
+test.cpp:6:7: note: the required expression ‘(x + y)’ is invalid
+    6 |     x + y;
+      |     ~~^~~
+cc1plus: note: set ‘-fconcepts-diagnostics-depth=’ to at least 2 for more detail
+</code></pre>
+<p>Here, we get a clearer error message that the compilation failed because the type <code>std::vector&lt;int&gt;</code> does not satisfy the concept Addable, which requires <code>x + y</code> to be a valid expression. We can also make the code even clearer by replacing <code>typename</code> with <code>Addable</code> in add's template parameter list:</p>
+<pre><code class="language-cpp">#include &lt;vector&gt;
+
+template &lt;typename T&gt;
+concept Addable = requires(T x, T y) {
+    x + y;
+};
+
+template &lt;Addable T&gt;
+T add(T x, T y) {
+    return x + y;
+}
+
+int main() {
+    std::vector v1 = {1, 2, 3};
+    std::vector v2 = {4, 5, 6};
+    std::vector v3 = add&lt;std::vector&lt;int&gt;&gt;(v1, v2);
+
+    return 0;
+}
+</code></pre>
+<p>The <code>concepts</code> library provides predefined concepts in the <code>std</code> namespaces. There is a pretty limited set of predefined concepts, and they can be used just like programmer-defined concepts, so they aren't going to be covered in depth. The list of predefined concepts is available on cppreference.com. </p>
+<h2 id="concept-declarations">Concept Declarations</h2>
+<p>A concept declaration consists of a generic parameter list, followed by the <code>concept</code> keyword and a name. The name of the concept is followed by an equals sign and a "requires expression". The requires expression starts with the <code>requires</code> keyword and is followed by two possible items (when used for a concept declaration), a block, or a parameter list with a block. In most instances, the parameter list is needed since this allows you to specify what instances of the generic type can do. A block without the parameter list only allows you to express a limited number of items, such as the static members of the generic type or inner types.</p>
+<pre><code class="language-cpp">template &lt;typename T&gt;
+concept HasInnerType = requires {
+    T::inner
+};
+</code></pre>
+<p>In this case, class <code>A</code> will pass the concept check, and class <code>B</code> will not. Neither will class <code>C</code>.</p>
+<pre><code class="language-cpp">class A {
+public:
+    A() {}
+    class inner {};
+};
+class B {
+public:
+    B() {}
+};
+class C {
+public:
+    class inner1 {};
+};
+</code></pre>
+<p>More interesting is when we add the parameter list. This allows us to specify actions that an instance of the generic type can take:</p>
+<pre><code class="language-cpp">template &lt;typename T&gt;
+concept HasSize = requires(T t) {
+    // verifies that T instances have a member function size
+    t.size();
+};
+
+template &lt;typename T&gt;
+concept Addable = requires(T x, T y) {
+    // verifies that T has &quot;operator+(T, T)&quot; defined
+    x + y;
+};
+
+template &lt;typename T, typename U&gt;
+concept MixedTypeArithmetic = requires(T t, U u) {
+    // verifies that T and U can be added
+    t + u;
+    // subtracted
+    t - u;
+    // multiplied
+    t * u;
+    // divided
+    t / u;
+};
+</code></pre>
+<p>Here are some examples of these concepts in use:</p>
+<pre><code class="language-cpp">template &lt;HasSize T&gt;
+size_t getSize(T object) {
+    return object.size();
+}
+
+template &lt;Addable T&gt; 
+T add(T x, T y) {
+    return x + y;
+}
+
+// concepts that use multiple types need a requires clause
+// the concept cannot be used in place of &quot;typename&quot;
+template &lt;typename T, typename U&gt;
+requires MixedTypeArithmetic&lt;T, U&gt;
+T add(T x, U y) {
+    return x + y; 
+}
+</code></pre>
+<p>This type of check do not verify the return type of the expressions. To check the return type of the expression, the <code>{} -&gt; conceptName;</code> syntax is used:</p>
+<pre><code class="language-cpp">template &lt;typename T&gt;
+concept HasSize = requires(T t) {
+    {t.size()} -&gt; std::same_as&lt;size_t&gt;;
+}
+
+template &lt;HasSize T&gt;
+size_t getSize(T object) {
+    return object.size();
+}
+
+template &lt;typename T, typename U, typename R&gt;
+concept DivisionReturnsR = requires (T t, U u) {
+    {t / u} -&gt; std::same_as&lt;R&gt;;
+}
+
+template &lt;typename T, typename U, typename R&gt;
+requires DivisionReturnsR&lt;T, U, R&gt;
+R divide(T x, U y) {
+    return x / y; 
+}
+</code></pre>
+<h2 id="conjunctions-and-disjunctions">Conjunctions and Disjunctions</h2>
+<p>If a generic type/function must satisfy multiple concepts, a conjunction (<code>&amp;&amp;</code>) can be used:</p>
+<pre><code class="language-cpp">template &lt;typename T&gt;
+concept Integral = requires std::is_integral&lt;T&gt;;
+
+// both Integral&lt;T&gt; and std::is_signed&lt;T&gt; concepts must be met
+template &lt;typename T&gt;
+concept SignedIntegral = requires Integral&lt;T&gt; &amp;&amp; std::is_signed&lt;T&gt;;
+</code></pre>
+<p>If a generic type/function must satisfy one or another concept, a disjunction (<code>||</code>) can be used in the same way.</p>
+<h2 id="requires-requires">Requires Requires</h2>
+<p>If you want use an inline concept (i.e., use a requires expression without definining a concept), you have to use the somewhat silly looking <code>requires requires</code> syntax. The second <code>requires</code> can have any expressions that a normal <code>requires</code> in a concept can have:</p>
+<pre><code class="language-cpp">template &lt;typename T&gt;
+requires requires(T x, T y) {
+    x + y;
+}
+T add(T x, T y) {
+    return x + y;
+}
+</code></pre>
+<h2 id="conclusion">Conclusion</h2>
+<p>Concepts provide a way to make constraints on generic types clearer. The error messages for a generic type violation is more clear when a concept is used. Additionally, using concepts allows editor error detection (red squiggles) to detect when the template arguments are invalid, making it faster to identify when a generic function/type is being misued.</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script src="../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

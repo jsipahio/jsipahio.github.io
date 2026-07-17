@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../../img/favicon.ico">
+        <title>GitHub and git Cheat Sheet - </title>
+        <link href="../../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../../css/brands.min.css" rel="stylesheet">
+        <link href="../../../css/solid.min.css" rel="stylesheet">
+        <link href="../../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" disabled>
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../../.."></a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../../cv/" class="nav-link">CV</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../../teaching/" class="nav-link">Teaching</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item dropdown">
+                              <button id="theme-menu" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static" aria-label="Toggle theme" class="nav-link dropdown-toggle">
+                                <i class="fa-solid fa-circle-half-stroke fa-fw"></i>
+                                <span class="d-lg-none ms-2">Toggle theme</span>
+                              </button>
+                              <ul class="dropdown-menu dropdown-menu-end">
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
+                                    <i class="fa-solid fa-sun fa-fw"></i>
+                                    <span class="ms-2">Light</span>
+                                    <i class="fa-solid fa-check ms-auto d-none"></i>
+                                  </button>
+                                </li>
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
+                                    <i class="fa-solid fa-moon fa-fw"></i>
+                                    <span class="ms-2">Dark</span>
+                                    <i class="fa-solid fa-check ms-auto d-none"></i>
+                                  </button>
+                                </li>
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="auto" aria-pressed="true">
+                                    <i class="fa-solid fa-circle-half-stroke fa-fw"></i>
+                                    <span class="ms-2">Auto</span>
+                                    <i class="fa-solid fa-check ms-auto"></i>
+                                  </button>
+                                </li>
+                              </ul>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <script src="../../../js/darkmode.js"></script>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#github-and-git-cheat-sheet" class="nav-link">GitHub and git Cheat Sheet</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#github-and-gh" class="nav-link">GitHub and gh</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#git-commands" class="nav-link">git Commands</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#codespaces" class="nav-link">Codespaces</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="github-and-git-cheat-sheet">GitHub and git Cheat Sheet</h1>
+<p>In this class we will be using GitHub classroom to manage your source code. This page contains useful information about GitHub and git.</p>
+<p>GitHub is a frontend for hosting source code repositories using git as a version control system. What are all these, exactly?
+- A source code repository (often just called a "repo") is the combination of the source code and metadata used by a version control system to track changes to the code over time.
+- A version control system is used to track changes to a source code project (technically version control can be used for any type of file or project, but we are interested in source code in this class). When multiple developers are working on the same code base, it is likely that two or more developers may need to work on the same file at the same time. Early version control systems used a lock system, which prevented other developers from working on a file that another developer was working on until they finished. Newer systems use version merging, where separate versions of the file exist until they are deliberately merged into one final file.
+- git is the standard version control system used now (90%+ market share). git is a distributed version control system, meaning that all developers maintain a local copy of the repo. Older version control system used a centralized model where all developers worked on the same copy of code hosted on a centralized server. The distributed model improves branching, merging, and offline work ability.
+- GitHub is a frontend for hosting git repos. In addition to providing a server to host the repos, GitHub provides access control, issue tracking, project planning, and more. 
+- Branches are separate versions of the same repo. When working on a specific issue or adding a new feature, developers will create a branch of the current version of the source code, modify the branch, then create a pull request to merge their changes back into the main development branch. 
+- Commits are groups of changes made to a branch.
+- When working on a branch locally, your changes are only applied locally. For your changes to show up on the remote version of the codebase, you must <strong>push</strong> the commit. This updates the remote state of the repo to have the commits you have made. Files that are not committed will not be pushed. If there is a conflict between the remote state and the changes you have made, you must resolve it before the changes can be pushed.
+- To update the local state of the repo, you can use <strong>pull</strong> to copy the remote state into your local files. If there are conflicts between your local changes and the remote state being pulled, you will need to resolve them.</p>
+<h2 id="github-and-gh">GitHub and gh</h2>
+<p>To create an account, simply go to <a href="https://github.com/">GitHub's Website</a> and select the option to create an account. To use GitHub classroom, you will need to enable two-factor authentication when it asks you.  </p>
+<p>GitHub is the front end you can use to monitor your repositories. Repositories can be public or private. For this class, your repos will all be private.  </p>
+<p>To access repositories hosted on GitHub locally, the <code>gh</code> command is used. This command manages your GitHub authentication on your computer, so you can use <code>git</code> locally. To log into GitHub on the command line, run:</p>
+<pre><code class="language-bash">gh auth login
+</code></pre>
+<p>This will prompt you to enter some information. For the first question, select "GitHub.com". For the next </p>
+<h2 id="git-commands">git Commands</h2>
+<p>This is not an exhaustive list; git has a ton of functions. This should be enough to use git for this class, unless you really mess something up.
+<code>clone</code> - The <code>git clone</code> command is used to clone a remote repository onto your local machine. By default, it creates a new folder with the same name as the repo in the directory you are currently in<br />
+<code>pull</code> - The <code>git pull</code> command pulls changes in the remote version of the branch into the local copy of the branch. <code>pull</code> operates on the current branch only<br />
+<code>status</code> - The <code>git status</code> command shows the current branch you are on, the staged changes, changes not staged for commit, and untracked files in the repository. Staged changes are the ones that are added to the commit. Changes not staged for commit are files that are detected as being modified, but have not been added to the commit. Untracked files are files that have never existed in the repository before, and need to be added to be tracked.<br />
+<code>add</code> - The <code>git add</code> command is used to add files to a commit. Both new files and modified files must be added to the commit. Multiple files can be listed, separated by spaces: <code>git add class.hpp class.cpp main.cpp</code><br />
+<code>rm</code> - The <code>git rm</code> command is used to remove files. <code>git rm filename</code> will remove the file from tracking AND delete the file locally. If you want to keep the local copy of the file, used <code>git rm --cached filename</code> to only remove the file from tracking.<br />
+<code>restore</code> - The <code>git restore</code> command is used to "undo" changes since the last time the file was committed.<br />
+<code>switch</code> - The <code>git switch</code> command is used to change and create branches. <code>git switch other-branch</code> will change to an existing branch called "other-branch". <code>git switch -c new-branch</code> will create a new branch called "new-branch", based on the current branch, and switch to that branch.<br />
+<code>commit</code> - The <code>git commit</code> command is used to commit a set of changes to your local repository. You should always provide a message describing the commit, using the <code>-m</code> switch: <code>git commit -m "Added README"</code>.
+<code>push</code> - The <code>git push</code> command updates the remote version of the repository to reflect local commits.<br />
+<code>fetch</code> - The fetch command is used to access remote branches.</p>
+<h2 id="codespaces">Codespaces</h2>
+<p>GitHub Codespaces are a web view of the Visual Studio Code editor running a Linux Virtual Machine. These offer a complete development environment, with all the build tools and git commands already installed and ready to be used. The main drawbacks of Codespaces is that they can be laggy and slow to start up, since they are remote virtual machines, and you need to be connected to the internet to access them. Another consideration is that you have a limited amount of time (currently ~75 hours a month) that you can use Codespaces for free. I don't foresee the usage limit being an issue, but it's worth keeping in mind. If you'd prefer to work locally, instructions to set up a local environment are here: <a href="local_env.mmd">Set Up A Local Environment</a>  </p>
+<p>Codespaces are bound to the repository you create it on. To create a Codespace, click the "Code &lt;&gt;" button, click the "Codespaces" tab, and select "Create Codespace on main". This will open a new tab, and after a couple of minutes of set up, the Codespace will be ready to use. Changes you make to your code in the Codespace are local to the Codespace. You will still need to commit and push changes for them to be visible outside the Codespace.  </p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../../js/base.js"></script>
+        <script src="../../../javascripts/mathjax.js"></script>
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script src="../../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../../img/favicon.ico">
+        <title>Lecture Notes: Digraphs, DAGs, and Weighted Graphs - </title>
+        <link href="../../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../../css/brands.min.css" rel="stylesheet">
+        <link href="../../../css/solid.min.css" rel="stylesheet">
+        <link href="../../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" disabled>
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../../.."></a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../../cv/" class="nav-link">CV</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../../teaching/" class="nav-link">Teaching</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item dropdown">
+                              <button id="theme-menu" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static" aria-label="Toggle theme" class="nav-link dropdown-toggle">
+                                <i class="fa-solid fa-circle-half-stroke fa-fw"></i>
+                                <span class="d-lg-none ms-2">Toggle theme</span>
+                              </button>
+                              <ul class="dropdown-menu dropdown-menu-end">
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
+                                    <i class="fa-solid fa-sun fa-fw"></i>
+                                    <span class="ms-2">Light</span>
+                                    <i class="fa-solid fa-check ms-auto d-none"></i>
+                                  </button>
+                                </li>
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
+                                    <i class="fa-solid fa-moon fa-fw"></i>
+                                    <span class="ms-2">Dark</span>
+                                    <i class="fa-solid fa-check ms-auto d-none"></i>
+                                  </button>
+                                </li>
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="auto" aria-pressed="true">
+                                    <i class="fa-solid fa-circle-half-stroke fa-fw"></i>
+                                    <span class="ms-2">Auto</span>
+                                    <i class="fa-solid fa-check ms-auto"></i>
+                                  </button>
+                                </li>
+                              </ul>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <script src="../../../js/darkmode.js"></script>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#lecture-notes-digraphs-dags-and-weighted-graphs" class="nav-link">Lecture Notes: Digraphs, DAGs, and Weighted Graphs</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#1-directed-graphs-digraphs" class="nav-link">1. Directed Graphs (Digraphs)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#2-directed-acyclic-graphs-dags" class="nav-link">2. Directed Acyclic Graphs (DAGs)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#3-topological-sort-ordering-a-dag" class="nav-link">3. Topological Sort: Ordering a DAG</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#4-weighted-graphs" class="nav-link">4. Weighted Graphs</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#summary-of-graph-varieties" class="nav-link">Summary of Graph Varieties</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="lecture-notes-digraphs-dags-and-weighted-graphs">Lecture Notes: Digraphs, DAGs, and Weighted Graphs</h1>
+<p>Up to this point, we have primarily focused on simple, undirected, and unweighted graphs. While those are great for modeling basic connections like mutual friendships, real-world systems are rarely that simple.</p>
+<p>If you are modeling a street network, some streets are one-way (directed). If you are mapping out college course prerequisites, you must take Course A <em>before</em> Course B (directed and acyclic). If you are building a GPS navigation system, some roads are longer or have slower speed limits than others (weighted).</p>
+<p>This week, we expand our Graph toolkit to cover <strong>Directed Graphs (Digraphs)</strong>, <strong>Directed Acyclic Graphs (DAGs)</strong>, and <strong>Weighted Graphs</strong>, along with a critical algorithm called <strong>Topological Sort</strong>.</p>
+<hr />
+<h2 id="1-directed-graphs-digraphs">1. Directed Graphs (Digraphs)</h2>
+<p>In a <strong>Digraph</strong>, edges have a direction. An edge is represented as an ordered pair <span class="arithmatex">\((u, v)\)</span>, meaning there is a one-way path from vertex <span class="arithmatex">\(u\)</span> to vertex <span class="arithmatex">\(v\)</span>.</p>
+<h3 id="impact-on-graph-implementation">Impact on Graph Implementation</h3>
+<p>Our C++ implementation strategies from earlier need slight adjustments to support direction:</p>
+<ul>
+<li><strong>Adjacency Matrix:</strong> If there is a directed edge <span class="arithmatex">\(u \rightarrow v\)</span>, we set <code>matrix[u][v] = 1</code>. However, we <strong>do not</strong> set <code>matrix[v][u] = 1</code> unless there is also a separate return edge from <span class="arithmatex">\(v\)</span> to <span class="arithmatex">\(u\)</span>. The matrix is no longer guaranteed to be symmetric.</li>
+<li><strong>Adjacency List:</strong> When adding a directed edge <span class="arithmatex">\(u \rightarrow v\)</span>, we only push <span class="arithmatex">\(v\)</span> into the neighbor list of <span class="arithmatex">\(u\)</span>:</li>
+</ul>
+<pre><code class="language-cpp">void addDirectedEdge(int u, int v) {
+    adjList[u].push_back(v); // Only u can reach v!
+    // Do NOT add u to adjList[v]
+}
+
+</code></pre>
+<h3 id="in-degree-vs-out-degree">In-Degree vs. Out-Degree</h3>
+<p>In undirected graphs, we simply counted how many connections a node had (its degree). In a digraph, we split this into two metrics:</p>
+<ul>
+<li><strong>In-Degree:</strong> The number of incoming edges pointing <em>to</em> a vertex. (How many nodes can reach this vertex?)</li>
+<li><strong>Out-Degree:</strong> The number of outgoing edges pointing <em>from</em> a vertex. (How many nodes can this vertex reach?)</li>
+</ul>
+<hr />
+<h2 id="2-directed-acyclic-graphs-dags">2. Directed Acyclic Graphs (DAGs)</h2>
+<p>A <strong>DAG</strong> is a directed graph that contains <strong>absolutely no cycles</strong>. If you start at any vertex in a DAG and follow the directed edges, it is mathematically impossible to ever loop back to your starting point.</p>
+<p>DAGs are the gold standard for representing <strong>dependencies, workflows, and hierarchies</strong>.</p>
+<h3 id="examples-of-dags">Examples of DAGs:</h3>
+<ul>
+<li><strong>Prerequisite Sheets:</strong> You must take CS1 before CS2, and CS2 before Algorithms. You cannot have a cycle where Algorithms is a prerequisite for CS1!</li>
+<li><strong>Build Systems (like Make or CMake):</strong> Compiling Code File B depends on Code File A being compiled first.</li>
+<li><strong>Git Commits:</strong> Every commit points backward to its parent commit(s), forming a history tree that never loops back on itself.</li>
+</ul>
+<hr />
+<h2 id="3-topological-sort-ordering-a-dag">3. Topological Sort: Ordering a DAG</h2>
+<p>Suppose you want to find a valid order to take all your college classes such that you never violate a prerequisite. The process of taking a DAG and laying out its vertices in a linear sequence is called a <strong>Topological Sort</strong>.</p>
+<blockquote>
+<p><strong>The Topological Sort Rule:</strong> For every directed edge <span class="arithmatex">\(u \rightarrow v\)</span>, vertex <span class="arithmatex">\(u\)</span> must appear <em>before</em> vertex <span class="arithmatex">\(v\)</span> in the final ordering.</p>
+</blockquote>
+<p><em>Note: A graph can only have a topological sort if it is a DAG. If there is a cycle (e.g., A depends on B, B depends on C, C depends on A), no valid ordering exists.</em></p>
+<h3 id="how-to-implement-kahns-algorithm-bfs-based">How to Implement: Kahn's Algorithm (BFS-Based)</h3>
+<p>The most intuitive way to perform a topological sort is using <strong>Kahn's Algorithm</strong>, which works by repeatedly stripping away nodes that have no prerequisites (In-Degree = 0).</p>
+<h4 id="the-algorithm">The Algorithm:</h4>
+<ol>
+<li>Calculate the <strong>In-Degree</strong> of every vertex in the graph.</li>
+<li>Place all vertices with an In-Degree of <code>0</code> into a Queue. (These are classes with no prerequisites).</li>
+<li>While the queue is not empty:</li>
+<li>Dequeue a vertex <span class="arithmatex">\(u\)</span> and add it to our sorted list.</li>
+<li>For each neighbor <span class="arithmatex">\(v\)</span> of <span class="arithmatex">\(u\)</span> (the classes that depended on <span class="arithmatex">\(u\)</span>):</li>
+<li>Decrement the In-Degree of <span class="arithmatex">\(v\)</span> by 1.</li>
+<li>
+<p>If <span class="arithmatex">\(v\)</span>'s In-Degree becomes <code>0</code>, push it into the queue.</p>
+</li>
+<li>
+<p>If the final sorted list does not contain all vertices in the graph, it means the graph has a <strong>cycle</strong>, and topological sorting was impossible.</p>
+</li>
+</ol>
+<h3 id="c-code-for-kahns-algorithm">C++ Code for Kahn's Algorithm</h3>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;list&gt;
+#include &lt;queue&gt;
+
+bool topologicalSort(int V, const std::vector&lt;std::list&lt;int&gt;&gt;&amp; adjList, std::vector&lt;int&gt;&amp; order) {
+    std::vector&lt;int&gt; inDegree(V, 0);
+
+    // Step 1: Calculate In-Degrees
+    for (int u = 0; u &lt; V; u++) {
+        for (int v : adjList[u]) {
+            inDegree[v]++;
+        }
+    }
+
+    // Step 2: Queue up all vertices with In-Degree of 0
+    std::queue&lt;int&gt; q;
+    for (int i = 0; i &lt; V; i++) {
+        if (inDegree[i] == 0) {
+            q.push(i);
+        }
+    }
+
+    // Step 3: Process the queue
+    while (!q.empty()) {
+        int u = q.front();
+        q.pop();
+        order.push_back(u);
+
+        for (int v : adjList[u]) {
+            inDegree[v]--; // u is resolved, so v has one less dependency
+            if (inDegree[v] == 0) {
+                q.push(v);
+            }
+        }
+    }
+
+    // Step 4: Check for cycles
+    return order.size() == static_cast&lt;size_t&gt;(V);
+}
+
+</code></pre>
+<ul>
+<li><strong>Time Complexity:</strong> <strong><span class="arithmatex">\(O(V + E)\)</span></strong> because it behaves exactly like a standard BFS.</li>
+<li><strong>Auxiliary Space Complexity:</strong> <strong><span class="arithmatex">\(O(V)\)</span></strong> to store the in-degree array and the queue.</li>
+</ul>
+<hr />
+<h2 id="4-weighted-graphs">4. Weighted Graphs</h2>
+<p>In a <strong>Weighted Graph</strong>, each edge is assigned a numerical value called a <strong>weight</strong>. This weight can represent physical distance, cost, delay, capacity, or any other metric associated with traversing that edge.</p>
+<h3 id="how-to-represent-weights-in-c">How to Represent Weights in C++</h3>
+<p>To represent weights, we need to transition our data structures from holding plain integers to holding pairs or custom structs.</p>
+<h4 id="weighted-adjacency-matrix">Weighted Adjacency Matrix</h4>
+<p>Instead of storing <code>1</code> for an edge and <code>0</code> for no edge, we store the actual weight.</p>
+<ul>
+<li>To represent the lack of a connection, we use a special value (like <code>-1</code> or <code>std::numeric_limits&lt;int&gt;::max()</code>), because a <code>0</code> could be a valid edge weight.</li>
+</ul>
+<pre><code class="language-cpp">// Representing a grid of weights
+std::vector&lt;std::vector&lt;int&gt;&gt; weightedMatrix(V, std::vector&lt;int&gt;(V, -1));
+
+</code></pre>
+<h4 id="weighted-adjacency-list">Weighted Adjacency List</h4>
+<p>Instead of storing a list of integers, each element in the neighbor list becomes a pair: <code>std::pair&lt;int, int&gt;</code>, where the first value is the destination vertex, and the second is the weight of the edge.</p>
+<pre><code class="language-cpp">#include &lt;vector&gt;
+#include &lt;list&gt;
+#include &lt;utility&gt; // For std::pair
+
+class WeightedGraph {
+private:
+    int numVertices;
+    // Each element in the list is a pair: {destination, weight}
+    std::vector&lt;std::list&lt;std::pair&lt;int, int&gt;&gt;&gt; adjList;
+
+public:
+    WeightedGraph(int vertices) : numVertices(vertices) {
+        adjList.resize(vertices);
+    }
+
+    void addWeightedEdge(int u, int v, int weight) {
+        adjList[u].push_back({v, weight});
+        // adjList[v].push_back({u, weight}); // Include this line if undirected!
+    }
+};
+
+</code></pre>
+<hr />
+<h2 id="summary-of-graph-varieties">Summary of Graph Varieties</h2>
+<table>
+<thead>
+<tr>
+<th>Graph Variant</th>
+<th>Edge Direction</th>
+<th>Uses Weights?</th>
+<th>Constraints</th>
+<th>Best Real-World Use Case</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Digraph</strong></td>
+<td>Directed (One-way)</td>
+<td>No</td>
+<td>None</td>
+<td>Hyperlink structures, web scrapers.</td>
+</tr>
+<tr>
+<td><strong>DAG</strong></td>
+<td>Directed (One-way)</td>
+<td>No</td>
+<td><strong>No cycles allowed</strong></td>
+<td>Project management schedules, compilers.</td>
+</tr>
+<tr>
+<td><strong>Weighted Graph</strong></td>
+<td>Directed or Undirected</td>
+<td><strong>Yes</strong></td>
+<td>None</td>
+<td>Road networks, network routing paths.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p>Next up, we will tackle the final set of notes in our Graph unit: <strong>Greedy Algorithms</strong> and how we can use them to find the absolute shortest path through a weighted graph using <strong>Dijkstra's Algorithm</strong>.</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../../js/base.js"></script>
+        <script src="../../../javascripts/mathjax.js"></script>
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script src="../../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

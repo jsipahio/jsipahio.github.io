@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>CSE233 Week 3: If Statements and Boolean Logic - </title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../css/brands.min.css" rel="stylesheet">
+        <link href="../../css/solid.min.css" rel="stylesheet">
+        <link href="../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" disabled>
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../.."></a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../cv/" class="nav-link">CV</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../teaching/" class="nav-link">Teaching</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item dropdown">
+                              <button id="theme-menu" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static" aria-label="Toggle theme" class="nav-link dropdown-toggle">
+                                <i class="fa-solid fa-circle-half-stroke fa-fw"></i>
+                                <span class="d-lg-none ms-2">Toggle theme</span>
+                              </button>
+                              <ul class="dropdown-menu dropdown-menu-end">
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
+                                    <i class="fa-solid fa-sun fa-fw"></i>
+                                    <span class="ms-2">Light</span>
+                                    <i class="fa-solid fa-check ms-auto d-none"></i>
+                                  </button>
+                                </li>
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
+                                    <i class="fa-solid fa-moon fa-fw"></i>
+                                    <span class="ms-2">Dark</span>
+                                    <i class="fa-solid fa-check ms-auto d-none"></i>
+                                  </button>
+                                </li>
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="auto" aria-pressed="true">
+                                    <i class="fa-solid fa-circle-half-stroke fa-fw"></i>
+                                    <span class="ms-2">Auto</span>
+                                    <i class="fa-solid fa-check ms-auto"></i>
+                                  </button>
+                                </li>
+                              </ul>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <script src="../../js/darkmode.js"></script>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#cse233-week-3-if-statements-and-boolean-logic" class="nav-link">CSE233 Week 3: If Statements and Boolean Logic</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#if-statements" class="nav-link">If Statements</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#variable-scopes" class="nav-link">Variable Scopes</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#switch-statements" class="nav-link">Switch Statements</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#boolean-logic" class="nav-link">Boolean Logic</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#examples" class="nav-link">Examples</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#conclusion" class="nav-link">Conclusion</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="cse233-week-3-if-statements-and-boolean-logic">CSE233 Week 3: If Statements and Boolean Logic</h1>
+<p>The first conditional statement we will look at is the "if statement". An if statement executes a block of code <em>if</em> a given condition is true. If statements can optionally have an else block that only executes if the given condition is false. The condition for an if statement is a Boolean expression which evaluates to true or false. Similar to if statements are switch statements, which we'll also discuss this week. </p>
+<h2 id="if-statements">If Statements</h2>
+<p>An if statement is a conditional statement that is used to execute a block of code if its given condition is true. Remember that in C++, a block of code is denoted by curly braces. A basic C++ if statement looks like the following:</p>
+<pre><code class="language-C++">if (condition) {
+    statement;
+}
+</code></pre>
+<p>If there is only a single statement for the if, the curly braces are optional:</p>
+<pre><code class="language-C++">if (condition)
+    statement;
+</code></pre>
+<p>If statements are started with the <code>if</code> keyword. It is followed by a set of parenthesis with the condition in them. The condition can be a value, a variable, or an expression. Either the single statement or a block follows the condition. I'd recommend always putting a block, even if you only have a single statement. It makes it easier to add additional statements to the if later, if you need to. Here is an example:</p>
+<pre><code class="language-C++">// declare and integer variable, x, whose value is 2
+int x = 2;
+// remember that % is the remainder. if the remainder
+// of x divided by 2 is 0, x is even
+if (x % 2 == 0) {
+    std::cout &lt;&lt; &quot;x is even\n&quot;;
+}
+</code></pre>
+<p>This handles printing a message if the value of x is even. But what if we want to print a message if x is odd? Then, we would need an else clause. To add an else to an if statement, place the <code>else</code> keyword after the block of the if. Then, put a block after the else to be executed. Else clauses do not have conditions. Example:</p>
+<pre><code class="language-C++">int x = 2;
+
+if (x % 2 == 0) {
+    std::cout &lt;&lt; &quot;x is even\n&quot;;
+}
+// the else comes immediately after the if's block 
+else {
+    std::cout &lt;&lt; &quot;x is odd\n&quot;;
+}
+</code></pre>
+<p>If there are multiple conditions that need to be checked, we can either nest if statements, or use the <code>else if</code> syntax to chain if statements together. Consider this example that determines if a number is positive, negative, or 0:</p>
+<pre><code class="language-C++">// first, we'll nest the if statements
+if (x &gt; 0) {
+    std::cout &lt;&lt; &quot;x is positive\n&quot;;
+}
+else {
+    // the second if statement goes inside the else block
+    if (x &lt; 0) {
+        std::cout &lt;&lt; &quot;x is negative\n&quot;;
+    }
+    // we need another else
+    else {
+        std::cout &lt;&lt; &quot;x is 0\n&quot;;
+    }
+}
+
+// now, we'll do the same thing with &quot;else if&quot;
+if (x &gt; 0) {
+    std::cout &lt;&lt; &quot;x is positive\n&quot;;
+}
+// we put &quot;if (condition)&quot; immediately after &quot;else&quot;
+else if (x &lt; 0) {
+    std::cout &lt;&lt; &quot;x is negative\n&quot;;
+}
+// then the final &quot;else&quot; block
+else {
+    std::cout &lt;&lt; &quot;x is 0\n&quot;;
+}
+</code></pre>
+<p>The "else if" syntax is typically preferred since it reduces the level of nesting. </p>
+<h2 id="variable-scopes">Variable Scopes</h2>
+<p>Variables in C++ are scoped to the block that they are in. This means that a variable declared in the block of an if statement only exists in that block.</p>
+<h2 id="switch-statements">Switch Statements</h2>
+<p>Switch statements can replace an else if chain with a more concise form. A switch statement can be used when:   </p>
+<ol>
+<li>The condition being tested are single integer-like values</li>
+<li>There are a finite number of conditions, with a possible default action  </li>
+</ol>
+<p>If those two conditions are met, a switch statement is usable. If the condition is not an integer value, or if you need to test ranges, then switches cannot be used. A switch statement consists of the keyword <code>switch</code>, followed by a test expression in parentheses. This is followed by a block. The block of a switch is special, since it contains cases. Here is the switch syntax:</p>
+<pre><code class="language-C++">switch (test_expression) {
+    case 1:
+        statement;
+        break;
+    case 2:
+        statement1;
+        statement2;
+        break;
+    default:
+        statement;
+}
+</code></pre>
+<p>There are a few things to note. First, each case can have multiple statements, but these statements do not have to be wrapped in curly braces. Each case ends with a <code>break;</code> statement. This tells the compiler that you want to exit the switch statement. If you do not have a break statement, you will "fall through" to the next case. While there are times when this behavior is desirable, typically you want to break out of each case. In this class, you will always want to break out of each case. Finally, there is a default case. This is the last case in the switch, and is used to handle any input to the switch that does not match any of the cases. Since it is the last case, it does not need a break statement.  </p>
+<p>Below is an example "elevator" simulation using a switch:</p>
+<pre><code class="language-C++">int current_floor = 0;
+int selection;
+std::cout &lt;&lt; &quot;Enter floor (1-4): &quot;;
+std::cin &gt;&gt; selection; 
+
+// the test case for the switch is the user's floor selection
+switch (selection) {
+    // there is a case for each valid floor
+    case 1:
+        std::cout &lt;&lt; &quot;Moving to floor 1\n&quot;;
+        current_floor = 1;
+        break;
+    case 2:
+        std::cout &lt;&lt; &quot;Moving to floor 2\n&quot;;
+        current_floor = 2;
+        break;
+    case 3:
+        std::cout &lt;&lt; &quot;Moving to floor 3\n&quot;;
+        current_floor = 3;
+        break;
+    case 4:
+        std::cout &lt;&lt; &quot;Moving to floor 4\n&quot;;
+        current_floor = 4;
+        break;
+    // the default case prints a message stating that the 
+    // selection is invalid
+    default:
+        std::cout &lt;&lt; &quot;Invalid selection\n&quot;;
+}
+</code></pre>
+<p>Any switch can also be written as a chain of if-else if-else statements:</p>
+<pre><code class="language-C++">int current_floor = 0;
+int selection;
+std::cout &lt;&lt; &quot;Enter floor (1-4): &quot;;
+std::cin &gt;&gt; selection; 
+
+if (selection == 1) {
+    std::cout &lt;&lt; &quot;Moving to floor 1\n&quot;;
+    current_floor = 1;
+}
+else if (selection == 2) {
+    std::cout &lt;&lt; &quot;Moving to floor 2\n&quot;;
+    current_floor = 2;
+}
+else if (selection == 3) {
+    std::cout &lt;&lt; &quot;Moving to floor 3\n&quot;;
+    current_floor = 3;
+}
+else if (selection == 4) {
+    std::cout &lt;&lt; &quot;Moving to floor 4\n&quot;;
+    current_floor = 4;
+}
+else {
+    std::cout &lt;&lt; &quot;Invalid selection\n&quot;;
+}
+</code></pre>
+<h3 id="stacked-cases">Stacked Cases</h3>
+<p>If the same code needs to run for multiple cases, the case labels are stacked. The syntax <code>case 1, 2, 3:</code> is illegal. You need a separate case tag for each case. The example below prints a message based on the letter grade entered by the user:</p>
+<pre><code class="language-C++">char grade;
+std::cout &lt;&lt; &quot;Enter your letter grade: &quot;;
+std::cin &gt;&gt; grade;
+
+// internally, the char data type is an integer, 
+// so char can be used for switch cases as well
+switch (grade) {
+    // the &quot;You passed&quot; message will be printed
+    // if the grade is A, B, C, or D
+    case 'A':
+    case 'B':
+    case 'C':
+    case 'D':
+        std::cout &lt;&lt; &quot;You passed\n&quot;;
+        break;
+    case 'F':
+        std::cout &lt;&lt; &quot;You failed\n&quot;;
+        break;
+    default:
+        std::cout &lt;&lt; &quot;Invalid grade\n&quot;;
+}
+</code></pre>
+<h2 id="boolean-logic">Boolean Logic</h2>
+<p>Boolean logic, also called Boolean algebra, are expressions that evaluate to either true or false. It is named for the mathematician George Boole. There are three main operations in Boolean logic: AND, OR, and NOT. The AND operation is a binary operation and is true iff (if and only if) both operands are true. The OR operation is a binary operation and is false iff both operands are false. The NOT operation is a unary operation, and simply negates its operand. I.E., NOT true is false and NOT false is true. </p>
+<h3 id="truth-tables">Truth Tables</h3>
+<p>Truth tables are used to visualize the possible outcomes of Boolean operations. Below is a truth table for two values, a and b, and the possible combinations of them:  </p>
+<table>
+<thead>
+<tr>
+<th>a</th>
+<th>b</th>
+<th>NOT a</th>
+<th>NOT b</th>
+<th>a AND b</th>
+<th>a OR b</th>
+<th>NOT (a AND b)</th>
+<th>NOT (a OR b)</th>
+<th>NOT a AND NOT b</th>
+<th>NOT a OR NOT b</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>true</td>
+<td>true</td>
+<td>false</td>
+<td>false</td>
+<td>true</td>
+<td>true</td>
+<td>false</td>
+<td>false</td>
+<td>true</td>
+<td>true</td>
+</tr>
+<tr>
+<td>true</td>
+<td>false</td>
+<td>false</td>
+<td>true</td>
+<td>false</td>
+<td>true</td>
+<td>true</td>
+<td>false</td>
+<td>false</td>
+<td>true</td>
+</tr>
+<tr>
+<td>false</td>
+<td>true</td>
+<td>true</td>
+<td>false</td>
+<td>false</td>
+<td>true</td>
+<td>true</td>
+<td>false</td>
+<td>false</td>
+<td>true</td>
+</tr>
+<tr>
+<td>false</td>
+<td>false</td>
+<td>true</td>
+<td>true</td>
+<td>false</td>
+<td>false</td>
+<td>true</td>
+<td>true</td>
+<td>true</td>
+<td>true</td>
+</tr>
+</tbody>
+</table>
+<p>There should be a column for each input variable and operation between the input variables. The number of rows scales exponentially with the number of input variables. In this truth table, there are two input variables, a and b. a and b can have two possible values, true or false, and there are two input variables, so the number of rows is 2<sup>2</sup> = 4. If we added a third input variable, we'd have 2<sup>3</sup> = 8 rows. For four input variables, we'd have 2<sup>4</sup> = 16 rows, and so on. Therefore, truth tables scale poorly when there are many input variables, but if you can minimize the number of input variables truth tables can be useful for determining the results of various Boolean expressions.</p>
+<h3 id="precedence">Precedence</h3>
+<p>Comparison operators have lower precedence than arithmetic operators. Arithmetic operators (+, -, *, /, etc.) follow the PEMDAS you should have learned in grade school. Next, the comparison operators are applied. The &lt;, &gt;, &lt;=, &gt;= are applied before == and !=. Next, AND is applied. Finally, OR is applied. This is true in most programming languages.</p>
+<h3 id="de-morgans-laws">De Morgan's Laws</h3>
+<p>De Morgan's laws are a pair of equivalences used for simplifying boolean expressions. We'll skip the formal proof, and instead look to the truth table to demonstrate the validity of the laws.  </p>
+<ol>
+<li>NOT (a AND b) = (NOT a) OR (NOT b)</li>
+<li>NOT (a OR b) = (NOT a) AND (NOT b)  </li>
+</ol>
+<p>If you look at the table, you'll see that for each row, the column for "NOT (a AND b)" has the same value as "NOT a OR NOT b". The same applies for "NOT (A OF B)" and "NOT a AND NOT b". <br />
+In modern programming, these are less relevant, as the compiler/interpreter will apply De Morgan's laws to make Boolean logic more efficient on its own. Nonetheless, remembering the laws can be useful when trying to think through what a Boolean expression is doing. </p>
+<h3 id="numbers-as-boolean-values">Numbers as Boolean Values</h3>
+<p>Many modern programming languages are based on C. C did not have a Boolean type originally. Instead, it used 0 for false and 1 for true. In reality, any numeric value that is not 0 is interpreted as true. The same is true in C++. For example:</p>
+<pre><code class="language-cpp">if (5) {
+    std::cout &lt;&lt; &quot;5 is true!\n&quot;;
+}
+</code></pre>
+<p>The same is true for floating point numbers:</p>
+<pre><code class="language-cpp">if (-4.2) {
+    std::cout &lt;&lt; &quot;-4.2 is true!\n&quot;;
+}
+</code></pre>
+<h2 id="examples">Examples</h2>
+<p>Here are some examples using if statements and switch statements.</p>
+<h3 id="login">Login</h3>
+<pre><code class="language-C++">#include &lt;iostream&gt; 
+#include &lt;string&gt;
+
+// obviously, this isn't accurate to a real login system
+// it's just to demonstrate if statments
+int main() {
+    // string variables to hold username and password
+    std::string username;
+    std::string password;
+
+    // read username and password
+    std::cout &lt;&lt; &quot;Enter username: &quot;;
+    std::cin &gt;&gt; username;
+    std::cout &lt;&lt; &quot;Enter password: &quot;;
+    std::cin &gt;&gt; password;
+
+    // if the username is admin, print admin loggin message
+    if (username == &quot;admin&quot; &amp;&amp; password == &quot;password&quot;) {
+        std::cout &lt;&lt; &quot;Admin login successful\n&quot;;
+    }
+    // if the username is admin and the password was not &quot;password&quot;
+    // the password is incorrect
+    else if (username == &quot;admin&quot;) {
+        std::cout &lt;&lt; &quot;Admin login unsuccessful. Incorrect password.\n&quot;;
+    }
+    // if user is the username and &quot;password&quot; is the password
+    // we'll consider this a valid login
+    else if (username == &quot;user&quot; &amp;&amp; password == &quot;password&quot;) {
+        std::cout &lt;&lt; &quot;User login successful\n&quot;;
+    }
+    // if the username is &quot;user&quot; and the password is not &quot;password&quot;
+    // the password is not correct
+    else if (username == &quot;user&quot;) {
+        std::cout &lt;&lt; &quot;Admin login unsuccessful. Incorrect password.\n&quot;;
+    }
+    // any username that is not &quot;admin&quot; or &quot;user&quot; is invalid
+    else {
+        std::cout &lt;&lt; &quot;Unknown user: &quot; &lt;&lt; username &lt;&lt; &quot;\n&quot;;
+    }
+}
+</code></pre>
+<h3 id="vending-machine">Vending Machine</h3>
+<pre><code class="language-C++">#include &lt;iostream&gt;
+
+int main() {
+    // print out the options and prices
+    std::cout &lt;&lt; &quot;A1: Plain Chips $1.50 ----- &quot;;
+    std::cout &lt;&lt; &quot;A2: BBQ Chips $1.50 ------- &quot;;
+    std::cout &lt;&lt; &quot;A3: Jalepeno Chips $1.50 --\n&quot;;
+    std::cout &lt;&lt; &quot;B1: PB Cups $1.75 --------- &quot;; 
+    std::cout &lt;&lt; &quot;B2: Chocolate Bar $2.50 --- &quot;;
+    std::cout &lt;&lt; &quot;B3: Cookie $2.00 ----------\n&quot;;
+    std::cout &lt;&lt; &quot;C1: Trail Mix $2.25 ------- &quot;;
+    std::cout &lt;&lt; &quot;C2: Protein Bar $3.50 ----- &quot;;
+    std::cout &lt;&lt; &quot;C3: Granola Bar $2.50 -----\n&quot;;
+
+    // get money from user
+    double money;
+    std::cout &lt;&lt; &quot;Enter money: $&quot;;
+    std::cin &gt;&gt; money;
+
+    char row;
+    int column;
+
+    // read the row and column of the selection
+    std::cout &lt;&lt; &quot;Enter row: &quot;;
+    std::cin &gt;&gt; row;
+    std::cout &lt;&lt; &quot;Enter column: &quot;;
+    std::cin &gt;&gt; column;
+
+    // used to store the item price to compare later
+    double item_price = 0;
+
+    // use switch to find item price
+    switch (row) {
+        // first, the row is checked
+        // the characeter 'A' is different than 'a'
+        // so both can be checked if we want to allow lowercase
+        case 'A':
+        case 'a':
+            // each row case has a nested switch that checks the column
+            switch (column) {
+                case 1:
+                    // each case sets the price
+                    item_price = 1.5;
+                    break;
+                case 2:
+                    item_price = 1.5;
+                    break;
+                case 3:
+                    item_price = 1.5;
+                    break;
+                default:
+                    // default case handles invalid input
+                    std::cout &lt;&lt; &quot;Invalid column\n&quot;;
+            }
+            break;
+        case 'B':
+        case 'b':
+            switch (column) {
+                case 1:
+                    item_price = 1.75;
+                    break;
+                case 2:
+                    item_price = 2.5;
+                    break;
+                case 3:
+                    item_price = 2.0;
+                    break;
+                default:
+                    std::cout &lt;&lt; &quot;Invalid column\n&quot;;
+            }
+            break;
+        case 'C':
+        case 'c':
+            switch (column) {
+                case 1:
+                    item_price = 2.25;
+                    break;
+                case 2:
+                    item_price = 3.5;
+                    break;
+                case 3:
+                    item_price = 2.5;
+                    break;
+                default:
+                    std::cout &lt;&lt; &quot;Invalid column\n&quot;;
+            }
+            break;
+        default:
+            std::cout &lt;&lt; &quot;Invalid row\n&quot;;
+    }
+
+    // if the item_price is still 0,
+    // the selection was invalid
+    if (item_price == 0) {
+        std::cout &lt;&lt; &quot;Invalid selection, try again later\n&quot;;
+    }
+    // check if the amount of money entered is more 
+    // than the price of the item selected
+    else if (item_price &lt; money) {
+        double change = money - item_price;
+        std::cout &lt;&lt; &quot;Your change is $&quot; &lt;&lt; change &lt;&lt; std::endl;
+    }
+    // otherwise, they can't afford it
+    else {
+        double shortage = item_price - money;
+        std::cout &lt;&lt; &quot;You are $&quot; &lt;&lt; shortage &lt;&lt; &quot; short\n&quot;;
+    }
+
+    return 0;
+}
+</code></pre>
+<h2 id="conclusion">Conclusion</h2>
+<p>This week we discussed if statements. If statements are conditional statements that execute a block of code only if their condition is true. If statements can have an optional else clause, which executes a block of code if the condition is false. There are also "else if" clauses, that allow multiple conditions to be used within the same if statement. We also discussed Boolean logic for constructing complex conditions. Chains of else if clauses can be replaced with switch statements when the values being tested are integer-like (<code>int</code>, <code>char</code>, <code>long</code>, etc.) values as a condition.</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script src="../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>CSE233 Week 4: While and For Loops - </title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../css/brands.min.css" rel="stylesheet">
+        <link href="../../css/solid.min.css" rel="stylesheet">
+        <link href="../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" disabled>
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../.."></a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../cv/" class="nav-link">CV</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../teaching/" class="nav-link">Teaching</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item dropdown">
+                              <button id="theme-menu" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static" aria-label="Toggle theme" class="nav-link dropdown-toggle">
+                                <i class="fa-solid fa-circle-half-stroke fa-fw"></i>
+                                <span class="d-lg-none ms-2">Toggle theme</span>
+                              </button>
+                              <ul class="dropdown-menu dropdown-menu-end">
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
+                                    <i class="fa-solid fa-sun fa-fw"></i>
+                                    <span class="ms-2">Light</span>
+                                    <i class="fa-solid fa-check ms-auto d-none"></i>
+                                  </button>
+                                </li>
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
+                                    <i class="fa-solid fa-moon fa-fw"></i>
+                                    <span class="ms-2">Dark</span>
+                                    <i class="fa-solid fa-check ms-auto d-none"></i>
+                                  </button>
+                                </li>
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="auto" aria-pressed="true">
+                                    <i class="fa-solid fa-circle-half-stroke fa-fw"></i>
+                                    <span class="ms-2">Auto</span>
+                                    <i class="fa-solid fa-check ms-auto"></i>
+                                  </button>
+                                </li>
+                              </ul>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <script src="../../js/darkmode.js"></script>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#cse233-week-4-while-and-for-loops" class="nav-link">CSE233 Week 4: While and For Loops</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#pre-and-post-incrementdecrement-operators" class="nav-link">Pre- and Post-Increment/Decrement Operators</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#while-loops" class="nav-link">While Loops</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#for-loops" class="nav-link">For Loops</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#break-and-continue-statements" class="nav-link">Break and Continue Statements</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#do-while" class="nav-link">Do While</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#infinite-loops" class="nav-link">Infinite Loops</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#examples" class="nav-link">Examples</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#conclusion" class="nav-link">Conclusion</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="cse233-week-4-while-and-for-loops">CSE233 Week 4: While and For Loops</h1>
+<p>This week we will discuss while and for loops. Last week, we discussed if statements, which run a set of statements one time if a given condition is true. Loops are used to run a set of statements multiple times if a condition is true. Unlike if statements, while and for loops do not have an else clause. Once the loop is done, it is done. First, we'll look at the increment and decrement operators, since they are often used with loops.</p>
+<h2 id="pre-and-post-incrementdecrement-operators">Pre- and Post-Increment/Decrement Operators</h2>
+<p>Two operators we did not discuss in Week 2 are the increment and decrement operators, <code>++</code> and <code>--</code>, respectively. The <code>++</code> operator increases a numeric variable by 1, while <code>--</code> decreases a numeric variable by 1. The <code>++</code> or <code>--</code> can go before or after the name of the variable. There cannot be a space between the two plus or minus signs, but there can be a space between the operator and the variable (but just because there can be, doesn't mean there should. Please never let me see <code>++ x</code>). Below is an example:</p>
+<pre><code class="language-C++">// x starts at 0
+int x = 0;
+// x is increased to 1
+++x;
+// x is increased to 2
+x++;
+// x is decreased back to 1
+--x;
+// x is increased to 2
+++x;
+// x is decreased to 1
+x--;
+// x is decreased to 0
+--x;
+</code></pre>
+<p>The main difference between putting the <code>++</code> (or <code>--</code>) before or after the variable name is when the variable's value gets read. When using it before, the value is incremented (or decremented) first, then the value of the variable is returned. When using them after the name, the value of the variable gets returned, then it gets incremented (or decremented). Let's look at an example:</p>
+<pre><code class="language-C++">int x = 0;
+// in this case y will be 1
+// the value of x is increased first,
+// then returned and stored into y
+int y = ++x;
+
+int a = 0;
+// here, b will be 0
+// first, the value of a, 0, is returned and stored in b
+// then, the value of a is increased to 1 afterwards
+int b = a++;
+</code></pre>
+<p>Since using <code>++</code> or <code>--</code> first does not require storing the original value of the variable being modified, it is typically faster to use that version of the operator. There are some instances where using <code>++</code> after is more efficient, but these cases are rare.</p>
+<h2 id="while-loops">While Loops</h2>
+<p>The basic syntax for the while loop is shown below:</p>
+<pre><code class="language-C++">while (condition) {
+    statement;
+}
+</code></pre>
+<p>Like the if statement, when the body of the while loops is only a single statement, the curly braces become optional. The condition on the while loop is a Boolean expression, just like the condition for an if statement. There are two main types of loop: definite and indefinite. Definite loops use a counter to determine when to exit. The number of iterations for the loop can be a number that is written into the code, or read from the user. Indefinite loops user a sentinel value to determine when the loop is finished.<br />
+<br/></p>
+<h3 id="definite-while-loops">Definite While Loops</h3>
+<p>Below is a basic definite loop:</p>
+<pre><code class="language-C++">// set the number of times the loop will run
+const int num_iterations = 5;
+// set a counter variable to start at 0
+int i = 0;
+
+// when starting at 0, use less than to make the 
+// number of times the loop runs equal to num_iterations
+while (i &lt; num_iterations) {
+    // printing out the current value of i
+    std::cout &lt;&lt; &quot;i = &quot; &lt;&lt; i &lt;&lt; std::endl;
+    // increment i
+    ++i;
+}
+// print value of i after the loop
+std::cout &lt;&lt; &quot;After the loop, i = &quot; &lt;&lt; i &lt;&lt; std::endl;
+</code></pre>
+<p>First, we've declared a constant variable to store the number of iterations for the loop. Then, we declare a counter variable, <code>i</code>, to count the number of times the loop has executed so far. Typically, in programming, counters start at 0.<br />
+Next, we have the while loop. We put the keyword <code>while</code>, followed by a set of parenthesis. Inside the parentheses, we have the condition for the while loop, <code>i &lt; num_iterations</code>. In this case, the body of the while loop executes so long as the value of <code>i</code> remains strictly less than <code>num_iterations</code>. <br />
+Inside the body of the loop, we have a statement that prints out the current value of <code>i</code>. Then, we have the statement <code>++i</code>, which increases the value of <code>i</code> by one each time the body of the loop runs. This is important; if we didn't increment the value of <code>i</code>, its value would remain at 0. 0 is always less than 5, the value of <code>num_iteration</code>, meaning that this loop would run infinitely. Infinite loops are undesirable.<br />
+Let's analyze the output of this code snippet.  </p>
+<ul>
+<li>The first time the while loop is encountered, the value of <code>i</code> is 0. 0 is less than 5, so the loop body executes, and "i = 0" is printed. The value of <code>i</code> is then increased to 1. </li>
+<li>We then go back to the condition and check it again. <code>i</code> is now 1. 1 is still less than 5, so the loop executes again. This time, "i = 1" is printed, and <code>i</code>'s value is increased to 2.</li>
+<li>2 is less than 5, so the loop executes again. "i = 2" is printed and <code>i</code> gets incremented to 3.</li>
+<li>3 is less than 5, so the loop executes again. "i = 3" is printed and <code>i</code> gets incremented to 4.</li>
+<li>4 is less than 5, so the loop executes again. "i = 4" is printed and <code>i</code> gets incremented to 5.</li>
+<li>Now, when we check the condition, <code>i</code> is 5, and 5 is not less than 5. Therefore, instead of executing the body of the loop, we move to the next line of code after the loop. In this case, the next line is another <code>std::cout</code> statement that prints: "After the loop, i = 5". </li>
+<li>The rest of the program will proceed from there.<br />
+A definite loop can also have its maximum value read in from the user:</li>
+</ul>
+<pre><code class="language-cpp">// read in the total number of numbers from the user
+int total;
+std::cout &lt;&lt; &quot;Enter how many numbers will be input: &quot;;
+std::cin &gt;&gt; total;
+
+// initialize counter and sum
+int i = 0;
+double sum = 0;
+
+// run the loop while i is less than the total
+while (i &lt; total) {
+    double num;
+    std::cout &lt;&lt; &quot;Enter a number: &quot;;
+    std::cin &gt;&gt; num;
+
+    // add to sum
+    sum += num;  
+    // increase counter 
+    i += 1;      
+}
+
+// compute the average
+double average = sum / total;
+
+// print the average
+std::cout &lt;&lt; &quot;The average is &quot; &lt;&lt; average &lt;&lt; std::endl;
+</code></pre>
+<p>The counter for a definite loop also does not have to increase. You can also have a loop that starts at its maximum value and counts down. Below is an example that will print the "99 bottles of DRINK on the wall". The user can enter the drink they want printed and how many times to print the verse of the song.</p>
+<pre><code class="language-C++">// reading in the drink choice
+std::string drink;
+std::cout &lt;&lt; &quot;Enter drink: &quot;;
+std::cin &gt;&gt; drink;
+
+// reading in the number of bottles
+int bottles;
+std::cout &lt;&lt; &quot;Enter number of bottles: &quot;;
+std::cin &gt;&gt; bottles;
+
+// line that separates the input from the song
+std::cout &lt;&lt; &quot;\n------------------------------------------------\n&quot;;
+
+// while loop that prints the song
+// since we are counting down, we want our control variable to be 
+// greater than the minimum, which is 0 in this case
+while (bottles &gt; 0) {
+    // print the first set of lyrics in a verse
+    std::cout &lt;&lt; bottles &lt;&lt; &quot; bottles of &quot; &lt;&lt; drink &lt;&lt; &quot;on the wall\n&quot;;
+    std::cout &lt;&lt; bottles &lt;&lt; &quot; bottles of &quot; &lt;&lt; drink;
+    std::cout &lt;&lt; &quot;Take one down, pass it around\n&quot;;
+    // since the next line of the song has 1 fewer bottle
+    // we'll decrement that value of bottles here.
+    --bottles;
+    std::cout &lt;&lt; bottles &lt;&lt; &quot; bottles of &quot; &lt;&lt; drink &lt;&lt; &quot;on the wall\n&quot;;
+    // print an extra blank line to separate the verses
+    std::cout &lt;&lt; &quot;\n&quot;;
+}
+</code></pre>
+<h3 id="indefinite-loops">Indefinite Loops</h3>
+<p>In the definite loops, we knew how many times the loop would execute based on either a value we coded into the program or read from the user. Then, we could either count up to that value, or count down from it to know when to stop the loop. Sometimes, you don't have a way of knowing how many times a loop will be run. This is especially true when reading user input or reading from a file. In this case, an indefinite loop can be used. Indefinite loops use a sentinel value to determine when to stop running. The sentinel value can be something that you decide, or something entered by the user to denote when the loop should stop. In the example below, the program continues reading names from the user until the value "quit" is entered:</p>
+<pre><code class="language-C++">// variable to hold user input
+std::string input;
+
+// ask user for initial input
+std::cout &lt;&lt; &quot;Enter a name (or 'quit' to exit): &quot;;
+std::cin &gt;&gt; input;
+
+// we are using the value &quot;quit&quot; to determine
+// when to exit the program
+while (input != &quot;quit&quot;) {
+    // echo input back to user
+    std::cout &lt;&lt; &quot;You entered: &quot; &lt;&lt; input &lt;&lt; std::endl;
+
+    // continute asking user for input
+    std::cout &lt;&lt; &quot;Enter a name (or 'quit' to exit): &quot;;
+    std::cin &gt;&gt; input;
+}
+</code></pre>
+<h2 id="for-loops">For Loops</h2>
+<p>A for loop is a shorthand syntax for a counter controlled while loop. In a single statement, you can initialize your control variable, condition, and increment/decrement the control. Below is the syntax for a for loop.</p>
+<pre><code class="language-C++">for (init; condition; incr) {
+    statement;
+}
+</code></pre>
+<p>Like the while and if statements, the curly braces are optional when the body of the for loop has only one statement. Note that the <code>init</code> and <code>condition</code> have a semicolon after them. There is not a semicolon after the <code>incr</code>. <br />
+The <code>init</code> of the for loop can either be setting the value of an existing variable, or the declaration of a whole new variable. When declaring a new variable, the variable is locally scoped to the for loop, and is not available outside that loop. The <code>condtion</code> is the comparison used to determine if the loop should run. The <code>incr</code> is an expression that increases (or decreases) the control variable. Here are the three definite while loop examples rewritten using for loops. <br />
+The first example:</p>
+<pre><code class="language-cpp">// set the number of times the loop will run
+const int num_iterations = 5;
+// we don't need to set a starting value
+// we can do it in the for loop
+int i;
+
+// i = 0; sets the initial value of i for the loop
+// i &lt; num_iterations; is the condition, just like the while
+// ++i increases i by 1 each time the loop runs
+for (i = 0; i &lt; num_iterations; ++i) {
+    // printing out the current value of i
+    std::cout &lt;&lt; &quot;i = &quot; &lt;&lt; i &lt;&lt; std::endl;
+    // we no longer increment i in the loop
+}
+// print value of i after the loop
+std::cout &lt;&lt; &quot;After the loop, i = &quot; &lt;&lt; i &lt;&lt; std::endl;
+</code></pre>
+<p>The second example:</p>
+<pre><code class="language-cpp">// read in the total number of numbers from the user
+int total;
+std::cout &lt;&lt; &quot;Enter how many numbers will be input: &quot;;
+std::cin &gt;&gt; total;
+
+// initialize sum
+double sum = 0;
+
+// here, we declare i in the for loop since we don't use it after
+for (int i = 0; i &lt; total; ++i) {
+    double num;
+    std::cout &lt;&lt; &quot;Enter a number: &quot;;
+    std::cin &gt;&gt; num;
+
+    // add to sum
+    sum += num;  
+}
+
+// compute the average
+double average = sum / total;
+
+// print the average
+std::cout &lt;&lt; &quot;The average is &quot; &lt;&lt; average &lt;&lt; std::endl;
+</code></pre>
+<p>And the third example:</p>
+<pre><code class="language-cpp">// reading in the drink choice
+std::string drink;
+std::cout &lt;&lt; &quot;Enter drink: &quot;;
+std::cin &gt;&gt; drink;
+
+// reading in the number of bottles
+int bottles;
+std::cout &lt;&lt; &quot;Enter number of bottles: &quot;;
+std::cin &gt;&gt; bottles;
+
+// line that separates the input from the song
+std::cout &lt;&lt; &quot;\n------------------------------------------------\n&quot;;
+
+// since we are counting down, we want our control variable to be 
+// greater than the minimum, which is 0 in this case
+// we can also do &quot;i -= 1&quot; instead of &quot;--i&quot;
+for (int i = bottles; i &gt; 0; i -= 1) {
+    // print the first set of lyrics in a verse
+    std::cout &lt;&lt; i &lt;&lt; &quot; bottles of &quot; &lt;&lt; drink &lt;&lt; &quot;on the wall\n&quot;;
+    std::cout &lt;&lt; i &lt;&lt; &quot; bottles of &quot; &lt;&lt; drink;
+    std::cout &lt;&lt; &quot;Take one down, pass it around\n&quot;;
+    // the next line of the song prints one less bottle
+    std::cout &lt;&lt; i - 1 &lt;&lt; &quot; bottles of &quot; &lt;&lt; drink &lt;&lt; &quot;on the wall\n&quot;;
+    // print an extra blank line
+    std::cout &lt;&lt; &quot;\n&quot;;
+}
+</code></pre>
+<h2 id="break-and-continue-statements">Break and Continue Statements</h2>
+<p>We saw break statements last week to exit switch statements. Break statements can also be used to exit a loop early. Continue statements are used to skip to the next iteration of the loop. Here are a couple examples of break and continue being used:</p>
+<pre><code class="language-C++">// this loop only prints odd numbers
+for (int i = 0; i &lt; 10; ++i) {
+    if (i % 2 == 0) {
+        // skips even numbers
+        continue;
+    }
+    std::cout &lt;&lt; &quot;i = &quot; i &lt;&lt; std::endl;
+}
+
+// this is a definite loop that breaks early 
+// if the user enters a negative number
+int i = 0;
+const int max = 10;
+while (i &lt; max) {
+    double num;
+    std::cout &lt;&lt; &quot;Enter a positive number: &quot;;
+    std::cin &gt;&gt; num;
+    // check if number is less than 0
+    if (num &lt; 0) {
+        std::cout &lt;&lt; &quot;Negative was entered.\n&quot;;
+        // exits the loop
+        break;
+    }
+}
+std::cout &lt;&lt; &quot;End of loop.\n&quot;;
+</code></pre>
+<h2 id="do-while">Do While</h2>
+<p>C++ also offers the do-while loop. The difference between the while and do-while loop is the do-while checks the condition after each iteration of the loop. The basic syntax is below:</p>
+<pre><code class="language-C++">do {
+    statement;
+} while (condition);
+</code></pre>
+<p>The do-while loop starts with the keyword <code>do</code>. The block containing the statements of the loop body follow <code>do</code>. After the block, is the <code>while</code> keyword with the condition. There needs to be a semicolon after the condition.</p>
+<h2 id="infinite-loops">Infinite Loops</h2>
+<p>An infinite loop is a loop whose condition will never be false. Sometimes, this is done intentionally, and a break statement is used to break the loop. In general, though, infinite loops are the result of programmer mistakes. Here are some common errors that cause infinite loops:  </p>
+<ul>
+<li>Using the wrong comparison</li>
+<li>Incrementing a counter when you should decrement (and vice versa)</li>
+<li>Using an impossible sentinel value</li>
+</ul>
+<h2 id="examples">Examples</h2>
+<p>Below are some examples of using while and for loops.</p>
+<h3 id="even-numbers-from-0-to-100-while-loop">Even Numbers from 0 to 100 (While Loop)</h3>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+
+int main() {
+    // initialize counter variable
+    int count = 0;
+    // loop while the counter is less than or equal to 100
+    while (count &lt;= 100) {
+        // print the current count
+        std::cout &lt;&lt; count &lt;&lt; std::end;
+        // increase by 2 to only print even values
+        count += 2;
+    }
+}
+</code></pre>
+<h3 id="even-numbers-for-0-to-100-for-loop">Even Numbers for 0 to 100 (For Loop)</h3>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+
+int main() {
+    // in the for loop, the declaration of the counter
+    // the condition, and the increment are in the same statement
+    for (int i = 0; i &lt;= 100; i+=2) {
+        std::cout &lt;&lt; i &lt;&lt; std::endl;
+    }
+}
+</code></pre>
+<h3 id="printing-a-rectangle-for-loop">Printing a Rectangle (For Loop)</h3>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+
+int main() {
+    // outer loop prints handles printing
+    // new lines to start the next row
+    for (int i = 0; i &lt; 10; ++i) {
+        // inner loop prints each row
+        for (int j = 0; j &lt; 10; ++j) {
+            std::cout &lt;&lt; '#';
+        }
+        std::cout &lt;&lt; '\n';
+    }
+}
+</code></pre>
+<p>The output would look like this:</p>
+<pre><code>##########
+##########
+##########
+##########
+##########
+##########
+##########
+##########
+##########
+##########
+</code></pre>
+<h3 id="grade-summation-while-loops">Grade Summation (While Loops)</h3>
+<p>This program asks the user to enter a students name. It stops reading students when the name is "quit". It then asks the user to enter grades and assumes all the grades are out of 100. Grades are read until a negative value is entered. The total and average grade percentage is printed for each student.</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;string&gt;
+
+int main() {
+    // read first name
+    std::string name;
+    std::cout &lt;&lt; &quot;Enter first student: &quot;;
+    std::cin &gt;&gt; name;
+
+    // run loop while name is not &quot;quit&quot;
+    while (name != &quot;quit&quot;) {
+        // initialize variables for computing grades
+        int count = 0;
+        double grade = 0;
+        double total_grade = 0;
+
+        // read first grade
+        std::cout &lt;&lt; &quot;Enter first grade for &quot; &lt;&lt; name &lt;&lt; &quot;: &quot;;
+        std::cin &gt;&gt; grade;
+
+        // read grades while grade is greater than or equal to 0
+        while (grade &gt;= 0) {
+            // increase count
+            ++count;
+            // increse total_grade by the amount entered
+            total_grade += grade;
+            // read the next grade
+            std::cout &lt;&lt; &quot;Enter next grade (-1 to stop): &quot;;
+            std::cin &gt;&gt; grade;
+        }
+
+        // compute the average 
+        // since we are assuming each grade is out of 100,
+        // we multiply the count by 100
+        double average = total_grade / (count * 100);
+
+        // print out the total
+        std::cout &lt;&lt; &quot;Total of &quot; &lt;&lt; count &lt;&lt; &quot; grades for &quot;
+            &lt;&lt; name &lt;&lt; &quot; is &quot; &lt;&lt; total_grade &lt;&lt; &quot;\n&quot;;
+        // print out the average
+        std::cout &lt;&lt; &quot;Average grade for &quot; &lt;&lt; name &lt;&lt; &quot; is &quot;
+            &lt;&lt; average * 100 &lt;&lt; &quot;%\n&quot;;
+
+        // read the next name
+        std::cout &lt;&lt; &quot;Enter next student (or 'quit'): &quot;;
+        std::cin &gt;&gt; name;
+    }
+
+    std::cout &lt;&lt; &quot;Bye!\n&quot;;
+}
+</code></pre>
+<h2 id="conclusion">Conclusion</h2>
+<p>Loops are used to repeat a set of instructions multiple times. First, we discussed while loops, which execute their body as long as their condition is true. Definite while loops use a counter variable to determine how many times the loop needs to run. Indefinite loops, on the other hand, compare their input to a sentinel value to determine when to stop running. Any definite while loop can also be written as a for loop, which condenses the counter declaration, condition, and increment step into a single statement. Do while loops can be used in situations where the loop body must always run at least once. I don't cover them in too much detail here since they are not available in some other programming languages (such as Python and Rust), and a normal while loop can be used anywhere a do while is used. We also discussed break and continue statements, and common situations that may cause an infinite loop.</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script src="../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

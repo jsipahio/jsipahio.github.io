@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>CSE234 Week 13: CMake - </title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../css/brands.min.css" rel="stylesheet">
+        <link href="../../css/solid.min.css" rel="stylesheet">
+        <link href="../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" disabled>
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../.."></a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../cv/" class="nav-link">CV</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../teaching/" class="nav-link">Teaching</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item dropdown">
+                              <button id="theme-menu" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static" aria-label="Toggle theme" class="nav-link dropdown-toggle">
+                                <i class="fa-solid fa-circle-half-stroke fa-fw"></i>
+                                <span class="d-lg-none ms-2">Toggle theme</span>
+                              </button>
+                              <ul class="dropdown-menu dropdown-menu-end">
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
+                                    <i class="fa-solid fa-sun fa-fw"></i>
+                                    <span class="ms-2">Light</span>
+                                    <i class="fa-solid fa-check ms-auto d-none"></i>
+                                  </button>
+                                </li>
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
+                                    <i class="fa-solid fa-moon fa-fw"></i>
+                                    <span class="ms-2">Dark</span>
+                                    <i class="fa-solid fa-check ms-auto d-none"></i>
+                                  </button>
+                                </li>
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="auto" aria-pressed="true">
+                                    <i class="fa-solid fa-circle-half-stroke fa-fw"></i>
+                                    <span class="ms-2">Auto</span>
+                                    <i class="fa-solid fa-check ms-auto"></i>
+                                  </button>
+                                </li>
+                              </ul>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <script src="../../js/darkmode.js"></script>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#cse234-week-13-cmake" class="nav-link">CSE234 Week 13: CMake</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#quick-history-lesson-make" class="nav-link">Quick History Lesson: Make</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#cmake" class="nav-link">CMake</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="cse234-week-13-cmake">CSE234 Week 13: CMake</h1>
+<p>CMake is the predominant build tool for C++ projects. There other build tools as well (Meson, Premake, xmake, Bazel, etc.), but CMake is the most popular for C/C++. </p>
+<h2 id="quick-history-lesson-make">Quick History Lesson: Make</h2>
+<p>Before CMake was <code>make</code>. Make is a build system for UNIX-like systems. It is very simple compared to CMake, but shares some similarities. Make (and CMake) use the last modified times of files to determine if a file needs to be recompiled. This allows Make to rebuild the minimum number of files required to update the program. Make uses a file called <code>Makefile</code> to configure the build for a project. Makefiles consist of <em>targets</em>, <em>dependencies</em>, <em>variables</em>, <em>comments</em>, <em>directives</em>, and <em>commands</em>. For our overview here, we are only concerned with targets, dependencies, and commands. Let's revisit the compilation of a basic three file program. To compile this, we need to compile the source code files separately, then link them. If we have a project that consists of <code>Class.hpp</code>, <code>Class.cpp</code>, and <code>main.cpp</code>, we would have to compile it as follows (assuming Linux is the platform):</p>
+<pre><code class="language-bash">g++ -c Class.cpp
+g++ -c main.cpp
+g++ Class.o main.o -o main
+</code></pre>
+<p>A <code>Makefile</code> allows us to provide these build instructions to <code>make</code>, so that we can simply run the <code>make</code> command to build our project. The equivalent Makefile would look like the following:</p>
+<pre><code class="language-Makefile">main: main.o Class.o
+    g++ Class.o main.o -o main
+
+Class.o: Class.cpp Class.hpp
+    g++ -c Class.cpp
+
+main.o: main.cpp Class.hpp
+    g++ -c main.cpp
+</code></pre>
+<p>The top target of the file is <code>main</code>. By default, <code>make</code> will try to build the first target in the file. The files after the colon are the dependencies for that target. The dependencies for <code>main</code> are <code>Class.o</code> and <code>main.o</code>. If <code>make</code> does not find those files, it will search the Makefile for a target to build them. <code>Class.o</code> has dependencies of <code>Class.cpp</code> and <code>Class.hpp</code> to be built. There are no targets to build those files, so if they do not exist, the build will fail. The <code>main.o</code> target depends on <code>main.cpp</code> and <code>Class.hpp</code> to be built. The commands underneath the targets and dependencies are run to build that target. If any of the dependencies are modified (the last modified date is more recent than the last time <code>make</code> was run), <code>make</code> will only rebuild the the targets that are impacted. For example, if we modify <code>main.cpp</code>, <code>main.o</code> depends on <code>main.cpp</code> so it will be rebuilt. This then means that <code>main.o</code> has been updated, so <code>main</code> will be rebuilt as well. However, <code>Class.cpp</code> and <code>Class.hpp</code> are unaffected, so <code>Class.o</code> will not be rebuilt. </p>
+<h2 id="cmake">CMake</h2>
+<p>Make improved the build process for building C/C++ projects, but is far from perfect. It does not have mechanisms for ensuring dependencies exist, has a very verbose syntax, and only works on Unix-based systems. Compared to Make, which is a pure build system, CMake is a meta-build system. It generates build files (such as Makefiles) based on higher-level instructions. Whereas in Make you must track the dependencies of each file manually, CMake handles target-to-dependency resolution for you. CMake configurations are written in a file called <code>CMakeLists.txt</code>. That exact file name must be used, CMake does not automatically recognize any other file. The <code>CMakeLists.txt</code> for any project start with the following two commands:</p>
+<pre><code class="language-cmake">cmake_minimum_required(VERSION 3.28)
+
+project(PROJECT_NAME)
+</code></pre>
+<p>The <code>cmake_minimum_required()</code> command indicates the minimum version of CMake required to generate build files. Newer versions of CMake can act as older versions based on the specified version. The <code>project()</code> command indicates that CMake is being invoked to build a C/C++ project and forces it to run a series of checks to ensure that compilers are installed and detect important properties of the target machine. It also indicates to CMake the internal name it will use for the project.   </p>
+<p>Let's consider the case where we want to build an executable program from a single source code file. An executable program contains a <code>main()</code> function and is what you've been building throughout the class. The <code>add_executable()</code> command tells CMake that you are adding an executable target to the project. The target can have multiple properties, including the output name of the executable, include directories, source code files, dependencies, and compiler flags. In <code>add_executable()</code>, we specify the name of the target executable. </p>
+<pre><code class="language-cmake">add_executable(example_program)
+</code></pre>
+<p>The <code>target_sources()</code> command is used to list the source code files needed to compile the CMake file's target. In this case, we want to compile <code>example_program</code>. Let's assume the code for the program is in a file called <code>example.cpp</code> that is in the same directory as our <code>CMakeLists.txt</code> file. To add <code>example.cpp</code>, we'd write the following CMake command:</p>
+<pre><code class="language-cmake">target_sources(example_program PRIVATE example.cpp)
+</code></pre>
+<p>Now, to run CMake, we use the following command (assuming we have navigated to the same directory as <code>CMakeLists.txt</code>):</p>
+<pre><code class="language-bash">cmake . -B build
+</code></pre>
+<p>This tells CMake to generate the build files for the current directory <code>.</code>, and write the generated files to a directory <code>-B</code> called <code>build</code>. CMake will automatically detect the compiler and generate the appropriate build files. To compile the program, we can run:</p>
+<pre><code class="language-bash">cmake --build build
+</code></pre>
+<p>Depending on your OS and compiler, the executable will be written directly to the <code>build</code> directory or to a subdirectory of build like <code>build/bin</code> or <code>build/Debug</code>. You can change directory to the location of the executable and run it.<br />
+<strong>Mac/Linux</strong></p>
+<pre><code class="language-bash">./example_program
+</code></pre>
+<p><strong>Windows</strong></p>
+<pre><code class="language-powershell">.\example_program.exe
+</code></pre>
+<p>The example code for this is in <code>week13_simple.zip</code> on Brightspace. The complete <code>CMakeLists.txt</code> for this example would be:</p>
+<pre><code class="language-cmake">cmake_minimum_required(VERSION 3.28)
+
+project(EXAMPLE_PROJECT)
+
+add_executable(example_program)
+target_sources(example_program PRIVATE example.cpp)
+</code></pre>
+<h3 id="libraries">Libraries</h3>
+<p>Up until this point everything you've created in C++ have been executable programs. Software can also be compiled into a library. A library is a collection of functions and data types that other libraries and executables can use. <code>iostream</code>, <code>string</code>, <code>algorithm</code>, <code>vector</code>, etc. are all libraries. Libraries do not have a <code>main()</code> function. </p>
+<p>To create a library using CMake, we can use the <code>add_library()</code> command, similar to how we used <code>add_executable</code> for a program. </p>
+<pre><code class="language-cmake">add_library(example_library)
+</code></pre>
+<p>Unlike executables, where all the code it depends on is private, clients of a library do need to know the contents of the header files of the library. If you did not have access to the <code>iostream</code> header, you would never be able to include or use it. Therefore, when adding target soruces to a library, we make the implementation files private and the library headers public:</p>
+<pre><code class="language-cmake">target_sources(example_library
+    PRIVATE
+        example.cpp
+    PUBLIC
+        FILE_SET exampleHeaders
+        TYPE HEADERS
+        FILES
+            example.hpp
+)
+</code></pre>
+<p>The <code>PRIVATE</code> section just contains the source code for the library. The <code>PUBLIC</code> section is a bit more complicated. First, <code>FILE_SET</code> indicates the name CMake will use to refer to this set of files. It is a bit redundant here since there is only one file, but it will become more useful when we have files. <code>TYPE HEADERS</code> indicates that these are header files. <code>FILES</code> indicates the names of the header file(s). In this case, we only have one header file, <code>example.hpp</code>. We run CMake to generate the build files and compile just as before. However, rather than compiling to an executable, it will generate a compiled library file. Typically, the default is to build a static library file. On Mac/Linux, a static library file with the <code>.a</code> extension. On Windows, the <code>.lib</code> extension. There are options that can be set to generate a shared library.</p>
+<h4 id="static-vs-dynamicshared-libraries">Static vs Dynamic/Shared Libraries</h4>
+<p>A static library is a fully compiled version of a library that must be integrated as part of an executable. That is, when the executable is compiled, the static library will be included as part of that executable's code. On Mac and Linux, static libraries typically have the <code>.a</code> extension. On Windows, they have the <code>.lib</code> extension. Shared (also called dynamically linked) libraries do not need to be compiled as part of an executable's machine code. Instead, when the code from the shared library is needed, the executable (while running) can request for the operating system to find that shared libary and load the code it needs. This means that the overall size of the final executable is smaller. However, it also requires the client using the executable to have the shared library installed. Shared libraries have the <code>.so</code> extension on Mac and Linux, and the <code>.dll</code> extension on Windows. To build a shared library, the <code>SHARED</code> option can be set on the <code>add_library()</code> command.</p>
+<pre><code class="language-cmake">add_library(example_static_library STATIC)
+add_library(example_shared_library SHARED)
+</code></pre>
+<h3 id="building-libraries-and-executables">Building Libraries and Executables</h3>
+<p>We can also provide build instructions for libraries and executables in the same <code>CMakeLists.txt</code> file. In this example, we build a shared and static library from the header file and its implementation, and then build our executable using the static libary.</p>
+<pre><code class="language-cmake">cmake_minimum_required(VERSION 3.28)
+project(EXAMPLE_PROJECT)
+
+add_library(example_static_library STATIC)
+add_library(example_shared_library SHARED)
+add_executable(example_executable)
+
+target_sources(example_static_library
+    PRIVATE
+        example.cpp
+    PUBLIC
+        FILE_SET exampleHeaders
+        TYPE HEADERS
+        FILES
+            example.hpp
+)
+
+target_sources(example_shared_library
+    PRIVATE
+        example.cpp
+    PUBLIC
+        FILE_SET exampleHeaders
+        TYPE HEADERS
+        FILES
+            example.hpp
+)
+
+target_link_libraries(example_executable PRIVATE example_static_library)
+target_sources(example_executable PRIVATE main.cpp)
+</code></pre>
+<h3 id="subdirectories">Subdirectories</h3>
+<p>Larger scale projects split files into multiple subdirectories. Typically, a <code>CMakeLists.txt</code> is written for each directory. The <code>add_subdirectory()</code> command is used to tell CMake which subdirectory to search for more <code>CMakeLists.txt</code>. Below is a typical directory structure for a basic C++ project:</p>
+<pre><code>project-root
+    include
+        header-files
+    src
+        source-files
+</code></pre>
+<p>The <code>CMakeLists.txt</code> in the project root is used to specify the minimum CMake version, package name, and add subdirectories. Directories that only contain header files do not need a <code>CMakeLists.txt</code>, since headers are not compiled on their own. The <code>CMakeLists.txt</code> in the <code>src</code> directory specifies the libraries and/or executables to be built. There may be more nested directories within <code>src</code> or <code>include</code> for larger scale projects, but we'll assume here that this is the highest tier of nesting. The <code>CMakeLists.txt</code> for the root would be:</p>
+<pre><code class="language-cmake">cmake_minimum_required(VERSION 3.28)
+project(EXAMPLE_PROJECT)
+
+add_subdirectory(src)
+</code></pre>
+<p>And for src:</p>
+<pre><code class="language-cmake">add_library(example_static_library STATIC)
+
+target_include_directories(example_static_library PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../include)
+
+target_sources(example_static_library
+    PRIVATE
+        example.cpp
+)
+
+add_executable(example)
+target_sources(example PRIVATE example.cpp)
+target_link_library(example PRIVATE example_static_library)
+</code></pre>
+<p>The <code>target_include_directories</code> is used to specify which path(s) to search for header files. Since the headers <code>PUBLIC</code> on the library, we do not need to specify them again for the executable. </p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script src="../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

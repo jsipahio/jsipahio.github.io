@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>CSE233 Week 9: C Strings and STL Strings - </title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../css/brands.min.css" rel="stylesheet">
+        <link href="../../css/solid.min.css" rel="stylesheet">
+        <link href="../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" disabled>
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../.."></a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../cv/" class="nav-link">CV</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../teaching/" class="nav-link">Teaching</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item dropdown">
+                              <button id="theme-menu" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static" aria-label="Toggle theme" class="nav-link dropdown-toggle">
+                                <i class="fa-solid fa-circle-half-stroke fa-fw"></i>
+                                <span class="d-lg-none ms-2">Toggle theme</span>
+                              </button>
+                              <ul class="dropdown-menu dropdown-menu-end">
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
+                                    <i class="fa-solid fa-sun fa-fw"></i>
+                                    <span class="ms-2">Light</span>
+                                    <i class="fa-solid fa-check ms-auto d-none"></i>
+                                  </button>
+                                </li>
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
+                                    <i class="fa-solid fa-moon fa-fw"></i>
+                                    <span class="ms-2">Dark</span>
+                                    <i class="fa-solid fa-check ms-auto d-none"></i>
+                                  </button>
+                                </li>
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="auto" aria-pressed="true">
+                                    <i class="fa-solid fa-circle-half-stroke fa-fw"></i>
+                                    <span class="ms-2">Auto</span>
+                                    <i class="fa-solid fa-check ms-auto"></i>
+                                  </button>
+                                </li>
+                              </ul>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <script src="../../js/darkmode.js"></script>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#cse233-week-9-c-strings-and-stl-strings" class="nav-link">CSE233 Week 9: C Strings and STL Strings</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#c-strings" class="nav-link">C Strings</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#stl-strings" class="nav-link">STL Strings</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#conclusion" class="nav-link">Conclusion</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="cse233-week-9-c-strings-and-stl-strings">CSE233 Week 9: C Strings and STL Strings</h1>
+<p>There are two types of strings that you will encounter in C++, C strings and STL Strings. So far, we have used the STL String (the <code>std::string</code> type) for storing text data. But, C++ is built on the C language, and inherits its representation of strings as well. <code>std::string</code> itself is a wrapper around the C string type.</p>
+<h2 id="c-strings">C Strings</h2>
+<p>The <code>char</code> data type in C and C++ is internally an integer. The character with an integer value of 0 is called the null terminator. It is also represented as <code>'\0'</code>. This is important for understanding C strings. All C strings end with the null terminator. A C string is an array of <code>char</code>s that ends with a null terminator. Below is an example C string:</p>
+<pre><code class="language-cpp">char cStr[] = &quot;Hello World&quot;;
+</code></pre>
+<p>Note that the null terminator does not need to explicitly added. The compiler supports this shorthand syntax for creating a C string directly. If we created the array normally, such as with an initializer list, then we would have to manually include the null terminator.</p>
+<pre><code class="language-cpp">// manually making the last character 0
+char cStr[] = {'H', 'e', 'l', 'l', 'o', 0 };
+</code></pre>
+<p>C strings cannot be assigned to after they are created. For example, the code below is illegal:</p>
+<pre><code class="language-cpp">char cStr[] = &quot;Hello&quot;;
+// illegal, cannot reassign a C string
+cStr = &quot;Hello World&quot;;
+</code></pre>
+<p>C strings also do not support any operators. They cannot be concatenated (added) using the <code>+</code> operator, nor compared using <code>==</code>. C strings can be read from the console. To declare an empty C string, you just declare a character array. However, keep in mind that the size of the array needs to be one more than the number of characters the string has to store. This is due to the last character of the array needing to be dedicated to the null terminator.</p>
+<pre><code class="language-cpp">// this C string can hold 15 characters
+char cStr[16];
+std::cout &lt;&lt; &quot;Enter some text (15 or less characters): &quot;;
+std::cin &gt;&gt; cStr;
+std::cout &lt;&lt; &quot;You entered: &quot; &lt;&lt; cStr &lt;&lt; &quot;\n&quot;;
+</code></pre>
+<p>If the user enters a C string longer than 15 characters, the input will be truncated to 15 characters. For example:</p>
+<pre><code>Enter some text (15 or less characters): thisismorethan15characters
+You entered: thisismorethan1
+</code></pre>
+<h3 id="c-string-member-functions">C String Member Functions</h3>
+<p>There are functions available in the <code>cstring</code> library for operating on strings. To use them, <code>#include &lt;cstring&gt;</code> in your file. Below are the functions provided by <code>cstring</code>. All the functions described here are provided already by <code>cstring</code>, but example definitions will also be provided to demonstrate how to operate on C strings. To be honest, I don't really recommend using the C string library. It is inconsistently implemented across compilers and operating systems, and even the best implementation is not very good. But, since these can be encountered in the wild, we will look at them.</p>
+<h4 id="strlen"><code>strlen()</code></h4>
+<p>The <code>strlen()</code> function returns the length of a C string. The length does not include the null terminator. For example:</p>
+<pre><code class="language-cpp">int length = strlen(&quot;Hello World&quot;);
+assert(length == 11);
+</code></pre>
+<p>Below is a possible implementation of <code>strlen</code>:</p>
+<pre><code class="language-cpp">unsigned long strlen(const char str[]) {
+    unsigned long i = 0;
+    // checking each character until a null terminator is found
+    while (str[i] != 0) ++i;
+    return i;
+}
+</code></pre>
+<p>It is possible that a C string is malformed (i.e., it is missing the null terminator). More recent versions of C/C++ offer <code>strnlen</code>, with an n between <code>str</code> and <code>len</code>. This allows a max length to be passed to <code>strlen</code>. </p>
+<pre><code class="language-cpp">// manually creating a malformed C string
+char cStr[] = &quot;Hello World&quot;;
+// overwriting null terminator
+cStr[11] = '\n';
+// this will search until it finds a byte with 
+// the value 0, which will not be the correct value
+// theoretically, it could infinite loop
+int length = strlen(cStr);
+// this may not be the correct length, but will never 
+// infinite loop. it will stop once it exhausts 1000 characters
+int safeLength = strnlen(cStr, 1000);
+</code></pre>
+<p>Here is a possible implementation of <code>strnlen()</code></p>
+<pre><code class="language-cpp">unsigned long strnlen(const char str[], unsigned long n) {
+    unsigned long i;
+    while (str[i] != 0 &amp;&amp; i &lt;= n) ++i;
+    return i;
+}
+</code></pre>
+<h3 id="strcpy"><code>strcpy()</code></h3>
+<p>The function <code>strcpy()</code> takes two C strings as arguments. The second argument is copied into the first. If the first argument has data already, it is overwritten. Here is an example of its usage:</p>
+<pre><code class="language-cpp">char cStr[] = &quot;Hello World&quot;;
+char copy[12];
+strcpy(cStr, copy);
+std::cout &lt;&lt; copy &lt;&lt; &quot;\n&quot;; 
+// prints: Hello World
+</code></pre>
+<p>Here is a potential implementation of <code>strcpy()</code>:</p>
+<pre><code class="language-cpp">void strcpy(char destination[], const char source[]) {
+    unsigned long length = strlen(source);
+    // using &lt;= to copy the null terminator too
+    for (unsigned long i = 0; i &lt;= length; ++i) {
+        destination[i] = source[i];
+    }
+}
+</code></pre>
+<p>Like <code>strlen</code>, there is also a "safe" version of <code>strcpy()</code>, called <code>strncpy()</code>. This version takes a third argument, <code>n</code>, for the maximum number of characters to copy over. This way, if the source string is larger than the destination buffer, <code>strncpy()</code> will not write data out of bounds.</p>
+<pre><code class="language-cpp">char longString[] = &quot;This string is much longer than the destination&quot;;
+char shortString[10];
+// need to leave room for null terminator
+strncpy(shortString, longString, 9);
+// shortString is now &quot;This stri&quot;, but does not have a null terminator
+// manually insert null terminator
+shortString[9] = 0;
+</code></pre>
+<p><code>strncpy</code> does not add a null terminator if it runs out of characters to copy. At this point, the output string is simply a character array, and should not be treated as a C string anymore. Here is a safer way to check use <code>strncpy()</code>. Here, we check if the string being copied is longer than the destination. If it is, we copy as many characters as we can while still leaving a space for the null terminator. Otherwise, we copy the string normally.</p>
+<pre><code class="language-cpp">char source1[] = &quot;This string is shorter than its destination&quot;;
+char source2[] = &quot;This string is longer than its destination&quot;;
+
+const int dest1Len = 44;
+const int dest2Len = 16;
+
+// we can use these variables as the sizes
+// of the arrays since they are const
+char dest1[dest1Len];
+char dest2[dest2Len];
+
+// check if the length of the source is less than
+// the max length of the destination
+if (strnlen(source1, dest1Len) &lt; dest1Len) {
+    // if it is, we can copy normally
+    strcpy(dest1, source1);
+}
+else {
+    // otherwise, we need to manually add the null terminator
+    strncpy(dest1, source1, dest1Len - 2);
+    dest1[dest1Len - 1] = 0;
+}
+
+if (dest2Len &lt; strnlen(source2, dest2Len)) {
+    strcpy(dest2, source2);
+}
+else {
+    strncpy(dest2, source2, dest2Len - 2);
+    dest2[dest2Len - 1] = 0;
+}
+</code></pre>
+<p>Here is a better implementation of <code>strncpy()</code> that inserts a null terminator if the source string is longer than the destination:</p>
+<pre><code class="language-cpp">void strncpy(char destination[], const char source[], unsigned long n) {
+    unsigned long sourceLength = strnlen(source, n);
+    // if the source string is shorter than n, we can copy it normally
+    if (sourceLength &lt; n) {
+        for (unsigned long i = 0; i &lt;= sourceLength; ++i) {
+            destination[i] = source[i];
+        }
+    }
+    // otherwise, copy as many characters as we can, then insert null
+    else {
+        for (unsigned long i = 0; i &lt; n - 1; ++i) {
+            destination[i] = source[i];
+        }
+        destination[n - 1] = 0;
+    }
+}
+</code></pre>
+<h3 id="strcat"><code>strcat()</code></h3>
+<p>The <code>strcat()</code> function is used to concatenate (i.e., add) two strings. The first string passed will be modified. The result is the first string with the second string appended to it. The first string must be a large enough array to hold itself and the second string. The second string will not be modified by the function. </p>
+<pre><code class="language-cpp">char str1[] = &quot;Hello &quot;;
+char str2[] = &quot;World&quot;;
+// &quot;Hello World&quot; is 11 characters, + 1 for null terminator
+char result[12];
+// first, we need to copy str1 into result
+strcpy(result, str1);
+// then concatenate str2 onto the end of result
+strcat(result, str2);
+</code></pre>
+<p>Here is a potential implementation of <code>strcat()</code>:</p>
+<pre><code class="language-cpp">void strcat(char destination[], const char source[]) {
+    unsigned long destLen = strlen(destination);
+    unsigned long srcLen = strlen(source);
+
+    // start copying at the end of the destination,
+    // overwriting it's null terminator with the first char of source
+    // again, using &lt;= to copy source's null terminator
+    for (unsigned long i = destLen + 1; i &lt;= srcLen; ++i) {
+        destination[i] = source[i - srcLen];
+    }
+}
+</code></pre>
+<p>Like the other C string functions, there is also an <code>n</code> version of <code>strcat()</code>. The <code>strncat()</code> function has an additional argument for the maximum number of characters to copy from the source string. Like <code>strncpy()</code>, <code>strncat()</code> does not insert a null terminator if the source string is larger than <code>n</code>. Therefore, like <code>strncpy()</code>, we need to be careful with how we use this function, as it may not "return" a valid C string. We can use the same guards as before to ensure that the result becomes a valid C string:</p>
+<pre><code class="language-cpp">const int resultSize = 30;
+char str1[] = &quot;Start of string.&quot;;
+char str2[] = &quot;Rest of string.&quot;;
+// this is not quite large enough to hold both str1 and str2
+char result[resultSize];
+strcpy(result, str1);
+// need to check if we can copy all of str2
+unsigned long str1Len = strlen(str1);
+unsigned long str2Len = strlen(str2);
+if (str2Len &lt; (resultSize - str1Len - 1)) {
+    strncat(result, str2, (resultSize - str1Len - 1));
+    result[resultSize - 1] = 0;
+}
+else {
+    strcat(result, str2);
+}
+</code></pre>
+<p>Here is a better implementation of <code>strncat()</code> that does insert a null terminator:</p>
+<pre><code class="language-cpp">void strncat(char destination[], const char source[], unsigned long n) {
+    unsigned long destLength = strnlen(destination, n);
+    unsigned long srcLength = strnlen(source, n);
+
+    // if the destination length + null character is less than n
+    // we can start concatenating the string
+    if (destLength + 1 &lt; n) {
+        // compute the number of characters we can copy
+        // need to subtract an extra 1 for the null terminator
+        unsigned long maxChars = n - destLength - 1;
+        if (srcLength &lt; maxChars) {
+            maxChars = destLength + srcLength;
+            for (unsigned long i = destLength; i &lt;= maxChars; ++i) {
+                destination[i] = source[i - srcLength];
+            }
+        }
+        else {
+            for (unsigned long i = 0; i &lt; maxChars; ++i) {
+                destination[i + destLength] = source[i];
+            }
+            destination[n - 1] = 0;
+
+        }
+    }
+    // otherwise, we can't do anything since the destination is already n long
+}
+</code></pre>
+<h3 id="strcmp"><code>strcmp()</code></h3>
+<p><code>strcmp()</code> is used to compare two strings. It returns an integer. The strings are compared lexicographically (dictionary order). However, in C++ (and most programming languages), all capital letters come before lowercase. So, capital 'Z' comes before lowercase 'a'. <code>strcmp()</code> returns a negative number if the first string comes before the second, 0 if the strings are the same, and a positive number if the first string comes after the second. Below are some examples:</p>
+<pre><code class="language-cpp">char str1[] = &quot;abc&quot;;
+char str2[] = &quot;ABC&quot;;
+char str3[] = &quot;xyz&quot;;
+char str4[] = &quot;Hello&quot;;
+char str5[] = &quot;hello&quot;;
+char str6[] = &quot;hello&quot;;
+char str7[] = &quot;abcd&quot;;
+
+int result;
+
+// result is 0
+result = strcmp(str1, str1);
+// result is 0
+result = strcmp(str5, str6);
+// result is positive
+result = strcmp(str1, str2);
+// result is negative
+result = strcmp(str2, str1);
+// result is positive
+result = strcmp(str3, str2);
+// result is negative
+result = strcmp(str2, str3);
+// result is negative
+result = strcmp(str4, str5);
+// result is positive
+result = strcmp(str5, str4);
+// result is negative
+result = strcmp(str1, str7);
+</code></pre>
+<p>Below is a possible implementation of <code>strcmp()</code>:</p>
+<pre><code class="language-cpp">int strcmp(const char str1[], const char str2[]) {
+    unsigned long i = 0;
+
+    while (str1[i] != 0 &amp;&amp; str2[i] != 0) {
+        if (str1[i] &lt; str2[i]) return -1;
+        else if (str1[i] &gt; str2[i]) return 1;
+        ++i;
+    }
+
+    if (str1[i] == 0) return -1;
+    if (str2[i] == 0) return 1;
+    // if we got here all the characters were the same
+    // and the strings are the same length
+    return 0;
+}
+</code></pre>
+<p>There is also the <code>n</code> version of <code>strcmp()</code>, <code>strncmp()</code>. This version will compare up to <code>n</code> characters of the strings. It stops comparing if a null terminator is found in either string:</p>
+<pre><code class="language-cpp">char str1[] = &quot;hello&quot;
+char str2[] = &quot;hello world&quot;;
+
+int result;
+// result is negative
+result = strncmp(str1, str2, 11);
+// result is 0
+result = strncmp(str1, str2, 5);
+</code></pre>
+<p>Below is a possible implementation of <code>strncmp()</code>:</p>
+<pre><code class="language-cpp">int strncmp(const char str1[], const char str2[], unsigned long n) {
+    if (n == 0) return 0;
+
+    unsigned long i = 0;
+
+    while (str1[i] != 0 &amp;&amp; str2[i] != 0 &amp;&amp; i &lt;= n) {
+        if (str1[i] &lt; str2[i]) return -1;
+        else if (str1[i] &gt; str2[i]) return 1;
+        ++i;
+    }
+
+    if (str1[i] == 0) return -1;
+    if (str2[i] == 0) return 1;
+    // if we got here all the characters were the same
+    // and the strings are the same length
+    return 0;
+}
+</code></pre>
+<h2 id="stl-strings">STL Strings</h2>
+<p>The <code>std::string</code> type is defined as part of C++'s Standard Template Library (STL). C++ strings are still C strings internally, but make working with strings significantly easier. STL strings support allow many operations which make strings easier to use. In the following subsections, we'll discuss the various string operations.</p>
+<h3 id="objects">Objects</h3>
+<p><code>std::string</code> is a class. You should have had a brief introduction to classes at the end of programming logic. In short, a class is data type that groups data and operations (member functions) into a single type. An object is an instance (i.e., variable) of a class. Each string variable you create is a string object. Class member functions are called for an object using the dot operator in C++.</p>
+<h3 id="assigning-and-copying">Assigning and Copying</h3>
+<p>A string can be declared like any other variable, except the <code>string</code> header needs to be included. </p>
+<pre><code class="language-cpp">std::string str;
+</code></pre>
+<p>A string can also be created using the string constructor. Both string literals and string objects can be passed to the constructor. The constructor is only called when the variable is created.</p>
+<pre><code class="language-cpp">// calling constructor with a string literal
+str::string str(&quot;Hello world&quot;);
+// call constructor with a string variable
+std::string copy(str);
+</code></pre>
+<p>Strings can also be created and copied using the <code>=</code> operator:</p>
+<pre><code class="language-cpp">std::string str = &quot;Hello World&quot;;
+std::string copy = str;
+</code></pre>
+<h3 id="concatenation">Concatenation</h3>
+<p>Strings can be concatenated using the <code>+</code> and <code>+=</code> operators, as well as the <code>append()</code> member function. The <code>+=</code> operator and <code>append()</code> function modify an existing string, while the <code>+</code> operator returns a new string that is a combination of the two strings being concatenated:</p>
+<pre><code class="language-cpp">std::string str = &quot;Hello&quot;;
+str += &quot; world&quot;;
+// str is now &quot;Hello world&quot;
+
+// append is a member function
+// use the . operator to call it
+str.append(&quot;!\n&quot;)
+// str is now &quot;Hello world!\n&quot;
+
+std::string str2 = &quot;Hello&quot; + &quot; world&quot;;
+// str2 is &quot;Hello world&quot;
+</code></pre>
+<h3 id="comparison">Comparison</h3>
+<p>Strings can be compared using the normal comparison operators like <code>==</code>, <code>&lt;</code>, <code>&gt;</code>, etc. Like C strings, <code>&lt;</code> and <code>&gt;</code> compare the strings lexicographically. Just like C strings, the comparison is really based on the order that the characters appear in ASCII order, so uppercase letters are "smaller" than lowercase. Certain characters like punctuation are smaller than letters. </p>
+<h3 id="length-empty-subscript-and-at">Length, Empty, Subscript, and <code>at()</code></h3>
+<p>The <code>length()</code> member function is used to access the length of the string. It returns the number of characters in the string. The <code>empty()</code> member function returns <code>true</code> if the string is empty, and <code>false()</code> otherwise. Like a C string, the individual characters of the string can be accessed using the subscript operator. A string can be treated just like an array of characters. The <code>at()</code> member function is used in the same way as the subscript operator, except it will throw an exception if an out-of-range access is attempted. </p>
+<pre><code class="language-cpp">std::string example = &quot;This is an example std::string&quot;;
+for (int i = 0; i &lt; example.length(); ++i) {
+    // print each character on it's own line
+    std::cout &lt;&lt; example[i] &lt;&lt; std::endl;
+}
+std::string emptyString = &quot;&quot;;
+if (emptyString.empty()) {
+    // this will print, emptyString holds no characters
+    std::cout &lt;&lt; &quot;emptyString is empty\n&quot;;
+}
+// use at() to access an individual characer
+example.at(0) = 't';
+// this will crash the program immediately, 
+// since the index passed is out of range
+example.at(100) = '!';
+</code></pre>
+<h3 id="find-find-first-of-and-substring">Find, Find First Of, and Substring</h3>
+<p>The <code>find()</code> member function is used to find the position of a string within another string. It returns the index of the first occurrence of the string being searched for. The member function takes two arguments. The first is the string to search for. The second is the position to start searching from. This parameter has a default value of 0 (starts searching from the start of the string). A variation of <code>find()</code> called <code>rfind()</code> exists to search from the back of the string instead of the front. <code>rfind()</code> will return the start index of the last instance of the string being searched for. Both versions return a special value, <code>std::string::npos</code>, when the target string is not found. <code>std::string::npos</code> is the </p>
+<pre><code class="language-cpp">std::string example = &quot;This string is an example&quot;;
+
+// pos == 5
+int pos = example.find(&quot;string&quot;);
+// pos == std::string::npos
+pos = example.find(&quot;string&quot;, 6)
+// pos == 2
+pos = example.find(&quot;is&quot;);
+// pos == 12
+pos = example.rfind(&quot;is&quot;);
+// pos == 2
+pos = example.rfind(&quot;is&quot;, 14);
+</code></pre>
+<p>The <code>find_first_of()</code> function passed a string of characters to search for. The index of the first occurrence of one of the characters is returned. If none of the characters are found in the string, <code>std::string::npos</code> is returned. The <code>find_last_of()</code> does the same thing as <code>find_first_of()</code>, except it starts searching from the end of the string. Like <code>find()</code>, a position to start searching from can be passed as the second argument.</p>
+<pre><code class="language-cpp">std::string example = &quot;This is an example string. It contains punctuation.&quot;;
+std::string punctuation = &quot;,.?!;:&quot;;
+// pos == 25, finds the first period
+int pos = example.find_first_of(punctuation);
+// pos == 50, finds the last period
+pos = example.find_last_of(punctuation);
+</code></pre>
+<p>There are also equivalent <code>find_first_not_of()</code> and <code>find_last_not_of()</code> functions, which return the first (or last) index of the first character that does not match the argument.</p>
+<h3 id="erase-substring-and-replace">Erase, Substring, and Replace</h3>
+<p>The <code>erase()</code> member function takes two arguments, a start index and the number of characters to remove, starting at the start index. <code>erase()</code> modifies the string that calls it. The <code>substr()</code> member function returns a substring of the string it is called on. It, like <code>erase()</code>, expects the start index and number of characters to extract. Finally, the <code>replace()</code> member function expects three arguments: the start index, the number of characters to replace, and the string to replace them with.</p>
+<pre><code class="language-cpp">std::string example = &quot;This is an example std::string&quot;;
+// example will be &quot;This is an example string&quot;
+example.erase(19, 5);
+// example will be &quot;This is an example STL String&quot;
+example.replace(19, 1, &quot;STL S&quot;);
+// substring will be &quot;example&quot;
+std::string example = example.substr(11, 7);
+</code></pre>
+<h3 id="example">Example</h3>
+<p>Pig Latin has the following rules:<br />
+- Words that start with a vowel have "way" appended to the end
+- Words that start with a consonant have the consonant moved to the end, and "ay" appended to the end
+Let's write a function that converts a word to Pig Latin:</p>
+<pre><code class="language-cpp">const std::string VOWELS = &quot;aeiouAEIOU&quot;;
+const std::string EXTENDED_VOWELS = &quot;aeiouyAEIOUY&quot;;
+const std::string UPPERCASE = &quot;ABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;;
+
+// helper function to check if character is upper case
+bool isUpper(char c) {
+    if (UPPERCASE.find(c) != std::string::npos) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+// helper function to check if string is uppercase
+bool isUpper(const std::string str) {
+    for (int i = 0; i &lt; str.length(); ++i) {
+        if (!isUpper(str[i])) return false;
+    }
+    return true;
+}
+
+
+void convertToPigLatin(std::string&amp; word) {
+    // 'y' can sometimes be a vowel
+    // it's not a perfect check, but we'll 
+    // assume that if the first letter is not
+    // a vowel, then y is allowed to be a vowel
+
+    // first, check if the first letter is a vowel
+    if (VOWELS.find(word[0]) != std::string::npos) {
+        // the first letter is a vowel, append way
+        if (isUpper(word)) {
+            word.append(&quot;WAY&quot;);
+        }
+        else {
+            word.append(&quot;way&quot;);
+        }
+    }
+    else {
+        // the first letter is not a vowel
+        // first, extract and remove any leading consonants
+        int end = word.find_first_of(EXTENDED_VOWELS);
+        // if this is true, the &quot;word&quot; had no vowels
+        if (end == std::string::npos) {
+            if (isUpper(word)) {
+                word.append(&quot;AY&quot;);
+            }
+            else {
+                word.append(&quot;ay&quot;);
+            }   
+        }
+        else {
+            // copy the consonants
+            // there could be more than one, like &quot;th&quot;, &quot;sh&quot;, etc.
+            std::string start = word.substr(0, end);
+            word.erase(0, end);
+            // check if the word was all caps
+            if (isUpper(word) &amp;&amp; isUpper(start)) {
+                word.append(start);
+                word.append(&quot;AY&quot;);
+            }
+            // check if the word started with a capital letter
+            else if (isUpper(start[0])) {
+                // make consonant lowercase
+                start[0] += 32;
+                // make start of word uppercase
+                word[0] -= 32;
+                word.append(start);
+                word.append(&quot;ay&quot;);
+            }
+            else {
+                word.append(start);
+                word.append(&quot;ay&quot;);
+            }
+        } 
+    }
+}
+</code></pre>
+<p>We can also define a function that converts a sentence to Pig Latin, using the function that converts single words to Pig Latin. For this example, we'll assume that the sentence contains no punctuation.</p>
+<pre><code class="language-cpp">void convertSentenceToPigLatin(std::string&amp; sentence) {
+    int start = 0;
+    // find the first space
+    int end = sentence.find(&quot; &quot;);
+    std::string word;
+    // while a space is still found
+    while (end != std::string::npos) {
+        // extract the word
+        word = sentence.substr(start, end - start);
+        // convert the extracted word to pig latin
+        convertToPigLatin(word);
+        // replace the original word with the pig latin word
+        sentence.replace(start, end - start, word);
+        // update the start position to be 
+        // one more than the end of the new word
+        start = end + 1 + (word.length() - (end - start));
+        // find the next space
+        end = sentence.find(&quot; &quot;, start);
+    }
+    // handle the last word
+    word = sentence.substr(start, std::string::npos);
+    convertToPigLatin(word);
+    sentence.replace(start, sentence.length() - start, word);
+}
+</code></pre>
+<h2 id="conclusion">Conclusion</h2>
+<p>This week we discussed strings, both the original C strings and C++ STL strings. C strings still exist for backwards compatibility with C, but the C string library is lackluster. Most of the time, using a C++ STL string is advisable. The C++ string is implemented as a class. Variables of classes are called objects, and objects have functions associated with them. C++ strings have many member functions associated with its objects, as well as support for operators.</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script src="../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

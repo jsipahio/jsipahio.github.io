@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>CSE234 Week 9: Copying Algorithms - </title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../css/brands.min.css" rel="stylesheet">
+        <link href="../../css/solid.min.css" rel="stylesheet">
+        <link href="../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" disabled>
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../.."></a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../cv/" class="nav-link">CV</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../teaching/" class="nav-link">Teaching</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item dropdown">
+                              <button id="theme-menu" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static" aria-label="Toggle theme" class="nav-link dropdown-toggle">
+                                <i class="fa-solid fa-circle-half-stroke fa-fw"></i>
+                                <span class="d-lg-none ms-2">Toggle theme</span>
+                              </button>
+                              <ul class="dropdown-menu dropdown-menu-end">
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
+                                    <i class="fa-solid fa-sun fa-fw"></i>
+                                    <span class="ms-2">Light</span>
+                                    <i class="fa-solid fa-check ms-auto d-none"></i>
+                                  </button>
+                                </li>
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
+                                    <i class="fa-solid fa-moon fa-fw"></i>
+                                    <span class="ms-2">Dark</span>
+                                    <i class="fa-solid fa-check ms-auto d-none"></i>
+                                  </button>
+                                </li>
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="auto" aria-pressed="true">
+                                    <i class="fa-solid fa-circle-half-stroke fa-fw"></i>
+                                    <span class="ms-2">Auto</span>
+                                    <i class="fa-solid fa-check ms-auto"></i>
+                                  </button>
+                                </li>
+                              </ul>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <script src="../../js/darkmode.js"></script>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#cse234-week-9-copying-algorithms" class="nav-link">CSE234 Week 9: Copying Algorithms</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#copying" class="nav-link">Copying</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#conclusion" class="nav-link">Conclusion</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="cse234-week-9-copying-algorithms">CSE234 Week 9: Copying Algorithms</h1>
+<p>This week, we will continue discussing the STL algorithms library. This week, we'll discuss the algorithms for copying containers.</p>
+<h2 id="copying">Copying</h2>
+<p><code>std::copy</code> takes the start and end iterators of the collection being copied, along with the start iterator of the destination collection. <code>std::copy_if</code> takes an additional parameter, a predicate, that should return true if the element should be copied and false if it should not. <code>std::copy_n</code> takes the starting iterator of the collection being copied from, the number of items to copy, and the starting iterator of the destination collection. <code>std::copy_backward</code> takes the start and end iterator of the collection to be copied, and the end iterator of the destination collection. The elements are copied in order, but placed at the end of the destination collection.</p>
+<pre><code class="language-C++">#include &lt;algorithm&gt;
+#include &lt;vector&gt;
+
+int main() {
+    std::vector&lt;int&gt; values = { 1, 2, 3, 4, 5, 6, 7, 8 };
+    // the destination needs to be large enough to hold the result
+    std::vector&lt;int&gt; valuesCopy(values.size());
+    std::vector&lt;int&gt; evenValues(values.size());
+    std::vector&lt;int&gt; firstHalf(values.size() / 2);
+    std::vector&lt;int&gt; twoCopies(values.size() * 2);
+    // pass the beginning and end of the range to be copied,
+    // and the start iterator of the destination to copy it to
+    // valuesCopy == { 1, 2, 3, 4, 5, 6, 7, 8 }
+    std::copy(values.begin(), values.end(), valuesCopy.begin());
+    // pass the beginning and end of the range to be copied from,
+    // an iterator to the start of the destination range,
+    // and a predicate that returns true if the element should 
+    // be copied, and false if it should not be copied
+    // evenValues == { 2, 4, 6, 8, ?, ?, ?, ? }
+    std::copy_if(values.begin(), values.end(), evenValues.begin(), [](int x) {
+        return !(x % 2);
+    });
+    // pass the beginning iterator of the range to be copied from,
+    // the number of elements to copy, and the start iterator of
+    // the range to copy the elements to
+    // firstHalf == { 1, 2, 3, 4 }
+    std::copy_n(values.begin(), values.size() / 2, firstHalf.begin());
+    // copy values into first half of twoCopies
+    std::copy(values.begin(), values.end(), twoCopies.begin());
+    // now, use copy_backward to put second copy of values at the end
+    // twoCopies == { 1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 4, 5, 6, 7, 8 }
+    std::copy_backward(values.begin(), values.end(), twoCopies.end());
+    return 0;
+}
+</code></pre>
+<p>We'll talk about <code>std::remove</code> next week, but the functions <code>std::remove_copy</code> and <code>std::remove_copy_if</code> are discussed here, since they are still copying a collection rather than directly modifying it. These functions will copy a collection to a new collection, but omit elements that meet the specified criteria. Both have the same first three arguments as <code>std::copy</code>, the start and end iterator of the collection being copied and the start iterator of the target collection. The fourth argument of <code>std::remove_copy</code> is the value that will be omitted when performing the copy. The fourth argument of <code>std::remove_copy_if</code> is a predicate that returns true if an element will be omitted, and false if it will be copied.</p>
+<pre><code class="language-C++">#include &lt;algorithm&gt;
+#include &lt;vector&gt;
+
+int main() {
+    std::vector&lt;int&gt; values = { 0, 1, 3, -6, 1, 0, -5, 6, -2, 0 };
+    std::vector&lt;int&gt; noZeros(values.size());
+    std::vector&lt;int&gt; noNegativeValues(values.size());
+    // copy values into noZeros, excluding elements that are 0
+    // after operation:
+    // values == { 0, 1, 3, -6, 1, 0, -5, 6, -2, 0 }
+    // noZeros == { 1, 3, -6, 1, -5, 6, -2, ?, ?, ? }
+    std::remove_copy(values.begin(), values.end(), noZeros.begin(), 0);
+    // copy values into noNegativeValues, excluding elements that are less than 0
+    // after operation: 
+    // values = { 0, 1, 3, -6, 1, 0, -5, 6, -2, 0 }
+    // noNegativeValues = { 0, 1, 3, 1, 0, 6, 0, ?, ?, ? }
+    std::remove_copy_if(values.begin(), values.end(), noNegativeValues.begin(), [](int x) {
+        // predicate returns true if element is ignored
+        return x &lt; 0;
+    });
+    return 0;
+}
+</code></pre>
+<p>There are also <code>std::replace_copy</code> and <code>std::replace_copy_if</code> which work exactly the same as the remove variants, but rather than omitting the element they instead take an additional fifth argument, which is a value to replace the target with. See the later section on <code>std::replace</code> and <code>std::replace_if</code> for an example of replacement.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>This week we discussed the copying algorithms provided in C++. Definitely a shorter week. This week and next week will have a combined lab. </p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script src="../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

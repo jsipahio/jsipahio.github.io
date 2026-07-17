@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>CSE234 Week 8: For Each and Searching Algorithms - </title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../css/brands.min.css" rel="stylesheet">
+        <link href="../../css/solid.min.css" rel="stylesheet">
+        <link href="../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" disabled>
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../.."></a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../cv/" class="nav-link">CV</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../teaching/" class="nav-link">Teaching</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item dropdown">
+                              <button id="theme-menu" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static" aria-label="Toggle theme" class="nav-link dropdown-toggle">
+                                <i class="fa-solid fa-circle-half-stroke fa-fw"></i>
+                                <span class="d-lg-none ms-2">Toggle theme</span>
+                              </button>
+                              <ul class="dropdown-menu dropdown-menu-end">
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
+                                    <i class="fa-solid fa-sun fa-fw"></i>
+                                    <span class="ms-2">Light</span>
+                                    <i class="fa-solid fa-check ms-auto d-none"></i>
+                                  </button>
+                                </li>
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
+                                    <i class="fa-solid fa-moon fa-fw"></i>
+                                    <span class="ms-2">Dark</span>
+                                    <i class="fa-solid fa-check ms-auto d-none"></i>
+                                  </button>
+                                </li>
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="auto" aria-pressed="true">
+                                    <i class="fa-solid fa-circle-half-stroke fa-fw"></i>
+                                    <span class="ms-2">Auto</span>
+                                    <i class="fa-solid fa-check ms-auto"></i>
+                                  </button>
+                                </li>
+                              </ul>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <script src="../../js/darkmode.js"></script>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#cse234-week-8-for-each-and-searching-algorithms" class="nav-link">CSE234 Week 8: For Each and Searching Algorithms</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#for-each" class="nav-link">For Each</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#any-all-and-none" class="nav-link">Any, All, and None</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#find-find-if-and-find-if-not" class="nav-link">Find, Find If, and Find If Not</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#find-first-of" class="nav-link">Find First Of</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#count-and-count-if" class="nav-link">Count and Count If</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#search" class="nav-link">Search</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#search-n" class="nav-link">Search N</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#conclusion" class="nav-link">Conclusion</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="cse234-week-8-for-each-and-searching-algorithms">CSE234 Week 8: For Each and Searching Algorithms</h1>
+<p>This week we will look at the <code>std::for_each</code> function and the searching algorithms provided by the STL Algorithms library. <code>std::for_each</code> is used to run a callback on each element in a range. The searching functions do not modify the elements of a container. They are used to check if an element is (or isn't) a member of a container, find if a container contains an element (or range of elements), and count the occurrences of an element in a container. </p>
+<h2 id="for-each">For Each</h2>
+<p>The first algorithm we will look at is <code>std::for_each</code>. This function has three parameters: the starting iterator of a range, the ending iterator of a range, and a unary function that takes an element of the collection as a parameter. <code>std::for_each</code> is used when the elements of a container (or consecutive subset of the container) need to be accessed, and possibly modified. <code>std::for_each</code> cannot be used to add or remove elements from the range, but can modify the existing elements.</p>
+<pre><code class="language-C++">// must include algorithm
+#include &lt;algorithm&gt;
+#include &lt;iostream&gt;
+#include &lt;array&gt;
+
+int main() {
+    std::array&lt;int, 7&gt; values = { 2, 6, 24, 76, 3, 67, 5 };
+    int sum = 0;
+
+    // use for_each to sum elements
+    std::for_each(values.begin(), values.end(), [&amp;sum](int x) mutable) {
+        sum += x;
+    };
+
+    // compute average
+    double average = sum / 7.0;
+    std::cout &lt;&lt; &quot;Average = &quot; &lt;&lt; average &lt;&lt; std::endl;
+
+    return 0;
+}
+</code></pre>
+<p>The difference between <code>std::for_each</code> and a range-based for loop (<code>for (auto&amp; x: y) {}</code> syntax) is that <code>std::for_each</code> supports running on a partial range, and, if the container supports reverse iterators, iterate backwards over the range. However, range-based for loops support break and continue statements, which <code>std::for_each</code> does not.</p>
+<h2 id="any-all-and-none">Any, All, and None</h2>
+<p>The first three searching algorithms we'll discuss return <code>bool</code>. The first function, <code>std::any_of</code>, returns true if <strong>at least one</strong> element in the collection meet the search criteria. <code>std::all_of</code> returns true if <strong>all</strong> items in the collection meet the search criteria. Finally, <code>std::none_of</code> returns true if <strong>no</strong> elements meet the criteria. All three functions have three arguments: the starting iterator, the ending iterator, and a unary predicate. Below are some examples of each function's usage:</p>
+<pre><code class="language-C++">#include &lt;algorithm&gt;
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+
+int main() {
+    std::vector&lt;int&gt; values = { 1, -2, 5, 34, 2, 90, 365, -67 };
+
+    // this will return true since there is 
+    // at least one negative value in the vector
+    if (std::any_of(values.begin(), values.end(), [](int x) { return x &lt; 0; }))
+        std::cout &lt;&lt; &quot;values contains a negative number&quot; &lt;&lt; std::endl;
+    else
+        std::cout &lt;&lt; &quot;values contains no negatives&quot; &lt;&lt; std::endl;
+
+    // this will be false since there are even numbers in values
+    if (std::all_of(vales.begin(), values.end(), [](int x) { return x % 2; }))
+        std::cout &lt;&lt; &quot;All values are odd&quot; &lt;&lt; std::endl;
+    else
+        std::cout &lt;&lt; &quot;Some values are even&quot; &lt;&lt; std::endl;
+
+    // this will be true since there are no 0s in values
+    if (std::none_of(values.begin(), values.end(), [](int x) { return x == 0; })) 
+        std::cout &lt;&lt; &quot;There are no 0s in values&quot; &lt;&lt; std::endl;
+    else 
+        std::cout &lt;&lt; &quot;There is at least one 0 in values&quot; &lt;&lt; std::endl;
+
+    return 0;
+}
+</code></pre>
+<p>To be more concrete with our definitions, <code>any_of</code> returns true iff (if and only if) the predicate returns true at least once. <code>all_of</code> returns true iff the predicate returns false zero times. <code>none_of</code> returns true iff the predicate returns true zero times.  </p>
+<h2 id="find-find-if-and-find-if-not">Find, Find If, and Find If Not</h2>
+<p>If you want to find a certain element, or if a certain element matches (or doesn't match) a criterion, then <code>std::find</code>, <code>std::find_if</code>, and <code>std::find_if_not</code> can be used. <code>std::find</code> takes a starting and ending iterator as its first two parameters, and the value to search for as its third parameter. If you are not looking for a specific value, but if a value in the collection meets a certain condition, <code>std::find_if</code> can be used. <code>find_if</code> also takes a start and end iterator as its first two parameters, but instead of a value it expects a predicate as the third argument. If you want to find an element that does not match a condition, <code>std::find_if_not</code> is used the same way. All three functions return an iterator to the found element, or an iterator to the end of the collection if no match is found. If there are multiple matches, only the first match's iterator is returned. </p>
+<pre><code class="language-C++">#include &lt;algorithm&gt;
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;vector&gt;
+
+int main() {
+    std::vector&lt;std::string&gt; fruits = {
+        &quot;apple&quot;, &quot;banana&quot;, &quot;cherry&quot;, &quot;dragonfruit&quot;, &quot;elderberry&quot;, 
+        &quot;fig&quot;, &quot;grape&quot;, &quot;huckleberry&quot;, &quot;icaco&quot;, &quot;juniper&quot;, 
+        &quot;kiwi&quot;, &quot;lemon&quot;, &quot;melon&quot;, &quot;nectarine&quot;, &quot;orange&quot;, &quot;peach&quot;,
+        &quot;quandong&quot;, &quot;raspberry&quot;, &quot;strawberry&quot;, &quot;tangerine&quot;,&quot;ugli&quot;, 
+        &quot;vanilla&quot;, &quot;watermelon&quot;, &quot;ximenia&quot;, &quot;yuzu&quot;, &quot;zucchini&quot;
+    };
+
+    auto it = std::find(fruits.begin(), fruits.end(), &quot;blackberry&quot;);
+    if (it != fruits.end()) {
+        std::cout &lt;&lt; &quot;Found blackberry\n&quot;;
+    }
+    else {
+        // this will print
+        std::cout &lt;&lt; &quot;Blackberry not found\n&quot;;
+    }
+    it = std::find_if(fruits.begin(), fruits.end(), 
+    [](const std::string&amp; fruit) {
+        if (fruit[0] == 'b') return true;
+        else return false;
+    });
+
+    *it = &quot;blackberry&quot;;
+    it = std::find(fruits.begin(), fruits.end(), &quot;blackberry&quot;);
+    if (it != fruits.end()) {
+        // this will print
+        std::cout &lt;&lt; &quot;Found blackberry\n&quot;;
+    }
+    else {
+        std::cout &lt;&lt; &quot;Blackberry not found\n&quot;;
+    }
+
+    // print all fruits with four or fewer letters
+    auto detectShortString = [](const std::string&amp; fruit) {
+        if (fruit.length() &gt; 4) return true;
+        else return false;
+    };
+
+    it = std::find_if_not(fruits.begin(), fruits.end(), detectShortString);
+
+
+    while (it != fruits.end()) {
+        std::cout &lt;&lt; *it &lt;&lt; &quot;\n&quot;;
+        ++it;
+        // starting search at next element
+        it = std::find_if_not(it, fruits.end(), detectShortString);
+    }
+}
+</code></pre>
+<h2 id="find-first-of">Find First Of</h2>
+<p>The <code>std::find_first_of</code> is similar to <code>std::string::find_first_of</code>. Its parameters are the start and end iterators of the collection to search, along with the start and end iterators of the collection of search targets. If any of the elements in the second collection are found in the first, an iterator to that element is returned.</p>
+<pre><code class="language-C++">#include &lt;algorithm&gt;
+#include &lt;array&gt;
+#include &lt;iostream&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;time.h&gt;
+
+int main() {
+    srand(time(0));
+
+    std::array&lt;int, 100&gt; numbers;
+    std::array primeNumbers = {
+        2, 3, 5, 7, 11, 13, 17, 19, 
+        23, 29, 31, 37, 41, 43, 47, 
+        53, 59, 61, 67, 71, 73, 79, 
+        83, 89, 97
+    };
+
+    for (int i = 0; i &lt; 100; ++i) {
+        numbers[i] = rand() % 100 + 1;    
+    }
+
+    auto it = std::find_first_of(
+        numbers.begin(),
+        numbers.end(),
+        primeNumbers.begin(),
+        primeNumbers.end()
+    );
+
+    if (it != numbers.end())
+        std::cout &lt;&lt; &quot;The first prime number found is: &quot; &lt;&lt; *it &lt;&lt; &quot;\n&quot;;
+    else 
+        std::cout &lt;&lt; &quot;No prime numbers found in range\n&quot;;
+
+    return 0;
+}
+</code></pre>
+<h2 id="count-and-count-if">Count and Count If</h2>
+<p>To determine how many times an element appears in a collection, <code>std::count</code> can be used. <code>std::count</code> expects a starting iterator, ending iterator, and an element to search for and count as parameters. It returns the number of instances of the provided element in the collection as a <code>size_t</code> value. To count the number of elements that match a certain criterion, use <code>std::count_if</code>. Again, <code>std::count_if</code> expects the start and end iterator, but instead of a specific element it counts, it takes a unary predicate, and will count all elements for which that predicate returns true.</p>
+<pre><code class="language-C++">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;algorithm&gt; // Required for std::count and std::count_if
+
+int main() {
+    std::vector&lt;int&gt; numbers = {1, 2, 3, 4, 4, 5, 6, 4, 7, 8, 9, 10};
+
+    int target = 4;
+    // this version searches for a certain element
+    auto targetCount = std::count(numbers.begin(), numbers.end(), target);
+    std::cout &lt;&lt; &quot;The number &quot; &lt;&lt; target 
+        &lt;&lt; &quot; appears &quot; &lt;&lt; targetCount &lt;&lt; &quot; times.\n&quot;;
+
+    // this version takes a unary predicate, and counts any elements that
+    // returns true from the predicate
+    auto evenCount = std::count_if(numbers.begin(), numbers.end(), 
+    [](int n) {
+        return n % 2 == 0; 
+    });
+    std::cout &lt;&lt; &quot;There are &quot; &lt;&lt; evenCount &lt;&lt; &quot; even numbers in the list.\n&quot;;
+
+    // the predicate can be anything
+    auto greaterThanFive = std::count_if(numbers.begin(), numbers.end(), 
+    [](int n) {
+        return n &gt; 5;
+    });
+    std::cout &lt;&lt; &quot;There are &quot; &lt;&lt; greaterThanFive &lt;&lt; &quot; numbers greater than 5.\n&quot;;
+
+    return 0;
+}
+</code></pre>
+<h2 id="search">Search</h2>
+<p>The <code>std::search</code> function takes two ranges as input. It searches for the first occurrence of the second range within the first, and returns an iterator to the result of the search. For example:</p>
+<pre><code class="language-C++">#include &lt;algorithm&gt;
+#include &lt;vector&gt;
+
+int main() {
+    std::vector&lt;int&gt; values = { 1, 2, 3, 1, 2, 6, 3, 1, 2 };
+    std::vector&lt;int&gt; target = { 1, 2, 6 };
+    // pass the beginning and end of the range to search
+    // and the beginning and end of the range we want to find
+    auto it = std::search(values.begin(), values.end(), target.begin(), target.end());
+    // the iterator returned should point to the 4th element of the vector
+    assert(*it == values[3]);
+    assert(*(it + 1) == values[4]);
+    assert(*(it + 2) == values[5]);
+    target = { 1, 2, 5};
+    // since target is not in the range we are searching, we expect not to find it
+    it = std::search(values.begin(), values.end(), target.begin(), target.end());
+    // when the target is not found it returns the second argument,
+    // i.e., the end of the search range
+    assert(it == values.end());
+    return 0;
+}
+</code></pre>
+<h2 id="search-n">Search N</h2>
+<p>Rather than taking a range to search for, <code>search_n</code> looks for consecutive occurrences of a single value. The parameters are the start and end iterators of a collection to search in, the number of times the target should appear consecutively, and the target to search for. Example:</p>
+<pre><code class="language-C++">#include &lt;algorithm&gt;
+#include &lt;cassert&gt;
+#include &lt;vector&gt;
+
+int main() {
+    std::vector&lt;int&gt; values = { 1, 1, 2, 1, 1, 1, 2, 3, 1, 1, 1, 1, 1, 2 };
+    // find first occurrence of 2 1s in a row
+    auto it2 = std::search_n(values.begin(), values.end(), 2, 1);
+    // find first occurrence of 3 1s in a row
+    auto it3 = std::search_n(values.begin(), values.end(), 3, 1);
+    // find first occurrence of 4 1s in a row
+    auto it4 = std::search_n(values.begin(), values.end(), 4, 1);
+    // find first occurrence of 5 1s in a row
+    auto it5 = std::search_n(values.begin(), values.end(), 5, 1);
+    // find first occurrence of 6 1s in a row
+    auto it6 = std::search_n(values.begin(), values.end(), 6, 1);
+
+    assert(it2 == values.begin());
+    assert(it3 == values.begin() + 3);
+    assert(it4 == values.begin() + 8);
+    assert(it5 == values.begin() + 8);
+    assert(it6 == values.end());
+    return 0;
+}
+</code></pre>
+<h2 id="conclusion">Conclusion</h2>
+<p>This week, we looked at the first set of STL Algorithms. <code>std::for_each</code> is used to apply a unary function to every element in a container. <code>std::any_of</code>, <code>std::all_of</code>, and <code>std::none_of</code> return bool, and just determine if an element does or does not appear in a collection. <code>std::find</code> looks for occurrences of a particular element, while <code>std::find_if</code> searches for elements that cause a unary predicate to return true. The <code>std::count</code> and <code>std::count_if</code> functions return the number of times an element (or elements that match a predicate) occur in a collection. The <code>std::search</code> function takes two ranges as input, and searches for the first occurrence of a range within another range. The <code>std::search_n</code> function searches a range for consecutive occurrences of elements. </p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script src="../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

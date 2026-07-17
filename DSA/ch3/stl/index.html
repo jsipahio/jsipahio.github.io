@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../../img/favicon.ico">
+        <title>STL Vector and I/O Streams - </title>
+        <link href="../../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../../css/brands.min.css" rel="stylesheet">
+        <link href="../../../css/solid.min.css" rel="stylesheet">
+        <link href="../../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" disabled>
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../../.."></a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../../cv/" class="nav-link">CV</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../../teaching/" class="nav-link">Teaching</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item dropdown">
+                              <button id="theme-menu" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static" aria-label="Toggle theme" class="nav-link dropdown-toggle">
+                                <i class="fa-solid fa-circle-half-stroke fa-fw"></i>
+                                <span class="d-lg-none ms-2">Toggle theme</span>
+                              </button>
+                              <ul class="dropdown-menu dropdown-menu-end">
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
+                                    <i class="fa-solid fa-sun fa-fw"></i>
+                                    <span class="ms-2">Light</span>
+                                    <i class="fa-solid fa-check ms-auto d-none"></i>
+                                  </button>
+                                </li>
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
+                                    <i class="fa-solid fa-moon fa-fw"></i>
+                                    <span class="ms-2">Dark</span>
+                                    <i class="fa-solid fa-check ms-auto d-none"></i>
+                                  </button>
+                                </li>
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="auto" aria-pressed="true">
+                                    <i class="fa-solid fa-circle-half-stroke fa-fw"></i>
+                                    <span class="ms-2">Auto</span>
+                                    <i class="fa-solid fa-check ms-auto"></i>
+                                  </button>
+                                </li>
+                              </ul>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <script src="../../../js/darkmode.js"></script>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#stl-vector-and-io-streams" class="nav-link">STL Vector and I/O Streams</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#vector" class="nav-link">Vector</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#io-streams" class="nav-link">I/O Streams</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="stl-vector-and-io-streams">STL Vector and I/O Streams</h1>
+<p>The C++ Standard Template Library contains implementations of most common data structures and algorithms. In this class, the only STL data structure we will use is the <code>std::vector</code> class. Additionally, we will discuss the standard library I/O streams in more detail.</p>
+<h2 id="vector">Vector</h2>
+<p>A vector is an automatically resizing array. The <code>std::vector</code> class is a template class (we'll discuss templates in more detail in Week 5), which means a vector can be used to hold any data type. To specify the type of data the vector holds, we put the target data type in angle brackets after the name vector: <code>std::vector&lt;int&gt;</code> is a vector of <code>int</code>, <code>std::vector&lt;std::string&gt;</code> is a vector of strings, etc. Vectors are useful when we don't know how many data elements we need to store, such as reading values from a file. While we read the file, count the number of values we need to store, then read the values into a dynamic array that we create, this is not optimal, as reading files is one of the more computationally expensive operations we can perform.  </p>
+<h3 id="adding-values">Adding Values</h3>
+<p>Provided the values are being inserted to the vector in order, or the order is insignificant, the safest way to add elements with the <code>push_back()</code> function. Values can be inserted using the subscript operator <code>[]</code>, however, there is no guarantee that the vector will automatically resize if you attempt to access an index that the vector does not have capacity for. </p>
+<h3 id="vector-resizing">Vector Resizing</h3>
+<p>A vector automatically resizes itself by doubling its capacity each time it runs out of space. </p>
+<h3 id="accessing-values">Accessing Values</h3>
+<p>Values in the vector can be accessed and modified by the subscript operator (square brackets <code>[]</code>). Like a normal array, however, this provides no protection against out-of-range access. The <code>at()</code> member function can be used to access members, and throws an exception if the index passed to it is outside the vector's bounds.</p>
+<h2 id="io-streams">I/O Streams</h2>
+<p>At this point, you are likely used to automatically adding <code>#include &lt;iostream&gt;</code> to the top of all your program. Now, we are going to discuss I/O streams in more detail.</p>
+<h3 id="console-io">Console I/O</h3>
+<p>The <code>&lt;iostream&gt;</code> header provides access to the <code>std::cin</code>, <code>std::cout</code>, and <code>std::cerr</code> streams to access the console. You should be aware that <code>std::cin</code> is used to read input data from the console, and <code>std::cout</code> is used to write data to the console. You may not be as familiar with <code>std::cerr</code>. Terminals have two output streams, one for standard output and one for error output. The <code>std::cerr</code> object writes to the error stream rather than the standard output. Therefore, when printing an error message, it is better to use <code>std::cerr</code>, so the end user can separate error messages from normal output if they wish.  </p>
+<h4 id="reading-data">Reading Data</h4>
+<p><code>std::cin</code> can be used to read data from the console. You are already familiar with using the extraction operator <code>&gt;&gt;</code> to read data. The extraction operator delineates input elements based on whitespace characters, so if you type "a b c" into the console, a single read with <code>&gt;&gt;</code> will only read "a". The other two letters will remain in the input stream, waiting for the next read operation. This may lead to unexpected results, if the input stream is not flushed. The example below will demonstrate this behavior:</p>
+<pre><code class="language-C++">#include &lt;iostream&gt;
+#include &lt;string&gt;
+
+int main() {
+    std::string name;
+    int age;
+
+    std::cout &lt;&lt; &quot;Enter your name.&quot; &lt;&lt; std::endl;
+    std::cout &lt;&lt; &quot;$ &quot;;
+    std::cin &gt;&gt; str;
+
+    std::cout &lt;&lt; &quot;Enter your age (in years).&quot; &lt;&lt; std::endl;
+    std::cout &lt;&lt; &quot;$ &quot;;
+    std::cin &gt;&gt; age;
+
+    std::cout &lt;&lt; &quot;Hello, &quot; &lt;&lt; name 
+        &lt;&lt; &quot;. You are &quot; &lt;&lt; age &lt;&lt; &quot;years old.&quot; &lt;&lt; std::endl;
+
+    return 0;
+}
+</code></pre>
+<p>Example I/O:</p>
+<pre><code>Enter your name.
+$ John S
+Enter your age (in years).
+$ Hello, John, you are 0 years old
+</code></pre>
+<p>When entering the "John S" as the name, only "John" is read into the string variable <code>name</code>. This is because <code>&gt;&gt;</code> splits input on whitespace characters. However, the "S" is not flushed from the input buffer. Therefore, after printing the next message, rather than allowing the user to enter the value for <code>age</code>, the next item in the input buffer is immediately read in. Depending on the compiler and platform, what the program does when trying to read the "S" into an integer may vary. On my system, it skipped trying to parse it as an integer and printed 0 for the value of age. Other systems may parse "S" as a character and cast it as an integer, or there may be some garbage value that gets printed instead of 0. The behavior is undefined.  </p>
+<p>If we want to avoid these situations, we should clear the input buffer after each read attempt. Since <code>std::cin</code> stops reading after a new line, we can implement a function <code>clearInput()</code> to reset the input buffer:</p>
+<pre><code class="language-C++">#include &lt;iostream&gt;
+#include &lt;string&gt;
+
+void clearInput() {
+    // this flushes any error locks,
+    // ex: failed to read incompatable data types
+    std::cin.clear();
+    // this reads data until a new line is reached
+    while (std::cin.get() != '\n' &amp;&amp; std::cin) ;
+}
+
+int main() {
+    std::string name;
+    int age;
+
+    std::cout &lt;&lt; &quot;Enter your name.&quot; &lt;&lt; std::endl;
+    std::cout &lt;&lt; &quot;$ &quot;;
+    std::cin &gt;&gt; str;
+    clearInput();
+
+    std::cout &lt;&lt; &quot;Enter your age (in years).&quot; &lt;&lt; std::endl;
+    std::cout &lt;&lt; &quot;$ &quot;;
+    std::cin &gt;&gt; age;
+    clearInput();
+
+    std::cout &lt;&lt; &quot;Hello, &quot; &lt;&lt; name 
+        &lt;&lt; &quot;. You are &quot; &lt;&lt; age &lt;&lt; &quot;years old.&quot; &lt;&lt; std::endl;
+
+    return 0;
+}
+</code></pre>
+<p>Example I/O:</p>
+<pre><code>Enter your name.
+$ 
+Enter your age (in years).
+$ 
+Hello, , you are  years old
+</code></pre>
+<p>There are other mechanisms for reading input as well, however. In the <code>clearInput()</code> function, we used <code>std::cin.get()</code>. This function reads a single character at a time, including whitespace. This can be useful if we need to read input into a buffer, or are expecting input to be separated by non-whitespace characters. The <code>&lt;string&gt;</code> header provides a function, <code>getline()</code>, that can be used to read input into a string until a new line character is reached.   </p>
+<p>The extraction operator can be overloaded for user defined types. If the operator needs to access private members of the class, it needs to be defined as a <code>friend</code> function, and not a member function. If it does not need to access members of the class, it is better to define it as a free function.</p>
+<h4 id="writing-data">Writing Data</h4>
+<p>The <code>std::cout</code> and <code>std::cerr</code> objects can be used to print data to the console. Data is written using the <code>&lt;&lt;</code> operator. Normal output is written using <code>std::cout</code>. For error messages and debug statements, use <code>std::cerr</code>. The <code>operator&lt;&lt;</code> can be overloaded to print out any data type. Similar to <code>operator&gt;&gt;</code>, if it needs to access private members of the class, it must be defined as a <code>friend</code> function. If it does not need access to private members, it is better to define it as a free function.  </p>
+<h3 id="file-streams">File Streams</h3>
+<p>Often, programs need to read data from, and write data to, files. In C++, you create objects that operate similarly to <code>std::cin</code> and <code>std::cout</code> to handle files. </p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../../js/base.js"></script>
+        <script src="../../../javascripts/mathjax.js"></script>
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script src="../../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

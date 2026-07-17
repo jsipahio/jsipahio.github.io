@@ -1,0 +1,1214 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>CSE233 Week 5: Introduction to Functions - </title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../css/brands.min.css" rel="stylesheet">
+        <link href="../../css/solid.min.css" rel="stylesheet">
+        <link href="../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" disabled>
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../.."></a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../cv/" class="nav-link">CV</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../teaching/" class="nav-link">Teaching</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item dropdown">
+                              <button id="theme-menu" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static" aria-label="Toggle theme" class="nav-link dropdown-toggle">
+                                <i class="fa-solid fa-circle-half-stroke fa-fw"></i>
+                                <span class="d-lg-none ms-2">Toggle theme</span>
+                              </button>
+                              <ul class="dropdown-menu dropdown-menu-end">
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
+                                    <i class="fa-solid fa-sun fa-fw"></i>
+                                    <span class="ms-2">Light</span>
+                                    <i class="fa-solid fa-check ms-auto d-none"></i>
+                                  </button>
+                                </li>
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
+                                    <i class="fa-solid fa-moon fa-fw"></i>
+                                    <span class="ms-2">Dark</span>
+                                    <i class="fa-solid fa-check ms-auto d-none"></i>
+                                  </button>
+                                </li>
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="auto" aria-pressed="true">
+                                    <i class="fa-solid fa-circle-half-stroke fa-fw"></i>
+                                    <span class="ms-2">Auto</span>
+                                    <i class="fa-solid fa-check ms-auto"></i>
+                                  </button>
+                                </li>
+                              </ul>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <script src="../../js/darkmode.js"></script>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#cse233-week-5-introduction-to-functions" class="nav-link">CSE233 Week 5: Introduction to Functions</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#functions" class="nav-link">Functions</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#predefined-functions" class="nav-link">Predefined Functions</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#task-decomposition-and-refactoring" class="nav-link">Task Decomposition and Refactoring</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#conclusion" class="nav-link">Conclusion</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="cse233-week-5-introduction-to-functions">CSE233 Week 5: Introduction to Functions</h1>
+<p>This week, we will introduce functions. Functions are a mechanism to modularize and reuse code. We'll talk about using predefined functions, as well as defining our own functions.</p>
+<h2 id="functions">Functions</h2>
+<p>A function is a block of code that executes a task. Functions have their own scope, meaning that variables defined inside a function are local to that function's body. To pass data, functions accept parameters as input and return values that can be used elsewhere in the program. A function's signature consists of its return type, name, and parameter list. In C++, functions can be declared and implemented separately. Below is the general syntax for a function declaration:</p>
+<pre><code class="language-C++">return_type function_name(param_type1 param_name1, param_type2 param_name2);
+</code></pre>
+<p>First, the return type of the function is provided. If the function does not return a value, the <code>void</code> type is used. Then, the name of the function is provided. Finally, the parameter list. The parameter list is a comma-separated list wrapped in parentheses. If the function has no parameters, the parentheses are empty. Each parameter has a data type and a name. The function declaration ends with a semicolon. The point of a function declaration is to act as a promise that the function exists somewhere. It provides the function's signature so that the function can be called, without needing to immediately define it (the main reason why function declarations exist in C and C++ has to do with how C programs are compiled. We'll discuss the specifics of this at the end of the course).<br />
+Here is an example function declaration for a function that adds two integers, and returns an integer result:</p>
+<pre><code class="language-cpp">int add(int a, int b);
+</code></pre>
+<p>In this case, the return type of the function is <code>int</code>. The name of the function is <code>add</code>. The function has two parameters, <code>int a</code> and <code>int b</code>. Here is a function declaration for a function that prints a greeting:</p>
+<pre><code class="language-cpp">void printGreeting();
+</code></pre>
+<p>Since the function is only printing a greeting, and not processing data, it does not need to return a value. Therefore, the "return type" is <code>void</code>. The name of the function is <code>printGreeting</code>. This function has no parameters.<br />
+At some point, the function needs to be defined (given a body) to specify the instructions the function must carry out. A function definition has the following syntax:</p>
+<pre><code class="language-cpp">return_type function_name(param_type1 param_name1, param_type2 param_name2) {
+    statement;
+    // non-void functions must return a value
+    return value;
+}
+</code></pre>
+<p>You'll notice that this is the exact same as the syntax for the declaration, except instead of a semicolon the function now has a block. Inside the block are the statements that the function will execute when it is called. Non-void functions must have a return statement that specifies the value that is returned by the function. Void functions do not need a return statement, although one can be provided. The return statement for a void function consists of <code>return;</code> with no value after the <code>return</code> keyword. Below are the function definitions for <code>add()</code> and <code>printGreeting()</code>:</p>
+<pre><code class="language-cpp">int add(int a, int b) {
+    return a + b;
+}
+
+void printGreeting() {
+    std::cout &lt;&lt; &quot;Hello, World!\n&quot;;
+}
+</code></pre>
+<p>Let's view these functions in the context of a full program:</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+
+// function declarations before main()
+int add(int a, int b);
+void printGreeting();
+
+// since the functions are declared before main(),
+// they can be used in main, even though we have not
+// defined them yet. if the functions were not declared here,
+// they would not be usable in main()
+int main() {
+    // to call a void function, you put the name of the 
+    // function, it's argument list, and a semicolon
+    // since printGreeting expects 0 parameters,
+    // the argument list is empty
+    printGreeting();
+
+    // declare variables
+    int x = 4;
+    int y = 2;
+    // variables can be passed as arguments to the function
+    // the value returned by add is stored in z
+    int z = add(x, y);
+
+    std::cout &lt;&lt; x &lt;&lt; &quot; + &quot; &lt;&lt; y &lt;&lt; &quot; = &quot; &lt;&lt; z &lt;&lt; std::endl;
+
+    // the function can also be called directly in the cout statement
+    // we can also pass literals to the function
+    std::cout &lt;&lt; &quot;5 + 7 = &quot; &lt;&lt; add(5, 7) &lt;&lt; std::endl;
+
+    // you can also mix and match
+    std::cout &lt;&lt; &quot;5 + 4 = &quot; &lt;&lt; add(5, x) &lt;&lt; std::endl;
+
+    // even a function call can be an argument:
+    std::cout &lt;&lt; &quot;(5 + 7) + (2 + 4) = &quot; 
+        &lt;&lt; add(add(5, 7), add(y, x)) &lt;&lt; std::endl;
+
+    return 0;
+}
+
+// we are defining the functions after main()
+// since they were **declared before main(), 
+// they are still usable in main
+
+int add(int a, int b) {
+    return a + b;
+}
+
+void printGreeting() {
+    std::cout &lt;&lt; &quot;Hello, World\n&quot;;
+}
+</code></pre>
+<p>In this example, the functions are declared before the <code>main()</code> function. This allows us the use the functions in main() without needing to define them. </p>
+<h3 id="argument-vs-parameter">Argument vs. Parameter</h3>
+<p>When defining the function, the variables that go in the parentheses are called parameters. These are variables that are used as placeholders for the actual values that will be passed to the function when it is called. When calling the function, the values passed to the function are called arguments. These could be literal values, variables, expressions, or even another function call (provided the function being called returns the correct data type).</p>
+<h2 id="predefined-functions">Predefined Functions</h2>
+<p>We learned that we can use <code>#include &lt;iostream&gt;</code> to include <code>std::cout</code> for printing data and <code>std::cin</code> for reading data. We can use <code>#include &lt;string&gt;</code> to include the <code>std::string</code> data type to store text data. These are called include statements, a type of C preprocessor statement. The C preprocessor is a part of the C/C++ compiler that runs before the code is compiled, and it tells the compiler to go look for this file (e.g., <code>iostream</code>, <code>string</code>) and copy-paste its contents into the file that is being compiled. The actual process is a little more sophisticated, but for our purposes this explanation is sufficient. There are many other libraries for C/C++ that contain predefined functions we can use in our code. Predefined functions are functions that are written by someone else that we can use. The compiler ships with many standard libraries that contain functions that you can use. We'll discuss a few common examples in the coming subsections.</p>
+<h3 id="math-cmath">Math (<code>cmath</code>)</h3>
+<p>The math library contains various mathematics related functions. To use it, you must <code>#include &lt;cmath&gt;</code>. Below is a table of common functions and their descriptions:  </p>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>double pow(double base, double exp)</code></td>
+<td>The pow function raises its first parameter to the power that is provided as its second parameter</td>
+</tr>
+<tr>
+<td><code>double sqrt(double x)</code></td>
+<td>Returns the square root of a number</td>
+</tr>
+<tr>
+<td><code>int floor(double x)</code></td>
+<td>Rounds a number down</td>
+</tr>
+<tr>
+<td><code>int ceil(double x)</code></td>
+<td>Rounds a number up</td>
+</tr>
+<tr>
+<td><code>int round(double x)</code></td>
+<td>Rounds a number to the nearest integer</td>
+</tr>
+<tr>
+<td><code>double sin(double x)</code></td>
+<td>Returns the sine of angle x (x in radians)</td>
+</tr>
+<tr>
+<td><code>double cos(double x)</code></td>
+<td>Returns the cosine of angle x (x in radians)</td>
+</tr>
+<tr>
+<td><code>double tan(double x)</code></td>
+<td>Returns the tangent of angle x (x in radians)</td>
+</tr>
+<tr>
+<td><code>double asin(double x)</code></td>
+<td>Returns the arc sine of angle x (x in radians)</td>
+</tr>
+<tr>
+<td><code>double acos(double x)</code></td>
+<td>Returns the arc cosine of angle x (x in radians)</td>
+</tr>
+<tr>
+<td><code>double atan(double x)</code></td>
+<td>Returns the arc tangent of angle x (x in radians)</td>
+</tr>
+<tr>
+<td><code>double log(double x)</code></td>
+<td>Returns the natural log of x (ln(x))</td>
+</tr>
+<tr>
+<td><code>double log10(double x)</code></td>
+<td>Returns the log base 10 of x (log(x))</td>
+</tr>
+<tr>
+<td><code>double log2(double x)</code></td>
+<td>Returns the log base 2 of x (log<sub>2</sub>(x))</td>
+</tr>
+</tbody>
+</table>
+<p>These are just a few of the functions provided by <code>cmath</code>. </p>
+<h3 id="c-standard-library-cstdlib">C Standard Library (<code>cstdlib</code>)</h3>
+<p>This is the C++ wrapper for C's standard library. It provides functions for a variety of tasks, including random number generation, converting strings to integers, and exiting programs when errors occur.  </p>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>int rand()</code></td>
+<td>Returns a pseudo-random number between 0 and <code>RAND_MAX</code></td>
+</tr>
+<tr>
+<td><code>void srand(unsigned seed)</code></td>
+<td>Used to seed <code>rand()</code>. <code>rand()</code> will always return the same sequence of numbers for the same seed</td>
+</tr>
+<tr>
+<td><code>void abort()</code></td>
+<td>Exits program without cleaning up. Emergency program termination option</td>
+</tr>
+<tr>
+<td><code>void exit(int exit_code)</code></td>
+<td>Exits program with clean up and returns the passed <code>exit_code</code> to the operating system</td>
+</tr>
+<tr>
+<td><code>int atoi(const char* str)</code></td>
+<td>Converts a C string to an integer</td>
+</tr>
+<tr>
+<td><code>long atol(const char* str)</code></td>
+<td>Converts a C string to a long</td>
+</tr>
+<tr>
+<td><code>float atof(const char* str)</code></td>
+<td>Converts a C string to a float</td>
+</tr>
+<tr>
+<td><code>double atod(const char* str)</code></td>
+<td>Converts a C string to a double</td>
+</tr>
+<tr>
+<td>We'll talk about C strings in a couple of weeks.</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="time-ctime">Time (<code>ctime</code>)</h3>
+<p>This is a C++ wrapper for the C <code>time</code> library. It contains functions for accessing and manipulating times. C and C++ use the number of seconds from January 1st, 1970 (called the UNIX Epoch) to determine the time. It is much more efficient for a computer to process time this way than to consider the individual time parts. The <code>std::time_t</code> data type is an alias for the largest possible integer on the system used by the time library.</p>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>time_t time(std::time_t* arg)</code></td>
+<td>Returns the current system time, and optionally stores the system time in <code>arg</code></td>
+</tr>
+<tr>
+<td><code>double difftime(std::time_t time_end, std::time_t time_begin)</code></td>
+<td>Returns the difference between <code>time_end</code> and <code>time_start</code> in seconds</td>
+</tr>
+</tbody>
+</table>
+<p>Often, the current time is used as a seed to the <code>srand()</code> function. This ensures that each time the program is run, a different seed is provided for pseudo-random number generation. Below is an example:</p>
+<pre><code class="language-cpp">// include cstdlib for std::rand() and std::srand()
+#include &lt;cstdlib&gt;
+// include ctime for std::time()
+#include &lt;ctime&gt;
+#include &lt;iostream&gt;
+
+int main() {
+    // seed the random number generator
+    // since we don't need to store the result of time,
+    //  we pass it 0 as an argument and call it directly
+    std::srand(std::time(0));
+
+    // generate 10 random numbers
+    for (int i = 0; i &lt; 10; ++i) {
+        std::cout &lt;&lt; &quot;Random number &quot; &lt;&lt; i + 1 
+            &lt;&lt; &quot;: &quot; &lt;&lt; std::rand() &lt;&lt; std::endl;
+    }
+
+    // that generates numbers within the range 0 to RAND_MAX
+    // the value of RAND_MAX varies depending on the system,
+    //  but is very large nonetheless
+
+    // if we want constrain the random number to a range of values,
+    //  we can use the modulus operator %
+    // this loop prints 10 random numbers from 0 to 25
+    for (int i = 0; i &lt; 10; ++i) {
+        std::cout &lt;&lt; &quot;Random number &quot; &lt;&lt; i + 1 
+            &lt;&lt; &quot;: &quot; &lt;&lt; std::rand() % 26 &lt;&lt; std::endl;
+    }
+
+    // std::rand() % 26 gives the remainder of std::rand() when
+    //  divided by 26. the minimum remainder is 0 and the max is 25,
+    //  so the values that get printed out are constrained to 0-25
+
+    // if we want to print numbers from 1 to 25, we need to shift
+    //  the output of std::rand() up by one. However, that would
+    //  increase the output of 25 to 26, so we also need to change 
+    //  the modulus value to be one less:
+
+    for (int i = 0; i &lt; 10; ++i) {
+        std::cout &lt;&lt; &quot;Random number &quot; &lt;&lt; i + 1 
+            &lt;&lt; &quot;: &quot; &lt;&lt; (std::rand() % 25) + 1 &lt;&lt; std::endl;
+    }
+
+    // in this case, std::rand() % 25 returns numbers from 0-24
+    //  whatever result we get will have 1 added to it, so the
+    //  final range is shifted up by 1, and we get 1-25
+
+    return 0;
+}
+</code></pre>
+<h2 id="task-decomposition-and-refactoring">Task Decomposition and Refactoring</h2>
+<p>Writing a program requires decomposing the task you have been given into more manageable sub-tasks. Then, you can solve the individual sub-tasks until you've created a program that solves the whole task you've been given. However, the resulting code of the program will often be messy, inefficient, and disorganized. Refactoring is the process in which you go through after writing the initial code and clean up the program. Next week, when we discuss testing and test driven development, you'll see a couple of longer examples of this. Here, I'll stick with a shorter example.  </p>
+<p>Let's say that we have been given the task of writing a program that, given a range of integers, finds the integer that takes the most steps to reach 1 following the Collatz conjecture. The Collatz conjecture states the following: Given a positive integer, if it is even, divide it by 2. If it is odd, multiply it by 3 and subtract 1. Every integer will eventually reach 1 by doing this. This has never been formally proved, which is why it is called a conjecture and not a theorem, but there has never been an example to disprove it, either.  </p>
+<p>Let's break down the requirements of the program into manageable tasks:<br />
+1. Read two numbers
+2. Apply the Collatz conjecture to each number
+3. Count the number of steps to reduce the number to 1
+4. Keep track of the number that took the most steps
+5. Report the number that took the most steps to reach 1</p>
+<p>With these tasks in mind, let's start implementing a solution. The easiest thing to do is to read the two numbers in, so let's do that:</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+
+int main() {
+    unsigned start;
+    unsigned end;
+    std::cout &lt;&lt; &quot;This program will find which positive integer&quot;
+        &lt;&lt; &quot; in a given range takes the most steps to reach 1&quot;
+        &lt;&lt; &quot; following the Collatz Conjecture\n&quot;;
+    std::cout &lt;&lt; &quot;Enter start of range: &quot;;
+    std::cin &gt;&gt; start;
+    std::cout &lt;&lt; &quot;Enter end of range: &quot;;
+    std::cin &gt;&gt; end;
+
+    return 0;
+}
+</code></pre>
+<p>That's task 1 done. However, in writing this, I thought of a problem. While I am asking for the minimum and maximum number explicitly, the user could still enter them in the wrong order. They could also enter the same number twice. In that case, we'd only be checking one number. This is technically valid, so we'll allow the user to enter the same number, so the program can be used to check how many steps it takes to reduce a single number to 1. However, we should validate that the start is less than or equal to the end. We could allow the user to continually reenter numbers, but I'd rather just report the invalid usage and end the program. It is short program that only asks the user to enter two numbers, so forcing them to run it again to use it correctly is easier than writing the code to prompt the user to enter the correct value.</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+
+int main() {
+    unsigned start;
+    unsigned end;
+    std::cout &lt;&lt; &quot;This program will find which positive integer&quot;
+        &lt;&lt; &quot; in a given range takes the most steps to reach 1&quot;
+        &lt;&lt; &quot; following the Collatz Conjecture\n&quot;;
+    std::cout &lt;&lt; &quot;Enter start of range: &quot;;
+    std::cin &gt;&gt; start;
+    std::cout &lt;&lt; &quot;Enter end of range: &quot;;
+    std::cin &gt;&gt; end;
+
+    // add logic to report invalid range
+    if (start &gt; end) {
+        std::cout &lt;&lt; &quot;Invalid usage. Start must be less than end\n&quot;;
+        return 1;
+    }
+
+    return 0;
+}
+</code></pre>
+<p>Now, we can test if the program works. Below are some example inputs (the explanation message is excluded):</p>
+<pre><code>./collatz
+Enter start of range: 1
+Enter end of range: 5
+./collatz
+Enter start of range: 5
+Enter end of range: 1
+Invalid usage. Start must be less than end
+./collatz
+Enter start of range: 0
+Enter end of range: 5
+</code></pre>
+<p>In testing it, I discovered another problem. 0 is not a valid input for the program. While the <code>unsigned</code> integer data type is used to prevent negative numbers from being input, 0 is also invalid, since it is not positive. 0 is neither positive nor negative. Therefore, we also need a check that neither element of the range is 0.</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+
+int main() {
+    unsigned start;
+    unsigned end;
+    std::cout &lt;&lt; &quot;This program will find which positive integer&quot;
+        &lt;&lt; &quot; in a given range takes the most steps to reach 1&quot;
+        &lt;&lt; &quot; following the Collatz Conjecture\n&quot;;
+
+    std::cout &lt;&lt; &quot;Enter start of range: &quot;;
+    std::cin &gt;&gt; start;
+    std::cout &lt;&lt; &quot;Enter end of range: &quot;;
+    std::cin &gt;&gt; end;
+
+    // add logic to ensure neither part of the range is 0
+    if (start == 0 || end == 0) {
+        std::cout &lt;&lt; &quot;Invalid usage. 0 is not a valid input value\n&quot;;
+        return 1;
+    }
+
+    if (start &gt; end) {
+        std::cout &lt;&lt; &quot;Invalid usage. Start must be less than end\n&quot;;
+        return 2;
+    }
+
+    return 0;
+}
+</code></pre>
+<p>Now, we can test it again:</p>
+<pre><code>./collatz
+Enter start of range: 0
+Enter end of range: 5
+Invalid usage. 0 is not a valid input value
+</code></pre>
+<p>Now, we've handled getting input from the user. Next, we need to apply the Collatz conjecture to each of them. First, let's loop through the numbers:</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+
+int main() {
+    unsigned start;
+    unsigned end;
+    std::cout &lt;&lt; &quot;This program will find which positive integer&quot;
+        &lt;&lt; &quot; in a given range takes the most steps to reach 1&quot;
+        &lt;&lt; &quot; following the Collatz Conjecture\n&quot;;
+
+    std::cout &lt;&lt; &quot;Enter start of range: &quot;;
+    std::cin &gt;&gt; start;
+    std::cout &lt;&lt; &quot;Enter end of range: &quot;;
+    std::cin &gt;&gt; end;
+
+    if (start == 0 || end == 0) {
+        std::cout &lt;&lt; &quot;Invalid usage. 0 is not a valid input value\n&quot;;
+        return 1;
+    }
+
+    if (start &gt; end) {
+        std::cout &lt;&lt; &quot;Invalid usage. Start must be less than end\n&quot;;
+        return 2;
+    }
+
+    // for now, let's just verify that we 
+    // loop through the numbers correctly
+    for (unsigned i = start; i &lt;= end; ++i) {
+        std::cout &lt;&lt; i &lt;&lt; &quot;\n&quot;;
+    }
+
+    return 0;
+}
+</code></pre>
+<p>Before implementing anything else, we can check to make sure the loop works as intended:</p>
+<pre><code>./collatz
+Enter start of range: 1
+Enter end of range: 5
+1
+2
+3
+4
+5
+Enter start of range: 500
+Enter end of range: 500
+500
+</code></pre>
+<p>Once we are satisfied, we can eliminate the print statement from the loop. Now, we need to write the algorithm for the Collatz conjecture. Rather testing it on each number in the range, we will comment out the for loop for now, and just run the algorithm on the first element of the range. That way, we can test if it works before running it on each number in the range.</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+
+int main() {
+    unsigned start;
+    unsigned end;
+    std::cout &lt;&lt; &quot;This program will find which positive integer&quot;
+        &lt;&lt; &quot; in a given range takes the most steps to reach 1&quot;
+        &lt;&lt; &quot; following the Collatz Conjecture\n&quot;;
+
+    std::cout &lt;&lt; &quot;Enter start of range: &quot;;
+    std::cin &gt;&gt; start;
+    std::cout &lt;&lt; &quot;Enter end of range: &quot;;
+    std::cin &gt;&gt; end;
+
+    if (start == 0 || end == 0) {
+        std::cout &lt;&lt; &quot;Invalid usage. 0 is not a valid input value\n&quot;;
+        return 1;
+    }
+
+    if (start &gt; end) {
+        std::cout &lt;&lt; &quot;Invalid usage. Start must be less than end\n&quot;;
+        return 2;
+    }
+
+    // for now, let's just verify that we 
+    // that the algorithm we write for the Collatz
+    // conjecture works as intended
+    // therefore, we'll ignore looping through each
+    // number in the range for now
+
+    // for (unsigned i = start; i &lt;= end; ++i) {
+    //     std::cout &lt;&lt; i &lt;&lt; &quot;\n&quot;;
+    // }
+
+    // the stop condition for the Collatz conjecture
+    // is when the number becomes 1
+    while (start != 1) {
+        // case 1: the number is even
+        if (start % 2 == 0) {
+            start /= 2;
+        }
+        // case 2: the number is odd
+        else {
+            start = start * 3 + 1;
+        }
+    }
+    std::cout &lt;&lt; &quot;start now equals &quot; &lt;&lt; start &lt;&lt; &quot;\n&quot;;
+    return 0;
+}
+</code></pre>
+<p>We expect that for any number we enter, that start eventually becomes 1. Now, our third requirement states that we need to count the number of steps it takes for the number to reach 1. Again, before looping through each number in the range, let's implement the counting mechanism:</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+
+int main() {
+    unsigned start;
+    unsigned end;
+    std::cout &lt;&lt; &quot;This program will find which positive integer&quot;
+        &lt;&lt; &quot; in a given range takes the most steps to reach 1&quot;
+        &lt;&lt; &quot; following the Collatz Conjecture\n&quot;;
+
+    std::cout &lt;&lt; &quot;Enter start of range: &quot;;
+    std::cin &gt;&gt; start;
+    std::cout &lt;&lt; &quot;Enter end of range: &quot;;
+    std::cin &gt;&gt; end;
+
+    if (start == 0 || end == 0) {
+        std::cout &lt;&lt; &quot;Invalid usage. 0 is not a valid input value\n&quot;;
+        return 1;
+    }
+
+    if (start &gt; end) {
+        std::cout &lt;&lt; &quot;Invalid usage. Start must be less than end\n&quot;;
+        return 2;
+    }
+
+    // for (unsigned i = start; i &lt;= end; ++i) {
+    //     std::cout &lt;&lt; i &lt;&lt; &quot;\n&quot;;
+    // }
+
+    // variable to count the number of steps
+    unsigned steps = 0;
+
+    while (start != 1) {
+        if (start % 2 == 0) {
+            start /= 2;
+        }
+        else {
+            start = start * 3 + 1;
+        }
+        // increase the step count
+        ++steps;
+    }
+    std::cout &lt;&lt; &quot;start now equals &quot; &lt;&lt; start &lt;&lt; &quot;\n&quot;;
+    std::cout &lt;&lt; &quot;it took &quot; &lt;&lt; steps &lt;&lt; &quot;steps\n&quot;;
+    return 0;
+}
+</code></pre>
+<p>To verify that it is correct, we can hand calculate a couple of examples:  <br />
+<strong>1</strong><br />
+1 is 1. It takes 0 steps  </p>
+<p><strong>5</strong></p>
+<ol>
+<li>5 is odd. 5 * 3 + 1 = 16</li>
+<li>16 is even. 16 / 2 = 8</li>
+<li>8 is even. 8 / 2 = 4</li>
+<li>4 is even. 4/ 2 = 2</li>
+<li>2 is even. 2/2 = 1</li>
+<li>1 is 1. It took 5 steps to get here  </li>
+</ol>
+<p><strong>10</strong>  </p>
+<ol>
+<li>10 us even. 10 / 2 = 5</li>
+<li>5 is odd. But, we know from our previous work that it takes 5 steps to get 5 to 1. Therefore, it takes 1 + 5 = 6 steps for 10 to get to 1.   </li>
+</ol>
+<p><strong>13</strong>  </p>
+<ol>
+<li>13 is odd. 13 * 3 + 1 = 40</li>
+<li>40 is even. 40 / 2 = 20</li>
+<li>20 is even. 20 / 10 = 10</li>
+<li>10 is even. But, we know from previous work that it takes 6 steps to get 10 to 1. Therefore, it takes 3 + 6 = 9 steps for 13 to get to 1.  </li>
+</ol>
+<p>Once satisfied with the number of test cases, we can run the program with them. Once satisfied that it works, we can move on to the next step, running the Collatz algorithm on all numbers in the range. To do so, we will move the code into the for loop, and replace <code>start</code> with <code>i</code>. <strong>Note: this won't work, and will create an infinite loop. I am leaving it in to demonstrate debugging and how writing a program doesn't always work on the first try</strong></p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+
+int main() {
+    unsigned start;
+    unsigned end;
+    std::cout &lt;&lt; &quot;This program will find which positive integer&quot;
+        &lt;&lt; &quot; in a given range takes the most steps to reach 1&quot;
+        &lt;&lt; &quot; following the Collatz Conjecture\n&quot;;
+
+    std::cout &lt;&lt; &quot;Enter start of range: &quot;;
+    std::cin &gt;&gt; start;
+    std::cout &lt;&lt; &quot;Enter end of range: &quot;;
+    std::cin &gt;&gt; end;
+
+    if (start == 0 || end == 0) {
+        std::cout &lt;&lt; &quot;Invalid usage. 0 is not a valid input value\n&quot;;
+        return 1;
+    }
+
+    if (start &gt; end) {
+        std::cout &lt;&lt; &quot;Invalid usage. Start must be less than end\n&quot;;
+        return 2;
+    }
+
+    // move Collatz algorithm into the for loop
+    for (unsigned i = start; i &lt;= end; ++i) {
+        unsigned steps = 0;
+        while (i != 1) {
+            if (i % 2 == 0) {
+                i /= 2;
+            }
+            else {
+                i = i * 3 + 1;
+            }
+            ++steps;
+        }
+        std::cout &lt;&lt; &quot;i now equals &quot; &lt;&lt; i &lt;&lt; &quot;\n&quot;;
+        std::cout &lt;&lt; &quot;it took &quot; &lt;&lt; steps &lt;&lt; &quot; steps\n&quot;;
+    }
+    return 0;
+}
+</code></pre>
+<p>Let's run this for the range 5 to 6:</p>
+<pre><code>./collatz
+Enter start of range: 1
+Enter end of range: 5
+i now equals 1
+it took 5 steps
+i now equals 1
+it took 1 steps
+i now equals 1
+it took 1 steps
+i now equals 1
+it took 1 steps
+i now equals 1
+it took 1 steps
+i now equals 1
+...
+it took 1 steps
+i now equals 1
+it took 1 steps^C
+</code></pre>
+<p>The CTRL + C keyboard input is used to stop an infinite looping program. So, what happened? The first time the loop ran, <code>i</code> started at 5, and was reduced down to 1. It took 5 steps, as expected. But, the value of <code>i</code> is now 1. When it returns to the for loop, <code>i</code> is increased to 2 by the <code>++i</code> statement. The body of the for loop once again decreases <code>i</code> to 1, and the cycle repeats. <code>i</code> is stuck being reduced to 1, increased to 2 by the for loop, then reduced back to 1 again. Therefore, to solve this, we need to perform the Collatz algorithm on a different variable that is a copy of <code>i</code>'s original value:</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+
+int main() {
+    unsigned start;
+    unsigned end;
+    std::cout &lt;&lt; &quot;This program will find which positive integer&quot;
+        &lt;&lt; &quot; in a given range takes the most steps to reach 1&quot;
+        &lt;&lt; &quot; following the Collatz Conjecture\n&quot;;
+
+    std::cout &lt;&lt; &quot;Enter start of range: &quot;;
+    std::cin &gt;&gt; start;
+    std::cout &lt;&lt; &quot;Enter end of range: &quot;;
+    std::cin &gt;&gt; end;
+
+    if (start == 0 || end == 0) {
+        std::cout &lt;&lt; &quot;Invalid usage. 0 is not a valid input value\n&quot;;
+        return 1;
+    }
+
+    if (start &gt; end) {
+        std::cout &lt;&lt; &quot;Invalid usage. Start must be less than end\n&quot;;
+        return 2;
+    }
+
+    for (unsigned i = start; i &lt;= end; ++i) {
+        unsigned steps = 0;
+        // copy the value of i
+        unsigned value = i;
+        while (value != 1) {
+            if (value % 2 == 0) {
+                value /= 2;
+            }
+            else {
+                value = value * 3 + 1;
+            }
+            ++steps;
+        }
+        std::cout &lt;&lt; &quot;value now equals &quot; &lt;&lt; value &lt;&lt; &quot;\n&quot;;
+        std::cout &lt;&lt; &quot;it took &quot; &lt;&lt; steps &lt;&lt; &quot; steps\n&quot;;
+    }
+    return 0;
+}
+</code></pre>
+<p>The program will now behave as expected:</p>
+<pre><code>./collatz
+Enter start of range: 5
+Enter end of range: 6
+value now equals 1
+it took 5 steps
+value now equals 1
+it took 8 steps
+</code></pre>
+<p>Now, the requirements did not say to print out the steps for each number in the range. We are only supposed to print out the number of steps and the number which took the most steps. Therefore, we'll eliminate the print statements in the for loop that we used for testing, now that we are confident in the logic of the program. To store the number that took the most steps, and the number of steps, we'll need two more variables. Since these need to be used outside the while loop to report the final results at the end of the program, we need to declare them before the while loop.<br />
+The minimum possible number of steps is 0, which happens if the value is 1. Therefore, we assume that the maximum number of steps taken is 0 to start off with. Then, each time we run the Collatz algorithm on a number, we check if the number of steps taken was more than the current maximum. If it is, we update the maximum number of steps and the value that caused the maximum number of steps. This will allow us to save the max steps.</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+
+int main() {
+    unsigned start;
+    unsigned end;
+    std::cout &lt;&lt; &quot;This program will find which positive integer&quot;
+        &lt;&lt; &quot; in a given range takes the most steps to reach 1&quot;
+        &lt;&lt; &quot; following the Collatz Conjecture\n&quot;;
+
+    std::cout &lt;&lt; &quot;Enter start of range: &quot;;
+    std::cin &gt;&gt; start;
+    std::cout &lt;&lt; &quot;Enter end of range: &quot;;
+    std::cin &gt;&gt; end;
+
+    if (start == 0 || end == 0) {
+        std::cout &lt;&lt; &quot;Invalid usage. 0 is not a valid input value\n&quot;;
+        return 1;
+    }
+
+    if (start &gt; end) {
+        std::cout &lt;&lt; &quot;Invalid usage. Start must be less than end\n&quot;;
+        return 2;
+    }
+
+    // variables to store the current maximum steps
+    unsigned maxSteps = 0;
+    // and the value that took that many steps
+    unsigned valueWithMaxSteps = start;
+
+    for (unsigned i = start; i &lt;= end; ++i) {
+        unsigned steps = 0;
+        unsigned value = i;
+        while (value != 1) {
+            if (value % 2 == 0) {
+                value /= 2;
+            }
+            else {
+                value = value * 3 + 1;
+            }
+            ++steps;
+        }
+        // check if this value took more steps than any
+        // of the past values in the range
+        if (steps &gt; maxSteps) {
+            maxSteps = steps;
+            // keep in mind that &quot;value&quot; will be 1 at this point
+            // we need the value of i, which was not affected
+            // by the algorithm
+            valueWithMaxSteps = i;
+        }
+    }
+
+    std::cout &lt;&lt; &quot;Most steps: &quot; &lt;&lt; maxSteps &lt;&lt; &quot;\n&quot;;
+    std::cout &lt;&lt; &quot;For value: &quot; &lt;&lt; valueWithMaxSteps &lt;&lt; &quot;\n&quot;;
+
+    return 0;
+}
+</code></pre>
+<p>Once again, we will test the program to ensure it works. At this point, all requirements have been met. However, we can clean up the program a bit. First, let's move the greeting message to a separate function. It takes up several lines of the main function, without contributing anything meaningful to anyone reading the code:</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+
+void printGreeting();
+
+int main() {
+    unsigned start;
+    unsigned end;
+
+    // move the greeting message to a separate function
+    printGreeting();
+
+    std::cout &lt;&lt; &quot;Enter start of range: &quot;;
+    std::cin &gt;&gt; start;
+    std::cout &lt;&lt; &quot;Enter end of range: &quot;;
+    std::cin &gt;&gt; end;
+
+    if (start == 0 || end == 0) {
+        std::cout &lt;&lt; &quot;Invalid usage. 0 is not a valid input value\n&quot;;
+        return 1;
+    }
+
+    if (start &gt; end) {
+        std::cout &lt;&lt; &quot;Invalid usage. Start must be less than end\n&quot;;
+        return 2;
+    }
+
+    unsigned maxSteps = 0;
+    unsigned valueWithMaxSteps = start;
+
+    for (unsigned i = start; i &lt;= end; ++i) {
+        unsigned steps = 0;
+        unsigned value = i;
+        while (value != 1) {
+            if (value % 2 == 0) {
+                value /= 2;
+            }
+            else {
+                value = value * 3 + 1;
+            }
+            ++steps;
+        }
+        if (steps &gt; maxSteps) {
+            maxSteps = steps;
+            // keep in mind that &quot;value&quot; will be 1 at this point
+            // we need the value of i, which was not affected
+            // by the algorithm
+            valueWithMaxSteps = i;
+        }
+    }
+
+    std::cout &lt;&lt; &quot;Most steps: &quot; &lt;&lt; maxSteps &lt;&lt; &quot;\n&quot;;
+    std::cout &lt;&lt; &quot;For value: &quot; &lt;&lt; valueWithMaxSteps &lt;&lt; &quot;\n&quot;;
+
+    return 0;
+}
+
+void printGreeting() {
+    std::cout &lt;&lt; &quot;This program will find which positive integer&quot;
+        &lt;&lt; &quot; in a given range takes the most steps to reach 1&quot;
+        &lt;&lt; &quot; following the Collatz Conjecture\n&quot;;
+}
+</code></pre>
+<p>Next, let's move the error handling to a separate function. Recall that we can use the <code>exit()</code> function from <code>cstdlib</code> to exit the program if an error occurs. This will allow us to terminate the program from a non-main function:</p>
+<pre><code class="language-cpp">#include &lt;cstdlib&gt;
+#include &lt;iostream&gt;
+
+void printGreeting();
+void validateInput(unsigned start, unsigned end);
+
+int main() {
+    unsigned start;
+    unsigned end;
+
+    printGreeting();
+
+    std::cout &lt;&lt; &quot;Enter start of range: &quot;;
+    std::cin &gt;&gt; start;
+    std::cout &lt;&lt; &quot;Enter end of range: &quot;;
+    std::cin &gt;&gt; end;
+
+    // move validation code to separate function
+    validateInput(start, end);
+
+    unsigned maxSteps = 0;
+    unsigned valueWithMaxSteps = start;
+
+    for (unsigned i = start; i &lt;= end; ++i) {
+        unsigned steps = 0;
+        unsigned value = i;
+        while (value != 1) {
+            if (value % 2 == 0) {
+                value /= 2;
+            }
+            else {
+                value = value * 3 + 1;
+            }
+            ++steps;
+        }
+        if (steps &gt; maxSteps) {
+            maxSteps = steps;
+            // keep in mind that &quot;value&quot; will be 1 at this point
+            // we need the value of i, which was not affected
+            // by the algorithm
+            valueWithMaxSteps = i;
+        }
+    }
+
+    std::cout &lt;&lt; &quot;Most steps: &quot; &lt;&lt; maxSteps &lt;&lt; &quot;\n&quot;;
+    std::cout &lt;&lt; &quot;For value: &quot; &lt;&lt; valueWithMaxSteps &lt;&lt; &quot;\n&quot;;
+
+    return 0;
+}
+
+void printGreeting() {
+    std::cout &lt;&lt; &quot;This program will find which positive integer&quot;
+        &lt;&lt; &quot; in a given range takes the most steps to reach 1&quot;
+        &lt;&lt; &quot; following the Collatz Conjecture\n&quot;;
+}
+
+void validateInput(unsigned start, unsigned end) {
+    if (start == 0 || end == 0) {
+        std::cout &lt;&lt; &quot;Invalid usage. 0 is not a valid input value\n&quot;;
+        // use exit to immediately end the program
+        exit(1);
+    }
+
+    if (start &gt; end) {
+        std::cout &lt;&lt; &quot;Invalid usage. Start must be less than end\n&quot;;
+        exit(2);
+    }
+}
+</code></pre>
+<p>Now, we can move the logic of performing the Collatz algorithm to a separate function. The only thing that we are interested in from the Collatz algorithm is how many steps it takes to complete, so we will have it return the number of steps:</p>
+<pre><code class="language-cpp">#include &lt;cstdlib&gt;
+#include &lt;iostream&gt;
+
+void printGreeting();
+void validateInput(unsigned start, unsigned end);
+unsigned countCollatzSteps(unsigned value);
+
+int main() {
+    unsigned start;
+    unsigned end;
+
+    printGreeting();
+
+    std::cout &lt;&lt; &quot;Enter start of range: &quot;;
+    std::cin &gt;&gt; start;
+    std::cout &lt;&lt; &quot;Enter end of range: &quot;;
+    std::cin &gt;&gt; end;
+
+    validateInput();
+
+    unsigned maxSteps = 0;
+    unsigned valueWithMaxSteps = start;
+
+    for (unsigned i = start; i &lt;= end; ++i) {
+        // now we can just call the function to
+        // count the number of steps
+        unsigned steps = countCollatzSteps(i);
+
+        if (steps &gt; maxSteps) {
+            maxSteps = steps;
+            valueWithMaxSteps = i;
+        }
+    }
+
+    std::cout &lt;&lt; &quot;Most steps: &quot; &lt;&lt; maxSteps &lt;&lt; &quot;\n&quot;;
+    std::cout &lt;&lt; &quot;For value: &quot; &lt;&lt; valueWithMaxSteps &lt;&lt; &quot;\n&quot;;
+
+    return 0;
+}
+
+void printGreeting() {
+    std::cout &lt;&lt; &quot;This program will find which positive integer&quot;
+        &lt;&lt; &quot; in a given range takes the most steps to reach 1&quot;
+        &lt;&lt; &quot; following the Collatz Conjecture\n&quot;;
+}
+
+void validateInput(unsigned start, unsigned end) {
+    if (start == 0 || end == 0) {
+        std::cout &lt;&lt; &quot;Invalid usage. 0 is not a valid input value\n&quot;;
+        exit(1);
+    }
+
+    if (start &gt; end) {
+        std::cout &lt;&lt; &quot;Invalid usage. Start must be less than end\n&quot;;
+        exit(2);
+    }
+}
+
+unsigned countCollatzSteps(unsigned value) {
+    unsigned steps = 0;
+    while (value != 1) {
+        if (value % 2 == 0) {
+            value /= 2;
+        }
+        else {
+            value = value * 3 + 1;
+        }
+        ++steps;
+    }
+
+    return steps;
+}
+</code></pre>
+<p>We can also move printing the results to a separate function:</p>
+<pre><code class="language-cpp">#include &lt;cstdlib&gt;
+#include &lt;iostream&gt;
+
+void printGreeting();
+void validateInput();
+unsigned countCollatzSteps(unsigned value);
+void printResults(unsigned steps, unsigned value);
+
+int main() {
+    unsigned start;
+    unsigned end;
+
+    printGreeting();
+
+    std::cout &lt;&lt; &quot;Enter start of range: &quot;;
+    std::cin &gt;&gt; start;
+    std::cout &lt;&lt; &quot;Enter end of range: &quot;;
+    std::cin &gt;&gt; end;
+
+    validateInput();
+
+    unsigned maxSteps = 0;
+    unsigned valueWithMaxSteps = start;
+
+    for (unsigned i = start; i &lt;= end; ++i) {
+        unsigned steps = countCollatzSteps(i);
+
+        if (steps &gt; maxSteps) {
+            maxSteps = steps;
+            valueWithMaxSteps = i;
+        }
+    }
+
+    // move results to separate function
+    printResults(maxSteps, valueWithMaxSteps);
+
+    return 0;
+}
+
+void printGreeting() {
+    std::cout &lt;&lt; &quot;This program will find which positive integer&quot;
+        &lt;&lt; &quot; in a given range takes the most steps to reach 1&quot;
+        &lt;&lt; &quot; following the Collatz Conjecture\n&quot;;
+}
+
+void validateInput(unsigned start, unsigned end) {
+    if (start == 0 || end == 0) {
+        std::cout &lt;&lt; &quot;Invalid usage. 0 is not a valid input value\n&quot;;
+        exit(1);
+    }
+
+    if (start &gt; end) {
+        std::cout &lt;&lt; &quot;Invalid usage. Start must be less than end\n&quot;;
+        exit(2);
+    }
+}
+
+unsigned countCollatzSteps(unsigned value) {
+    unsigned steps = 0;
+    while (value != 1) {
+        if (value % 2 == 0) {
+            value /= 2;
+        }
+        else {
+            value = value * 3 + 1;
+        }
+        ++steps;
+    }
+
+    return steps;
+}
+
+void printResults(unsigned steps, unsigned value) {
+    std::cout &lt;&lt; &quot;Most steps: &quot; &lt;&lt; steps &lt;&lt; &quot;\n&quot;;
+    std::cout &lt;&lt; &quot;For value: &quot; &lt;&lt; value &lt;&lt; &quot;\n&quot;;
+}
+</code></pre>
+<p>We've now made <code>main()</code> function cleaner, with logic that is easier to follow. Next week, when discussing unit testing, we will see that breaking the program up into smaller functions that handle single tasks make it easier to test programs, as well. </p>
+<h2 id="conclusion">Conclusion</h2>
+<p>This week, we discussed functions. A function consists of a signature, which specifies the name, return type, and parameters of the function, and a body, which indicates the code that a function actually executes when it is called. C++ provides function declarations and function definitions. The declaration is the function's signature followed by a semicolon, and is used to provide a promise to the compiler that the function definition exists somewhere in the code base. This allows functions to be used before they are defined. The definition consists of the function's signature followed by a block. The block contains the statements that the function executes. When the function is called, the statements in the function's body are executed at that point in the code. The function's parameters are given the values of the arguments that are passed to the function call. Arguments can be variables, literals, function calls, or an expression that combines these.  </p>
+<p>Predefined functions are provided by the C++ standard library headers that are included with your compiler. Predefined functions can also be included from external libraries, but using external libraries is outside the scope of this course. We will only focus on the standard library functions. We looked at examples from <code>cmath</code>, <code>cstdlib</code>, and <code>ctime</code>.  </p>
+<p>Refactoring is used to reorganize and clean up code. When writing code, it is best to break down the problem and write code that solves the sub-problems. Once combined, however, the code can become messy and disorganized. Spending time to refactor the code can make it more organized and easier to modify in the future.</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script src="../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
