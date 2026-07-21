@@ -1,10 +1,11 @@
-## Week 2 Quiz
-### CSE238 - Data Structures and Algorithms
-#### Name _____________________________________
+# Quiz 2
+Submit a PDF, Word Document, or Text Entry with the answers to these questions.
 
-1. Explain what is meant by code coverage in software testing. (2.5 points)
-2. Explain what edge cases are in software testing. (2.5 points)
-3. Write the recurrence equation, inductive reduction, and big-Oh runtime complexity of the following loops. You can assume that any function calls within the loop have an O(1) complexity. (2 points each)  
+## Questions
+
+1. Short Answer: Explain what is meant by code coverage in software testing. (2.5 points)
+2. Short Answer: Explain what edge cases are in software testing. (2.5 points)
+3. Short Answer: Provide the Big-O runtime complexity of the following loops. You can assume that any function calls within the loop have an O(1) complexity. (2 points each)  
   
 a.
 ```C++
@@ -49,7 +50,7 @@ for (int i = 1; i < n; ++i) {
     x *= i;
 }
 ```
-4. For the following functions and classes, determine their space complexity. (2 points each)  
+4. Short Answer: For the following functions and classes, determine their space complexity. (2 points each)  
   
 a.
 ```C++

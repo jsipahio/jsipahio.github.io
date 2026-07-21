@@ -6,10 +6,10 @@ Submit a PDF, Word Document, or Text Entry with the answers to these questions.
 1. Short Answer: What is a hash collision? (3 points)
 
 2. Multiple Choice: Which of the following is not a method for mitigating hash collisions? (1 point)
-- A. Open Addressing
-- B. Larger hash range
-- C. Chaining
-- D. 
+    A. Open Addressing
+    B. Larger hash range
+    C. Chaining
+    D. Caching
 
 3. True/False: Sets are commonly implemented using hash tables. (1 point)
 
