@@ -3,11 +3,323 @@
 A set is a container that stores unique values where order is not important (note: C++'s standard library sets do not follow this rule). The goal of a set is to provide O(1) insertion, deletion, and find operations. Additionally, sets implement between-set operations like union, intersection, set difference, and symmetric difference. Before looking at sets, we need to discuss the internal data structure we will use to implement sets: hash tables.
 
 ## Hash Table
-A hash is a mathematical algorithm that converts a data into a (sufficiently) unique, numeric output. A hash table is a table that uses hashes to key its values. 
+A hash is a mathematical algorithm that converts a data into a (sufficiently) unique, numeric output. A hash table is an array that uses hashes to index its values. Let's say we had a hash that computes values from 0 to 6 by taking the remainder of the input divided by 7. Then, for the values 21, 31, 5, 2, 17, the hash table would look like: 
+```
+hash(21) = 21 & 7 = 0
+hash(31) = 31 % 7 = 4
+hash(5) = 5 % 7 = 5
+hash(2) = 2 % 7 = 2
+hash(17) = 17 % 7 = 3
+
+hash_table[0] = 21
+hash_table[1] = null
+hash_table[2] = 2
+hash_table[3] = 17
+hash_table[4] = 31
+hash_table[5] = 5
+hash_table[6] = null
+```
+One problem facing hash tables is the possibility of a hash collision. When computing the hash of a value, there are a finite amount of outputs that can be computed for it. It is therefore possible that there are two values that produce the same hash value. In that case, you would be trying to store two values in the same index of the table. That is part of why we want a hash function that produces hashes that are sufficiently unique. Obviously, the example above uses an extremely small hash range as a demonstration. However, it does illustrate another problem. For a hash with 7 possible values, we need an array of 7 elements to store the hash table. If we had a hash that generates 1,000,000 possible values, then we'd need an array of 1,000,000 elements. That could lead to a large amount of wasted space if we needed to store only a few elements in the table. Therefore, while using a larger hash range reduces the chance of a collision, it is not a perfect solution. We will cover two strategies used to handle hash collisions: chaining and open addressing. 
 
 ### Chaining
+With chaining, the hash table stores lists of elements at each index instead of a single element. When a collision occurs, the element is added to the list at that hash address. This allows the hash table to store infinitely many elements, regardless of its size. However, it does mean that the table uses additional data to store lists instead of single elements. Additionally, searching the table takes two steps now: 1. hash the element and find the correct index, and 2. search the list for that element. In the worst case, all elements would have the same hash, and would therefore all be put into the same list. Therefore, rather than the search time for a single element being close to O(1), it deteriorates to O(n), as the whole list needs to be searched. This is the worst case, and not likely to actually occur, provided a sufficient hash function is used. 
 
 ### Open Addressing
+In open addressing, the hash table only stores single elements in each index. If a collision occurs, another location in the table is used. The process for finding an open location to store the element is called probing. There are three types of probing we'll consider: linear, quadratic, and double hashing. For all of these, the hash table has a finite size. Therefore, open-addressing requires the hash table to be larger than the expected number of values it may hold. The chaining approach does not have this limitation. 
+
+#### Linear Probing
+When linear probing is used, the next index is checked. This is done continuously until an open index is found. The element is then stored there. Linear probing is simple and takes advantage of CPU caching, but can lead to clusters of elements being out of place.
+
+#### Quadratic Probing
+This method of probing increases the interval it checks quadratically. It starts like linear probing, checking the next element, since 1<sup>2</sup> is 1. However, if the next index is also filled, instead of checking the next index, it checks the index 2<sup>2</sup> = 4 away from where the element was originally supposed to be inserted. Then, 3<sup>2</sup> is checked, and so on. This reduces the chance that large clusters form by checking an index much farther away each time, but at the cost of cache efficiency is lost.
+
+#### Double Hashing
+In double hashing, a secondary hash is computed for each probe attempt. Hashing any two values twice can exponentially decrease the likelihood of collisions (especially for sufficiently large hash ranges). Additionally, it will not suffer the clustering problem that linear probing does, since the second hash is likely very far from the first's value. However, this does require evaluating two hash algorithms and also loses out on CPU caching.
+
+#### Examples of Each Collision Resolution Method
+Assume we have a hash table of size 11, a hash function that takes the remainder of the input divided by 11. Let's look at how the collision solutions handle trying to insert these 8 elements into the hash table. The elements are { 12, 4, 23, 5, 2, 35, 17, 27 }. The hashes:
+```
+hash(12) = 11 % 12 = 1
+hash(4) = 11 % 4 = 4
+hash(23) = 11 % 23 = 1
+hash(5) = 11 % 5 = 5
+hash(2) = 11 % 2 = 2
+hash(35) = 11 % 35 = 2
+hash(17) = 11 % 17 = 6
+hash(27) = 11 % 27 = 5
+```
+##### Chaining
+With chaining, the hash table would be:
+```
+hash_table[0] = null
+hash_table[1] = 12 <-> 23
+hash_table[2] = 2 <-> 35
+hash_table[3] = null
+hash_table[4] = 4
+hash_table[5] = 5 <-> 27
+hash_table[6] = 17
+hash_table[7] = null
+hash_table[8] = null
+hash_table[9] = null
+hash_table[10] = null
+```
+##### Linear Probing
+With linear probing, the first two values are inserted with no problems:
+```
+hash_table[0] = null
+hash_table[1] = 12
+hash_table[2] = null
+hash_table[3] = null
+hash_table[4] = 4
+hash_table[5] = null
+hash_table[6] = null
+hash_table[7] = null
+hash_table[8] = null
+hash_table[9] = null
+hash_table[10] = null 
+```
+Now, when we want to insert 23, the index of 1 is already taken, so we check the next index, which is 2. This location is open, so we insert 23 at index 2. The element after is 5, and the index 5 is open, so we insert there.
+```
+hash_table[0] = null
+hash_table[1] = 12
+hash_table[2] = 23
+hash_table[3] = null
+hash_table[4] = 4
+hash_table[5] = 5
+hash_table[6] = null
+hash_table[7] = null
+hash_table[8] = null
+hash_table[9] = null
+hash_table[10] = null 
+```
+Now, we have another collision. 2 should be inserted at index 2, but it is occupied by 23. Therefore, the next index is checked. 3 is open, so it inserts 2 at index 3. 
+```
+hash_table[0] = null
+hash_table[1] = 12
+hash_table[2] = 23
+hash_table[3] = 2
+hash_table[4] = 4
+hash_table[5] = 5
+hash_table[6] = null
+hash_table[7] = null
+hash_table[8] = null
+hash_table[9] = null
+hash_table[10] = null 
+```
+The next element is 35. 35 also wants to be inserted at index 2, but it is taken. So, index 3 is checked. It is also taken. Indexes 4 and 5 are checked and occupied as well, so 35 does not get inserted until index 6. 
+```
+hash_table[0] = null
+hash_table[1] = 12
+hash_table[2] = 23
+hash_table[3] = 2
+hash_table[4] = 4
+hash_table[5] = 5
+hash_table[6] = 35
+hash_table[7] = null
+hash_table[8] = null
+hash_table[9] = null
+hash_table[10] = null 
+```
+The next element is 17. 17 has a hash of 6, but index 6 is taken. So, index 7 is checked. It is open, so 17 is inserted at index 7.
+```
+hash_table[0] = null
+hash_table[1] = 12
+hash_table[2] = 23
+hash_table[3] = 2
+hash_table[4] = 4
+hash_table[5] = 5
+hash_table[6] = 35
+hash_table[7] = 17
+hash_table[8] = null
+hash_table[9] = null
+hash_table[10] = null 
+```
+The final element is 27. It has a hash of 5, but index 5 is taken. Therefore, 6 and 7 are tested. They are both in use, so it isn't until index 8 that 27 can be inserted.
+```
+hash_table[0] = null
+hash_table[1] = 12
+hash_table[2] = 23
+hash_table[3] = 2
+hash_table[4] = 4
+hash_table[5] = 5
+hash_table[6] = 35
+hash_table[7] = 17
+hash_table[8] = 27
+hash_table[9] = null
+hash_table[10] = null 
+```
+##### Quadratic Probing
+Like with linear probing, the first two elements can be inserted as normal, since there are no collisions.
+```
+hash_table[0] = null
+hash_table[1] = 12
+hash_table[2] = null
+hash_table[3] = null
+hash_table[4] = 4
+hash_table[5] = null
+hash_table[6] = null
+hash_table[7] = null
+hash_table[8] = null
+hash_table[9] = null
+hash_table[10] = null 
+```
+Now, since there is a collision between 23 and 12, the index 1<sup>2</sup> from the original insertion point is checked. Index 2 is open, so we can insert 23 at index 2. The next element, 5, is can also be inserted, since there is nothing occupying index 5.
+```
+hash_table[0] = null
+hash_table[1] = 12
+hash_table[2] = 23
+hash_table[3] = null
+hash_table[4] = 4
+hash_table[5] = 5
+hash_table[6] = null
+hash_table[7] = null
+hash_table[8] = null
+hash_table[9] = null
+hash_table[10] = null 
+```
+The next element is 2. 2 should be inserted at index 2, but since it is occupied, we check the next 1<sup>2</sup> index, which is 3. 3 is open, so we insert 2 at index 3.
+```
+hash_table[0] = null
+hash_table[1] = 12
+hash_table[2] = 23
+hash_table[3] = 2
+hash_table[4] = 4
+hash_table[5] = 5
+hash_table[6] = null
+hash_table[7] = null
+hash_table[8] = null
+hash_table[9] = null
+hash_table[10] = null 
+```
+The next element is 35, which also has a hash of 2. Index 2 is in use, so 2 + 1<sup>2</sup> is checked, which is index 3. This is also in use. Now, rather than checking index 4, we check the index at 2 + 2<sup>2</sup> which is index 6. Index 6 is not in use, so we insert 35 at index 6.
+```
+hash_table[0] = null
+hash_table[1] = 12
+hash_table[2] = 23
+hash_table[3] = 2
+hash_table[4] = 4
+hash_table[5] = 5
+hash_table[6] = 35
+hash_table[7] = null
+hash_table[8] = null
+hash_table[9] = null
+hash_table[10] = null 
+```
+The next element is 17, which has a hash of 6. 6 is in use, so we check index 6 + 1<sup>2</sup> which is index 7. This is open, so 17 is inserted there.
+```
+hash_table[0] = null
+hash_table[1] = 12
+hash_table[2] = 23
+hash_table[3] = 2
+hash_table[4] = 4
+hash_table[5] = 5
+hash_table[6] = 35
+hash_table[7] = 17
+hash_table[8] = null
+hash_table[9] = null
+hash_table[10] = null 
+```
+Next, we try to insert 27. 27 has a hash of 5. 5 is occupied, so we check index 6. Index 6 is also taken, so we check 5 + 2<sup>2</sup> = 9. Index 9 is not in use, so 27 is inserted at index 9. 
+```
+hash_table[0] = null
+hash_table[1] = 12
+hash_table[2] = 23
+hash_table[3] = 2
+hash_table[4] = 4
+hash_table[5] = 5
+hash_table[6] = 35
+hash_table[7] = 17
+hash_table[8] = null
+hash_table[9] = 27
+hash_table[10] = null 
+```
+##### Double Hashing
+Once again, 12 and 4 can be inserted immediately. 
+```
+hash_table[0] = null
+hash_table[1] = 12
+hash_table[2] = null
+hash_table[3] = null
+hash_table[4] = 4
+hash_table[5] = null
+hash_table[6] = null
+hash_table[7] = null
+hash_table[8] = null
+hash_table[9] = null
+hash_table[10] = null 
+```
+Now, we have a collision with 23 and index 1. We need a secondary hash function. Let's use `hash2(n) = 7 - (n % 7)`. The next index we check for 23 is at `hash(23) + 1 * hash2(23) = 1 + 1 * 2 = 3`. Since we have 11 spaces in our hash table, we must still take `mod 11`, which is still 3, in this case. Therefore, index 3 is the location we will try to insert 23. 3 is open, so 23 can be inserted. The next element, 5, can still be inserted at index 5.
+```
+hash_table[0] = null
+hash_table[1] = 12
+hash_table[2] = null
+hash_table[3] = 23
+hash_table[4] = 4
+hash_table[5] = 5
+hash_table[6] = null
+hash_table[7] = null
+hash_table[8] = null
+hash_table[9] = null
+hash_table[10] = null 
+```
+The next element to be inserted is 2. Index 2 is open, so 2 is inserted directly this time.
+```
+hash_table[0] = null
+hash_table[1] = 12
+hash_table[2] = 2
+hash_table[3] = 23
+hash_table[4] = 4
+hash_table[5] = 5
+hash_table[6] = null
+hash_table[7] = null
+hash_table[8] = null
+hash_table[9] = null
+hash_table[10] = null 
+```
+The next element, 35, has a hash of 2. 2 is in use, so we must double hash 35 to find the next insertion point to check. `hash(35) + 1 * hash2(35) = 1 + 1 * 7 = 8`. Index 8 is open, so we insert 35 at index 8.
+```
+hash_table[0] = null
+hash_table[1] = 12
+hash_table[2] = 2
+hash_table[3] = 23
+hash_table[4] = 4
+hash_table[5] = 5
+hash_table[6] = null
+hash_table[7] = null
+hash_table[8] = 35
+hash_table[9] = null
+hash_table[10] = null 
+```
+The next element is 17, with a hash of 6. Index 6 is open, so we insert 17 at index 6.
+```
+hash_table[0] = null
+hash_table[1] = 12
+hash_table[2] = 2
+hash_table[3] = 23
+hash_table[4] = 4
+hash_table[5] = 5
+hash_table[6] = 17
+hash_table[7] = null
+hash_table[8] = 35
+hash_table[9] = null
+hash_table[10] = null 
+```
+Finally, we have 27, which has a hash of 5. Since index 5 is in use, we calculate `hash(27) + 1 * hash2(27) = 5 + 1 * 1 = 6`. Index 6 is in use, so we compute for the next iteration: `hash(27) + 2 * hash2(27) = 5 + 2 * 1 = 7`. Index 7 is open, so we insert at index 7.
+```
+hash_table[0] = null
+hash_table[1] = 12
+hash_table[2] = 2
+hash_table[3] = 23
+hash_table[4] = 4
+hash_table[5] = 5
+hash_table[6] = 17
+hash_table[7] = 27
+hash_table[8] = 35
+hash_table[9] = null
+hash_table[10] = null 
+```
+### Hash Table Final Thoughts
+We haven't really discussed hash functions. This is because constructing a good hash function is beyond the scope of this course. Especially when the hash needs to handle input other than integers. For integers, taking the modulus of a prime number is typically sufficient (the reasoning of this is also getting too deep into integer number theory for this class). For our hash table and set implementation, we will use C++'s in-built `std::hash`. Typically, to keep the size of the table from being too large, hash tables will take the modulus of the hash output by a prime number. 
 
 ## Set Data
 A set stores a collection of unique values without maintaining any ordering on the elements. In theory, we could use an array if we can compute a unique index for each item we enter into the set. However, this means that the underlying array may be very large and sparse. It would need to be large to hold all the possible elements that could be entered into the set. It would likely end up being sparse, since if the overall array size is very large, and the set only contains a few elements, there would be many wasted indices. Consider this example of a set using an array to store data. Let's say the set stores integers, and an integer is transformed to a key by subtracting one from it. If the first element added to the set is 1,000,000, that means we need to reserve 1,000,000 spaces for the array to store an element in the array:
@@ -32,8 +344,60 @@ Next, we'll discuss intersections. A set intersection is a set that contains onl
 Now, we'll discuss the set difference. If we have sets A and B, A &setminus; B contains all the elements in A that are not in B. B &setminus; A returns a set with all the elements in B that are not in A.
 Finally, we'll discuss the symmetric difference of two sets. The symmetric difference are the elements that are in A or B, but not both. The symmetric difference is the union of A &setminus; B with B &setminus; A.
 
+## Set Complexities
+The insertion time for a set is dependent on the underlying hash table. For a reasonable hash and hash table implementation, this tends towards O(1). However, if there is a large amount of chaining or probing due to a poor hash or hash table that is too small, this can tend towards O(n). The same goes for checking if a set contains an element. If there is no chaining or probing required, checking if an item is present in a set is O(1). In the worst case, it can degrade to O(n). For a good hash and hash table this is highly unlikely to occur.  
+  
+```
+operation union(set1, set2) -> Set:
+    declare result_set: Set
+
+    for key in set1:
+        result_set.insert(key)
+
+    for key in set2:
+        result_set.insert(key)
+```
+Set union is O(n). To union two sets, you simply insert every element into a new set. If set 1 has n elements and set 2 has m elements, that is n + m operations (assuming insert is roughly O(1)). If both sets are the same size (which is the worst case, since in that case both sets are as large as the largest set being unioned), it takes n + n operations, which is 2n. O(2n) = O(n).  
+  
+```
+operation intersection(set1, set2) -> Set:
+    declare result_set: Set
+    
+    if set1.size() <= set2.size():
+        for key in set1:
+            if set2.contains(key):
+                result_set.insert(key)
+    else:
+        for key in set2:
+            if set1.contains(key):
+                result_set.insert(key)
+```
+The intersection is O(n), although technically it can be implemented to be O(min(m, n)), for two sets of size m and n. This is since lookup and insertion are both O(1). Since the elements of the intersection must be in both sets, we only need to check the elements in the smaller set. Checking if each element is in the other set is O(1), and inserting it into the result set is also O(1).
+```
+operation difference(set1, set2) -> Set:
+    declare result_set: Set
+    
+    for key in set1:
+        if not set2.contains(key):
+            result_set.insert(key)
+```
+The set difference is O(n) when n is the size of the set being subtracted from. This is because we need to check every element in `set1`, and only add it to the result set if `set2` does not contain that element. Checking if a key is in `set2` is O(1), and inserting a key to the result set is also O(1). Therefore, the algorithm only scales with the size of `set1`.
+```
+operation symmetric_difference(set1, set2) -> Set:
+    declare result_set: Set
+    
+    for key in set1:
+        if not set2.contains(key):
+            result_set.insert(key)
+
+    for key in set2:
+        if not set1.contains(key):
+            result_set.insert(key)
+```
+This is effectively the same as the set union, except we are only adding elements that are not in the intersection. Since checking set membership is O(1), this does not change that this algorithm is O(n).
+
 ## Set Implementation
 
 ## Applications of Sets
-
+Sets are typically used as lookup tables. If you have a collection of items, and want
 

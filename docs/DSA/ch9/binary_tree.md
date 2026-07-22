@@ -24,7 +24,7 @@ operation bst_insert(element, node):
 ```
 Now, we can look at the pseudocode for the find operation:
 ```
-operation bst_find(element, node):
+operation bst_find(element, node) -> boolean:
     if node == null:
         return false
     if node.data == element:

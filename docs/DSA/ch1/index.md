@@ -7,6 +7,3 @@ The first chapter will review the prerequisite knowledge you are expected to hav
 - [Naming and Style](Naming.md)
 - [Compiling Programs and Makefiles](Makefiles.md)
 - [Glossary](Glossary.md)
-
-## Exercises
-- [Quiz 1: Makefiles and Naming](https://ess.starkstate.edu)

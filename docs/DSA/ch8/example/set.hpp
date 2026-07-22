@@ -3,7 +3,7 @@
 #include <functional>
 #include "../../ch7/example/list.hpp"
 
-template <typename T, typename Hash = std::hash<T>, size_t BUCKETS=128>
+template <typename T, typename Hash = std::hash<T>, size_t BUCKETS=127>
 class Set {
 public:
     Set() : buckets(BUCKETS), hashTable(new List<T>[BUCKETS]), hash(Hash()) {}
@@ -41,9 +41,13 @@ private:
     // called if the number of elements
     // gets too high, creating too many collisions
     void resize();
+    // current number of buckets (indexes for the hash table)
     size_t buckets;
+    // current number of elements in the set
     size_t currentSize;
+    // a dynamic array of lists
     List<T> *hashTable;
+    // hash object
     Hash hash;
 };
 
