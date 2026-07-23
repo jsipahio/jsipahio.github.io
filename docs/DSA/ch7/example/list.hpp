@@ -58,10 +58,10 @@ public:
         T* operator->() {
             return &ref->data;
         }
-        bool operator==(const Iterator &rhs) {
+        bool operator==(const Iterator &rhs) const {
             return rhs.ref == ref;
         }
-        bool operator!=(const Iterator &rhs) {
+        bool operator!=(const Iterator &rhs) const {
             return rhs.ref != ref;
         }
     private:
@@ -69,9 +69,12 @@ public:
     };
 
     List() {
-        front = new Node<T>(nullptr, back);
+        front = new Node<T>;
         back = new Node<T>(front, nullptr);
+        front->next = back;
+        currentSize = 0;
     }
+
     ~List() {
         while (front != nullptr) {
             Node<T> *temp = front;
@@ -79,29 +82,33 @@ public:
             delete temp;
         }
         front = back = nullptr;
+        currentSize = 0;
     }
+
     List(const List &other) {
         // initialize front and back of this list
-        front = new Node<T>(nullptr, back);
+        front = new Node<T>;
         back = new Node<T>(front, nullptr);
+        front->next = back;
+        currentSize = 0;
 
         // walk the other list from front to back
-        // inserting the each element at the back
+        // inserting each element at the back
         // will create a new list with the same
         // elements in the same order
         Node<T> *temp = other.front->next;
-        while (temp != nullptr) {
+        while (temp != other.back) {
             insertBack(temp->data);
             temp = temp->next;
         }
-    
     }
 
-    Iterator begin() {
+    Iterator begin() const {
+        if (currentSize == 0) return end();
         return Iterator(front->next);
     }
 
-    Iterator end() {
+    Iterator end() const {
         return Iterator(back);
     }
 
@@ -109,12 +116,16 @@ public:
         if (this == &other) return;
         Node<T> *tempFront = front;
         Node<T> *tempBack = back;
+        size_t tempSize = currentSize;
 
         front = other.front;
         other.front = tempFront;
 
         back = other.back;
         other.back = tempBack;
+
+        currentSize = other.currentSize;
+        other.currentSize = tempSize;
     }
 
     List<T>& operator=(List rhs) {
@@ -131,9 +142,11 @@ public:
         // node1->prev is newNode
         // newNode->prev is front
         // and front->next becomes newNode
+
         Node<T> *newNode = new Node<T>(data, front, front->next);
         front->next->prev = newNode;
         front->next = newNode;
+        ++currentSize;
     }
 
     void insertBack(T data) {
@@ -145,27 +158,44 @@ public:
         // node1->next is newNode
         // newNode->prev is node1, which is back->prev
         // and back->prev becomes newNode
+
         Node<T> *newNode = new Node<T>(data, back->prev, back);
         back->prev->next = newNode;
         back->prev = newNode;
+        ++currentSize;
     }
 
     Iterator find(T data) const {
         if (front == nullptr) {
-            return end();
+            return Iterator(back);
         }
         Node<T> *temp = front->next;
         while (temp != nullptr) {
             if (temp->data == data) {
                 return Iterator(temp);
             }
+            temp = temp->next;
         }
-        return end();
+        return Iterator(back);
+    }
+
+    Iterator findLast(T data) const {
+        if (back == nullptr) {
+            return Iterator(back);
+        }
+        Node<T> *temp = back->prev;
+        while (temp != nullptr) {
+            if (temp->data == data) {
+                return Iterator(temp);
+            }
+            temp = temp->prev;
+        }
+        return Iterator(back);
     }
 
     void remove(Iterator pos) {
         // we need to find the node this iterator points to
-        Node<T> node = front;
+        Node<T> *node = front;
         // since we don't want to expose the nodes in the Iterator class
         // we need to convert node to an iterator and compare with the 
         // parameter to this function
@@ -177,8 +207,25 @@ public:
         // if we do find it, call the private remove with the node
         else remove(node);
     }
+
+    bool operator==(const List& rhs) const {
+        if (currentSize != rhs.currentSize) return false;
+
+        auto thisIterator = begin();
+        auto rhsIterator = rhs.begin();
+        while (thisIterator != end()) {
+            if (!(*thisIterator == *rhsIterator)) return false;
+            ++thisIterator;
+            ++rhsIterator;
+        }
+        return true;
+    }
+
+    size_t size() const { return currentSize; }
+
+    bool empty() const { return currentSize == 0; }
 private:
-    void remove(Node<T> node) {
+    void remove(Node<T> *node) {
         // say we have this list
         // nullptr<-front<->node1<->node2<->node3<->back->nullptr
         // we want to remove node2
@@ -194,9 +241,11 @@ private:
         node->prev->next = node->next;
         node->next->prev = node->prev;
         delete node;
+        --currentSize;
     }
     Node<T> *front;
     Node<T> *back;
+    size_t currentSize;
 };
 
 #endif
