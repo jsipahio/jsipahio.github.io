@@ -1,23 +1,17 @@
 # Time and Space Complexity of Algorithms
 
-Here is a thorough, ebook-style set of lecture notes for your students. It skips the heavy mathematical proofs (like the formal limit definitions of Big O) and instead focuses on practical intuition, instruction counting, and visual pattern recognition.
-
----
-
-# Lecture Notes: Understanding Code Efficiency (Time & Space Complexity)
-
-When we write software, it isn't enough for a program to just *work*. It also needs to be efficient. If your program takes three days to process a single file, it isn't very useful.
+When we write software, it isn't enough for a program to just work. It also needs to be efficient. If your program takes three days to process a single file, it isn't very useful.
 
 In computer science, we measure efficiency using two metrics:
 
 1. **Time Complexity:** How fast does the algorithm run as the amount of input data grows?
 2. **Auxiliary Space Complexity:** How much extra memory does the algorithm need as the amount of input data grows?
 
-Rather than measuring this in exact seconds or megabytes (which change depending on whether you are running the code on a smartphone or a supercomputer), we use a framework called **Big O Notation**.
+Rather than measuring this in exact seconds or megabytes (which change depending on whether you are running the code on a smartphone or a supercomputer), we use a framework called Big O Notation.
 
 ---
 
-## 1. The Intuition: Counting "Steps" instead of Seconds
+## Basics of Time Complexity
 
 Imagine you are looking for a specific name in a physical phone book.
 
@@ -26,9 +20,9 @@ Imagine you are looking for a specific name in a physical phone book.
 
 If the phone book only has 10 pages, both methods are fast. But if the phone book has 1,000,000 pages, Strategy A will take forever, while Strategy B will take only a few seconds.
 
-In data structures, we represent the size of the input data as **$n$**. (For example, $n$ could be the number of elements in an array). We want to know: **As $n$ gets massive, how does the number of operations our CPU has to perform grow?**
+In data structures, we represent the size of the input data as **$n$**. (For example, $n$ could be the number of elements in an array). We want to know: As $n$ gets massive, how does the number of operations our CPU has to perform grow?
 
-### What is a "Step"?
+### Counting Steps
 
 For our purposes, a "step" (or a primitive operation) is any basic action that takes a constant amount of time:
 
@@ -37,25 +31,23 @@ For our purposes, a "step" (or a primitive operation) is any basic action that t
 * Comparing two values (`x < y`)
 * Accessing an element in an array (`arr[0]`)
 
----
+## Big O Notation
 
-## 2. Big O Notation: Dropping the Small Stuff
+Big O notation provides an approximation of an algorithm's time complexity. When $n$ becomes incredibly large (like 10 million), smaller terms and constant multipliers stop mattering.
 
-Big O notation acts like a magnifying glass that only looks at the "big picture." When $n$ becomes incredibly large (like 10 million), smaller terms and constant multipliers stop mattering.
+### Drop the Constants
 
-### Rule 1: Drop the Constants
+If an algorithm takes $3n$ steps, we say it is $O(n)$. Why? Because if $n$ goes from 1 million to 2 million, the time it takes doubles. The factor of 3 doesn't change the rate of growth.
 
-If an algorithm takes $3n$ steps, we say it is **$O(n)$**. Why? Because if $n$ goes from 1 million to 2 million, the time it takes doubles. The factor of 3 doesn't change the *rate of growth*.
+### Drop Non-Dominant Terms
 
-### Rule 2: Drop the Non-Dominant Terms
-
-If an algorithm takes $n^2 + 5n + 100$ steps, we say it is **$O(n^2)$**.
+If an algorithm takes $n^2 + 5n + 100$ steps, we say it is $O(n^2)$.  
 Let's look at why the $5n$ and $100$ become irrelevant when $n$ is large:
 
 * If $n = 1,000$: $n^2 = 1,000,000$, while $5n = 5,000$.
+* The 5,000 term makes almost no difference in the amount of time the algorithm takes.
 * The $n^2$ term completely dominates the execution time.
-
----
+* At this point, the 100 term in contributing practically nothing to execution time.
 
 ## 3. Analyzing Time Complexity of C++ Code
 
@@ -63,7 +55,7 @@ Let's look at common code structures your students will encounter and learn how 
 
 ### Constant Time: $O(1)$
 
-An algorithm is $O(1)$ if its execution time does **not** depend on the size of the input data ($n$).
+An algorithm is $O(1)$ if its execution time does not depend on the size of the input data ($n$).
 
 ```cpp
 void printFirstElement(int arr[], int n) {
@@ -72,7 +64,7 @@ void printFirstElement(int arr[], int n) {
 
 ```
 
-*Even if the array has 5 elements or 5 million elements, this function only ever looks at the first element. It takes the exact same amount of time.*
+Even if the array has 5 elements or 5 million elements, this function only ever looks at the first element. It takes the exact same amount of time no matter what the size of the input is.
 
 ### Linear Time: $O(n)$
 
@@ -90,7 +82,7 @@ int findSum(int arr[], int n) {
 ```
 
 * **Exact Step Count:** $1 + n(1) + 1 = n + 2$.
-* **Big O:** Drop the constant $2$. We are left with **$O(n)$**.
+* **Big O:** Drop the constant $2$. We are left with $O(n)$.
 
 ### Quadratic Time: $O(n^2)$
 
@@ -109,9 +101,9 @@ void printPairs(int arr[], int n) {
 
 * For every single iteration of the outer loop ($n$ times), the inner loop runs completely ($n$ times).
 * Total iterations = $n \times n = n^2$.
-* **Big O:** **$O(n^2)$**.
+* **Big O:** $O(n^2)$.
 
-#### The "Tricky" Nested Loop
+#### More Complex Nested Loops
 
 What happens if the inner loop doesn't go up to $n$, but instead changes based on $i$?
 
@@ -132,12 +124,10 @@ void printUniquePairs(int arr[], int n) {
 * The total number of iterations is the sum: $(n-1) + (n-2) + ... + 2 + 1 + 0$.
 * An easy way to picture this visually is a grid cut in half diagonally (a triangle). The area of a triangle of base $n$ and height $n$ is $\frac{1}{2}n^2$.
 * Using our rules: Drop the constant fraction ($\frac{1}{2}$). The complexity is still **$O(n^2)$**.
+* However, in the real world, this algorithm is much faster than the previous. Big O is an approximation, and assigns algorithms to categories. It does not provide deep analysis between algorithms in the same Big O category.
 
 ### Logarithmic Time: $O(\log n)$
-
-Logarithmic time is the trickiest concept for students without discrete math. Avoid the formal algebraic definition of logarithms. Instead, teach them the **"Divide and Conquer" rule**.
-
-> **The Logarithmic Rule of Thumb:** If an algorithm repeatedly cuts the amount of data it has to look at **in half** during every step, it runs in **$O(\log n)$** time.
+Logarithmic algorithms are tricky to understand without a discrete math background. At a high level, any time an algorithm splits its data in half successively, it is probably logarithmic.
 
 ```cpp
 // A classic example of dividing the problem in half
@@ -155,12 +145,11 @@ If $n = 1,000,000$, it takes only about 20 iterations! This makes $O(\log n)$ in
 
 ---
 
-## 4. Understanding Auxiliary Space Complexity
-
-Students often confuse *total memory footprint* with *auxiliary space complexity*.
+## 4. Auxiliary Space Complexity
+The total space an algorithm uses will, of course, be dependent on the input data size. However, in algorithm analysis, we really want to know how much extra space an algorithm uses.  
 
 * **Total Space:** The entire memory the program uses, including the original input data.
-* **Auxiliary Space:** The **extra** or **temporary** memory allocated by the algorithm to solve the problem, *excluding* the input data. In this course, we focus almost exclusively on Auxiliary Space.
+* **Auxiliary Space:** The extra or temporary memory allocated by the algorithm to solve the problem, excluding the input data. In this course, we focus almost exclusively on auxiliary space.
 
 Just like time complexity, we measure this by seeing how our temporary allocations grow relative to $n$.
 
@@ -181,7 +170,7 @@ int findMax(int arr[], int n) {
 
 ```
 
-*Whether $n$ is 10 or 10,000, this function only ever creates two integers (`maxVal` and `i`) in memory. The extra space does not grow.*
+Whether $n$ is 10 or 10,000, this function only ever creates two integers (`maxVal` and `i`) in memory. The extra space does not grow.
 
 ### $O(n)$ Auxiliary Space (Linear Extra Space)
 
@@ -198,12 +187,11 @@ int* copyArray(int arr[], int n) {
 
 ```
 
-*If $n = 1,000$, we allocate memory for 1,000 integers. The auxiliary space grows perfectly in parallel with the input size.*
+If $n = 1,000$, we allocate memory for 1,000 integers. The auxiliary space grows perfectly in parallel with the input size.
 
----
-
-## Quick Reference Cheat Sheet for Students
-
+## Table of Complexities
+Here is a high-level overview of common algorithm complexities. We rarely see algorithms go beyond $O(n^3)$, since at this point they become far too slow to be practical. Many algorithms are $O(2^n)$, but they are never used because exponential algorithms become impossibly slow, even for relatively small input sizes. Most modern cryptology (security) depends on the fact that finding the prime factorization of a large enough number would take centuries to compute.
+  
 | Big O | Common Name | How to spot it in basic code |
 | --- | --- | --- |
 | **$O(1)$** | Constant | No loops that depend on $n$. Just straight-through code. |
@@ -211,7 +199,5 @@ int* copyArray(int arr[], int n) {
 | **$O(n)$** | Linear | A single loop that counts from $0$ up to $n$ (or down to $0$). |
 | **$O(n \log n)$** | Linearithmic | A loop that runs $n$ times, inside of which is an operation that cuts data in half. (Seen in efficient sorting algorithms). |
 | **$O(n^2)$** | Quadratic | Two nested loops that both depend on $n$. |
-
----
-
-Would you like to move on to generating the next set of lecture notes, perhaps focusing on Pointers and Dynamic Memory Management in C++ as a quick bridge before we tackle Linked Lists?
+| **$O(n^3)$** | Hyperbolic | Three nested loops that both depend on $n$. |
+| **$O(2^n)$** | Exponential | No easy tell |

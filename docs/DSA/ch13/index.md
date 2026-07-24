@@ -4,4 +4,4 @@ This chapter and the next focus on graphs. This chapter focuses on graph represe
 
 ### Outline
 - [Graph Representations](graph.md)
-- [Searching](graph_seraching.md)
+- [Searching](graph_searching.md)
