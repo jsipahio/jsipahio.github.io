@@ -4,9 +4,6 @@
 #include <string>
 #include <iostream>
 
-#include <string>
-#include <iostream>
-
 class BankAccount {
 public:
     BankAccount();
