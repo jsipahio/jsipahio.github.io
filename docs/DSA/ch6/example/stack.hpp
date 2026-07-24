@@ -166,5 +166,8 @@ private:
     T *data;
 };
 
+// need to include template implementation at end of header
+// only do these for template implementations
+// never source code that needs to be individually compiled/linked
 #include "stack.tpp"
 #endif 

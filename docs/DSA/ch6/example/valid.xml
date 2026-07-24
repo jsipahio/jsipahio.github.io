@@ -1,0 +1,408 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:pos="http://www.srcML.org/srcML/position" revision="1.0.0" pos:tabs="8">
+
+<unit xmlns:cpp="http://www.srcML.org/srcML/cpp" revision="1.0.0" language="C++" filename="stack.hpp" pos:tabs="8" hash="10433b5e24c18eb5d0e47300edfde8aae8e8837a">
+<cpp:ifndef pos:start="2:1" pos:end="2:17">#<cpp:directive pos:start="2:2" pos:end="2:7">ifndef</cpp:directive> <name pos:start="2:9" pos:end="2:17">STACK_HPP</name></cpp:ifndef>
+<cpp:define pos:start="3:1" pos:end="3:17">#<cpp:directive pos:start="3:2" pos:end="3:7">define</cpp:directive> <cpp:macro pos:start="3:9" pos:end="3:17"><name pos:start="3:9" pos:end="3:17">STACK_HPP</name></cpp:macro></cpp:define>
+
+<cpp:include pos:start="5:1" pos:end="5:22">#<cpp:directive pos:start="5:2" pos:end="5:8">include</cpp:directive> <cpp:file pos:start="5:10" pos:end="5:22">&lt;sys/types.h&gt;</cpp:file></cpp:include>
+
+<decl_stmt pos:start="7:1" pos:end="7:41"><decl pos:start="7:1" pos:end="7:40"><type pos:start="7:1" pos:end="7:16"><specifier pos:start="7:1" pos:end="7:9">constexpr</specifier> <name pos:start="7:11" pos:end="7:16">size_t</name></type> <name pos:start="7:18" pos:end="7:34">DEFAULT_MAX_STACK</name> <init pos:start="7:36" pos:end="7:40">= <expr pos:start="7:38" pos:end="7:40"><literal type="number" pos:start="7:38" pos:end="7:40">256</literal></expr></init></decl>;</decl_stmt>
+
+<comment type="block" format="doxygen" pos:start="9:1" pos:end="9:51">/** Exception class for accessing an empty Stack */</comment>
+<class pos:start="10:1" pos:end="16:2">class <name pos:start="10:7" pos:end="10:22">EmptyStackAccess</name> <block pos:start="10:24" pos:end="16:1">{<private type="default" pos:start="10:25" pos:end="11:0">
+</private><public pos:start="11:1" pos:end="16:0">public:
+    <constructor pos:start="12:5" pos:end="12:25"><name pos:start="12:5" pos:end="12:20">EmptyStackAccess</name><parameter_list pos:start="12:21" pos:end="12:22">()</parameter_list> <block pos:start="12:24" pos:end="12:25">{<block_content/>}</block></constructor>
+    <function pos:start="13:5" pos:end="15:5"><type pos:start="13:5" pos:end="13:15"><specifier pos:start="13:5" pos:end="13:9">const</specifier> <name pos:start="13:11" pos:end="13:14">char</name><modifier pos:start="13:15" pos:end="13:15">*</modifier></type> <name pos:start="13:17" pos:end="13:20">what</name><parameter_list pos:start="13:21" pos:end="13:22">()</parameter_list> <block pos:start="13:24" pos:end="15:5">{<block_content pos:start="13:25" pos:end="15:4">
+        <return pos:start="14:9" pos:end="14:49">return <expr pos:start="14:16" pos:end="14:48"><literal type="string" pos:start="14:16" pos:end="14:48">"Attempted to access empty stack"</literal></expr>;</return>
+    </block_content>}</block></function>
+</public>}</block>;</class>
+
+<comment type="block" format="doxygen" pos:start="18:1" pos:end="18:51">/** Exception class for overflowing a full Stack */</comment>
+<class pos:start="19:1" pos:end="25:2">class <name pos:start="19:7" pos:end="19:21">FullStackAccess</name> <block pos:start="19:23" pos:end="25:1">{<private type="default" pos:start="19:24" pos:end="20:0">
+</private><public pos:start="20:1" pos:end="25:0">public:
+    <constructor pos:start="21:5" pos:end="21:24"><name pos:start="21:5" pos:end="21:19">FullStackAccess</name><parameter_list pos:start="21:20" pos:end="21:21">()</parameter_list> <block pos:start="21:23" pos:end="21:24">{<block_content/>}</block></constructor>
+    <function pos:start="22:5" pos:end="24:5"><type pos:start="22:5" pos:end="22:15"><specifier pos:start="22:5" pos:end="22:9">const</specifier> <name pos:start="22:11" pos:end="22:14">char</name><modifier pos:start="22:15" pos:end="22:15">*</modifier></type> <name pos:start="22:17" pos:end="22:20">what</name><parameter_list pos:start="22:21" pos:end="22:22">()</parameter_list> <block pos:start="22:24" pos:end="24:5">{<block_content pos:start="22:25" pos:end="24:4">
+        <return pos:start="23:9" pos:end="23:50">return <expr pos:start="23:16" pos:end="23:49"><literal type="string" pos:start="23:16" pos:end="23:49">"Attempted to overflow full stack"</literal></expr>;</return>
+    </block_content>}</block></function>
+</public>}</block>;</class>
+
+<comment type="block" format="doxygen" pos:start="27:1" pos:end="31:3">/**
+ * class Stack
+ * Uses a dynamic array to represent a
+ * Stack (LIFO container) data structure
+ */</comment>
+<class pos:start="32:1" pos:end="167:2"><template pos:start="32:1" pos:end="32:21">template <parameter_list pos:start="32:10" pos:end="32:21">&lt;<parameter pos:start="32:11" pos:end="32:20"><type pos:start="32:11" pos:end="32:18"><name pos:start="32:11" pos:end="32:18">typename</name></type> <name pos:start="32:20" pos:end="32:20">T</name></parameter>&gt;</parameter_list></template>
+class <name pos:start="33:7" pos:end="33:11">Stack</name> <block pos:start="33:13" pos:end="167:1">{<private type="default" pos:start="33:14" pos:end="34:0">
+</private><public pos:start="34:1" pos:end="160:0">public:
+    <comment type="block" format="doxygen" pos:start="35:5" pos:end="36:9">/** @defgroup Creational Methods
+     @{*/</comment>
+    <comment type="block" format="doxygen" pos:start="37:5" pos:end="40:7">/**
+     * Default Constructor
+     * Sets max stack size to DEFAULT_MAX_STACK
+     */</comment>
+    <constructor_decl pos:start="41:5" pos:end="41:12"><name pos:start="41:5" pos:end="41:9">Stack</name><parameter_list pos:start="41:10" pos:end="41:11">()</parameter_list>;</constructor_decl>
+    <comment type="block" format="doxygen" pos:start="42:5" pos:end="46:7">/**
+     * Constructor 
+     * 
+     * Creates stack with maximum size of max
+     */</comment>
+    <constructor_decl pos:start="47:5" pos:end="47:22"><name pos:start="47:5" pos:end="47:9">Stack</name><parameter_list pos:start="47:10" pos:end="47:21">(<parameter pos:start="47:11" pos:end="47:20"><decl pos:start="47:11" pos:end="47:20"><type pos:start="47:11" pos:end="47:16"><name pos:start="47:11" pos:end="47:16">size_t</name></type> <name pos:start="47:18" pos:end="47:20">max</name></decl></parameter>)</parameter_list>;</constructor_decl>
+    <comment type="block" format="doxygen" pos:start="48:5" pos:end="54:7">/**
+     * Copy Constructor
+     * 
+     * Performs deep copy of stacks
+     * 
+     * @param other - const reference to another Stack
+     */</comment>
+    <constructor_decl pos:start="55:5" pos:end="55:30"><name pos:start="55:5" pos:end="55:9">Stack</name><parameter_list pos:start="55:10" pos:end="55:29">(<parameter pos:start="55:11" pos:end="55:28"><decl pos:start="55:11" pos:end="55:28"><type pos:start="55:11" pos:end="55:22"><specifier pos:start="55:11" pos:end="55:15">const</specifier> <name pos:start="55:17" pos:end="55:21">Stack</name><modifier pos:start="55:22" pos:end="55:22">&amp;</modifier></type> <name pos:start="55:24" pos:end="55:28">other</name></decl></parameter>)</parameter_list>;</constructor_decl>
+    <comment type="block" format="doxygen" pos:start="56:5" pos:end="60:7">/**
+     * Destructor
+     * 
+     * Deletes dynamically allocated memory
+     */</comment>
+    <destructor_decl pos:start="61:5" pos:end="61:13"><name pos:start="61:5" pos:end="61:10">~Stack</name><parameter_list pos:start="61:11" pos:end="61:12">()</parameter_list>;</destructor_decl>
+    <comment type="block" format="doxygen" pos:start="62:5" pos:end="66:7">/**
+     * Overloaded Assignment Operator
+     * 
+     * @param rhs - Stack that is being copied to this
+     */</comment>
+    <function_decl type="operator" pos:start="67:5" pos:end="67:32"><type pos:start="67:5" pos:end="67:10"><name pos:start="67:5" pos:end="67:9">Stack</name><modifier pos:start="67:10" pos:end="67:10">&amp;</modifier></type> <name pos:start="67:12" pos:end="67:20">operator<name pos:start="67:20" pos:end="67:20">=</name></name><parameter_list pos:start="67:21" pos:end="67:31">(<parameter pos:start="67:22" pos:end="67:30"><decl pos:start="67:22" pos:end="67:30"><type pos:start="67:22" pos:end="67:26"><name pos:start="67:22" pos:end="67:26">Stack</name></type> <name pos:start="67:28" pos:end="67:30">rhs</name></decl></parameter>)</parameter_list>;</function_decl>
+    <comment type="block" format="doxygen" pos:start="68:5" pos:end="68:11">/**@}*/</comment>
+
+    <comment type="block" format="doxygen" pos:start="70:5" pos:end="71:9">/** @defgroup Stack Methods
+     @{*/</comment>
+    <comment type="block" format="doxygen" pos:start="72:5" pos:end="79:7">/**
+     * push - add element to stack
+     * 
+     * @param element - Element to add to stack
+     * @pre Stack is not full
+     * @post element is added to stack
+     * @throws FullStackException
+     */</comment>
+    <function_decl pos:start="80:5" pos:end="80:32"><type pos:start="80:5" pos:end="80:8"><name pos:start="80:5" pos:end="80:8">void</name></type> <name pos:start="80:10" pos:end="80:13">push</name><parameter_list pos:start="80:14" pos:end="80:31">(<parameter pos:start="80:15" pos:end="80:30"><decl pos:start="80:15" pos:end="80:30"><type pos:start="80:15" pos:end="80:22"><specifier pos:start="80:15" pos:end="80:19">const</specifier> <name pos:start="80:21" pos:end="80:21">T</name><modifier pos:start="80:22" pos:end="80:22">&amp;</modifier></type> <name pos:start="80:24" pos:end="80:30">element</name></decl></parameter>)</parameter_list>;</function_decl>
+    <comment type="block" format="doxygen" pos:start="81:5" pos:end="87:7">/**
+     * top - return top of stack
+     * 
+     * @pre Stack is not empty
+     * @throws EmptyStackException
+     * @returns Element at top of the stack
+     */</comment>
+    <function_decl pos:start="88:5" pos:end="88:19"><type pos:start="88:5" pos:end="88:6"><name pos:start="88:5" pos:end="88:5">T</name><modifier pos:start="88:6" pos:end="88:6">&amp;</modifier></type> <name pos:start="88:8" pos:end="88:10">top</name><parameter_list pos:start="88:11" pos:end="88:12">()</parameter_list> <specifier pos:start="88:14" pos:end="88:18">const</specifier>;</function_decl>
+    <comment type="block" format="doxygen" pos:start="89:5" pos:end="95:7">/**
+     * pop - remove element from top of stack
+     * 
+     * @pre Stack is not empty
+     * @post Top element of stack is removed
+     * @throws EmptyStackException
+     */</comment>
+    <function_decl pos:start="96:5" pos:end="96:15"><type pos:start="96:5" pos:end="96:8"><name pos:start="96:5" pos:end="96:8">void</name></type> <name pos:start="96:10" pos:end="96:12">pop</name><parameter_list pos:start="96:13" pos:end="96:14">()</parameter_list>;</function_decl>
+    <comment type="block" format="doxygen" pos:start="97:5" pos:end="97:11">/**@}*/</comment>
+
+
+    <comment type="block" format="doxygen" pos:start="100:5" pos:end="101:9">/** @defgroup Accessor and Boolean Methods
+     @{*/</comment>
+    <comment type="block" format="doxygen" pos:start="102:5" pos:end="106:7">/**
+     * capacity - max elements the stack can hold
+     * 
+     * @returns maximum capacity of the stack
+     */</comment>
+    <function_decl pos:start="107:5" pos:end="107:28"><type pos:start="107:5" pos:end="107:10"><name pos:start="107:5" pos:end="107:10">size_t</name></type> <name pos:start="107:12" pos:end="107:19">capacity</name><parameter_list pos:start="107:20" pos:end="107:21">()</parameter_list> <specifier pos:start="107:23" pos:end="107:27">const</specifier>;</function_decl>
+    <comment type="block" format="doxygen" pos:start="108:5" pos:end="112:7">/**
+     * size - current number of elements in the stack
+     * 
+     * @returns number of elements in the stack
+     */</comment>
+    <function_decl pos:start="113:5" pos:end="113:24"><type pos:start="113:5" pos:end="113:10"><name pos:start="113:5" pos:end="113:10">size_t</name></type> <name pos:start="113:12" pos:end="113:15">size</name><parameter_list pos:start="113:16" pos:end="113:17">()</parameter_list> <specifier pos:start="113:19" pos:end="113:23">const</specifier>;</function_decl>
+    <comment type="block" format="doxygen" pos:start="114:5" pos:end="119:7">/**
+     * full - check if stack is full
+     * 
+     * @return true - stack is full
+     * @return false - stack is not full
+     */</comment>
+    <function_decl pos:start="120:5" pos:end="120:22"><type pos:start="120:5" pos:end="120:8"><name pos:start="120:5" pos:end="120:8">bool</name></type> <name pos:start="120:10" pos:end="120:13">full</name><parameter_list pos:start="120:14" pos:end="120:15">()</parameter_list> <specifier pos:start="120:17" pos:end="120:21">const</specifier>;</function_decl>
+    <comment type="block" format="doxygen" pos:start="121:5" pos:end="126:7">/**
+     * empty - check if stack is empty
+     * 
+     * @return true - stack is empty
+     * @return false - stack is not empty
+     */</comment>
+    <function_decl pos:start="127:5" pos:end="127:23"><type pos:start="127:5" pos:end="127:8"><name pos:start="127:5" pos:end="127:8">bool</name></type> <name pos:start="127:10" pos:end="127:14">empty</name><parameter_list pos:start="127:15" pos:end="127:16">()</parameter_list> <specifier pos:start="127:18" pos:end="127:22">const</specifier>;</function_decl>
+    <comment type="block" format="doxygen" pos:start="128:5" pos:end="137:7">/**
+     * operator ==
+     * Stacks are checked for equality pairwise
+     * Stacks with different capacities are still equal
+     * as long as they have the same elements in the same order
+     * 
+     * @param other - Stack to compare to
+     * @return true - stack elements match pairwise
+     * @return false - any mismatch found between pairs of elements
+     */</comment>
+    <function_decl type="operator" pos:start="138:5" pos:end="138:46"><type pos:start="138:5" pos:end="138:8"><name pos:start="138:5" pos:end="138:8">bool</name></type> <name pos:start="138:10" pos:end="138:19">operator<name pos:start="138:18" pos:end="138:19">==</name></name><parameter_list pos:start="138:20" pos:end="138:39">(<parameter pos:start="138:21" pos:end="138:38"><decl pos:start="138:21" pos:end="138:38"><type pos:start="138:21" pos:end="138:33"><specifier pos:start="138:21" pos:end="138:25">const</specifier> <name pos:start="138:27" pos:end="138:31">Stack</name> <modifier pos:start="138:33" pos:end="138:33">&amp;</modifier></type><name pos:start="138:34" pos:end="138:38">other</name></decl></parameter>)</parameter_list> <specifier pos:start="138:41" pos:end="138:45">const</specifier>;</function_decl>
+    <comment type="block" format="doxygen" pos:start="139:5" pos:end="139:11">/**@}*/</comment>
+
+
+    <comment type="block" format="doxygen" pos:start="142:5" pos:end="143:9">/** @defgroup Modifier methods
+     @{*/</comment>
+    <comment type="block" format="doxygen" pos:start="144:5" pos:end="148:7">/**
+     * swap - constant time swap of two stacks
+     * 
+     * @post "this" stack is swapped with other
+     */</comment>
+    <function_decl pos:start="149:5" pos:end="149:28"><type pos:start="149:5" pos:end="149:8"><name pos:start="149:5" pos:end="149:8">void</name></type> <name pos:start="149:10" pos:end="149:13">swap</name><parameter_list pos:start="149:14" pos:end="149:27">(<parameter pos:start="149:15" pos:end="149:26"><decl pos:start="149:15" pos:end="149:26"><type pos:start="149:15" pos:end="149:20"><name pos:start="149:15" pos:end="149:19">Stack</name><modifier pos:start="149:20" pos:end="149:20">&amp;</modifier></type> <name pos:start="149:22" pos:end="149:26">other</name></decl></parameter>)</parameter_list>;</function_decl>
+    <comment type="block" format="doxygen" pos:start="150:5" pos:end="157:7">/**
+     * resize - allocates new memory to change size of the stack
+     * 
+     * @param newSize - size to change stack to
+     * @post the max size of "this" is changed to new size.\
+             if the new size is less than the old top index,\
+             top is adjusted to be max index of new size
+     */</comment>
+    <function_decl pos:start="158:5" pos:end="158:32"><type pos:start="158:5" pos:end="158:8"><name pos:start="158:5" pos:end="158:8">void</name></type> <name pos:start="158:10" pos:end="158:15">resize</name><parameter_list pos:start="158:16" pos:end="158:31">(<parameter pos:start="158:17" pos:end="158:30"><decl pos:start="158:17" pos:end="158:30"><type pos:start="158:17" pos:end="158:22"><name pos:start="158:17" pos:end="158:22">size_t</name></type> <name pos:start="158:24" pos:end="158:30">newSize</name></decl></parameter>)</parameter_list>;</function_decl>
+    <comment type="block" format="doxygen" pos:start="159:5" pos:end="159:13">/** @} */</comment>
+</public><private pos:start="160:1" pos:end="167:0">private:
+    <comment type="line" pos:start="161:5" pos:end="161:36">// the maximum size of the stack</comment>
+    <decl_stmt pos:start="162:5" pos:end="162:19"><decl pos:start="162:5" pos:end="162:18"><type pos:start="162:5" pos:end="162:10"><name pos:start="162:5" pos:end="162:10">size_t</name></type> <name pos:start="162:12" pos:end="162:18">maxSize</name></decl>;</decl_stmt>
+    <comment type="line" pos:start="163:5" pos:end="163:44">// "top of stack" - index of current top</comment>
+    <decl_stmt pos:start="164:5" pos:end="164:15"><decl pos:start="164:5" pos:end="164:14"><type pos:start="164:5" pos:end="164:10"><name pos:start="164:5" pos:end="164:10">size_t</name></type> <name pos:start="164:12" pos:end="164:14">tos</name></decl>;</decl_stmt>
+    <comment type="line" pos:start="165:5" pos:end="165:36">// array to store stack elements</comment>
+    <decl_stmt pos:start="166:5" pos:end="166:12"><decl pos:start="166:5" pos:end="166:11"><type pos:start="166:5" pos:end="166:7"><name pos:start="166:5" pos:end="166:5">T</name> <modifier pos:start="166:7" pos:end="166:7">*</modifier></type><name pos:start="166:8" pos:end="166:11">data</name></decl>;</decl_stmt>
+</private>}</block>;</class>
+
+<cpp:include pos:start="169:1" pos:end="169:20">#<cpp:directive pos:start="169:2" pos:end="169:8">include</cpp:directive> <cpp:file pos:start="169:10" pos:end="169:20">"stack.tpp"</cpp:file></cpp:include>
+<cpp:endif pos:start="170:1" pos:end="170:6">#<cpp:directive pos:start="170:2" pos:end="170:6">endif</cpp:directive></cpp:endif> </unit>
+
+<unit xmlns:cpp="http://www.srcML.org/srcML/cpp" revision="1.0.0" language="C++" filename="XmlValidator.cpp" pos:tabs="8" hash="2fde477f3436e95ee99b102b5968c21539c1163c"><comment type="block" pos:start="1:1" pos:end="4:2">/*
+This program validates an XML document.
+All it does is validate that all elements are closed.
+*/</comment>
+
+<cpp:include pos:start="6:1" pos:end="6:18">#<cpp:directive pos:start="6:2" pos:end="6:8">include</cpp:directive> <cpp:file pos:start="6:10" pos:end="6:18">&lt;fstream&gt;</cpp:file></cpp:include>
+<cpp:include pos:start="7:1" pos:end="7:19">#<cpp:directive pos:start="7:2" pos:end="7:8">include</cpp:directive> <cpp:file pos:start="7:10" pos:end="7:19">&lt;iostream&gt;</cpp:file></cpp:include>
+<cpp:include pos:start="8:1" pos:end="8:20">#<cpp:directive pos:start="8:2" pos:end="8:8">include</cpp:directive> <cpp:file pos:start="8:10" pos:end="8:20">"stack.hpp"</cpp:file></cpp:include>
+<cpp:include pos:start="9:1" pos:end="9:17">#<cpp:directive pos:start="9:2" pos:end="9:8">include</cpp:directive> <cpp:file pos:start="9:10" pos:end="9:17">&lt;string&gt;</cpp:file></cpp:include>
+
+<class pos:start="11:1" pos:end="21:2">class <name pos:start="11:7" pos:end="11:28">XmlValidationException</name> <block pos:start="11:30" pos:end="21:1">{<private type="default" pos:start="11:31" pos:end="12:0">
+</private><public pos:start="12:1" pos:end="19:0">public:
+    <constructor pos:start="13:5" pos:end="15:5"><name pos:start="13:5" pos:end="13:26">XmlValidationException</name><parameter_list pos:start="13:27" pos:end="13:53">(<parameter pos:start="13:28" pos:end="13:52"><decl pos:start="13:28" pos:end="13:52"><type pos:start="13:28" pos:end="13:45"><specifier pos:start="13:28" pos:end="13:32">const</specifier> <name pos:start="13:34" pos:end="13:44"><name pos:start="13:34" pos:end="13:36">std</name><operator pos:start="13:37" pos:end="13:38">::</operator><name pos:start="13:39" pos:end="13:44">string</name></name><modifier pos:start="13:45" pos:end="13:45">&amp;</modifier></type> <name pos:start="13:47" pos:end="13:52">reason</name></decl></parameter>)</parameter_list> <block pos:start="13:55" pos:end="15:5">{<block_content pos:start="13:56" pos:end="15:4">
+        <expr_stmt pos:start="14:9" pos:end="14:66"><expr pos:start="14:9" pos:end="14:65"><name pos:start="14:9" pos:end="14:20">errorMessage</name> <operator pos:start="14:22" pos:end="14:22">=</operator> <literal type="string" pos:start="14:24" pos:end="14:56">"XML Validation Failed. Reason: "</literal> <operator pos:start="14:58" pos:end="14:58">+</operator> <name pos:start="14:60" pos:end="14:65">reason</name></expr>;</expr_stmt>
+    </block_content>}</block></constructor>
+    <function pos:start="16:5" pos:end="18:5"><type pos:start="16:5" pos:end="16:15"><name pos:start="16:5" pos:end="16:15"><name pos:start="16:5" pos:end="16:7">std</name><operator pos:start="16:8" pos:end="16:9">::</operator><name pos:start="16:10" pos:end="16:15">string</name></name></type> <name pos:start="16:17" pos:end="16:20">what</name><parameter_list pos:start="16:21" pos:end="16:22">()</parameter_list> <specifier pos:start="16:24" pos:end="16:28">const</specifier> <block pos:start="16:30" pos:end="18:5">{<block_content pos:start="16:31" pos:end="18:4">
+        <return pos:start="17:9" pos:end="17:28">return <expr pos:start="17:16" pos:end="17:27"><name pos:start="17:16" pos:end="17:27">errorMessage</name></expr>;</return>
+    </block_content>}</block></function>
+</public><private pos:start="19:1" pos:end="21:0">private:
+    <decl_stmt pos:start="20:5" pos:end="20:29"><decl pos:start="20:5" pos:end="20:28"><type pos:start="20:5" pos:end="20:15"><name pos:start="20:5" pos:end="20:15"><name pos:start="20:5" pos:end="20:7">std</name><operator pos:start="20:8" pos:end="20:9">::</operator><name pos:start="20:10" pos:end="20:15">string</name></name></type> <name pos:start="20:17" pos:end="20:28">errorMessage</name></decl>;</decl_stmt>
+</private>}</block>;</class>
+
+<struct pos:start="23:1" pos:end="27:2">struct <name pos:start="23:8" pos:end="23:17">XmlElement</name> <block pos:start="23:19" pos:end="27:1">{<public type="default" pos:start="23:20" pos:end="27:0">
+    <decl_stmt pos:start="24:5" pos:end="24:21"><decl pos:start="24:5" pos:end="24:20"><type pos:start="24:5" pos:end="24:15"><name pos:start="24:5" pos:end="24:15"><name pos:start="24:5" pos:end="24:7">std</name><operator pos:start="24:8" pos:end="24:9">::</operator><name pos:start="24:10" pos:end="24:15">string</name></name></type> <name pos:start="24:17" pos:end="24:20">name</name></decl>;</decl_stmt>
+    <decl_stmt pos:start="25:5" pos:end="25:17"><decl pos:start="25:5" pos:end="25:16"><type pos:start="25:5" pos:end="25:8"><name pos:start="25:5" pos:end="25:8">bool</name></type> <name pos:start="25:10" pos:end="25:16">closing</name></decl>;</decl_stmt>
+    <decl_stmt pos:start="26:5" pos:end="26:21"><decl pos:start="26:5" pos:end="26:20"><type pos:start="26:5" pos:end="26:8"><name pos:start="26:5" pos:end="26:8">bool</name></type> <name pos:start="26:10" pos:end="26:20">selfClosing</name></decl>;</decl_stmt>
+</public>}</block>;</struct>
+
+<comment type="block" format="doxygen" pos:start="29:1" pos:end="39:3">/**
+ * readProlog
+ * XML documents may start with a prolog 
+ * that we want to skip 
+ * 
+ * Ex:
+ * &lt;?xml version="1.0" encoding="utf-8"?&gt;
+ * 
+ * @param in - input stream to read from
+ * @throws XmlValidationException
+ */</comment>
+<function pos:start="40:1" pos:end="65:1"><type pos:start="40:1" pos:end="40:4"><name pos:start="40:1" pos:end="40:4">void</name></type> <name pos:start="40:6" pos:end="40:15">readProlog</name><parameter_list pos:start="40:16" pos:end="40:34">(<parameter pos:start="40:17" pos:end="40:33"><decl pos:start="40:17" pos:end="40:33"><type pos:start="40:17" pos:end="40:30"><name pos:start="40:17" pos:end="40:29"><name pos:start="40:17" pos:end="40:19">std</name><operator pos:start="40:20" pos:end="40:21">::</operator><name pos:start="40:22" pos:end="40:29">ifstream</name></name><modifier pos:start="40:30" pos:end="40:30">&amp;</modifier></type> <name pos:start="40:32" pos:end="40:33">in</name></decl></parameter>)</parameter_list> <block pos:start="40:36" pos:end="65:1">{<block_content pos:start="40:37" pos:end="65:0">
+    <decl_stmt pos:start="41:5" pos:end="41:20"><decl pos:start="41:5" pos:end="41:19"><type pos:start="41:5" pos:end="41:8"><name pos:start="41:5" pos:end="41:8">char</name></type> <name pos:start="41:10" pos:end="41:13">prev</name> <init pos:start="41:15" pos:end="41:19">= <expr pos:start="41:17" pos:end="41:19"><literal type="char" pos:start="41:17" pos:end="41:19">'&lt;'</literal></expr></init></decl>;</decl_stmt>
+    <decl_stmt pos:start="42:5" pos:end="42:20"><decl pos:start="42:5" pos:end="42:19"><type pos:start="42:5" pos:end="42:8"><name pos:start="42:5" pos:end="42:8">char</name></type> <name pos:start="42:10" pos:end="42:13">curr</name> <init pos:start="42:15" pos:end="42:19">= <expr pos:start="42:17" pos:end="42:19"><literal type="char" pos:start="42:17" pos:end="42:19">'?'</literal></expr></init></decl>;</decl_stmt>
+    <decl_stmt pos:start="43:5" pos:end="43:24"><decl pos:start="43:5" pos:end="43:23"><type pos:start="43:5" pos:end="43:15"><name pos:start="43:5" pos:end="43:15"><name pos:start="43:5" pos:end="43:7">std</name><operator pos:start="43:8" pos:end="43:9">::</operator><name pos:start="43:10" pos:end="43:15">string</name></name></type> <name pos:start="43:17" pos:end="43:23">tagName</name></decl>;</decl_stmt>
+    <expr_stmt pos:start="44:5" pos:end="44:23"><expr pos:start="44:5" pos:end="44:22"><call pos:start="44:5" pos:end="44:22"><name pos:start="44:5" pos:end="44:19"><name pos:start="44:5" pos:end="44:11">tagName</name><operator pos:start="44:12" pos:end="44:12">.</operator><name pos:start="44:13" pos:end="44:19">reserve</name></name><argument_list pos:start="44:20" pos:end="44:22">(<argument pos:start="44:21" pos:end="44:21"><expr pos:start="44:21" pos:end="44:21"><literal type="number" pos:start="44:21" pos:end="44:21">3</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <for pos:start="45:5" pos:end="48:5">for <control pos:start="45:9" pos:end="45:47">(<init pos:start="45:10" pos:end="45:19"><decl pos:start="45:10" pos:end="45:18"><type pos:start="45:10" pos:end="45:12"><name pos:start="45:10" pos:end="45:12">int</name></type> <name pos:start="45:14" pos:end="45:14">i</name> <init pos:start="45:16" pos:end="45:18">= <expr pos:start="45:18" pos:end="45:18"><literal type="number" pos:start="45:18" pos:end="45:18">0</literal></expr></init></decl>;</init> <condition pos:start="45:21" pos:end="45:42"><expr pos:start="45:21" pos:end="45:41"><name pos:start="45:21" pos:end="45:21">i</name> <operator pos:start="45:23" pos:end="45:23">&lt;</operator> <literal type="number" pos:start="45:25" pos:end="45:25">3</literal> <operator pos:start="45:27" pos:end="45:28">&amp;&amp;</operator> <call pos:start="45:30" pos:end="45:41"><name pos:start="45:30" pos:end="45:35"><name pos:start="45:30" pos:end="45:31">in</name><operator pos:start="45:32" pos:end="45:32">.</operator><name pos:start="45:33" pos:end="45:35">get</name></name><argument_list pos:start="45:36" pos:end="45:41">(<argument pos:start="45:37" pos:end="45:40"><expr pos:start="45:37" pos:end="45:40"><name pos:start="45:37" pos:end="45:40">curr</name></expr></argument>)</argument_list></call></expr>;</condition> <incr pos:start="45:44" pos:end="45:46"><expr pos:start="45:44" pos:end="45:46"><operator pos:start="45:44" pos:end="45:45">++</operator><name pos:start="45:46" pos:end="45:46">i</name></expr></incr>)</control> <block pos:start="45:49" pos:end="48:5">{<block_content pos:start="45:50" pos:end="48:4">
+        <expr_stmt pos:start="46:9" pos:end="46:26"><expr pos:start="46:9" pos:end="46:25"><name pos:start="46:9" pos:end="46:18"><name pos:start="46:9" pos:end="46:15">tagName</name><index pos:start="46:16" pos:end="46:18">[<expr pos:start="46:17" pos:end="46:17"><name pos:start="46:17" pos:end="46:17">i</name></expr>]</index></name> <operator pos:start="46:20" pos:end="46:20">=</operator> <name pos:start="46:22" pos:end="46:25">curr</name></expr>;</expr_stmt>
+        <expr_stmt pos:start="47:9" pos:end="47:20"><expr pos:start="47:9" pos:end="47:19"><name pos:start="47:9" pos:end="47:12">prev</name> <operator pos:start="47:14" pos:end="47:14">=</operator> <name pos:start="47:16" pos:end="47:19">curr</name></expr>;</expr_stmt>
+    </block_content>}</block></for>
+    <if_stmt pos:start="49:5" pos:end="53:5"><if pos:start="49:5" pos:end="53:5">if <condition pos:start="49:8" pos:end="49:25">(<expr pos:start="49:9" pos:end="49:24"><name pos:start="49:9" pos:end="49:15">tagName</name> <operator pos:start="49:17" pos:end="49:18">!=</operator> <literal type="string" pos:start="49:20" pos:end="49:24">"xml"</literal></expr>)</condition> <block pos:start="49:27" pos:end="53:5">{<block_content pos:start="49:28" pos:end="53:4">
+        <throw pos:start="50:9" pos:end="52:10">throw <expr pos:start="50:15" pos:end="52:9"><call pos:start="50:15" pos:end="52:9"><name pos:start="50:15" pos:end="50:36">XmlValidationException</name><argument_list pos:start="50:37" pos:end="52:9">(
+            <argument pos:start="51:13" pos:end="51:30"><expr pos:start="51:13" pos:end="51:30"><literal type="string" pos:start="51:13" pos:end="51:30">"Invalid prologue"</literal></expr></argument>
+        )</argument_list></call></expr>;</throw>
+    </block_content>}</block></if></if_stmt>
+    <comment type="line" pos:start="54:5" pos:end="54:33">// read until closing bracket</comment>
+    <while pos:start="55:5" pos:end="56:20">while <condition pos:start="55:11" pos:end="55:39">(<expr pos:start="55:12" pos:end="55:38"><call pos:start="55:12" pos:end="55:23"><name pos:start="55:12" pos:end="55:17"><name pos:start="55:12" pos:end="55:13">in</name><operator pos:start="55:14" pos:end="55:14">.</operator><name pos:start="55:15" pos:end="55:17">get</name></name><argument_list pos:start="55:18" pos:end="55:23">(<argument pos:start="55:19" pos:end="55:22"><expr pos:start="55:19" pos:end="55:22"><name pos:start="55:19" pos:end="55:22">curr</name></expr></argument>)</argument_list></call> <operator pos:start="55:25" pos:end="55:26">&amp;&amp;</operator> <name pos:start="55:28" pos:end="55:31">curr</name> <operator pos:start="55:33" pos:end="55:34">!=</operator> <literal type="char" pos:start="55:36" pos:end="55:38">'&gt;'</literal></expr>)</condition><block type="pseudo" pos:start="55:40" pos:end="56:20"><block_content pos:start="55:40" pos:end="56:20"> 
+        <expr_stmt pos:start="56:9" pos:end="56:20"><expr pos:start="56:9" pos:end="56:19"><name pos:start="56:9" pos:end="56:12">prev</name> <operator pos:start="56:14" pos:end="56:14">=</operator> <name pos:start="56:16" pos:end="56:19">curr</name></expr>;</expr_stmt></block_content></block></while>
+    <comment type="line" pos:start="57:5" pos:end="57:58">// if the close of the tag is not ?&gt;, it's a violation</comment>
+    <comment type="line" pos:start="58:5" pos:end="58:57">// need to check curr because it's possible we reach </comment>
+    <comment type="line" pos:start="59:5" pos:end="59:27">// eof before finding &gt;</comment>
+    <if_stmt pos:start="60:5" pos:end="64:5"><if pos:start="60:5" pos:end="64:5">if <condition pos:start="60:8" pos:end="60:35">(<expr pos:start="60:9" pos:end="60:34"><name pos:start="60:9" pos:end="60:12">curr</name> <operator pos:start="60:14" pos:end="60:15">!=</operator> <literal type="char" pos:start="60:17" pos:end="60:19">'&gt;'</literal> <operator pos:start="60:21" pos:end="60:22">&amp;&amp;</operator> <name pos:start="60:24" pos:end="60:27">prev</name> <operator pos:start="60:29" pos:end="60:30">!=</operator> <literal type="char" pos:start="60:32" pos:end="60:34">'?'</literal></expr>)</condition> <block pos:start="60:37" pos:end="64:5">{<block_content pos:start="60:38" pos:end="64:4">
+        <throw pos:start="61:9" pos:end="63:10">throw <expr pos:start="61:15" pos:end="63:9"><call pos:start="61:15" pos:end="63:9"><name pos:start="61:15" pos:end="61:36">XmlValidationException</name><argument_list pos:start="61:37" pos:end="63:9">(
+            <argument pos:start="62:13" pos:end="62:30"><expr pos:start="62:13" pos:end="62:30"><literal type="string" pos:start="62:13" pos:end="62:30">"Invalid prologue"</literal></expr></argument>
+        )</argument_list></call></expr>;</throw>
+    </block_content>}</block></if></if_stmt>
+</block_content>}</block></function>
+
+<comment type="block" format="doxygen" pos:start="67:1" pos:end="73:3">/**
+ * readNextElemement
+ * Reads document until reaching next XML element. Ignores comments
+ * 
+ * @param in - input stream to read from
+ * @return first encountered XML element in the stream
+ */</comment>
+<function pos:start="74:1" pos:end="144:1"><type pos:start="74:1" pos:end="74:10"><name pos:start="74:1" pos:end="74:10">XmlElement</name></type> <name pos:start="74:12" pos:end="74:26">readNextElement</name><parameter_list pos:start="74:27" pos:end="74:44">(<parameter pos:start="74:28" pos:end="74:43"><decl pos:start="74:28" pos:end="74:43"><type pos:start="74:28" pos:end="74:41"><name pos:start="74:28" pos:end="74:39"><name pos:start="74:28" pos:end="74:30">std</name><operator pos:start="74:31" pos:end="74:32">::</operator><name pos:start="74:33" pos:end="74:39">istream</name></name> <modifier pos:start="74:41" pos:end="74:41">&amp;</modifier></type><name pos:start="74:42" pos:end="74:43">in</name></decl></parameter>)</parameter_list> <block pos:start="74:46" pos:end="144:1">{<block_content pos:start="74:47" pos:end="144:0">
+    <comment type="line" pos:start="75:5" pos:end="75:60">// it would be more efficient to use a character buffer,</comment>
+    <comment type="line" pos:start="76:5" pos:end="76:57">// but the point of this example is to show off Stack</comment>
+    <comment type="line" pos:start="77:5" pos:end="77:38">// not be as efficient as possible</comment>
+    <decl_stmt pos:start="78:5" pos:end="78:28"><decl pos:start="78:5" pos:end="78:27"><type pos:start="78:5" pos:end="78:15"><name pos:start="78:5" pos:end="78:15"><name pos:start="78:5" pos:end="78:7">std</name><operator pos:start="78:8" pos:end="78:9">::</operator><name pos:start="78:10" pos:end="78:15">string</name></name></type> <name pos:start="78:17" pos:end="78:27">elementName</name></decl>;</decl_stmt>
+    <comment type="line" pos:start="79:5" pos:end="79:62">// store the previous character to check if the element is</comment>
+    <comment type="line" pos:start="80:5" pos:end="80:30">// closing or self-closing</comment>
+    <decl_stmt pos:start="81:5" pos:end="81:18"><decl pos:start="81:5" pos:end="81:17"><type pos:start="81:5" pos:end="81:8"><name pos:start="81:5" pos:end="81:8">char</name></type> <name pos:start="81:10" pos:end="81:13">prev</name> <init pos:start="81:15" pos:end="81:17">= <expr pos:start="81:17" pos:end="81:17"><literal type="number" pos:start="81:17" pos:end="81:17">0</literal></expr></init></decl>;</decl_stmt>
+    <comment type="line" pos:start="82:5" pos:end="82:43">// current character that has been read</comment>
+    <decl_stmt pos:start="83:5" pos:end="83:14"><decl pos:start="83:5" pos:end="83:13"><type pos:start="83:5" pos:end="83:8"><name pos:start="83:5" pos:end="83:8">char</name></type> <name pos:start="83:10" pos:end="83:13">curr</name></decl>;</decl_stmt>
+    <comment type="line" pos:start="84:5" pos:end="84:49">// boolean to let us know we are in a element</comment>
+    <decl_stmt pos:start="85:5" pos:end="85:19"><decl pos:start="85:5" pos:end="85:18"><type pos:start="85:5" pos:end="85:8"><name pos:start="85:5" pos:end="85:8">bool</name></type> <name pos:start="85:10" pos:end="85:18">inElement</name></decl>;</decl_stmt>
+    <comment type="line" pos:start="86:5" pos:end="86:57">// boolean to let us know if the tag is a closing tag</comment>
+    <decl_stmt pos:start="87:5" pos:end="87:17"><decl pos:start="87:5" pos:end="87:16"><type pos:start="87:5" pos:end="87:8"><name pos:start="87:5" pos:end="87:8">bool</name></type> <name pos:start="87:10" pos:end="87:16">closing</name></decl>;</decl_stmt>
+    <comment type="line" pos:start="88:5" pos:end="88:61">// boolean to let us know the current tag is self-closing</comment>
+    <decl_stmt pos:start="89:5" pos:end="89:21"><decl pos:start="89:5" pos:end="89:20"><type pos:start="89:5" pos:end="89:8"><name pos:start="89:5" pos:end="89:8">bool</name></type> <name pos:start="89:10" pos:end="89:20">selfClosing</name></decl>;</decl_stmt>
+    <comment type="line" pos:start="90:5" pos:end="90:48">// boolean that tells us we are in a comment</comment>
+    <decl_stmt pos:start="91:5" pos:end="91:17"><decl pos:start="91:5" pos:end="91:16"><type pos:start="91:5" pos:end="91:8"><name pos:start="91:5" pos:end="91:8">bool</name></type> <name pos:start="91:10" pos:end="91:16">comment</name></decl>;</decl_stmt>
+    <comment type="line" pos:start="92:5" pos:end="92:68">// read a character at a time until reaching a potential element</comment>
+    <while pos:start="93:5" pos:end="142:5">while <condition pos:start="93:11" pos:end="93:24">(<expr pos:start="93:12" pos:end="93:23"><call pos:start="93:12" pos:end="93:23"><name pos:start="93:12" pos:end="93:17"><name pos:start="93:12" pos:end="93:13">in</name><operator pos:start="93:14" pos:end="93:14">.</operator><name pos:start="93:15" pos:end="93:17">get</name></name><argument_list pos:start="93:18" pos:end="93:23">(<argument pos:start="93:19" pos:end="93:22"><expr pos:start="93:19" pos:end="93:22"><name pos:start="93:19" pos:end="93:22">curr</name></expr></argument>)</argument_list></call></expr>)</condition> <block pos:start="93:26" pos:end="142:5">{<block_content pos:start="93:27" pos:end="142:4">
+        <comment type="line" pos:start="94:9" pos:end="94:74">// &lt; cannot be nested within another element tag, validation fails</comment>
+        <if_stmt pos:start="95:9" pos:end="112:9"><if pos:start="95:9" pos:end="99:9">if <condition pos:start="95:12" pos:end="95:37">(<expr pos:start="95:13" pos:end="95:36"><name pos:start="95:13" pos:end="95:16">curr</name> <operator pos:start="95:18" pos:end="95:19">==</operator> <literal type="char" pos:start="95:21" pos:end="95:23">'&lt;'</literal> <operator pos:start="95:25" pos:end="95:26">&amp;&amp;</operator> <name pos:start="95:28" pos:end="95:36">inElement</name></expr>)</condition> <block pos:start="95:39" pos:end="99:9">{<block_content pos:start="95:40" pos:end="99:8">
+            <throw pos:start="96:13" pos:end="98:14">throw <expr pos:start="96:19" pos:end="98:13"><call pos:start="96:19" pos:end="98:13"><name pos:start="96:19" pos:end="96:40">XmlValidationException</name><argument_list pos:start="96:41" pos:end="98:13">(
+                <argument pos:start="97:17" pos:end="97:38"><expr pos:start="97:17" pos:end="97:38"><literal type="string" pos:start="97:17" pos:end="97:38">"Nested element start"</literal></expr></argument>
+            )</argument_list></call></expr>;</throw>
+        </block_content>}</block></if>
+        <comment type="line" pos:start="100:9" pos:end="100:66">// reset booleans and string when encountering new element</comment>
+        <if type="elseif" pos:start="101:9" pos:end="106:9">else if <condition pos:start="101:17" pos:end="101:29">(<expr pos:start="101:18" pos:end="101:28"><name pos:start="101:18" pos:end="101:21">curr</name> <operator pos:start="101:23" pos:end="101:24">==</operator> <literal type="char" pos:start="101:26" pos:end="101:28">'&lt;'</literal></expr>)</condition> <block pos:start="101:31" pos:end="106:9">{<block_content pos:start="101:32" pos:end="106:8">
+            <expr_stmt pos:start="102:13" pos:end="102:32"><expr pos:start="102:13" pos:end="102:31"><name pos:start="102:13" pos:end="102:23">selfClosing</name> <operator pos:start="102:25" pos:end="102:25">=</operator> <literal type="boolean" pos:start="102:27" pos:end="102:31">false</literal></expr>;</expr_stmt>
+            <expr_stmt pos:start="103:13" pos:end="103:28"><expr pos:start="103:13" pos:end="103:27"><name pos:start="103:13" pos:end="103:19">closing</name> <operator pos:start="103:21" pos:end="103:21">=</operator> <literal type="boolean" pos:start="103:23" pos:end="103:27">false</literal></expr>;</expr_stmt>
+            <expr_stmt pos:start="104:13" pos:end="104:29"><expr pos:start="104:13" pos:end="104:28"><name pos:start="104:13" pos:end="104:23">elementName</name> <operator pos:start="104:25" pos:end="104:25">=</operator> <literal type="string" pos:start="104:27" pos:end="104:28">""</literal></expr>;</expr_stmt>
+            <expr_stmt pos:start="105:13" pos:end="105:29"><expr pos:start="105:13" pos:end="105:28"><name pos:start="105:13" pos:end="105:21">inElement</name> <operator pos:start="105:23" pos:end="105:23">=</operator> <literal type="boolean" pos:start="105:25" pos:end="105:28">true</literal></expr>;</expr_stmt>
+        </block_content>}</block></if>
+        <comment type="line" pos:start="107:9" pos:end="107:53">// if in an element and the current character</comment>
+        <comment type="line" pos:start="108:9" pos:end="108:39">//  is not the close character,</comment>
+        <comment type="line" pos:start="109:9" pos:end="109:48">//  append the character to the tag name</comment>
+        <if type="elseif" pos:start="110:9" pos:end="112:9">else if <condition pos:start="110:17" pos:end="110:60">(<expr pos:start="110:18" pos:end="110:59"><name pos:start="110:18" pos:end="110:26">inElement</name> <operator pos:start="110:28" pos:end="110:29">&amp;&amp;</operator> <operator pos:start="110:31" pos:end="110:31">!</operator><operator pos:start="110:32" pos:end="110:32">(</operator><name pos:start="110:33" pos:end="110:36">curr</name> <operator pos:start="110:38" pos:end="110:39">==</operator> <literal type="char" pos:start="110:41" pos:end="110:43">'&gt;'</literal> <operator pos:start="110:45" pos:end="110:46">||</operator> <name pos:start="110:48" pos:end="110:51">curr</name> <operator pos:start="110:53" pos:end="110:54">==</operator> <literal type="char" pos:start="110:56" pos:end="110:58">'/'</literal><operator pos:start="110:59" pos:end="110:59">)</operator></expr>)</condition> <block pos:start="110:62" pos:end="112:9">{<block_content pos:start="110:63" pos:end="112:8">
+            <expr_stmt pos:start="111:13" pos:end="111:32"><expr pos:start="111:13" pos:end="111:31"><name pos:start="111:13" pos:end="111:23">elementName</name> <operator pos:start="111:25" pos:end="111:26">+=</operator> <name pos:start="111:28" pos:end="111:31">curr</name></expr>;</expr_stmt>
+        </block_content>}</block></if></if_stmt>
+        <comment type="line" pos:start="113:9" pos:end="113:43">// found the start of a closing tag</comment>
+        <if_stmt pos:start="114:9" pos:end="116:9"><if pos:start="114:9" pos:end="116:9">if <condition pos:start="114:12" pos:end="114:39">(<expr pos:start="114:13" pos:end="114:38"><name pos:start="114:13" pos:end="114:16">prev</name> <operator pos:start="114:18" pos:end="114:19">==</operator> <literal type="char" pos:start="114:21" pos:end="114:23">'&lt;'</literal> <operator pos:start="114:25" pos:end="114:26">&amp;&amp;</operator> <name pos:start="114:28" pos:end="114:31">curr</name> <operator pos:start="114:33" pos:end="114:34">==</operator> <literal type="char" pos:start="114:36" pos:end="114:38">'/'</literal></expr>)</condition> <block pos:start="114:41" pos:end="116:9">{<block_content pos:start="114:42" pos:end="116:8">
+            <expr_stmt pos:start="115:13" pos:end="115:27"><expr pos:start="115:13" pos:end="115:26"><name pos:start="115:13" pos:end="115:19">closing</name> <operator pos:start="115:21" pos:end="115:21">=</operator> <literal type="boolean" pos:start="115:23" pos:end="115:26">true</literal></expr>;</expr_stmt>
+        </block_content>}</block></if></if_stmt>
+        <comment type="line" pos:start="117:9" pos:end="117:46">// found the end of a self closing tag</comment>
+        <if_stmt pos:start="118:9" pos:end="121:9"><if pos:start="118:9" pos:end="121:9">if <condition pos:start="118:12" pos:end="118:39">(<expr pos:start="118:13" pos:end="118:38"><name pos:start="118:13" pos:end="118:16">curr</name> <operator pos:start="118:18" pos:end="118:19">==</operator> <literal type="char" pos:start="118:21" pos:end="118:23">'&gt;'</literal> <operator pos:start="118:25" pos:end="118:26">&amp;&amp;</operator> <name pos:start="118:28" pos:end="118:31">prev</name> <operator pos:start="118:33" pos:end="118:34">==</operator> <literal type="char" pos:start="118:36" pos:end="118:38">'/'</literal></expr>)</condition> <block pos:start="118:41" pos:end="121:9">{<block_content pos:start="118:42" pos:end="121:8">
+            <expr_stmt pos:start="119:13" pos:end="119:32"><expr pos:start="119:13" pos:end="119:31"><name pos:start="119:13" pos:end="119:23">selfClosing</name> <operator pos:start="119:25" pos:end="119:26">==</operator> <literal type="boolean" pos:start="119:28" pos:end="119:31">true</literal></expr>;</expr_stmt>
+            <expr_stmt pos:start="120:13" pos:end="120:30"><expr pos:start="120:13" pos:end="120:29"><name pos:start="120:13" pos:end="120:21">inElement</name> <operator pos:start="120:23" pos:end="120:23">=</operator> <literal type="boolean" pos:start="120:25" pos:end="120:29">false</literal></expr>;</expr_stmt>
+        </block_content>}</block></if></if_stmt>
+        <comment type="line" pos:start="122:9" pos:end="122:50">// we may have found the end of an element</comment>
+        <if_stmt pos:start="123:9" pos:end="140:9"><if pos:start="123:9" pos:end="140:9">if <condition pos:start="123:12" pos:end="123:24">(<expr pos:start="123:13" pos:end="123:23"><name pos:start="123:13" pos:end="123:16">curr</name> <operator pos:start="123:18" pos:end="123:19">==</operator> <literal type="char" pos:start="123:21" pos:end="123:23">'&gt;'</literal></expr>)</condition> <block pos:start="123:26" pos:end="140:9">{<block_content pos:start="123:27" pos:end="140:8">
+            <comment type="line" pos:start="124:13" pos:end="124:50">// we need to check if it is a comment</comment>
+            <comment type="line" pos:start="125:13" pos:end="125:55">// an XML comment looks like: &lt;!-- TEXT --&gt;</comment>
+            <comment type="line" pos:start="126:13" pos:end="126:54">// since we skipped &lt; as part of the name,</comment>
+            <comment type="line" pos:start="127:13" pos:end="127:62">// check that the first three characters are "!--"</comment>
+            <comment type="line" pos:start="128:13" pos:end="128:51">// and the last two characters are "--"</comment>
+            <if_stmt pos:start="129:13" pos:end="138:13"><if pos:start="129:13" pos:end="138:13">if <condition pos:start="129:16" pos:end="136:13">(
+                <expr pos:start="130:17" pos:end="135:61"><operator pos:start="130:17" pos:end="130:17">!</operator><operator pos:start="130:18" pos:end="130:18">(</operator><call pos:start="130:19" pos:end="130:38"><name pos:start="130:19" pos:end="130:36"><name pos:start="130:19" pos:end="130:29">elementName</name><operator pos:start="130:30" pos:end="130:30">.</operator><name pos:start="130:31" pos:end="130:36">length</name></name><argument_list pos:start="130:37" pos:end="130:38">()</argument_list></call> <operator pos:start="130:40" pos:end="130:40">&gt;</operator> <literal type="number" pos:start="130:42" pos:end="130:42">3</literal> <operator pos:start="130:44" pos:end="130:45">&amp;&amp;</operator>
+                <name pos:start="131:17" pos:end="131:30"><name pos:start="131:17" pos:end="131:27">elementName</name><index pos:start="131:28" pos:end="131:30">[<expr pos:start="131:29" pos:end="131:29"><literal type="number" pos:start="131:29" pos:end="131:29">0</literal></expr>]</index></name> <operator pos:start="131:32" pos:end="131:33">==</operator> <literal type="char" pos:start="131:35" pos:end="131:37">'!'</literal> <operator pos:start="131:39" pos:end="131:40">&amp;&amp;</operator>
+                <name pos:start="132:17" pos:end="132:30"><name pos:start="132:17" pos:end="132:27">elementName</name><index pos:start="132:28" pos:end="132:30">[<expr pos:start="132:29" pos:end="132:29"><literal type="number" pos:start="132:29" pos:end="132:29">1</literal></expr>]</index></name> <operator pos:start="132:32" pos:end="132:33">==</operator> <literal type="char" pos:start="132:35" pos:end="132:37">'-'</literal> <operator pos:start="132:39" pos:end="132:40">&amp;&amp;</operator>
+                <name pos:start="133:17" pos:end="133:30"><name pos:start="133:17" pos:end="133:27">elementName</name><index pos:start="133:28" pos:end="133:30">[<expr pos:start="133:29" pos:end="133:29"><literal type="number" pos:start="133:29" pos:end="133:29">2</literal></expr>]</index></name> <operator pos:start="133:32" pos:end="133:33">==</operator> <literal type="char" pos:start="133:35" pos:end="133:37">'-'</literal> <operator pos:start="133:39" pos:end="133:40">&amp;&amp;</operator>
+                <name pos:start="134:17" pos:end="134:53"><name pos:start="134:17" pos:end="134:27">elementName</name><index pos:start="134:28" pos:end="134:53">[<expr pos:start="134:29" pos:end="134:52"><call pos:start="134:29" pos:end="134:48"><name pos:start="134:29" pos:end="134:46"><name pos:start="134:29" pos:end="134:39">elementName</name><operator pos:start="134:40" pos:end="134:40">.</operator><name pos:start="134:41" pos:end="134:46">length</name></name><argument_list pos:start="134:47" pos:end="134:48">()</argument_list></call> <operator pos:start="134:50" pos:end="134:50">-</operator> <literal type="number" pos:start="134:52" pos:end="134:52">2</literal></expr>]</index></name> <operator pos:start="134:55" pos:end="134:56">==</operator> <literal type="char" pos:start="134:58" pos:end="134:60">'-'</literal> <operator pos:start="134:62" pos:end="134:63">&amp;&amp;</operator>
+                <name pos:start="135:17" pos:end="135:53"><name pos:start="135:17" pos:end="135:27">elementName</name><index pos:start="135:28" pos:end="135:53">[<expr pos:start="135:29" pos:end="135:52"><call pos:start="135:29" pos:end="135:48"><name pos:start="135:29" pos:end="135:46"><name pos:start="135:29" pos:end="135:39">elementName</name><operator pos:start="135:40" pos:end="135:40">.</operator><name pos:start="135:41" pos:end="135:46">length</name></name><argument_list pos:start="135:47" pos:end="135:48">()</argument_list></call> <operator pos:start="135:50" pos:end="135:50">-</operator> <literal type="number" pos:start="135:52" pos:end="135:52">1</literal></expr>]</index></name> <operator pos:start="135:55" pos:end="135:56">==</operator> <literal type="char" pos:start="135:58" pos:end="135:60">'-'</literal><operator pos:start="135:61" pos:end="135:61">)</operator></expr>
+            )</condition> <block pos:start="136:15" pos:end="138:13">{<block_content pos:start="136:16" pos:end="138:12">
+
+            </block_content>}</block></if></if_stmt>
+            <break pos:start="139:13" pos:end="139:18">break;</break>
+        </block_content>}</block></if></if_stmt>
+        <expr_stmt pos:start="141:9" pos:end="141:20"><expr pos:start="141:9" pos:end="141:19"><name pos:start="141:9" pos:end="141:12">prev</name> <operator pos:start="141:14" pos:end="141:14">=</operator> <name pos:start="141:16" pos:end="141:19">curr</name></expr>;</expr_stmt>
+    </block_content>}</block></while>
+    <return pos:start="143:5" pos:end="143:47">return <expr pos:start="143:12" pos:end="143:46"><block pos:start="143:12" pos:end="143:46">{<expr pos:start="143:13" pos:end="143:23"><name pos:start="143:13" pos:end="143:23">elementName</name></expr>, <expr pos:start="143:26" pos:end="143:32"><name pos:start="143:26" pos:end="143:32">closing</name></expr>, <expr pos:start="143:35" pos:end="143:45"><name pos:start="143:35" pos:end="143:45">selfClosing</name></expr>}</block></expr>;</return>
+</block_content>}</block></function>
+
+<function pos:start="146:1" pos:end="231:1"><type pos:start="146:1" pos:end="146:3"><name pos:start="146:1" pos:end="146:3">int</name></type> <name pos:start="146:5" pos:end="146:8">main</name><parameter_list pos:start="146:9" pos:end="146:31">(<parameter pos:start="146:10" pos:end="146:17"><decl pos:start="146:10" pos:end="146:17"><type pos:start="146:10" pos:end="146:12"><name pos:start="146:10" pos:end="146:12">int</name></type> <name pos:start="146:14" pos:end="146:17">argc</name></decl></parameter>, <parameter pos:start="146:20" pos:end="146:30"><decl pos:start="146:20" pos:end="146:30"><type pos:start="146:20" pos:end="146:26"><name pos:start="146:20" pos:end="146:23">char</name> <modifier pos:start="146:25" pos:end="146:25">*</modifier><modifier pos:start="146:26" pos:end="146:26">*</modifier></type><name pos:start="146:27" pos:end="146:30">argv</name></decl></parameter>)</parameter_list> <block pos:start="146:33" pos:end="231:1">{<block_content pos:start="146:34" pos:end="231:0">
+    <if_stmt pos:start="147:5" pos:end="152:5"><if pos:start="147:5" pos:end="152:5">if <condition pos:start="147:8" pos:end="147:17">(<expr pos:start="147:9" pos:end="147:16"><name pos:start="147:9" pos:end="147:12">argc</name> <operator pos:start="147:14" pos:end="147:14">&lt;</operator> <literal type="number" pos:start="147:16" pos:end="147:16">2</literal></expr>)</condition> <block pos:start="147:19" pos:end="152:5">{<block_content pos:start="147:20" pos:end="152:4">
+        <expr_stmt pos:start="148:9" pos:end="148:55"><expr pos:start="148:9" pos:end="148:54"><name pos:start="148:9" pos:end="148:17"><name pos:start="148:9" pos:end="148:11">std</name><operator pos:start="148:12" pos:end="148:13">::</operator><name pos:start="148:14" pos:end="148:17">cerr</name></name> <operator pos:start="148:19" pos:end="148:20">&lt;&lt;</operator> <literal type="string" pos:start="148:22" pos:end="148:54">"Expected 1 argument. Got none\n"</literal></expr>;</expr_stmt>
+        <expr_stmt pos:start="149:9" pos:end="149:32"><expr pos:start="149:9" pos:end="149:31"><name pos:start="149:9" pos:end="149:17"><name pos:start="149:9" pos:end="149:11">std</name><operator pos:start="149:12" pos:end="149:13">::</operator><name pos:start="149:14" pos:end="149:17">cerr</name></name> <operator pos:start="149:19" pos:end="149:20">&lt;&lt;</operator> <literal type="string" pos:start="149:22" pos:end="149:31">"Usage:\n"</literal></expr>;</expr_stmt>
+        <expr_stmt pos:start="150:9" pos:end="150:54"><expr pos:start="150:9" pos:end="150:53"><name pos:start="150:9" pos:end="150:17"><name pos:start="150:9" pos:end="150:11">std</name><operator pos:start="150:12" pos:end="150:13">::</operator><name pos:start="150:14" pos:end="150:17">cerr</name></name> <operator pos:start="150:19" pos:end="150:20">&lt;&lt;</operator> <literal type="string" pos:start="150:22" pos:end="150:53">"./xml_validator filename.xml\n"</literal></expr>;</expr_stmt>
+        <return pos:start="151:9" pos:end="151:17">return <expr pos:start="151:16" pos:end="151:16"><literal type="number" pos:start="151:16" pos:end="151:16">1</literal></expr>;</return>
+    </block_content>}</block></if></if_stmt>
+    <decl_stmt pos:start="153:5" pos:end="153:30"><decl pos:start="153:5" pos:end="153:29"><type pos:start="153:5" pos:end="153:17"><name pos:start="153:5" pos:end="153:17"><name pos:start="153:5" pos:end="153:7">std</name><operator pos:start="153:8" pos:end="153:9">::</operator><name pos:start="153:10" pos:end="153:17">ifstream</name></name></type> <name pos:start="153:19" pos:end="153:20">in</name><argument_list pos:start="153:21" pos:end="153:29">(<argument pos:start="153:22" pos:end="153:28"><expr pos:start="153:22" pos:end="153:28"><name pos:start="153:22" pos:end="153:28"><name pos:start="153:22" pos:end="153:25">argv</name><index pos:start="153:26" pos:end="153:28">[<expr pos:start="153:27" pos:end="153:27"><literal type="number" pos:start="153:27" pos:end="153:27">1</literal></expr>]</index></name></expr></argument>)</argument_list></decl>;</decl_stmt>
+    <if_stmt pos:start="154:5" pos:end="157:5"><if pos:start="154:5" pos:end="157:5">if <condition pos:start="154:8" pos:end="154:18">(<expr pos:start="154:9" pos:end="154:17"><call pos:start="154:9" pos:end="154:17"><name pos:start="154:9" pos:end="154:15"><name pos:start="154:9" pos:end="154:10">in</name><operator pos:start="154:11" pos:end="154:11">.</operator><name pos:start="154:12" pos:end="154:15">fail</name></name><argument_list pos:start="154:16" pos:end="154:17">()</argument_list></call></expr>)</condition> <block pos:start="154:20" pos:end="157:5">{<block_content pos:start="154:21" pos:end="157:4">
+        <expr_stmt pos:start="155:9" pos:end="155:63"><expr pos:start="155:9" pos:end="155:62"><name pos:start="155:9" pos:end="155:17"><name pos:start="155:9" pos:end="155:11">std</name><operator pos:start="155:12" pos:end="155:13">::</operator><name pos:start="155:14" pos:end="155:17">cerr</name></name> <operator pos:start="155:19" pos:end="155:20">&lt;&lt;</operator> <literal type="string" pos:start="155:22" pos:end="155:43">"Could not open file "</literal> <operator pos:start="155:45" pos:end="155:46">&lt;&lt;</operator> <name pos:start="155:48" pos:end="155:54"><name pos:start="155:48" pos:end="155:51">argv</name><index pos:start="155:52" pos:end="155:54">[<expr pos:start="155:53" pos:end="155:53"><literal type="number" pos:start="155:53" pos:end="155:53">1</literal></expr>]</index></name> <operator pos:start="155:56" pos:end="155:57">&lt;&lt;</operator> <literal type="string" pos:start="155:59" pos:end="155:62">"\n"</literal></expr>;</expr_stmt>
+        <return pos:start="156:9" pos:end="156:17">return <expr pos:start="156:16" pos:end="156:16"><literal type="number" pos:start="156:16" pos:end="156:16">1</literal></expr>;</return>
+    </block_content>}</block></if></if_stmt>
+    <decl_stmt pos:start="158:5" pos:end="158:35"><decl pos:start="158:5" pos:end="158:34"><type pos:start="158:5" pos:end="158:21"><name pos:start="158:5" pos:end="158:21"><name pos:start="158:5" pos:end="158:9">Stack</name><argument_list type="generic" pos:start="158:10" pos:end="158:21">&lt;<argument pos:start="158:11" pos:end="158:20"><expr pos:start="158:11" pos:end="158:20"><name pos:start="158:11" pos:end="158:20">XmlElement</name></expr></argument>&gt;</argument_list></name></type> <name pos:start="158:23" pos:end="158:34">elementStack</name></decl>;</decl_stmt>
+    <try pos:start="159:5" pos:end="228:5">try <block pos:start="159:9" pos:end="212:5">{<block_content pos:start="159:10" pos:end="212:4">
+        <decl_stmt pos:start="160:9" pos:end="160:49"><decl pos:start="160:9" pos:end="160:48"><type pos:start="160:9" pos:end="160:18"><name pos:start="160:9" pos:end="160:18">XmlElement</name></type> <name pos:start="160:20" pos:end="160:26">element</name> <init pos:start="160:28" pos:end="160:48">= <expr pos:start="160:30" pos:end="160:48"><call pos:start="160:30" pos:end="160:48"><name pos:start="160:30" pos:end="160:44">readNextElement</name><argument_list pos:start="160:45" pos:end="160:48">(<argument pos:start="160:46" pos:end="160:47"><expr pos:start="160:46" pos:end="160:47"><name pos:start="160:46" pos:end="160:47">in</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <if_stmt pos:start="161:9" pos:end="165:9"><if pos:start="161:9" pos:end="165:9">if <condition pos:start="161:12" pos:end="161:28">(<expr pos:start="161:13" pos:end="161:27"><name pos:start="161:13" pos:end="161:27"><name pos:start="161:13" pos:end="161:19">element</name><operator pos:start="161:20" pos:end="161:20">.</operator><name pos:start="161:21" pos:end="161:27">closing</name></name></expr>)</condition> <block pos:start="161:30" pos:end="165:9">{<block_content pos:start="161:31" pos:end="165:8">
+            <throw pos:start="162:13" pos:end="164:14">throw <expr pos:start="162:19" pos:end="164:13"><call pos:start="162:19" pos:end="164:13"><name pos:start="162:19" pos:end="162:40">XmlValidationException</name><argument_list pos:start="162:41" pos:end="164:13">(
+                <argument pos:start="163:17" pos:end="163:54"><expr pos:start="163:17" pos:end="163:54"><literal type="string" pos:start="163:17" pos:end="163:54">"Document starts with closing element"</literal></expr></argument>
+            )</argument_list></call></expr>;</throw>
+        </block_content>}</block></if></if_stmt>
+        <if_stmt pos:start="166:9" pos:end="170:9"><if pos:start="166:9" pos:end="170:9">if <condition pos:start="166:12" pos:end="166:31">(<expr pos:start="166:13" pos:end="166:30"><name pos:start="166:13" pos:end="166:24"><name pos:start="166:13" pos:end="166:19">element</name><operator pos:start="166:20" pos:end="166:20">.</operator><name pos:start="166:21" pos:end="166:24">name</name></name> <operator pos:start="166:26" pos:end="166:27">==</operator> <literal type="string" pos:start="166:29" pos:end="166:30">""</literal></expr>)</condition> <block pos:start="166:33" pos:end="170:9">{<block_content pos:start="166:34" pos:end="170:8">
+            <throw pos:start="167:13" pos:end="169:14">throw <expr pos:start="167:19" pos:end="169:13"><call pos:start="167:19" pos:end="169:13"><name pos:start="167:19" pos:end="167:40">XmlValidationException</name><argument_list pos:start="167:41" pos:end="169:13">(
+                <argument pos:start="168:17" pos:end="168:39"><expr pos:start="168:17" pos:end="168:39"><literal type="string" pos:start="168:17" pos:end="168:39">"No XML elements found"</literal></expr></argument>
+            )</argument_list></call></expr>;</throw>
+        </block_content>}</block></if></if_stmt>
+        <expr_stmt pos:start="171:9" pos:end="171:35"><expr pos:start="171:9" pos:end="171:34"><call pos:start="171:9" pos:end="171:34"><name pos:start="171:9" pos:end="171:25"><name pos:start="171:9" pos:end="171:20">elementStack</name><operator pos:start="171:21" pos:end="171:21">.</operator><name pos:start="171:22" pos:end="171:25">push</name></name><argument_list pos:start="171:26" pos:end="171:34">(<argument pos:start="171:27" pos:end="171:33"><expr pos:start="171:27" pos:end="171:33"><name pos:start="171:27" pos:end="171:33">element</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt pos:start="172:9" pos:end="172:38"><expr pos:start="172:9" pos:end="172:37"><name pos:start="172:9" pos:end="172:15">element</name> <operator pos:start="172:17" pos:end="172:17">=</operator> <call pos:start="172:19" pos:end="172:37"><name pos:start="172:19" pos:end="172:33">readNextElement</name><argument_list pos:start="172:34" pos:end="172:37">(<argument pos:start="172:35" pos:end="172:36"><expr pos:start="172:35" pos:end="172:36"><name pos:start="172:35" pos:end="172:36">in</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <while pos:start="173:9" pos:end="211:9">while <condition pos:start="173:15" pos:end="173:34">(<expr pos:start="173:16" pos:end="173:33"><name pos:start="173:16" pos:end="173:27"><name pos:start="173:16" pos:end="173:22">element</name><operator pos:start="173:23" pos:end="173:23">.</operator><name pos:start="173:24" pos:end="173:27">name</name></name> <operator pos:start="173:29" pos:end="173:30">!=</operator> <literal type="string" pos:start="173:32" pos:end="173:33">""</literal></expr>)</condition> <block pos:start="173:36" pos:end="211:9">{<block_content pos:start="173:37" pos:end="211:8">
+            <comment type="line" pos:start="174:13" pos:end="174:70">// if we have emptied the stack and found another element,</comment>
+            <comment type="line" pos:start="175:13" pos:end="175:70">// the XML is invalid since all elements have to be nested</comment>
+            <if_stmt pos:start="176:13" pos:end="180:13"><if pos:start="176:13" pos:end="180:13">if <condition pos:start="176:16" pos:end="176:37">(<expr pos:start="176:17" pos:end="176:36"><call pos:start="176:17" pos:end="176:36"><name pos:start="176:17" pos:end="176:34"><name pos:start="176:17" pos:end="176:28">elementStack</name><operator pos:start="176:29" pos:end="176:29">.</operator><name pos:start="176:30" pos:end="176:34">empty</name></name><argument_list pos:start="176:35" pos:end="176:36">()</argument_list></call></expr>)</condition> <block pos:start="176:39" pos:end="180:13">{<block_content pos:start="176:40" pos:end="180:12">
+                <throw pos:start="177:17" pos:end="179:18">throw <expr pos:start="177:23" pos:end="179:17"><call pos:start="177:23" pos:end="179:17"><name pos:start="177:23" pos:end="177:44">XmlValidationException</name><argument_list pos:start="177:45" pos:end="179:17">(
+                    <argument pos:start="178:21" pos:end="178:45"><expr pos:start="178:21" pos:end="178:45"><literal type="string" pos:start="178:21" pos:end="178:45">"Unnested element found."</literal></expr></argument>
+                )</argument_list></call></expr>;</throw>
+            </block_content>}</block></if></if_stmt>
+
+            <comment type="line" pos:start="182:13" pos:end="182:41">// skip self closing elements</comment>
+            <if_stmt pos:start="183:13" pos:end="183:46"><if pos:start="183:13" pos:end="183:46">if <condition pos:start="183:16" pos:end="183:36">(<expr pos:start="183:17" pos:end="183:35"><name pos:start="183:17" pos:end="183:35"><name pos:start="183:17" pos:end="183:23">element</name><operator pos:start="183:24" pos:end="183:24">.</operator><name pos:start="183:25" pos:end="183:35">selfClosing</name></name></expr>)</condition><block type="pseudo" pos:start="183:37" pos:end="183:46"><block_content pos:start="183:37" pos:end="183:46"> <continue pos:start="183:38" pos:end="183:46">continue;</continue></block_content></block></if></if_stmt>
+
+            <comment type="line" pos:start="185:13" pos:end="185:46">// check if the element is closing</comment>
+            <if_stmt pos:start="186:13" pos:end="210:13"><if pos:start="186:13" pos:end="202:13">if <condition pos:start="186:16" pos:end="186:32">(<expr pos:start="186:17" pos:end="186:31"><name pos:start="186:17" pos:end="186:31"><name pos:start="186:17" pos:end="186:23">element</name><operator pos:start="186:24" pos:end="186:24">.</operator><name pos:start="186:25" pos:end="186:31">closing</name></name></expr>)</condition> <block pos:start="186:34" pos:end="202:13">{<block_content pos:start="186:35" pos:end="202:12">
+                <comment type="line" pos:start="187:17" pos:end="187:60">// we already checked the stack is not empty</comment>
+                <decl_stmt pos:start="188:17" pos:end="188:63"><decl pos:start="188:17" pos:end="188:62"><type pos:start="188:17" pos:end="188:26"><name pos:start="188:17" pos:end="188:26">XmlElement</name></type> <name pos:start="188:28" pos:end="188:41">openingElement</name> <init pos:start="188:43" pos:end="188:62">= <expr pos:start="188:45" pos:end="188:62"><call pos:start="188:45" pos:end="188:62"><name pos:start="188:45" pos:end="188:60"><name pos:start="188:45" pos:end="188:56">elementStack</name><operator pos:start="188:57" pos:end="188:57">.</operator><name pos:start="188:58" pos:end="188:60">top</name></name><argument_list pos:start="188:61" pos:end="188:62">()</argument_list></call></expr></init></decl>;</decl_stmt>
+                <comment type="line" pos:start="189:17" pos:end="189:73">// we check if the most recent element added to the stack</comment>
+                <comment type="line" pos:start="190:17" pos:end="190:63">// is the same as the closing tag we just found</comment>
+                <comment type="line" pos:start="191:17" pos:end="191:66">// if they are different, the XML is malformed and</comment>
+                <comment type="line" pos:start="192:17" pos:end="192:50">// we throw a validation exception</comment>
+                <if_stmt pos:start="193:17" pos:end="201:17"><if pos:start="193:17" pos:end="197:17">if <condition pos:start="193:20" pos:end="193:56">(<expr pos:start="193:21" pos:end="193:55"><name pos:start="193:21" pos:end="193:32"><name pos:start="193:21" pos:end="193:27">element</name><operator pos:start="193:28" pos:end="193:28">.</operator><name pos:start="193:29" pos:end="193:32">name</name></name> <operator pos:start="193:34" pos:end="193:35">!=</operator> <name pos:start="193:37" pos:end="193:55"><name pos:start="193:37" pos:end="193:50">openingElement</name><operator pos:start="193:51" pos:end="193:51">.</operator><name pos:start="193:52" pos:end="193:55">name</name></name></expr>)</condition> <block pos:start="193:58" pos:end="197:17">{<block_content pos:start="193:59" pos:end="197:16">
+                    <throw pos:start="194:21" pos:end="196:22">throw <expr pos:start="194:27" pos:end="196:21"><call pos:start="194:27" pos:end="196:21"><name pos:start="194:27" pos:end="194:48">XmlValidationException</name><argument_list pos:start="194:49" pos:end="196:21">(
+                        <argument pos:start="195:25" pos:end="195:70"><expr pos:start="195:25" pos:end="195:70"><literal type="string" pos:start="195:25" pos:end="195:70">"Closing element found with no valid opening."</literal></expr></argument>
+                    )</argument_list></call></expr>;</throw>
+                </block_content>}</block></if>
+                <comment type="line" pos:start="198:17" pos:end="198:78">// otherwise we closed an element and can pop it off the stack</comment>
+                <else pos:start="199:17" pos:end="201:17">else <block pos:start="199:22" pos:end="201:17">{<block_content pos:start="199:23" pos:end="201:16">
+                    <expr_stmt pos:start="200:21" pos:end="200:39"><expr pos:start="200:21" pos:end="200:38"><call pos:start="200:21" pos:end="200:38"><name pos:start="200:21" pos:end="200:36"><name pos:start="200:21" pos:end="200:32">elementStack</name><operator pos:start="200:33" pos:end="200:33">.</operator><name pos:start="200:34" pos:end="200:36">pop</name></name><argument_list pos:start="200:37" pos:end="200:38">()</argument_list></call></expr>;</expr_stmt>
+                </block_content>}</block></else></if_stmt>
+            </block_content>}</block></if>
+            <comment type="line" pos:start="203:13" pos:end="203:57">// otherwise, we add the element to the stack</comment>
+            <else pos:start="204:13" pos:end="210:13">else <block pos:start="204:18" pos:end="210:13">{<block_content pos:start="204:19" pos:end="210:12">
+                <comment type="line" pos:start="205:17" pos:end="205:50">// if the stack is full, resize it</comment>
+                <if_stmt pos:start="206:17" pos:end="208:17"><if pos:start="206:17" pos:end="208:17">if <condition pos:start="206:20" pos:end="206:40">(<expr pos:start="206:21" pos:end="206:39"><call pos:start="206:21" pos:end="206:39"><name pos:start="206:21" pos:end="206:37"><name pos:start="206:21" pos:end="206:32">elementStack</name><operator pos:start="206:33" pos:end="206:33">.</operator><name pos:start="206:34" pos:end="206:37">full</name></name><argument_list pos:start="206:38" pos:end="206:39">()</argument_list></call></expr>)</condition> <block pos:start="206:42" pos:end="208:17">{<block_content pos:start="206:43" pos:end="208:16">
+                    <expr_stmt pos:start="207:21" pos:end="207:69"><expr pos:start="207:21" pos:end="207:68"><call pos:start="207:21" pos:end="207:68"><name pos:start="207:21" pos:end="207:39"><name pos:start="207:21" pos:end="207:32">elementStack</name><operator pos:start="207:33" pos:end="207:33">.</operator><name pos:start="207:34" pos:end="207:39">resize</name></name><argument_list pos:start="207:40" pos:end="207:68">(<argument pos:start="207:41" pos:end="207:67"><expr pos:start="207:41" pos:end="207:67"><call pos:start="207:41" pos:end="207:63"><name pos:start="207:41" pos:end="207:61"><name pos:start="207:41" pos:end="207:52">elementStack</name><operator pos:start="207:53" pos:end="207:53">.</operator><name pos:start="207:54" pos:end="207:61">capacity</name></name><argument_list pos:start="207:62" pos:end="207:63">()</argument_list></call> <operator pos:start="207:65" pos:end="207:65">*</operator> <literal type="number" pos:start="207:67" pos:end="207:67">2</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                </block_content>}</block></if></if_stmt>
+                <expr_stmt pos:start="209:17" pos:end="209:43"><expr pos:start="209:17" pos:end="209:42"><call pos:start="209:17" pos:end="209:42"><name pos:start="209:17" pos:end="209:33"><name pos:start="209:17" pos:end="209:28">elementStack</name><operator pos:start="209:29" pos:end="209:29">.</operator><name pos:start="209:30" pos:end="209:33">push</name></name><argument_list pos:start="209:34" pos:end="209:42">(<argument pos:start="209:35" pos:end="209:41"><expr pos:start="209:35" pos:end="209:41"><name pos:start="209:35" pos:end="209:41">element</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></else></if_stmt>
+        </block_content>}</block></while>
+    </block_content>}</block>
+    <comment type="line" pos:start="213:5" pos:end="213:47">// not a true error, just failed validation</comment>
+    <catch pos:start="214:5" pos:end="217:5">catch <parameter_list pos:start="214:11" pos:end="214:37">(<parameter pos:start="214:12" pos:end="214:36"><decl pos:start="214:12" pos:end="214:36"><type pos:start="214:12" pos:end="214:33"><name pos:start="214:12" pos:end="214:33">XmlValidationException</name></type> <name pos:start="214:35" pos:end="214:36">ex</name></decl></parameter>)</parameter_list> <block pos:start="214:39" pos:end="217:5">{<block_content pos:start="214:40" pos:end="217:4">
+        <expr_stmt pos:start="215:9" pos:end="215:39"><expr pos:start="215:9" pos:end="215:38"><name pos:start="215:9" pos:end="215:17"><name pos:start="215:9" pos:end="215:11">std</name><operator pos:start="215:12" pos:end="215:13">::</operator><name pos:start="215:14" pos:end="215:17">cerr</name></name> <operator pos:start="215:19" pos:end="215:20">&lt;&lt;</operator> <call pos:start="215:22" pos:end="215:30"><name pos:start="215:22" pos:end="215:28"><name pos:start="215:22" pos:end="215:23">ex</name><operator pos:start="215:24" pos:end="215:24">.</operator><name pos:start="215:25" pos:end="215:28">what</name></name><argument_list pos:start="215:29" pos:end="215:30">()</argument_list></call> <operator pos:start="215:32" pos:end="215:33">&lt;&lt;</operator> <literal type="string" pos:start="215:35" pos:end="215:38">"\n"</literal></expr>;</expr_stmt>
+        <return pos:start="216:9" pos:end="216:17">return <expr pos:start="216:16" pos:end="216:16"><literal type="number" pos:start="216:16" pos:end="216:16">0</literal></expr>;</return>
+    </block_content>}</block></catch>
+    <comment type="line" pos:start="218:5" pos:end="218:33">// unknown exception occurred</comment>
+    <catch pos:start="219:5" pos:end="223:5">catch <parameter_list pos:start="219:11" pos:end="219:29">(<parameter pos:start="219:12" pos:end="219:28"><decl pos:start="219:12" pos:end="219:28"><type pos:start="219:12" pos:end="219:25"><name pos:start="219:12" pos:end="219:25"><name pos:start="219:12" pos:end="219:14">std</name><operator pos:start="219:15" pos:end="219:16">::</operator><name pos:start="219:17" pos:end="219:25">exception</name></name></type> <name pos:start="219:27" pos:end="219:28">ex</name></decl></parameter>)</parameter_list> <block pos:start="219:31" pos:end="223:5">{<block_content pos:start="219:32" pos:end="223:4">
+        <expr_stmt pos:start="220:9" pos:end="220:57"><expr pos:start="220:9" pos:end="220:56"><name pos:start="220:9" pos:end="220:17"><name pos:start="220:9" pos:end="220:11">std</name><operator pos:start="220:12" pos:end="220:13">::</operator><name pos:start="220:14" pos:end="220:17">cerr</name></name> <operator pos:start="220:19" pos:end="220:20">&lt;&lt;</operator> <literal type="string" pos:start="220:22" pos:end="220:56">"An unhandled exception occurred\n"</literal></expr>;</expr_stmt>
+        <expr_stmt pos:start="221:9" pos:end="221:39"><expr pos:start="221:9" pos:end="221:38"><name pos:start="221:9" pos:end="221:17"><name pos:start="221:9" pos:end="221:11">std</name><operator pos:start="221:12" pos:end="221:13">::</operator><name pos:start="221:14" pos:end="221:17">cerr</name></name> <operator pos:start="221:19" pos:end="221:20">&lt;&lt;</operator> <call pos:start="221:22" pos:end="221:30"><name pos:start="221:22" pos:end="221:28"><name pos:start="221:22" pos:end="221:23">ex</name><operator pos:start="221:24" pos:end="221:24">.</operator><name pos:start="221:25" pos:end="221:28">what</name></name><argument_list pos:start="221:29" pos:end="221:30">()</argument_list></call> <operator pos:start="221:32" pos:end="221:33">&lt;&lt;</operator> <literal type="string" pos:start="221:35" pos:end="221:38">"\n"</literal></expr>;</expr_stmt>
+        <return pos:start="222:9" pos:end="222:17">return <expr pos:start="222:16" pos:end="222:16"><literal type="number" pos:start="222:16" pos:end="222:16">1</literal></expr>;</return>
+    </block_content>}</block></catch>
+    <comment type="line" pos:start="224:5" pos:end="224:29">// very unknown exception</comment>
+    <catch pos:start="225:5" pos:end="228:5">catch <parameter_list pos:start="225:11" pos:end="225:15">(<parameter pos:start="225:12" pos:end="225:14"><decl pos:start="225:12" pos:end="225:14"><type pos:start="225:12" pos:end="225:14"><modifier pos:start="225:12" pos:end="225:14">...</modifier></type></decl></parameter>)</parameter_list> <block pos:start="225:17" pos:end="228:5">{<block_content pos:start="225:18" pos:end="228:4">
+        <expr_stmt pos:start="226:9" pos:end="226:55"><expr pos:start="226:9" pos:end="226:54"><name pos:start="226:9" pos:end="226:17"><name pos:start="226:9" pos:end="226:11">std</name><operator pos:start="226:12" pos:end="226:13">::</operator><name pos:start="226:14" pos:end="226:17">cerr</name></name> <operator pos:start="226:19" pos:end="226:20">&lt;&lt;</operator> <literal type="string" pos:start="226:22" pos:end="226:54">"An unknown exception occurred\n"</literal></expr>;</expr_stmt>
+        <return pos:start="227:9" pos:end="227:17">return <expr pos:start="227:16" pos:end="227:16"><literal type="number" pos:start="227:16" pos:end="227:16">1</literal></expr>;</return>
+    </block_content>}</block></catch></try>
+    <expr_stmt pos:start="229:5" pos:end="229:43"><expr pos:start="229:5" pos:end="229:42"><name pos:start="229:5" pos:end="229:13"><name pos:start="229:5" pos:end="229:7">std</name><operator pos:start="229:8" pos:end="229:9">::</operator><name pos:start="229:10" pos:end="229:13">cout</name></name> <operator pos:start="229:15" pos:end="229:16">&lt;&lt;</operator> <literal type="string" pos:start="229:18" pos:end="229:42">"XML Validation passed\n"</literal></expr>;</expr_stmt>
+    <return pos:start="230:5" pos:end="230:13">return <expr pos:start="230:12" pos:end="230:12"><literal type="number" pos:start="230:12" pos:end="230:12">0</literal></expr>;</return>
+</block_content>}</block></function>
+</unit>
+
+</unit>
