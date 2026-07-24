@@ -91,6 +91,7 @@ XmlElement readNextElement(std::istream &in) {
     bool comment;
     // read a character at a time until reaching a potential element
     while (in.get(curr)) {
+        std::cerr << curr << std::endl;
         // < cannot be nested within another element tag, validation fails
         if (curr == '<' && inElement) {
             throw XmlValidationException(
@@ -136,6 +137,8 @@ XmlElement readNextElement(std::istream &in) {
             ) {
 
             }
+            std::cerr << "here\n";
+            inElement = false;
             break;
         }
         prev = curr;
