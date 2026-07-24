@@ -1,10 +1,10 @@
-#ifndef HASHTABLE_HPP
-#define HASHTABLE_HPP
+#ifndef HASH_TABLE_HPP
+#define HASH_TABLE_HPP
 
 #include <algorithm>
 #include "../../ch7/example/list.hpp"
 
-template <typename T, typename Hash = std::hash<T>, size_t BUCKETS=128>
+template <typename T, typename Hash = std::hash<T>, size_t BUCKETS=127>
 class HashTable {
 public:
     HashTable();

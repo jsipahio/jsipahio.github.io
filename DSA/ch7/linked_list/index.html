@@ -113,6 +113,14 @@
               <ul class="nav flex-column">
               </ul>
             </li>
+            <li class="nav-item" data-bs-level="2"><a href="#efficiency" class="nav-link">Efficiency</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#implementing-stack-using-a-singly-linked-list" class="nav-link">Implementing Stack Using a Singly Linked List</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
             <li class="nav-item" data-bs-level="2"><a href="#implementing-queue-using-a-singly-linked-list" class="nav-link">Implementing Queue Using a Singly Linked List</a>
               <ul class="nav flex-column">
               </ul>
@@ -125,12 +133,179 @@
                     <div class="col-md-9" role="main">
 
 <h1 id="linked-list-adt">Linked List ADT</h1>
-<p>Linked lists are an alternative container to arrays. While arrays allow random access to any of their elements via a subscript, the size of an array must be known when it is created. This can lead to wasted space by making the array to large, insufficient space if the original size is too small, or expensive copies when the array needs to be resized to accommodate more elements. Lists, on the other hand, only allocate as much space as is needed to store the current amount of elements it holds. While conceptual diagrams of lists often show them as sequential, remember that the elements of a list can appear in any location in memory.</p>
+<p>Linked lists are an alternative container to arrays. While arrays allow random access to any of their elements via a subscript, the size of an array must be known when it is created. This can lead to wasted space by making the array to large, insufficient space if the original size is too small, or expensive copies when the array needs to be resized to accommodate more elements. Lists, on the other hand, only allocate as much space as is needed to store the current amount of elements it holds. While conceptual diagrams of lists often show them as sequential, remember that the elements of a list can appear in any location in memory. In this lecture, we'll mention iterators. Iterators are an abstraction that allow us to traverse a container. Iterators are covered in detail in the next lecture. </p>
 <h2 id="data">Data</h2>
+<p>A linked list consists of nodes that reference each other. There are two types of linked list, singly linked and doubly linked. A singly linked list only keeps track of the next element in the list. A doubly-linked list keeps track of both the previous and next node.<br />
+The actual data of a linked list is the root node(s). For a singly linked list, there is one root, which is the first element of the list. While not needed, doubly-linked lists typically track the front and back of the list. This allows for searches for the last occurrence of an element to start from the back instead of the front. </p>
 <h2 id="operations">Operations</h2>
+<p>We'll look at the operations for a doubly-linked list, since the singly-linked list is a subset of doubly-linked list operations. Doubly-linked lists support the ability to insert elements at the front and end of the list. They also allow for elements to be inserted in the middle of the list. This typically requires a pointer to where the element should be inserted, which is why iterators are commonly implemented for lists. Lists are also searched for if they contain an element. Doubly-linked lists support the ability to search from the front to find the instance of an element, or the back to find the last instance. Lists do not provide random access, so iterators are also needed to start searching from a certain point in the list. </p>
 <h2 id="rules">Rules</h2>
+<p>The only limit on the size of a list is the amount of memory the computer has available to store it. Accessing or removing data from an empty list is not allowed. An empty doubly-linked list has the property that the <code>front == end</code> since they are both null. </p>
+<h2 id="efficiency">Efficiency</h2>
+<p>Insertion and removal from the front and back of a doubly linked list is O(1). It only consists of creating a new node and assigning a few pointers. None of those operations are dependent on the number of nodes in the list. Insertion and removal from the front is a significant improvement over vectors and arrays, since they require shifting all elements to compensate, an O(n) operations.  </p>
+<p>Finding an element is O(n), since in the worst case every node must be checked to see if it has the value being searched for. Insertion at the middle of a list is technically O(1), since it is still shifting pointers around, but is practically O(n) since the location to insert the element must be found first. </p>
+<h2 id="implementing-stack-using-a-singly-linked-list">Implementing Stack Using a Singly Linked List</h2>
+<p>A singly-linked list with no search, find, or remove operations is automatically a stack. Elements are always added to and removed from the back of the list, since the root pointer always referencing the most recently inserted element. </p>
+<pre><code class="language-c++">template &lt;typename T&gt;
+struct Node {
+    Node&lt;T&gt; *next;
+    T data;
+    Node(Node&lt;T&gt; *n = nullptr): next(n) {}
+    Node(T d, Node&lt;T&gt; *n = nullptr): data(d), next(n) {}
+};
+
+template &lt;typename T&gt;
+class Stack {
+public:
+    Stack(): tos(nullptr) {}
+    Stack(const Stack&lt;T&gt; &amp;other) {
+        Stack&lt;T&gt; temp;
+        // since we only have a reference to the top of stack,
+        // we need to copy it (it will be in reverse order),
+        // then copy it again
+        Node&lt;T&gt; *tempNode = other.tos;
+        while (tempNode != nullptr) {
+            temp.push(tempNode-&gt;data);
+            tempNode = tempNode-&gt;next;
+        }
+
+        // copy temp's elements into the actual stack
+        while (temp.tos != nullptr) {
+            push(temp.top());
+            temp.pop();
+        }
+    }
+    ~Stack() {
+        while (tos != nullptr) {
+            pop();
+        }
+    }
+    Stack&amp; operator=(Stack rhs) {
+        swap(rhs);
+        return *this;
+    }
+    void swap(Stack&amp; other) {
+        Node&lt;T&gt; *temp = tos;
+        tos = other.tos;
+        other.tos = temp;
+    }
+    void push(const T&amp; data) {
+        if (tos == nullptr) {
+            tos = new Node&lt;T&gt;;
+        }
+        Node&lt;T&gt; newNode = new Node&lt;T&gt;(data);
+        newNode-&gt;next = tos-&gt;next;
+        tos-&gt;next = newNode;
+    }
+    T top() const {
+        if (tos == nullptr) {
+            std::cerr &lt;&lt; &quot;Stack is empty\n&quot;;
+            exit(1);
+        }
+        return tos-&gt;next-&gt;data;
+    }
+    void pop() {
+        if (tos == nullptr) {
+            std::cerr &lt;&lt; &quot;Stack is empty\n&quot;;
+            exit(1);
+        }
+        Node&lt;T&gt; *temp = tos-&gt;next;
+        tos-&gt;next = tos-&gt;next-&gt;next;
+        delete temp;
+    }
+    bool empty() const { return tos == nullptr; }
+private:
+    // tos = top of stack
+    Node&lt;T&gt; *tos;
+};
+</code></pre>
 <h2 id="implementing-queue-using-a-singly-linked-list">Implementing Queue Using a Singly Linked List</h2>
-<pre><code class="language-C++"></code></pre></div>
+<pre><code class="language-C++">// a Node struct that stores each queue element's
+// data, along with a reference to the next node
+template &lt;typename T&gt;
+struct Node {
+    T data;
+    Node&lt;T&gt; *next;
+    Node(const T&amp; d, Node&lt;T&gt;* n = nullptr) {
+        data = d;
+        next = n;
+    }
+};
+
+// an implementation of queue that uses a singly
+// linked list, rather than an array
+template &lt;typename T&gt;
+class Queue {
+public:
+    Queue() {
+        foq = back = nullptr;
+    }
+    ~Queue() {
+        while (foq != nullptr) {
+            Node&lt;T&gt; *temp = foq;
+            foq = foq-next;
+            delete temp;
+        }
+    }
+    Queue(const Queue&amp; other) {
+        foq = back = nullptr;
+        Node&lt;T&gt; *temp = other.foq;
+        while (temp != nullptr) {
+            enqueue(temp-&gt;data);
+        }
+    }
+    Queue&lt;T&gt;&amp; operator=(Queue rhs) {
+        swap(rhs);
+        return *this;
+    }
+
+    void swap(Queue&amp; other) {
+        Node&lt;T&gt; *tempFront = foq;
+        Node&lt;T&gt; *tempBack = back;
+
+        foq = other.foq;
+        other.foq = tempFront;
+
+        back = other.back;
+        other.back = tempBack;
+    }
+
+    void enqueue(const T&amp; data) {
+        if (foq == nullptr) {
+            foq = new Node&lt;T&gt;(data);
+            back = foq;
+        }
+        else {
+            Node&lt;T&gt; *next = new Node&lt;T&gt;(data);
+            foq-&gt;next = next;
+            back = next;
+        }
+    }
+
+    void dequeue() {
+        if (foq == nullptr &amp;&amp; back == nullptr) {
+            throw;
+        }
+        Node&lt;T&gt; *temp = foq;
+        foq = foq-&gt;next;
+        delete temp;
+    }
+
+    T front() const {
+        if (foq == nullptr) {
+            throw;
+        }
+        return foq-&gt;data;
+    }
+
+    bool empty() const {
+        return foq == nullptr &amp;&amp; back == nullptr;
+    }
+private:
+    Node&lt;T&gt; *foq;
+    Node&lt;T&gt; *back;
+};
+</code></pre></div>
             </div>
         </div>
 

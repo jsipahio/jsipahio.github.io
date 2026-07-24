@@ -137,7 +137,7 @@
         bst_insert(element, node.right)
 </code></pre>
 <p>Now, we can look at the pseudocode for the find operation:</p>
-<pre><code>operation bst_find(element, node):
+<pre><code>operation bst_find(element, node) -&gt; boolean:
     if node == null:
         return false
     if node.data == element:

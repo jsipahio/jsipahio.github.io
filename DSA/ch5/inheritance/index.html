@@ -101,6 +101,30 @@
             
             <li class="nav-item" data-bs-level="1"><a href="#inheritance" class="nav-link">Inheritance</a>
               <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#terminology" class="nav-link">Terminology</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#basic-example" class="nav-link">Basic Example</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#access-specifiers" class="nav-link">Access Specifiers</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#virtual-methods" class="nav-link">Virtual Methods</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#pure-virtual-abstract-classes-and-interfaces" class="nav-link">Pure Virtual, Abstract Classes, and Interfaces</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#conclusion" class="nav-link">Conclusion</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
               </ul>
             </li>
         </ul>
@@ -108,7 +132,207 @@
 </div></div>
                     <div class="col-md-9" role="main">
 
-<h1 id="inheritance">Inheritance</h1></div>
+<h1 id="inheritance">Inheritance</h1>
+<p>Inheritance is the mechanism used to enable runtime polymorphism in C++. When a class inherits from another class, the data and methods of the class being inherited from automatically become members of the derived class. This allows classes to extend or implement the behavior of other classes. Inheritance is not a super important topic for this class, so we will only cover it briefly. We will get more mileage out of templates and generic types, which are compile-time polymorphism.</p>
+<h2 id="terminology">Terminology</h2>
+<ul>
+<li>Base Class - The class being inherited from. Also called super class or parent class.</li>
+<li>Derived Class - The class doing the inheriting. Also called subclass or child class.</li>
+</ul>
+<h2 id="basic-example">Basic Example</h2>
+<pre><code class="language-cpp">class Pet {
+public:
+    // Default constructor
+    Pet(): name{}, age{}, isVaccinated(false), isSpayed(false) {}
+    // Constructor
+    Pet(const std::string&amp; n, int a, bool v, bool s):
+        name(n), age(a), isVaccinated(v), isSpayed(s) {}
+    // no dynamic memory, don't need big 3
+    // however, it is smart to always make a virtual destructor
+    // for classes that may be inherited from
+    virtual ~Pet() = default;
+
+    // getters/setters
+    std::string getName() const { return name; }
+    int getAge() const { return age; }
+    bool getVaccinationStatus const { return isVaccinated; }
+    bool getSpayedStatus const { return isSpayed; }
+    void setName(const std::string&amp; value) { name = value; }
+    void setAge(int value) { age = value; }
+    void setVaccinationStatus(bool value) { isVaccinated = value; }
+    void setSpayedStatus(bool value) { isSpayed = value; }
+
+    // other methods
+    virtual void makeSound() const { 
+        std::cout &lt;&lt; &quot;sound;\n&quot;;
+    }
+
+protected:
+    std::string name;
+    int age;
+    bool isVaccinated;
+    bool isSpayed;
+};
+
+class Dog: public Pet {
+public:
+    // Default constructor
+    Dog(): Pet() {}
+    Dog(const std::string&amp; n, int a, bool v, bool s) : Pet(n, a, v, s) {}
+    void makeSound() const override {
+        std::cout &lt;&lt; &quot;woof\n&quot;;
+    }
+};
+
+class Cat: public Pet {
+public:
+    // Default constructor
+    Cat(): Pet() {}
+    Cat(const std::string&amp; n, int a, bool v, bool s) : 
+        Pet(n, a, v, s), isDeclawed(false) {}
+    Cat(const std::string&amp; n, int a, bool v, bool s, bool d) : 
+        Pet(n, a, v, s), isDeclawed(d) {}
+
+    bool getDeclawStatus() const { return isDeclawed; }
+    void setDeclawStatus(bool value) { isDeclawed = value; }
+
+    void makeSound() const override {
+        std::cout &lt;&lt; &quot;meow\n&quot;;
+    }
+private:
+    bool isDeclawed;
+};
+
+int main() {
+    Pet pet(&quot;Rick&quot;, 3, true, true);
+    // prints: sound
+    pet.makeSound();
+
+    Dog dog(&quot;Fido&quot;, 6, true, true);
+    // prints: woof
+    dog.makeSound();
+    // dog can access methods of base class Pet
+    std::string dogName = dog.getName();
+
+    Cat cat(&quot;Whiskers&quot;, 2, true, true, false);
+    // prints: meow
+    cat.makeSound();
+    // cat has additional methods added to it
+    bool isCatDeclawed = cat.getDeclawStatus();
+
+    return 0;
+}
+</code></pre>
+<p>There are a few things that are new in here: <br />
+- The <code>Pet</code> class is using initializer lists for its constructors. You have likely seen these before, but in case you haven't, initializer lists are used to set the fields of a class. <code>name(n)</code> is the same as putting <code>name = n;</code> in the body of the constructor
+- The <code>name{}</code>, <code>age{}</code>, etc. syntax tells the compiler to initialize these fields with their default values. For integers, it is 0. For a string, it is the empty string value
+- The getters and setters are all normal, but we now have a destructor and member function marked as <code>virtual</code>. This tells the compiler that derived classes can implement this function for the base class. We'll discuss what this means in a later section.
+- The member variables of the class <code>Pet</code> are <code>protected</code>. The <code>protected</code> visibility means that derived classes are able to directly access these members, but they cannot be accessed outside the class (like <code>private</code>). Members that are <code>private</code> in a base class are never visible in child classes.
+- The <code>Dog</code> and <code>Cat</code> class inherit from the <code>Pet</code> class via the <code>: public Pet</code> after their names. We'll discuss why <code>Pet</code> is public in the next section.
+- The <code>Dog</code> and <code>Cat</code> class mark the <code>makeSound()</code> function as <code>override</code>. This tells the compiler to make sure a corresponding <code>virtual</code> method exists in the base class being inherited from. 
+- The <code>Cat</code> class adds additional data and methods for if the cat is declawed.</p>
+<h2 id="access-specifiers">Access Specifiers</h2>
+<p>We've seen that classes in C++ have access regions like <code>public:</code> and <code>private:</code>, as well as now <code>protected:</code>. To review, <code>public:</code> members are accessible internally to the class, by subclasses, and by objects of the class declared outside the class. <code>private:</code> members are only visible inside the class they are declared in. Objects cannot access them, and neither can subclasses. The <code>protected:</code> region sits in-between, where objects outside the class still cannot access these members, but subclasses can.  </p>
+<p>On top of the access regions, C++ adds another layer of visibility modification. When inheriting from a class, the access can be marked as <code>public</code>, <code>protected</code>, or <code>private</code>. <code>public</code> inheritance is what you would be used to if you know inheritance in Java or C#, the public members of the base class are still public in the derived class. The <code>protected</code> modifier makes public members of the base class protected in the derived class. Therefore, derived class objects can no longer call public member functions or access public fields of the base class. The <code>private</code> specifier makes everything in the base class private to the subclass, regardless of whether it is public or protected. Below is a table showing the relationship between the access specifiers.  </p>
+<table>
+    <thead>
+        <tr>
+            <th rowspan=2>Visibility Region</th>
+            <th colspan=3>Inheritance Spcifier</th>
+        </tr>
+        <tr>
+            <th>private</th>
+            <th>protected</th>
+            <th>public</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th>private</th>
+            <td>Inaccesible</td>
+            <td>Inaccesible</td>
+            <td>Inaccesible</td>
+        </tr>
+        <tr>
+            <th>protected</th>
+            <td>Inaccesible</td>
+            <td>Protected</td>
+            <td>Protected</td>
+        </tr>
+        <tr>
+            <th>public</th>
+            <td>Inaccesible</td>
+            <td>Protected</td>
+            <td>Public</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2 id="virtual-methods">Virtual Methods</h2>
+<p>The main reason to use inheritance, outside potentially saving some lines of code, is to enable runtime polymorphism. But how does C++ actually handle this? C++, along with most languages that support inheritance, use a virtual method table (VMT) to track which methods in a class are virtual. Then, when it finds a reference to a class that is derived from, it checks which version of the virtual method to call. Assume the <code>Pet</code>, <code>Dog</code>, and <code>Cat</code> classes are visible in this code snippet:</p>
+<pre><code class="language-cpp">int main() {
+    // runtime polymorphism is achieved with pointers
+    // and pass-by-reference parameters
+    Pet *pet;
+    // to make pet behave like a dog, we create a 
+    // Dog object using the Pet type pointer
+    pet = new Dog(&quot;Fido&quot;, 6, true, true);
+    // since pet's base type is Pet*, the VMT needs
+    // to be checked to see if there is an overload
+    // of the makeSound() function to be used instead
+    pet-&gt;makeSound();
+    // this prints: woof
+    // this is since the VMT sees that pet is assinged to
+    // a Dog object, and Dog overrides the virtual method makeSound
+
+    delete pet;
+    return 0;
+}
+</code></pre>
+<p>If we had not declared <code>makeSound()</code> as a virtual method, when calling <code>pet-&gt;makeSound()</code>, <code>sound</code> would have been printed. Unlike Java, where all methods are virtual by default, in C++ you have to explicitly tell the compiler you want the method to be virtual by using the <code>virtual</code> specifier.  </p>
+<h2 id="pure-virtual-abstract-classes-and-interfaces">Pure Virtual, Abstract Classes, and Interfaces</h2>
+<p>In the <code>Pet</code> class, we added an implementation to the <code>makeSound()</code> virtual method. However, since we have no knowledge of what sound the pet might make, it just prints <code>sound</code>. We could also have left the body empty and had a function that does nothing. However, in some cases we may want to force subclasses to implement a method. In that case, we can make the function pure virtual. To do so, instead of providing a body, we set the function equal to 0:</p>
+<pre><code class="language-cpp">class Pet {
+public:
+    // ...
+    virtual void makeSound() = 0;
+protected:
+    // ...
+};
+</code></pre>
+<p>This automatically makes <code>Pet</code> an "abstract class". We can no longer directly create an object of the class Pet, because it has an unimplemented function. We can still use <code>Pet</code> to create pointers that we assign references of subclass objects that implement <code>makeSound()</code>. We can also have pass-by-reference parameters of type <code>Pet&amp;</code>.</p>
+<pre><code class="language-cpp">// this is okay, it is a reference
+void printPet(const Pet&amp; pet) {
+    // ...
+}
+
+int main() {
+    // this is not allowed, Pet is abstract
+    // Pet pet1;
+    // this is allowed, it is a pointer
+    Pet *pet2;
+    // this is not allowed, we are setting 
+    // pet2 to an instance of Pet
+    // pet2 = new Pet{};
+    // this is allowed, Dog implements makeSound()
+    Pet *pet3 = new Dog{};
+    // this is allowed, Cat implemnets makeSound()
+    Pet *pet4 = new Cat{};
+    // we can still create subclass objects:
+    Dog dog;
+    Cat cat;
+    // and pass them to functions that expect
+    // a reference to a Pet object
+    printPet(dog);
+    printPet(cat);
+
+    delete pet3;
+    delete pet4;
+    return 0;
+}
+</code></pre>
+<h2 id="conclusion">Conclusion</h2>
+<p>There is a lot more that can be said about inheritance in C++, but that is not a topic for this course. This is just a basic overview of what inheritance is and how you can use it.</p></div>
             </div>
         </div>
 

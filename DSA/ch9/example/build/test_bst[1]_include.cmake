@@ -1,0 +1,5 @@
+if(EXISTS "/home/john/jsipahio.github.io/docs/DSA/ch9/example/build/test_bst[1]_tests.cmake")
+  include("/home/john/jsipahio.github.io/docs/DSA/ch9/example/build/test_bst[1]_tests.cmake")
+else()
+  add_test(test_bst_NOT_BUILT test_bst_NOT_BUILT)
+endif()

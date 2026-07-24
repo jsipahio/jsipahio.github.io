@@ -1,0 +1,5 @@
+if(EXISTS "/home/john/jsipahio.github.io/docs/DSA/ch8/example/build/test_map[1]_tests.cmake")
+  include("/home/john/jsipahio.github.io/docs/DSA/ch8/example/build/test_map[1]_tests.cmake")
+else()
+  add_test(test_map_NOT_BUILT test_map_NOT_BUILT)
+endif()

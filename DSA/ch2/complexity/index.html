@@ -101,16 +101,11 @@
             
             <li class="nav-item" data-bs-level="1"><a href="#time-and-space-complexity-of-algorithms" class="nav-link">Time and Space Complexity of Algorithms</a>
               <ul class="nav flex-column">
-              </ul>
-            </li>
-            
-            <li class="nav-item" data-bs-level="1"><a href="#lecture-notes-understanding-code-efficiency-time-space-complexity" class="nav-link">Lecture Notes: Understanding Code Efficiency (Time &amp; Space Complexity)</a>
-              <ul class="nav flex-column">
-            <li class="nav-item" data-bs-level="2"><a href="#1-the-intuition-counting-steps-instead-of-seconds" class="nav-link">1. The Intuition: Counting "Steps" instead of Seconds</a>
+            <li class="nav-item" data-bs-level="2"><a href="#basics-of-time-complexity" class="nav-link">Basics of Time Complexity</a>
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-bs-level="2"><a href="#2-big-o-notation-dropping-the-small-stuff" class="nav-link">2. Big O Notation: Dropping the Small Stuff</a>
+            <li class="nav-item" data-bs-level="2"><a href="#big-o-notation" class="nav-link">Big O Notation</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -118,11 +113,11 @@
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-bs-level="2"><a href="#4-understanding-auxiliary-space-complexity" class="nav-link">4. Understanding Auxiliary Space Complexity</a>
+            <li class="nav-item" data-bs-level="2"><a href="#4-auxiliary-space-complexity" class="nav-link">4. Auxiliary Space Complexity</a>
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-bs-level="2"><a href="#quick-reference-cheat-sheet-for-students" class="nav-link">Quick Reference Cheat Sheet for Students</a>
+            <li class="nav-item" data-bs-level="2"><a href="#table-of-complexities" class="nav-link">Table of Complexities</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -134,26 +129,23 @@
                     <div class="col-md-9" role="main">
 
 <h1 id="time-and-space-complexity-of-algorithms">Time and Space Complexity of Algorithms</h1>
-<p>Here is a thorough, ebook-style set of lecture notes for your students. It skips the heavy mathematical proofs (like the formal limit definitions of Big O) and instead focuses on practical intuition, instruction counting, and visual pattern recognition.</p>
-<hr />
-<h1 id="lecture-notes-understanding-code-efficiency-time-space-complexity">Lecture Notes: Understanding Code Efficiency (Time &amp; Space Complexity)</h1>
-<p>When we write software, it isn't enough for a program to just <em>work</em>. It also needs to be efficient. If your program takes three days to process a single file, it isn't very useful.</p>
+<p>When we write software, it isn't enough for a program to just work. It also needs to be efficient. If your program takes three days to process a single file, it isn't very useful.</p>
 <p>In computer science, we measure efficiency using two metrics:</p>
 <ol>
 <li><strong>Time Complexity:</strong> How fast does the algorithm run as the amount of input data grows?</li>
 <li><strong>Auxiliary Space Complexity:</strong> How much extra memory does the algorithm need as the amount of input data grows?</li>
 </ol>
-<p>Rather than measuring this in exact seconds or megabytes (which change depending on whether you are running the code on a smartphone or a supercomputer), we use a framework called <strong>Big O Notation</strong>.</p>
+<p>Rather than measuring this in exact seconds or megabytes (which change depending on whether you are running the code on a smartphone or a supercomputer), we use a framework called Big O Notation.</p>
 <hr />
-<h2 id="1-the-intuition-counting-steps-instead-of-seconds">1. The Intuition: Counting "Steps" instead of Seconds</h2>
+<h2 id="basics-of-time-complexity">Basics of Time Complexity</h2>
 <p>Imagine you are looking for a specific name in a physical phone book.</p>
 <ul>
 <li><strong>Strategy A:</strong> You start at page 1 and look at every single name in order until you find it.</li>
 <li><strong>Strategy B:</strong> You open to the exact middle, see if your name comes before or after that page, flip to the middle of the remaining section, and repeat.</li>
 </ul>
 <p>If the phone book only has 10 pages, both methods are fast. But if the phone book has 1,000,000 pages, Strategy A will take forever, while Strategy B will take only a few seconds.</p>
-<p>In data structures, we represent the size of the input data as <strong><span class="arithmatex">\(n\)</span></strong>. (For example, <span class="arithmatex">\(n\)</span> could be the number of elements in an array). We want to know: <strong>As <span class="arithmatex">\(n\)</span> gets massive, how does the number of operations our CPU has to perform grow?</strong></p>
-<h3 id="what-is-a-step">What is a "Step"?</h3>
+<p>In data structures, we represent the size of the input data as <strong><span class="arithmatex">\(n\)</span></strong>. (For example, <span class="arithmatex">\(n\)</span> could be the number of elements in an array). We want to know: As <span class="arithmatex">\(n\)</span> gets massive, how does the number of operations our CPU has to perform grow?</p>
+<h3 id="counting-steps">Counting Steps</h3>
 <p>For our purposes, a "step" (or a primitive operation) is any basic action that takes a constant amount of time:</p>
 <ul>
 <li>Assigning a value to a variable (<code>int x = 5;</code>)</li>
@@ -161,29 +153,29 @@
 <li>Comparing two values (<code>x &lt; y</code>)</li>
 <li>Accessing an element in an array (<code>arr[0]</code>)</li>
 </ul>
-<hr />
-<h2 id="2-big-o-notation-dropping-the-small-stuff">2. Big O Notation: Dropping the Small Stuff</h2>
-<p>Big O notation acts like a magnifying glass that only looks at the "big picture." When <span class="arithmatex">\(n\)</span> becomes incredibly large (like 10 million), smaller terms and constant multipliers stop mattering.</p>
-<h3 id="rule-1-drop-the-constants">Rule 1: Drop the Constants</h3>
-<p>If an algorithm takes <span class="arithmatex">\(3n\)</span> steps, we say it is <strong><span class="arithmatex">\(O(n)\)</span></strong>. Why? Because if <span class="arithmatex">\(n\)</span> goes from 1 million to 2 million, the time it takes doubles. The factor of 3 doesn't change the <em>rate of growth</em>.</p>
-<h3 id="rule-2-drop-the-non-dominant-terms">Rule 2: Drop the Non-Dominant Terms</h3>
-<p>If an algorithm takes <span class="arithmatex">\(n^2 + 5n + 100\)</span> steps, we say it is <strong><span class="arithmatex">\(O(n^2)\)</span></strong>.
+<h2 id="big-o-notation">Big O Notation</h2>
+<p>Big O notation provides an approximation of an algorithm's time complexity. When <span class="arithmatex">\(n\)</span> becomes incredibly large (like 10 million), smaller terms and constant multipliers stop mattering.</p>
+<h3 id="drop-the-constants">Drop the Constants</h3>
+<p>If an algorithm takes <span class="arithmatex">\(3n\)</span> steps, we say it is <span class="arithmatex">\(O(n)\)</span>. Why? Because if <span class="arithmatex">\(n\)</span> goes from 1 million to 2 million, the time it takes doubles. The factor of 3 doesn't change the rate of growth.</p>
+<h3 id="drop-non-dominant-terms">Drop Non-Dominant Terms</h3>
+<p>If an algorithm takes <span class="arithmatex">\(n^2 + 5n + 100\)</span> steps, we say it is <span class="arithmatex">\(O(n^2)\)</span>.<br />
 Let's look at why the <span class="arithmatex">\(5n\)</span> and <span class="arithmatex">\(100\)</span> become irrelevant when <span class="arithmatex">\(n\)</span> is large:</p>
 <ul>
 <li>If <span class="arithmatex">\(n = 1,000\)</span>: <span class="arithmatex">\(n^2 = 1,000,000\)</span>, while <span class="arithmatex">\(5n = 5,000\)</span>.</li>
+<li>The 5,000 term makes almost no difference in the amount of time the algorithm takes.</li>
 <li>The <span class="arithmatex">\(n^2\)</span> term completely dominates the execution time.</li>
+<li>At this point, the 100 term in contributing practically nothing to execution time.</li>
 </ul>
-<hr />
 <h2 id="3-analyzing-time-complexity-of-c-code">3. Analyzing Time Complexity of C++ Code</h2>
 <p>Let's look at common code structures your students will encounter and learn how to count their complexities.</p>
 <h3 id="constant-time-o1">Constant Time: <span class="arithmatex">\(O(1)\)</span></h3>
-<p>An algorithm is <span class="arithmatex">\(O(1)\)</span> if its execution time does <strong>not</strong> depend on the size of the input data (<span class="arithmatex">\(n\)</span>).</p>
+<p>An algorithm is <span class="arithmatex">\(O(1)\)</span> if its execution time does not depend on the size of the input data (<span class="arithmatex">\(n\)</span>).</p>
 <pre><code class="language-cpp">void printFirstElement(int arr[], int n) {
     std::cout &lt;&lt; arr[0] &lt;&lt; std::endl; // 1 step
 }
 
 </code></pre>
-<p><em>Even if the array has 5 elements or 5 million elements, this function only ever looks at the first element. It takes the exact same amount of time.</em></p>
+<p>Even if the array has 5 elements or 5 million elements, this function only ever looks at the first element. It takes the exact same amount of time no matter what the size of the input is.</p>
 <h3 id="linear-time-on">Linear Time: <span class="arithmatex">\(O(n)\)</span></h3>
 <p>If you have a single loop that visits every item in a collection of size <span class="arithmatex">\(n\)</span>, the code runs in linear time.</p>
 <pre><code class="language-cpp">int findSum(int arr[], int n) {
@@ -197,7 +189,7 @@ Let's look at why the <span class="arithmatex">\(5n\)</span> and <span class="ar
 </code></pre>
 <ul>
 <li><strong>Exact Step Count:</strong> <span class="arithmatex">\(1 + n(1) + 1 = n + 2\)</span>.</li>
-<li><strong>Big O:</strong> Drop the constant <span class="arithmatex">\(2\)</span>. We are left with <strong><span class="arithmatex">\(O(n)\)</span></strong>.</li>
+<li><strong>Big O:</strong> Drop the constant <span class="arithmatex">\(2\)</span>. We are left with <span class="arithmatex">\(O(n)\)</span>.</li>
 </ul>
 <h3 id="quadratic-time-on2">Quadratic Time: <span class="arithmatex">\(O(n^2)\)</span></h3>
 <p>This usually occurs when you nest a loop inside another loop, and both loops depend on <span class="arithmatex">\(n\)</span>.</p>
@@ -213,9 +205,9 @@ Let's look at why the <span class="arithmatex">\(5n\)</span> and <span class="ar
 <ul>
 <li>For every single iteration of the outer loop (<span class="arithmatex">\(n\)</span> times), the inner loop runs completely (<span class="arithmatex">\(n\)</span> times).</li>
 <li>Total iterations = <span class="arithmatex">\(n \times n = n^2\)</span>.</li>
-<li><strong>Big O:</strong> <strong><span class="arithmatex">\(O(n^2)\)</span></strong>.</li>
+<li><strong>Big O:</strong> <span class="arithmatex">\(O(n^2)\)</span>.</li>
 </ul>
-<h4 id="the-tricky-nested-loop">The "Tricky" Nested Loop</h4>
+<h4 id="more-complex-nested-loops">More Complex Nested Loops</h4>
 <p>What happens if the inner loop doesn't go up to <span class="arithmatex">\(n\)</span>, but instead changes based on <span class="arithmatex">\(i\)</span>?</p>
 <pre><code class="language-cpp">void printUniquePairs(int arr[], int n) {
     for (int i = 0; i &lt; n; i++) {
@@ -233,12 +225,10 @@ Let's look at why the <span class="arithmatex">\(5n\)</span> and <span class="ar
 <li>The total number of iterations is the sum: <span class="arithmatex">\((n-1) + (n-2) + ... + 2 + 1 + 0\)</span>.</li>
 <li>An easy way to picture this visually is a grid cut in half diagonally (a triangle). The area of a triangle of base <span class="arithmatex">\(n\)</span> and height <span class="arithmatex">\(n\)</span> is <span class="arithmatex">\(\frac{1}{2}n^2\)</span>.</li>
 <li>Using our rules: Drop the constant fraction (<span class="arithmatex">\(\frac{1}{2}\)</span>). The complexity is still <strong><span class="arithmatex">\(O(n^2)\)</span></strong>.</li>
+<li>However, in the real world, this algorithm is much faster than the previous. Big O is an approximation, and assigns algorithms to categories. It does not provide deep analysis between algorithms in the same Big O category.</li>
 </ul>
 <h3 id="logarithmic-time-olog-n">Logarithmic Time: <span class="arithmatex">\(O(\log n)\)</span></h3>
-<p>Logarithmic time is the trickiest concept for students without discrete math. Avoid the formal algebraic definition of logarithms. Instead, teach them the <strong>"Divide and Conquer" rule</strong>.</p>
-<blockquote>
-<p><strong>The Logarithmic Rule of Thumb:</strong> If an algorithm repeatedly cuts the amount of data it has to look at <strong>in half</strong> during every step, it runs in <strong><span class="arithmatex">\(O(\log n)\)</span></strong> time.</p>
-</blockquote>
+<p>Logarithmic algorithms are tricky to understand without a discrete math background. At a high level, any time an algorithm splits its data in half successively, it is probably logarithmic.</p>
 <pre><code class="language-cpp">// A classic example of dividing the problem in half
 void divideByTwo(int n) {
     while (n &gt; 1) {
@@ -251,11 +241,11 @@ void divideByTwo(int n) {
 <p>If <span class="arithmatex">\(n = 16\)</span>, the loop executes for <span class="arithmatex">\(16 \rightarrow 8 \rightarrow 4 \rightarrow 2 \rightarrow 1\)</span> (4 iterations).
 If <span class="arithmatex">\(n = 1,000,000\)</span>, it takes only about 20 iterations! This makes <span class="arithmatex">\(O(\log n)\)</span> incredibly fast.</p>
 <hr />
-<h2 id="4-understanding-auxiliary-space-complexity">4. Understanding Auxiliary Space Complexity</h2>
-<p>Students often confuse <em>total memory footprint</em> with <em>auxiliary space complexity</em>.</p>
+<h2 id="4-auxiliary-space-complexity">4. Auxiliary Space Complexity</h2>
+<p>The total space an algorithm uses will, of course, be dependent on the input data size. However, in algorithm analysis, we really want to know how much extra space an algorithm uses.  </p>
 <ul>
 <li><strong>Total Space:</strong> The entire memory the program uses, including the original input data.</li>
-<li><strong>Auxiliary Space:</strong> The <strong>extra</strong> or <strong>temporary</strong> memory allocated by the algorithm to solve the problem, <em>excluding</em> the input data. In this course, we focus almost exclusively on Auxiliary Space.</li>
+<li><strong>Auxiliary Space:</strong> The extra or temporary memory allocated by the algorithm to solve the problem, excluding the input data. In this course, we focus almost exclusively on auxiliary space.</li>
 </ul>
 <p>Just like time complexity, we measure this by seeing how our temporary allocations grow relative to <span class="arithmatex">\(n\)</span>.</p>
 <h3 id="o1-auxiliary-space-constant-extra-space"><span class="arithmatex">\(O(1)\)</span> Auxiliary Space (Constant Extra Space)</h3>
@@ -271,7 +261,7 @@ If <span class="arithmatex">\(n = 1,000,000\)</span>, it takes only about 20 ite
 }
 
 </code></pre>
-<p><em>Whether <span class="arithmatex">\(n\)</span> is 10 or 10,000, this function only ever creates two integers (<code>maxVal</code> and <code>i</code>) in memory. The extra space does not grow.</em></p>
+<p>Whether <span class="arithmatex">\(n\)</span> is 10 or 10,000, this function only ever creates two integers (<code>maxVal</code> and <code>i</code>) in memory. The extra space does not grow.</p>
 <h3 id="on-auxiliary-space-linear-extra-space"><span class="arithmatex">\(O(n)\)</span> Auxiliary Space (Linear Extra Space)</h3>
 <p>If an algorithm creates a copy of the data, or dynamically allocates an array that matches the size of the input, it uses <span class="arithmatex">\(O(n)\)</span> auxiliary space.</p>
 <pre><code class="language-cpp">int* copyArray(int arr[], int n) {
@@ -283,9 +273,9 @@ If <span class="arithmatex">\(n = 1,000,000\)</span>, it takes only about 20 ite
 }
 
 </code></pre>
-<p><em>If <span class="arithmatex">\(n = 1,000\)</span>, we allocate memory for 1,000 integers. The auxiliary space grows perfectly in parallel with the input size.</em></p>
-<hr />
-<h2 id="quick-reference-cheat-sheet-for-students">Quick Reference Cheat Sheet for Students</h2>
+<p>If <span class="arithmatex">\(n = 1,000\)</span>, we allocate memory for 1,000 integers. The auxiliary space grows perfectly in parallel with the input size.</p>
+<h2 id="table-of-complexities">Table of Complexities</h2>
+<p>Here is a high-level overview of common algorithm complexities. We rarely see algorithms go beyond <span class="arithmatex">\(O(n^3)\)</span>, since at this point they become far too slow to be practical. Many algorithms are <span class="arithmatex">\(O(2^n)\)</span>, but they are never used because exponential algorithms become impossibly slow, even for relatively small input sizes. Most modern cryptology (security) depends on the fact that finding the prime factorization of a large enough number would take centuries to compute.</p>
 <table>
 <thead>
 <tr>
@@ -320,10 +310,18 @@ If <span class="arithmatex">\(n = 1,000,000\)</span>, it takes only about 20 ite
 <td>Quadratic</td>
 <td>Two nested loops that both depend on <span class="arithmatex">\(n\)</span>.</td>
 </tr>
+<tr>
+<td><strong><span class="arithmatex">\(O(n^3)\)</span></strong></td>
+<td>Hyperbolic</td>
+<td>Three nested loops that both depend on <span class="arithmatex">\(n\)</span>.</td>
+</tr>
+<tr>
+<td><strong><span class="arithmatex">\(O(2^n)\)</span></strong></td>
+<td>Exponential</td>
+<td>No easy tell</td>
+</tr>
 </tbody>
-</table>
-<hr />
-<p>Would you like to move on to generating the next set of lecture notes, perhaps focusing on Pointers and Dynamic Memory Management in C++ as a quick bridge before we tackle Linked Lists?</p></div>
+</table></div>
             </div>
         </div>
 
